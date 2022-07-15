@@ -10,10 +10,9 @@
     font-size: 62.5%;
     margin: 0 20px;
 }
-header div{
+.header-div-container{
   display: grid;  
   justify-items: center;
-
 }
 .header-img{
     align-items: center;
@@ -26,15 +25,97 @@ header h1{
     margin-top: 18px;
     font-size: 25px;
 }
-.h2-subtitle{
+#Web-Developer-title{
     font-size: 20px;
     margin-top: 2px;
-    color: #16B5E4;
+    color: #0098c5;
 }
-.header-div-icons{
-    margin:20px ;
-    display:flex;
+.header-div-icons {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
 }
 .header-div-icons a{
     margin-left: 10px;
 }
+#about-me{
+    margin-left: 5px;
+}
+.header-container-translate{
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns:  1fr 1fr;
+    font-size: 16px;
+    padding:  10px;
+}
+.button-translate{
+    margin-left: 7px;
+    border-radius: 30px;
+    border: 2px solid;
+    border-color: #FFD56B;
+    padding: 5px 20px;
+    color: black;
+}
+
+.header-container-translate p{
+    padding: 3px 2px 3px 0px;
+    border-radius: 30px;
+    color: #080808;
+}
+
+.curriculum{
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 20px;
+    color: #E45F5F;
+}
+
+/* body */
+.body-container-sections{
+    display: grid;  
+    justify-items: center;
+  }
+
+.h2-subtitle{
+    font-size: 30px;
+    margin-top: 30px;
+    color: #333338;
+    margin-bottom: 20px;
+
+}
+.body-items{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-bottom: 50px;
+}
+.body-items img{
+width: 60px;
+margin: 10px 10px;
+}
+
+.body-post{
+    margin-bottom: 50px;
+    display: grid;
+    text-align: center;
+}
+.body-post a{
+margin: 60px 0px;
+}
+.post-img{
+    height: 180px;
+    border-radius: 10px;
+}
+.body-post a h3{
+    font-size: 20px;
+    color: #E45F5F;
+
+}
+.body-post a p{
+    color: #333338;
+    font-weight: bold;
+
+}
+
+#post-mrbrillante {box-shadow: #e45f5f73 0px 50px 100px -20px, #e45f5f73 0px 30px 60px -30px;}
+#post-josebajana{box-shadow: #fccb51 0px 50px 100px -20px, #fccb51c9 0px 30px 60px -30px;}
+
