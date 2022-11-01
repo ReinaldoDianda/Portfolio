@@ -99,7 +99,7 @@ margin-top: -5px;
   display: grid;  
   justify-items: center;
 }
-.main-img{
+.main-div-container img{
     align-items: center;
     width: 250px;
     height: 250px;
