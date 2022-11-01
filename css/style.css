@@ -101,8 +101,8 @@ margin-top: -5px;
 }
 .main-div-container img{
     align-items: center;
-    width: 250px;
-    height: 250px;
+    width: 250px !important;
+    height: 250px !important;
     border-radius: 50%;
     margin-top: 30px;
 }
