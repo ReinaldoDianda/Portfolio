@@ -82,9 +82,9 @@ margin-top: -5px;
 .header-container-translate div {
     width: 90px;
     margin: 10px 0px 0px 0px;
-    border: 1px rgb(0, 0, 0) solid;
+    border: 1px #ffffff solid;
     border-radius: 40px;
-    background: linear-gradient(to right, #0098c5 50%, white 50%);
+    background: linear-gradient(to right, #ffffff1a 50%, rgba(255, 255, 255, 0) 50%);
     ;
     
 }
