@@ -79,6 +79,13 @@ margin-top: -5px;
     width: 30px;
 }
 
+.flag-img {
+    width: 30%;
+    aspect-ratio: 4 / 3;
+    margin: 2px;
+    overflow: hidden;
+}
+
 .header-container-translate div {
     width: 90px;
     margin: 10px 0px 0px 0px;
