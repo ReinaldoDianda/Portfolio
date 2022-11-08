@@ -12,7 +12,7 @@ document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click",(
 }))
 
 
-// <!-- inicia test translater -->
+// <!-- inicia test translater  -->
 
 const flagsElement= document.getElementById("flags")
 
