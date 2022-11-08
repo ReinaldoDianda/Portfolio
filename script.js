@@ -16,13 +16,13 @@ document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click",(
 
 const flagsElement= document.getElementById("flags")
 
-let textToChange = document.querySelectorAll("[data-section]");
+let textsToChange = document.querySelectorAll("[data-section]");
 
 const changeLanguage = async (language) => {
     const requestJson = await fetch(`./languages/${language}.json`);
     const texts = await requestJson.json();
 
-   for( textToChange of textToChange){
+   for( const textToChange of textsToChange){
     let section = textToChange.dataset.section;
     let value = textToChange.dataset.value;
     textToChange.innerHTML = texts[section][value];
