@@ -13,7 +13,6 @@ document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click",(
 
 
 // <!-- inicia test translater -->
-// switch lenguage
 
 const flagsElement= document.getElementById("flags")
 //identificamos el elemento, imprimiendo un console .log
@@ -24,17 +23,7 @@ const changeLanguage = async (language) => {
     console.log(texts);
 }
 
-
-
-
-
-
-
 flagsElement.addEventListener('click',(e) =>{
     changeLanguage(e.target.parentElement.dataset.language);
 })
 
-
-
-
-// s
