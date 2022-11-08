@@ -27,6 +27,7 @@ const changeLanguage = async (language) => {
    for(textToChange of textToChange){
     const section = textToChange.dataset.section;
     const value = textToChange.dataset.value;
+    console.log(section,value);
    }
 }
 
