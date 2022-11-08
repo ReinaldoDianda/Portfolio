@@ -1,3 +1,5 @@
+const { ConsoleReporter } = require("jasmine");
+
 const hamburger = document.querySelector(".hamburger");
 const navMenu = document.querySelector(".nav-menu");
 
@@ -15,12 +17,14 @@ document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click",(
 // <!-- inicia test translater -->
 
 const flagsElement= document.getElementById("flags")
-//identificamos el elemento, imprimiendo un console .log
+
+const textToChange = document.querySelectorAll("[data-section]");
 
 const changeLanguage = async (language) => {
     const requestJson = await fetch(`./languages/${language}.json`)
     const texts = await requestJson.json();
-    console.log(texts);
+    for(textToChange of textToChange)
+    console.log(textToChange)
 }
 
 flagsElement.addEventListener('click',(e) =>{
