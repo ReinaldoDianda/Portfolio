@@ -12,17 +12,6 @@ document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click",(
 }))
 
 
-const translate_container = document.querySelector(".translate-container");
-
-translate_container.addEventListener("click",() => {
-    translate_container.classList.toggle("active");
-    navMenu.classList.toggle("active");
-})
-
-
-
-
-
 // <!-- inicia test translater -->
 // switch lenguage
 
