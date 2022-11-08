@@ -1,0 +1,16 @@
+{
+    "profile":{
+        "rol":"Front End Developer",
+        "Description":"Hello, I am a junior software developer passionate about technology. I believe that the code is the new bricks with which the future of humanity is created."
+    },
+    "proyects":{
+        "proyects-title":"Proyects",
+        "first-proyect-Description":"Landing Page for a cleaning company using Html5 and Css3",
+        "second-proyect-Description":"Website for a Biotech company using WordPress",
+        "third-proyect-Description":"Landing Page for a Tourism company made in WordPress",
+        "fourth-proyect-Description":"Website for a tourism company made in WordPress"
+    },
+    "contact":{
+    "contactme":"Contact me"
+    }
+}

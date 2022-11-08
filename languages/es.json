@@ -1,0 +1,16 @@
+    {
+        "profile":{
+            "rol":"Desarrollador Frontend",
+            "Description":"Hola, soy un desarrollador de software Junior apasionado por la tecnología creo que el código son los nuevos ladrillos con los que se crea el futuro de la humanidad"
+        },
+        "proyects":{
+            "proyects-title":"Proyectos",
+            "first-proyect-Description":"Landing Page para empresa de limpieza usando Html5 y Css3",
+            "second-proyect-Description":"Sitio web para una empresa de Biotecnología usando WordPress",
+            "third-proyect-Description":"Landing Page para una empresa de Turismo hecho en WordPress",
+            "fourth-proyect-Description":"Sitio web para una empresa de Turismo hecho en WordPress"
+        },
+        "contact":{
+        "contactme":"Contáctame"
+        }
+    }
