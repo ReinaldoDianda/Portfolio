@@ -22,11 +22,11 @@ const changeLanguage = async (language) => {
     const requestJson = await fetch(`./languages/${language}.json`);
     const texts = await requestJson.json();
 
-   for(textToChange of textToChange){
+   for(let textToChange of textToChange){
     let section = textToChange.dataset.section;
     let value = textToChange.dataset.value;
-    console.log(section,value);
-   }
+    textToChange.innerHTML = texts[section][value];
+}
 };
 
 flagsElement.addEventListener('click',(e) =>{
