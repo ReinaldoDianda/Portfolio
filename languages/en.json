@@ -1,7 +1,8 @@
 {
     "profile":{
         "rol":"Front End Developer",
-        "Description":"Hello, I am a junior software developer passionate about technology. I believe that the code is the new bricks with which the future of humanity is created."
+        "description":"Hello, I am a junior software developer passionate about technology. I believe that the code is the new bricks with which the future of humanity is created.",
+        "skills":"skills"
     },
     "proyects":{
         "proyects-title":"Proyects",

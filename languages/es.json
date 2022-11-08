@@ -1,7 +1,8 @@
     {
         "profile":{
             "rol":"Desarrollador Frontend",
-            "Description":"Hola, soy un desarrollador de software Junior apasionado por la tecnología creo que el código son los nuevos ladrillos con los que se crea el futuro de la humanidad"
+            "description":"Hola, soy un desarrollador de software Junior apasionado por la tecnología creo que el código son los nuevos ladrillos con los que se crea el futuro de la humanidad",
+            "skills":"skills"
         },
         "proyects":{
             "proyects-title":"Proyectos",
