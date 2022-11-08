@@ -49,11 +49,6 @@
     gap: 10px;
 }
 
-.header-container-translate{
-    display: block;
-text-align: center;
-margin-top: -5px;
-}
 
 .nav-link{
     transition: 0.7s ease;
@@ -75,26 +70,39 @@ margin-top: -5px;
     background-color: white;
 }
 
-.header-container-img-flags{
-    width: 30px;
+
+
+.header-container-translate{
+    display: flex;
+    flex-direction: row-reverse;
+text-align: center;
 }
 
+.usa-flag{
+    width: 40px;
+}
+.spain-flag{
+    width: 40px;
+}
 .flag-img {
-    width: 30%;
+    width: 100%;
     aspect-ratio: 4 / 3;
     margin: 2px;
     overflow: hidden;
 }
 
-.header-container-translate div {
+
+
+/* 
+.translate-container {
     width: 90px;
     margin: 10px 0px 0px 0px;
     border: 1px #ffffff solid;
     border-radius: 40px;
-    background: linear-gradient(to right, #ffffff1a 50%, rgba(255, 255, 255, 0) 50%);
+    background: linear-gradient(to right, #ffffff1a 50%, rgba(255, 255, 255, 0) 60%);
     ;
     
-}
+} */
 .header-container-translate p{
     margin-bottom: 15px;
 }
@@ -311,3 +319,37 @@ margin: 60px 0px;
 
     }
   }
+
+
+
+
+  
+/* <!-- inicia test translater --> */
+
+
+
+.flags{
+    display: flex;
+text-align: center;
+}
+
+.usa-flag{
+    width: 40px;
+    padding: 5px;
+}
+.spain-flag{
+    width: 40px;
+    padding: 5px;
+
+}
+.flag-img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    margin: 2px;
+    overflow: hidden;
+}
+
+
+
+
+/* <!-- finaliza test translater --> */
