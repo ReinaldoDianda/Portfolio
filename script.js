@@ -29,7 +29,7 @@ translate_container.addEventListener("click",() => {
 const flagsElement= document.getElementById("flags")
 //identificamos el elemento, imprimiendo un console .log
 
-const changeLanguage = async language => {
+const changeLanguage = async (language) => {
     const requestJson = await fetch(`./languages/${language}.json`)
     const texts = await requestJson.json();
     console.log(texts);
