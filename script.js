@@ -33,3 +33,4 @@ flagsElement.addEventListener('click',(e) =>{
     changeLanguage(e.target.parentElement.dataset.language);
 })
 
+// this is shit bro// wtf are jasmine
