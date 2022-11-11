@@ -105,6 +105,8 @@ cursor: pointer;
     cursor: pointer;
     display: flex;
     outline: none;
+    margin: 15px;
+
 }
 /* Establece la cosa redonda del boton en la izquierda, y dale stilos */
 .switch::after{
@@ -193,6 +195,7 @@ body.dark .container-div-icons a{
 
 #about-me{
     margin: 40px 20px;
+    line-height: 22px;
 }
 body.dark #about-me {
     color: #f1f1f1;
@@ -204,9 +207,10 @@ body.dark #about-me {
 .curriculum{
     margin-top: 50px;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 25px;
     color: #E45F5F;
     text-align: center;
+
 }
 
 /* main */
@@ -221,9 +225,9 @@ main{
 
 .h2-subtitle{
     font-size: 30px;
-    margin-top: 30px;
     color: #333338;
-    margin-bottom: 20px;
+    margin: 100px 0px 50px 0px;
+
 }
 
 body.dark .h2-subtitle{
@@ -233,7 +237,6 @@ body.dark .h2-subtitle{
 .main-items{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    margin-bottom: 100px;
     height: 200px;
 }
 
@@ -243,47 +246,29 @@ body.dark .h2-subtitle{
     display: grid;
     justify-items: center;
 }
-#level-skill-html{
+.level-skill{
     height: 10px;
     width: 50px;
     border: 1px rgb(0, 0, 0) solid;
     border-radius: 40px;
+}
+#level-skill-html{
     background: linear-gradient(to right, #41e415  75%, white 25%);
 }
 
 #level-skill-css{
-    height: 10px;
-    width: 50px;
-    border: 1px rgb(0, 0, 0) solid;
-    border-radius: 40px;
     background: linear-gradient(to right, #41e415  60%, white 40%);
 }
 #level-skill-js{
-    height: 10px;
-    width: 50px;
-    border: 1px rgb(0, 0, 0) solid;
-    border-radius: 40px;
     background: linear-gradient(to right, #41e415  40%, white 20%);
 }
 #level-skill-github{
-    height: 10px;
-    width: 50px;
-    border: 1px rgb(0, 0, 0) solid;
-    border-radius: 40px;
     background: linear-gradient(to right, #41e415  80%, white 20%);
 }
 #level-skill-wordpress{
-    height: 10px;
-    width: 50px;
-    border: 1px rgb(0, 0, 0) solid;
-    border-radius: 40px;
     background: linear-gradient(to right, #41e415  80%, white 20%);
 }
-#level-skill-il{
-    height: 10px;
-    width: 50px;
-    border: 1px rgb(0, 0, 0) solid;
-    border-radius: 40px;
+#level-skill-B{
     background: linear-gradient(to right, #41e415  40%, white 20%);
 }
 
@@ -300,14 +285,17 @@ margin: 10px 10px;
 }
 .main-post a{
 margin: 60px 0px;
+line-height: 22px;
+
 }
 .post-img{
     height: 160px;
     border-radius: 10px;
 }
 .main-post a h3{
-    font-size: 20px;
+    font-size: 25px;
     color: #E45F5F;
+    margin-bottom: 15px;
 
 }
 .main-post a p{
@@ -366,6 +354,8 @@ body.dark .main-post a p{
         left: 0;
     margin-top: -10px;
     padding: 20px;
+    border-radius: 0px 0px 40px 40px;
+
 
     }
   }
