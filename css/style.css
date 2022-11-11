@@ -66,36 +66,6 @@ body.dark{
 
 
 
-/* <!-- inicia test translater --> */
-
-
-
-.flags{
-    display: flex;
-text-align: center;
-cursor: pointer;
-}
-
-.usa-flag{
-    width: 40px;
-    padding: 5px;
-}
-.spain-flag{
-    width: 40px;
-    padding: 5px;
-
-}
-.flag-img {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    margin: 2px;
-    overflow: hidden;
-}
-
-
-
-
-
 /* Darktheme */
 .switch{
     background: #343d5b;
@@ -125,7 +95,7 @@ cursor: pointer;
 }
 /* cuando el boton este activo ponlo amarillo */
 .switch.active{
-    background: orange;
+    background: #eb993b;
     color: #000;
 }
 /* Cuando el boton este activo muevelo a la derecha */
@@ -144,6 +114,44 @@ cursor: pointer;
      background: none;
      color: #f1f1f1;
 }
+
+
+
+
+
+/* <!--  translater --> */
+
+.flags{
+    display: flex;
+text-align: center;
+cursor: pointer;
+}
+
+
+.flag-icon{
+    width: 40px;
+    padding: 5px;
+    margin-top: -5px;
+
+}
+.flag-img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    margin: 2px;
+    overflow: hidden;
+}
+
+.switch-translater{
+    height: 30px;
+}
+/* Establece la cosa redonda del boton en la izquierda, y dale stilos */
+.switch-translater::after{
+    width: 38px;
+
+}
+
+
+
 
 
 .main-div-container{
@@ -354,7 +362,7 @@ body.dark .main-post a p{
         left: 0;
     margin-top: -10px;
     padding: 20px;
-    border-radius: 0px 0px 40px 40px;
+    border-radius: 0px 0px 10px 10px;
 
 
     }
