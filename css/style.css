@@ -363,12 +363,63 @@ body.dark .main-post a p{
     margin-top: -10px;
     padding: 20px;
     border-radius: 0px 0px 10px 10px;
-
-
     }
+
   }
 
 
+  @media(min-width:768px){
+    .nav-menu a {
+        font-size: 16px;
+    }
+    .main-div-container h1 {
+        font-size: 30px;
+    }
+    #Web-Developer-title {
+        font-size: 25px;
+    }
+    .container-div-icons a {
+        width: 40px;
+        font-size: 25px;
+    }
+    #about-me{
+        margin: 40px 150px;
+    }
+    .main-items img {
+        width: 100px;
+    }
+    .curriculum {
+        font-size: 40px;
+    }
+    .h2-subtitle {
+        font-size: 40px;
+        margin: 170px 0px 50px 0px;
+
+    }
 
 
-  
+    .main-post {
+        grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media(min-width:1024px){
+    .nav-menu a {
+        font-size: 18px;
+    }
+    .main-post a {
+        margin: 60px 15px;
+    }
+    .main-post a h3 {
+        font-size: 30px;
+        
+    }
+    
+    .post-img {
+        height: 200px;
+    }
+  }
+  @media(min-width:1024px){
+    #about-me {
+        margin: 40px 300px;
+    }
+  }
