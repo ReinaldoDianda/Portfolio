@@ -34,10 +34,7 @@ const changeLanguage = async (language) => {
 flagsElement.addEventListener('click',(e) =>{
     changeLanguage(e.target.parentElement.dataset.language);
     const btnSwitchTranslater = document.querySelector('#switch-translater');
-
-    btnSwitchTranslater.addEventListener('click',() =>{
-        btnSwitchTranslater.classList.toggle('active');
-    })
+    btnSwitchTranslater.classList.toggle('active');
 
 })
 
