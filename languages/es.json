@@ -1,15 +1,15 @@
     {
         "profile":{
             "rol":"Desarrollador de Software",
-            "description":"Soy un desarrollador de software Junior apasionado por la tecnología, tengo 10 meses de experiencia y me adapto a cualquier lenguaje y reto que me propogan ya que veo el aprendizaje como algo que no debe detenerse",
+            "description":"Soy un desarrollador Junior apasionado por la tecnología, tengo 10 meses de experiencia y me adapto a cualquier lenguaje y reto que me propongan, ya que veo el aprendizaje como algo que no debe detenerse.",
             "skills":"Habilidades"
         },
         "proyects":{
             "proyects-title":"Proyectos",
-            "first-proyect-Description":"Landing Page para empresa de limpieza usando Html5 y Css3",
-            "second-proyect-Description":"Sitio web para una empresa de Biotecnología usando WordPress",
-            "third-proyect-Description":"Landing Page para una empresa de Turismo hecho en WordPress",
-            "fourth-proyect-Description":"Sitio web para una empresa de Turismo hecho en WordPress"
+            "first-proyect-Description":"Sitio web para la empresa de Limpieza Mr Brillante usando Html5 y Css3.",
+            "second-proyect-Description":"Sitio web para la empresa de Usbios donde se muestra el catálogo de productos usando WordPress y WooCommerce.",
+            "third-proyect-Description":"Landing page para la agencia de turismo Punta Centinela hecha usando Wordpress y Revolution Slider.",
+            "fourth-proyect-Description":"Sitio web para la agencia de Turismo Vip Infinity hecho en WordPress, donde se muestran todo el catálogo de Tours y destinos de la empresa."
         },
         "contact":{
         "contactme":"Contáctame"

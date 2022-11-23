@@ -1,15 +1,15 @@
 {
     "profile":{
         "rol":"Software Developer",
-        "description":"I am a junior software developer passionate about technology, I have 10 months of experience and I adapt to any language and challenge that is proposed to me since I see learning as something that should not stop",
+        "description":"I am a Junior developer passionate about technology, I have 10 months of experience and I adapt to any language and challenge that is proposed to me, I see learning as something that should not stop.",
         "skills":"Skills"
     },
     "proyects":{
         "proyects-title":"Proyects",
-        "first-proyect-Description":"Landing Page for a cleaning company using Html5 and Css3",
-        "second-proyect-Description":"Website for a Biotech company using WordPress",
-        "third-proyect-Description":"Landing Page for a Tourism company made in WordPress",
-        "fourth-proyect-Description":"Website for a tourism company made in WordPress"
+        "first-proyect-Description":"Website for Mr Brillante Cleaning company using Html5 and Css3.",
+        "second-proyect-Description":"Website for Usbios company where the product catalog is displayed using WordPress and WooCommerce.",
+        "third-proyect-Description":"Landing page for Punta Centinela tourism agency made using Wordpress and Revolution Slider.",
+        "fourth-proyect-Description":"Website for Vip Infinity Tourism agency made in WordPress, where the entire catalog of Tours and destinations of the company are displayed."
     },
     "contact":{
     "contactme":"Contact me"
