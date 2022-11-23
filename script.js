@@ -12,6 +12,7 @@ document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click",(
 }))
 
 
+
 // <!--translater  -->
 
 const flagsElement = document.getElementById("flags")
@@ -29,8 +30,6 @@ const changeLanguage = async (language) => {
 }
 };
 
-
-
 flagsElement.addEventListener('click',(e) =>{
     changeLanguage(e.target.parentElement.dataset.language);
     const btnSwitchTranslater = document.querySelector('#switch-translater');
@@ -38,18 +37,10 @@ flagsElement.addEventListener('click',(e) =>{
 
 })
 
-//button-translater
 
 
+// <!--Darktheme  -->
 
-
-
-
-
-
-
-
-/////////darktheme
 const btnSwitch = document.querySelector('#switch');
 
 btnSwitch.addEventListener('click',() =>{
