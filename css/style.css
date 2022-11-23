@@ -288,7 +288,7 @@ margin: 10px 10px;
 }
 
 .main-post{
-    margin-bottom: 50px;
+    margin: 0px 0px 50px -11px;
     display: grid;
     text-align: center;
 }
