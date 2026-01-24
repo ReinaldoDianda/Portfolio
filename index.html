@@ -4,47 +4,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reinaldo Dianda</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <title>Reinaldo Dianda - Desarrollador de Software</title> <link rel="stylesheet" href="./css/style.css">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <script src="https://kit.fontawesome.com/a2360167c8.js" crossorigin="anonymous"></script>    
 </head>
 <body>
-    <header >
+    <header>
     <nav class="navbar">
-         <!--translater -->
-         <button class="switch switch-translater nav-link" id="switch-translater">
-
+         <button class="switch switch-translater nav-link" id="switch-translater" aria-label="Cambiar idioma">
                 <div class="flags" id="flags"> 
-
-
                     <div class="flags_item" data-language="es">
-                            <img class="flag-icon" src="https://res.cloudinary.com/doo95ngwf/image/upload/v1662840998/espana_qx4hvi.png" alt="">
+                            <img class="flag-icon" src="https://res.cloudinary.com/doo95ngwf/image/upload/v1662840998/espana_qx4hvi.png" alt="Bandera España">
                     </div>
                     <div class="flags_item" data-language="en">
-                        <img class="flag-icon" src="https://res.cloudinary.com/doo95ngwf/image/upload/v1662840998/reino-unido_uh7wyq.png" alt="">
+                        <img class="flag-icon" src="https://res.cloudinary.com/doo95ngwf/image/upload/v1662840998/reino-unido_uh7wyq.png" alt="Bandera Reino Unido">
                     </div>
-
-                    
                 </div>
             </button>
-        <!--PopUp -->
-                <ul class="nav-menu">
-                    <li class="nav-item">
-                        <a class="nav-link" target="_blank" href="./Cv Reinaldo Dianda.pdf">Curriculum Vitae</a>
-                    </li>
-                    <li>
-                        <a href="mailto:reinaldodianda@gmail.com" target="_blank" class="nav-link">Contáctame </a>
-                    </li>
-                    <li>
-                        <!-- Darktheme -->
-                        <button class="switch nav-link" id="switch">
-                            <span><i class="fa-solid fa-sun"></i></span>
-                            <span><i class="fa-solid fa-moon"></i></span>
-                        </button>
-                    </li>
-                </ul>
-                <div class="hamburger">
+
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a class="nav-link" target="_blank" rel="noopener noreferrer" href="./Cv Reinaldo Dianda.pdf">Curriculum Vitae</a>
+                </li>
+                <li>
+                    <a href="mailto:reinaldodianda@gmail.com" target="_blank" rel="noopener noreferrer" class="nav-link">Contáctame</a>
+                </li>
+                <li>
+                    <button class="switch nav-link" id="switch" aria-label="Cambiar tema oscuro/claro">
+                        <span><i class="fa-solid fa-sun"></i></span>
+                        <span><i class="fa-solid fa-moon"></i></span>
+                    </button>
+                </li>
+            </ul>
+            <div class="hamburger" role="button" aria-label="Abrir menú">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -53,117 +45,76 @@
 </header>
 <main>
         <div class="main-div-container">
-            <img src="https://res.cloudinary.com/doo95ngwf/image/upload/v1668123458/ft_h5m64p.webp" alt="Profile-photo-Reinaldo-Dianda" class="main-img" >
+            <img src="https://res.cloudinary.com/doo95ngwf/image/upload/v1668123458/ft_h5m64p.webp" alt="Foto de perfil de Reinaldo Dianda" class="main-img">
             <h1>Reinaldo Dianda</h1>
             <h2 id="Web-Developer-title" data-section="profile" data-value="rol">Desarrollador de Software</h2>
             <div>
-                <div class="container-div-icons ">
-                    <a href="https://www.linkedin.com/in/reinaldo-dianda/" target="_blank"><i class="fa-brands fa-linkedin fa-lg"></i></a>
-                    <a href="mailto:reinaldodianda@gmail.com" target="_blank"><i class="fa-solid fa-envelope fa-lg"></i></a>
+                <div class="container-div-icons">
+                    <a href="https://www.linkedin.com/in/reinaldo-dianda/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin fa-lg"></i></a>
+                    <a href="mailto:reinaldodianda@gmail.com" target="_blank" rel="noopener noreferrer" aria-label="Email"><i class="fa-solid fa-envelope fa-lg"></i></a>
                 </div>
                 <p id="about-me" data-section="profile" data-value="description">
-                    Soy un desarrollador Junior y estudiante de ingenieria en Systemas apasionado por la tecnología, tengo 1 año de experiencia y me adapto a cualquier lenguaje y reto que me propongan, ya que veo el aprendizaje como algo que no debe detenerse.</p>
+                    Soy un desarrollador Junior y estudiante de Ingeniería en Sistemas apasionado por la tecnología, tengo 1 año de experiencia y me adapto a cualquier lenguaje y reto que me propongan, ya que veo el aprendizaje como algo que no debe detenerse.
+                </p>
             </div>
         </div>
-            <div class="curriculum" ><a class="curriculum" href="./Cv Reinaldo Dianda.pdf" target="_blank" >Curriculum Vitae</a></div>
+        
+        <div class="curriculum"><a class="curriculum" href="./Cv Reinaldo Dianda.pdf" target="_blank" rel="noopener noreferrer">Curriculum Vitae</a></div>
+    
     <section class="main-container-sections">
             <h2 class="h2-subtitle" data-section="profile" data-value="skills">Habilidades</h2>
                 <div class="main-items">
-
                     <div class="main-skills-container-levels">    
-                        <img src="https://res.cloudinary.com/doo95ngwf/image/upload/f_auto,q_auto/v1657836102/html-5_1_cghyef.png" alt="Html5">
-                        
-                            <div class="level-skill" id="level-skill-html"></div>
+                        <img src="https://res.cloudinary.com/doo95ngwf/image/upload/f_auto,q_auto/v1657836102/html-5_1_cghyef.png" alt="Logo HTML5" loading="lazy">
+                        <div class="level-skill" id="level-skill-html"></div>
                     </div>
 
                     <div class="main-skills-container-levels">
-                        <img src="https://res.cloudinary.com/doo95ngwf/image/upload/f_auto,q_auto/v1657836102/css-3_fxs9yo.png" alt="Css3">
-                        
+                        <img src="https://res.cloudinary.com/doo95ngwf/image/upload/f_auto,q_auto/v1657836102/css-3_fxs9yo.png" alt="Logo CSS3" loading="lazy">
                         <div class="level-skill" id="level-skill-css"></div>
-
                     </div>
                     
                     <div class="main-skills-container-levels">
-                        <img src="https://res.cloudinary.com/doo95ngwf/image/upload/f_auto,q_auto/v1657836103/480px-JavaScript-logo_vyqp79.png" alt="JavaScript">
-                        
+                        <img src="https://res.cloudinary.com/doo95ngwf/image/upload/f_auto,q_auto/v1657836103/480px-JavaScript-logo_vyqp79.png" alt="Logo JavaScript" loading="lazy">
                         <div class="level-skill" id="level-skill-js"></div>
                     </div>
                     
                     <div class="main-skills-container-levels">
-                        <img src="https://res.cloudinary.com/doo95ngwf/image/upload/f_auto,q_auto/v1657836103/github_wscnsy.png" alt="Git">
+                        <img src="https://res.cloudinary.com/doo95ngwf/image/upload/f_auto,q_auto/v1657836103/github_wscnsy.png" alt="Logo Git/GitHub" loading="lazy">
                         <div class="level-skill" id="level-skill-github"></div>
-
                     </div>
                     
                     <div class="main-skills-container-levels">
-                        <img src="https://res.cloudinary.com/doo95ngwf/image/upload/f_auto,q_auto/v1657836103/wordpress_1_flbkho.png" alt="WordPress">
+                        <img src="https://res.cloudinary.com/doo95ngwf/image/upload/f_auto,q_auto/v1657836103/wordpress_1_flbkho.png" alt="Logo WordPress" loading="lazy">
                         <div class="level-skill" id="level-skill-wordpress"></div>
-
                     </div>
                     
                     <div class="main-skills-container-levels">
-                        <img src="https://res.cloudinary.com/doo95ngwf/image/upload/v1668128498/bootstrap_1_pwefkt.svg" alt="Boostrap">
+                        <img src="https://res.cloudinary.com/doo95ngwf/image/upload/v1668128498/bootstrap_1_pwefkt.svg" alt="Logo Bootstrap" loading="lazy">
                         <div class="level-skill" id="level-skill-B"></div>
-
                     </div>
-
                 </div>
         </section>
 
          <section class="main-container-sections">
             <h2 class="h2-subtitle" data-section="proyects" data-value="proyects-title">Proyectos</h2>
             <article class="main-post">
-
-
-                <a href="https://mrbrillante.com/" target="_blank">
-                    <post >
-                    <h3>Mr Brillante</h3>
-                        <img id="post-mrbrillante" class="post-img" src="https://res.cloudinary.com/doo95ngwf/image/upload/v1668123870/mr_brillante1_jsdc6n_lwlwl8.webp" alt="viewport page mr-brillante.com">
-                    <p data-section="proyects" data-value="first-proyect-Description">Sitio web para la empresa de Limpieza Mr Brillante usando HTML5 y CSS3.
-                    </p>
-
-                </post></a>
-                
-                
-                
-
-                <a href="https://qbitdesarrollo.com/usbio/"target="_blank"><post>
-                    <h3>Usbio</h3>
-                        <img  id="post-usbio" class="post-img" src="https://res.cloudinary.com/doo95ngwf/image/upload/v1668123697/Usbio_opeber_cpjwkq.webp" alt="viewport page usbios ecuador">
-                        <p  data-section="proyects" data-value="second-proyect-Description">Sitio web para la empresa de Usbios donde se muestra el catálogo de productos usando WordPress y WooCommerce.
-                        </p>
-                </post></a>
-
-
-                <a href="https://qbitdesarrollo.com/puntacentinela/" target="_blank"><post>
-                    <h3>Punta Centinela</h3>
-                    <img id="punta-centinela" class="post-img" src="https://res.cloudinary.com/doo95ngwf/image/upload/v1668123943/Punta_centinela_ex0ync_ahlapv.webp" alt="viewport page punta-centinela">
-                    <p data-section="proyects" data-value="third-proyect-Description">Landing page para la agencia de turismo Punta Centinela hecha usando Wordpress y Revolution Slider.</p>
-                </post></a>
-
-
-                
-                <a href="https://qbitdesarrollo.com/vipinfinity/" target="_blank">
-                    <post >
-                    <h3>Vip Infinity</h3>
-                        <img id="post-vipinfinity" class="post-img" src="https://res.cloudinary.com/doo95ngwf/image/upload/v1668124013/Vip_infinty_kknkkj_xfe5sn.webp" alt="viewport page vipinfinity">
-                    <p  data-section="proyects" data-value="fourth-proyect-Description">Sitio web para la agencia de Turismo Vip Infinity hecho en WordPress, donde se muestran todo el catálogo de Tours y destinos de la empresa.</p>
-
-                </post></a>
-
-                
-       
+                <a href="https://mrbrillante.com/" target="_blank" rel="noopener noreferrer">
+                    <post>
+                        <h3>Mr Brillante</h3>
+                        <img id="post-mrbrillante" class="post-img" src="https://res.cloudinary.com/doo95ngwf/image/upload/v1668123870/mr_brillante1_jsdc6n_lwlwl8.webp" alt="Vista previa de mr-brillante.com" loading="lazy">
+                        <p data-section="proyects" data-value="first-proyect-Description">Sitio web para la empresa de Limpieza Mr Brillante usando HTML5 y CSS3.</p>
+                    </post>
+                </a>
             </article>
-            
-
         </section>
     </main>
     <footer>
         <div class="footer-container-sections" >
-            <h3 class="h2-subtitle" data-section="contact" data-value="contactme" >Contáctame  </h3>
+            <h3 class="h2-subtitle" data-section="contact" data-value="contactme">Contáctame</h3>
                 <div class="container-div-icons">
-                    <a href="https://www.linkedin.com/in/reinaldo-dianda/" target="_blank"><i class="fa-brands fa-linkedin fa-lg"></i></a>
-                    <a href="mailto:reinaldodianda@gmail.com" target="_blank"><i class="fa-solid fa-envelope fa-lg"></i></a>  
+                    <a href="https://www.linkedin.com/in/reinaldo-dianda/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin fa-lg"></i></a>
+                    <a href="mailto:reinaldodianda@gmail.com" target="_blank" rel="noopener noreferrer" aria-label="Email"><i class="fa-solid fa-envelope fa-lg"></i></a>  
                 </div>  
         </div>
     </footer>
