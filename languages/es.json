@@ -1,17 +1,14 @@
-    {
-        "profile":{
-            "rol":"Desarrollador de Software",
-            "description":"Soy un desarrollador Junior apasionado por la tecnología, tengo 10 meses de experiencia y me adapto a cualquier lenguaje y reto que me propongan, ya que veo el aprendizaje como algo que no debe detenerse.",
-            "skills":"Habilidades"
-        },
-        "proyects":{
-            "proyects-title":"Proyectos",
-            "first-proyect-Description":"Sitio web para la empresa de Limpieza Mr Brillante usando Html5 y Css3.",
-            "second-proyect-Description":"Sitio web para la empresa de Usbios donde se muestra el catálogo de productos usando WordPress y WooCommerce.",
-            "third-proyect-Description":"Landing page para la agencia de turismo Punta Centinela hecha usando Wordpress y Revolution Slider.",
-            "fourth-proyect-Description":"Sitio web para la agencia de Turismo Vip Infinity hecho en WordPress, donde se muestran todo el catálogo de Tours y destinos de la empresa."
-        },
-        "contact":{
-        "contactme":"Contáctame"
-        }
+{
+    "profile": {
+        "rol": "Desarrollador de Software",
+        "description": "Soy un desarrollador Junior y estudiante de Ingeniería en Sistemas apasionado por la tecnología, tengo 1 año de experiencia y me adapto a cualquier lenguaje y reto que me propongan, ya que veo el aprendizaje como algo que no debe detenerse.",
+        "skills": "Habilidades"
+    },
+    "projects": {
+        "title": "Proyectos",
+        "mrbrillante_desc": "Sitio web para la empresa de Limpieza Mr Brillante usando HTML5 y CSS3."
+    },
+    "contact": {
+        "title": "Contáctame"
     }
+}
