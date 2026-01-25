@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unidad 2: Métodos de Integración | Cálculo Integral</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- MathJax -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- ==================== NAVEGACIÓN ==================== -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <span class="brand-integral">∫</span> Cálculo Integral
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="unidad1.html">Unidad 1</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="unidad2.html">Unidad 2</a></li>
+                    <li class="nav-item"><a class="nav-link" href="unidad3.html">Unidad 3</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== UNIDAD 2 ==================== -->
+    <section id="unidad2" class="section-unit">
+        <div class="container">
+            
+            <!-- Encabezado de Unidad -->
+            <div class="unit-header">
+                <span class="unit-badge">UNIDAD 2</span>
+                <h2>Métodos de Integración</h2>
+                <p>Técnicas para resolver integrales que no son directas</p>
+            </div>
+
+            <!-- ==================== TEMA 2.1 ==================== -->
+            <div class="tema-card" id="tema2-1">
+                <div class="tema-header">
+                    <span class="tema-numero">2.1</span>
+                    <h3>Método de Sustitución: El cambio de disfraz</h3>
+                </div>
+                
+                <div class="tema-content">
+                    <!-- Pregunta gancho -->
+                    <div class="pregunta-gancho">
+                        <i class="fas fa-question-circle"></i>
+                        <p>¿Cómo resolverías $\int 2x \cdot e^{x^2} dx$? No parece una integral directa... <strong>¿y si cambiamos de variable?</strong></p>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Vida Real -->
+                        <div class="col-lg-6">
+                            <div class="bloque-real">
+                                <h5><i class="fas fa-mask me-2"></i> La Historia</h5>
+                                <p>Imagina que tienes un problema difícil en español. Pero resulta que en inglés es súper fácil de resolver.</p>
+                                <p>Entonces:</p>
+                                <ol class="lista-numerada">
+                                    <li><strong>Traduces</strong> el problema al inglés</li>
+                                    <li><strong>Lo resuelves</strong> fácilmente</li>
+                                    <li><strong>Traduces</strong> la respuesta de vuelta al español</li>
+                                </ol>
+                                <div class="pregunta-clave">
+                                    🎭 La sustitución es exactamente eso: "disfrazamos" la integral para que sea más fácil.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- La idea matemática -->
+                        <div class="col-lg-6">
+                            <div class="bloque-mate">
+                                <h5><i class="fas fa-exchange-alt me-2"></i> El Método</h5>
+                                <p>Si tienes algo "dentro de algo" y su derivada está afuera:</p>
+                                <div class="formula-box">
+                                    <div class="formula">$$ \int f(g(x)) \cdot g'(x) \, dx = \int f(u) \, du $$</div>
+                                    <span class="formula-traduccion">Donde $u = g(x)$ y $du = g'(x) \, dx$</span>
+                                </div>
+                                <div class="metodo-pasos mt-3">
+                                    <div class="metodo-paso">
+                                        <span class="paso-num">1</span>
+                                        <span>Identifica el "interior" → eso será <strong>u</strong></span>
+                                    </div>
+                                    <div class="metodo-paso">
+                                        <span class="paso-num">2</span>
+                                        <span>Deriva u para obtener <strong>du</strong></span>
+                                    </div>
+                                    <div class="metodo-paso">
+                                        <span class="paso-num">3</span>
+                                        <span>Reemplaza todo en términos de u</span>
+                                    </div>
+                                    <div class="metodo-paso">
+                                        <span class="paso-num">4</span>
+                                        <span>Integra y vuelve a x</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ejemplo resuelto -->
+                    <div class="ejemplo-box mt-4">
+                        <h5><i class="fas fa-pencil-alt me-2"></i> Ejemplo: $\int 2x \cdot e^{x^2} dx$</h5>
+                        <div class="ejemplo-contenido">
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 1: Identificar u</div>
+                                <div class="paso-body">
+                                    <p>¿Qué está "adentro"? → $x^2$ está dentro de $e^{x^2}$</p>
+                                    <p class="paso-resultado">$u = x^2$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 2: Calcular du</div>
+                                <div class="paso-body">
+                                    <p>Derivamos: $\frac{du}{dx} = 2x$</p>
+                                    <p class="paso-resultado">$du = 2x \, dx$ &nbsp; ← ¡Esto ya está en la integral!</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 3: Sustituir</div>
+                                <div class="paso-body">
+                                    <p>$\int 2x \cdot e^{x^2} dx = \int e^u \, du$</p>
+                                    <p class="paso-nota">¡Ahora es una integral directa!</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 4: Integrar y volver a x</div>
+                                <div class="paso-body">
+                                    <p>$\int e^u \, du = e^u + C = e^{x^2} + C$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-resultado-final">
+                                <span class="resultado-label">Resultado:</span>
+                                <span class="resultado-formula">$\int 2x \cdot e^{x^2} dx = e^{x^2} + C$</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- INTERACTIVO -->
+                    <div class="interactivo-box">
+                        <h5><i class="fas fa-gamepad me-2"></i> Practica la sustitución</h5>
+                        <p class="text-muted">Selecciona una integral y observa paso a paso cómo se resuelve con sustitución</p>
+                        
+                        <div class="row g-4">
+                            <div class="col-lg-5">
+                                <label class="form-label">Elige una integral:</label>
+                                <select class="form-select" id="sustitucion-selector">
+                                    <option value="ex2">$\int 2x \cdot e^{x^2} dx$</option>
+                                    <option value="sin">$\int \cos(x) \cdot e^{\sin(x)} dx$</option>
+                                    <option value="ln">$\int \frac{1}{x} \cdot (\ln x)^3 dx$</option>
+                                    <option value="sqrt">$\int \frac{x}{\sqrt{x^2+1}} dx$</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="sustitucion-pasos" id="sustitucion-pasos">
+                                    <div class="sust-paso">
+                                        <span class="sust-label">u =</span>
+                                        <span class="sust-valor" id="sust-u">x²</span>
+                                    </div>
+                                    <div class="sust-paso">
+                                        <span class="sust-label">du =</span>
+                                        <span class="sust-valor" id="sust-du">2x dx</span>
+                                    </div>
+                                    <div class="sust-paso">
+                                        <span class="sust-label">Integral en u:</span>
+                                        <span class="sust-valor" id="sust-integral">∫ eᵘ du</span>
+                                    </div>
+                                    <div class="sust-paso sust-resultado">
+                                        <span class="sust-label">Resultado:</span>
+                                        <span class="sust-valor" id="sust-resultado">eˣ² + C</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resumen -->
+                    <div class="resumen-tema">
+                        <strong>📌 En resumen:</strong> El método de sustitución "disfraza" la integral con un cambio de variable (u = algo). Funciona cuando ves una función compuesta y su derivada está presente. Es como traducir a un idioma más fácil.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== TEMA 2.2 ==================== -->
+            <div class="tema-card" id="tema2-2">
+                <div class="tema-header">
+                    <span class="tema-numero">2.2</span>
+                    <h3>Integración por Partes: Divide y vencerás</h3>
+                </div>
+                
+                <div class="tema-content">
+                    <!-- Pregunta gancho -->
+                    <div class="pregunta-gancho">
+                        <i class="fas fa-question-circle"></i>
+                        <p>¿Cómo integras $\int x \cdot e^x dx$? Es un producto de dos cosas diferentes... <strong>¿y si las separamos?</strong></p>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Vida Real -->
+                        <div class="col-lg-6">
+                            <div class="bloque-real">
+                                <h5><i class="fas fa-puzzle-piece me-2"></i> La Historia</h5>
+                                <p>Imagina que tienes que mover un mueble pesado con un amigo:</p>
+                                <ul class="lista-simple">
+                                    <li><strong>Tú</strong> empujas (haces una parte del trabajo)</li>
+                                    <li><strong>Tu amigo</strong> tira (hace la otra parte)</li>
+                                    <li>Juntos logran lo que ninguno podía solo</li>
+                                </ul>
+                                <div class="pregunta-clave">
+                                    🤝 La integración por partes divide el trabajo: una parte se deriva, la otra se integra.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- La idea matemática -->
+                        <div class="col-lg-6">
+                            <div class="bloque-mate">
+                                <h5><i class="fas fa-cut me-2"></i> La Fórmula</h5>
+                                <p>Viene de la regla del producto para derivadas:</p>
+                                <div class="formula-box">
+                                    <div class="formula">$$ \int u \, dv = uv - \int v \, du $$</div>
+                                    <span class="formula-traduccion">"La integral del producto = producto menos integral del otro producto"</span>
+                                </div>
+                                <div class="regla-liate mt-3">
+                                    <h6><i class="fas fa-lightbulb me-2"></i> Regla LIATE (¿qué elegir como u?)</h6>
+                                    <p class="small text-muted">Elige u en este orden de prioridad:</p>
+                                    <div class="liate-lista">
+                                        <span class="liate-item"><strong>L</strong>ogaritmos</span>
+                                        <span class="liate-item"><strong>I</strong>nversas trig</span>
+                                        <span class="liate-item"><strong>A</strong>lgebraicas (x, x²)</span>
+                                        <span class="liate-item"><strong>T</strong>rigonométricas</span>
+                                        <span class="liate-item"><strong>E</strong>xponenciales</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ejemplo resuelto -->
+                    <div class="ejemplo-box mt-4">
+                        <h5><i class="fas fa-pencil-alt me-2"></i> Ejemplo: $\int x \cdot e^x dx$</h5>
+                        <div class="ejemplo-contenido">
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 1: Elegir u y dv (usando LIATE)</div>
+                                <div class="paso-body">
+                                    <p>Entre $x$ (algebraica) y $e^x$ (exponencial), la "A" va primero:</p>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <p class="paso-resultado">$u = x$ → $du = dx$</p>
+                                        </div>
+                                        <div class="col-6">
+                                            <p class="paso-resultado">$dv = e^x dx$ → $v = e^x$</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 2: Aplicar la fórmula</div>
+                                <div class="paso-body">
+                                    <p>$\int u \, dv = uv - \int v \, du$</p>
+                                    <p class="paso-resultado">$\int x \cdot e^x dx = x \cdot e^x - \int e^x dx$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 3: Resolver la integral restante</div>
+                                <div class="paso-body">
+                                    <p>$= x \cdot e^x - e^x + C$</p>
+                                    <p>$= e^x(x - 1) + C$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-resultado-final">
+                                <span class="resultado-label">Resultado:</span>
+                                <span class="resultado-formula">$\int x \cdot e^x dx = e^x(x - 1) + C$</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- INTERACTIVO -->
+                    <div class="interactivo-box">
+                        <h5><i class="fas fa-gamepad me-2"></i> Elige u y dv correctamente</h5>
+                        <p class="text-muted">Selecciona qué debe ser u y qué debe ser dv. ¡Usa la regla LIATE!</p>
+                        
+                        <div class="partes-juego">
+                            <div class="partes-integral" id="partes-integral">
+                                $\int x \cdot \ln(x) \, dx$
+                            </div>
+                            
+                            <div class="row g-3 mt-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">¿Qué es <strong>u</strong>?</label>
+                                    <div class="partes-opciones" id="partes-u-opciones">
+                                        <button class="partes-btn" data-valor="x" id="btn-u-x">x</button>
+                                        <button class="partes-btn" data-valor="ln" id="btn-u-ln">ln(x)</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">¿Qué es <strong>dv</strong>?</label>
+                                    <div class="partes-opciones" id="partes-dv-opciones">
+                                        <button class="partes-btn" data-valor="x" id="btn-dv-x">x dx</button>
+                                        <button class="partes-btn" data-valor="ln" id="btn-dv-ln">ln(x) dx</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="partes-feedback mt-3" id="partes-feedback">
+                                <p class="text-muted">👆 Selecciona u y dv para ver si es correcto</p>
+                            </div>
+                            
+                            <button class="btn btn-outline-primary mt-3" id="partes-nueva">
+                                <i class="fas fa-random me-2"></i> Otra integral
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Resumen -->
+                    <div class="resumen-tema">
+                        <strong>📌 En resumen:</strong> Integración por partes separa un producto en dos partes: una se deriva (u) y otra se integra (dv). Usa LIATE para elegir correctamente. La fórmula es: $\int u \, dv = uv - \int v \, du$
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== TEMA 2.3 ==================== -->
+            <div class="tema-card" id="tema2-3">
+                <div class="tema-header">
+                    <span class="tema-numero">2.3</span>
+                    <h3>Potencias de Seno y Coseno: Los trucos trigonométricos</h3>
+                </div>
+                
+                <div class="tema-content">
+                    <!-- Pregunta gancho -->
+                    <div class="pregunta-gancho">
+                        <i class="fas fa-question-circle"></i>
+                        <p>¿Cómo integras $\int \sin^4(x) dx$? No puedes simplemente "subir el exponente"... <strong>¿qué truco usar?</strong></p>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Vida Real -->
+                        <div class="col-lg-6">
+                            <div class="bloque-real">
+                                <h5><i class="fas fa-tools me-2"></i> La Historia</h5>
+                                <p>Imagina que tienes un tornillo especial que no entra con ningún destornillador normal.</p>
+                                <p>Necesitas:</p>
+                                <ul class="lista-simple">
+                                    <li>Si el exponente es <strong>impar</strong>: separa uno y usa identidad pitagórica</li>
+                                    <li>Si el exponente es <strong>par</strong>: usa fórmulas de ángulo medio</li>
+                                </ul>
+                                <div class="pregunta-clave">
+                                    🔧 Cada tipo de integral trigonométrica tiene su "herramienta especial".
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- La idea matemática -->
+                        <div class="col-lg-6">
+                            <div class="bloque-mate">
+                                <h5><i class="fas fa-key me-2"></i> Las Identidades Clave</h5>
+                                <div class="identidades-grid">
+                                    <div class="identidad-card">
+                                        <span class="identidad-nombre">Pitagórica:</span>
+                                        <span class="identidad-formula">$\sin^2 x + \cos^2 x = 1$</span>
+                                    </div>
+                                    <div class="identidad-card">
+                                        <span class="identidad-nombre">Ángulo medio (sin²):</span>
+                                        <span class="identidad-formula">$\sin^2 x = \frac{1 - \cos(2x)}{2}$</span>
+                                    </div>
+                                    <div class="identidad-card">
+                                        <span class="identidad-nombre">Ángulo medio (cos²):</span>
+                                        <span class="identidad-formula">$\cos^2 x = \frac{1 + \cos(2x)}{2}$</span>
+                                    </div>
+                                </div>
+                                <div class="estrategia-box mt-3">
+                                    <h6>Estrategia:</h6>
+                                    <p class="small mb-1"><strong>Impar:</strong> Separa uno → usa $\sin^2 = 1 - \cos^2$ → sustitución</p>
+                                    <p class="small mb-0"><strong>Par:</strong> Usa fórmulas de ángulo medio → reduce el exponente</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ejemplo resuelto -->
+                    <div class="ejemplo-box mt-4">
+                        <h5><i class="fas fa-pencil-alt me-2"></i> Ejemplo (impar): $\int \sin^3(x) dx$</h5>
+                        <div class="ejemplo-contenido">
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 1: Separar un sin(x)</div>
+                                <div class="paso-body">
+                                    <p class="paso-resultado">$\int \sin^3 x \, dx = \int \sin^2 x \cdot \sin x \, dx$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 2: Usar identidad pitagórica</div>
+                                <div class="paso-body">
+                                    <p>$\sin^2 x = 1 - \cos^2 x$</p>
+                                    <p class="paso-resultado">$= \int (1 - \cos^2 x) \sin x \, dx$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 3: Sustitución u = cos(x)</div>
+                                <div class="paso-body">
+                                    <p>$u = \cos x$, $du = -\sin x \, dx$</p>
+                                    <p class="paso-resultado">$= -\int (1 - u^2) du = -u + \frac{u^3}{3} + C$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-resultado-final">
+                                <span class="resultado-label">Resultado:</span>
+                                <span class="resultado-formula">$\int \sin^3 x \, dx = -\cos x + \frac{\cos^3 x}{3} + C$</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- INTERACTIVO -->
+                    <div class="interactivo-box">
+                        <h5><i class="fas fa-gamepad me-2"></i> ¿Qué estrategia usar?</h5>
+                        <p class="text-muted">Cambia los exponentes y observa qué método se debe aplicar</p>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="trig-controles">
+                                    <label class="form-label">Exponente de sen(x): <strong id="exp-sin-valor">2</strong></label>
+                                    <input type="range" class="form-range" id="exp-sin" min="0" max="6" value="2">
+                                    
+                                    <label class="form-label mt-3">Exponente de cos(x): <strong id="exp-cos-valor">3</strong></label>
+                                    <input type="range" class="form-range" id="exp-cos" min="0" max="6" value="3">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="trig-resultado">
+                                    <div class="trig-integral" id="trig-integral">
+                                        $\int \sin^2(x) \cos^3(x) \, dx$
+                                    </div>
+                                    <div class="trig-estrategia" id="trig-estrategia">
+                                        <div class="estrategia-badge estrategia-impar">
+                                            <i class="fas fa-check-circle me-2"></i>
+                                            Exponente IMPAR en cos
+                                        </div>
+                                        <p class="mt-2 small">Separa un cos(x), usa $\cos^2 = 1 - \sin^2$, sustituye $u = \sin(x)$</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resumen -->
+                    <div class="resumen-tema">
+                        <strong>📌 En resumen:</strong> Para $\int \sin^n x \cos^m x \, dx$: si algún exponente es impar, separa uno y usa la identidad pitagórica. Si ambos son pares, usa las fórmulas de ángulo medio para reducir exponentes.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== TEMA 2.4 ==================== -->
+            <div class="tema-card" id="tema2-4">
+                <div class="tema-header">
+                    <span class="tema-numero">2.4</span>
+                    <h3>Potencias de Tangente y Secante: Los primos difíciles</h3>
+                </div>
+                
+                <div class="tema-content">
+                    <!-- Pregunta gancho -->
+                    <div class="pregunta-gancho">
+                        <i class="fas fa-question-circle"></i>
+                        <p>$\int \tan^3(x) \sec^2(x) dx$ parece intimidante... <strong>¿pero sabías que tiene un patrón predecible?</strong></p>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Vida Real -->
+                        <div class="col-lg-6">
+                            <div class="bloque-real">
+                                <h5><i class="fas fa-sitemap me-2"></i> La Historia</h5>
+                                <p>Tangente y secante son como primos de seno y coseno. Tienen sus propias reglas:</p>
+                                <ul class="lista-simple">
+                                    <li>$\tan x = \frac{\sin x}{\cos x}$</li>
+                                    <li>$\sec x = \frac{1}{\cos x}$</li>
+                                    <li>La derivada de tan es sec²</li>
+                                    <li>La derivada de sec es sec·tan</li>
+                                </ul>
+                                <div class="pregunta-clave">
+                                    🔗 Estas relaciones son la clave para integrarlos.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- La idea matemática -->
+                        <div class="col-lg-6">
+                            <div class="bloque-mate">
+                                <h5><i class="fas fa-route me-2"></i> Las Estrategias</h5>
+                                <div class="formula-box mb-3">
+                                    <span class="formula-label">Identidad fundamental:</span>
+                                    <div class="formula">$$ \sec^2 x = 1 + \tan^2 x $$</div>
+                                </div>
+                                <div class="estrategia-tabla">
+                                    <div class="estrategia-fila">
+                                        <span class="caso">Si sec es <strong>par</strong>:</span>
+                                        <span class="accion">Guarda $\sec^2 x$, convierte resto a tan, $u = \tan x$</span>
+                                    </div>
+                                    <div class="estrategia-fila">
+                                        <span class="caso">Si tan es <strong>impar</strong>:</span>
+                                        <span class="accion">Guarda $\sec x \tan x$, convierte a sec, $u = \sec x$</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ejemplo resuelto -->
+                    <div class="ejemplo-box mt-4">
+                        <h5><i class="fas fa-pencil-alt me-2"></i> Ejemplo: $\int \tan^3 x \sec^2 x \, dx$</h5>
+                        <div class="ejemplo-contenido">
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Análisis: sec es par (exponente 2)</div>
+                                <div class="paso-body">
+                                    <p>Usamos $u = \tan x$, entonces $du = \sec^2 x \, dx$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Sustituir</div>
+                                <div class="paso-body">
+                                    <p class="paso-resultado">$\int \tan^3 x \sec^2 x \, dx = \int u^3 \, du$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Integrar y volver a x</div>
+                                <div class="paso-body">
+                                    <p class="paso-resultado">$= \frac{u^4}{4} + C = \frac{\tan^4 x}{4} + C$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-resultado-final">
+                                <span class="resultado-label">Resultado:</span>
+                                <span class="resultado-formula">$\int \tan^3 x \sec^2 x \, dx = \frac{\tan^4 x}{4} + C$</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- INTERACTIVO -->
+                    <div class="interactivo-box">
+                        <h5><i class="fas fa-gamepad me-2"></i> ¿Qué sustitución usar?</h5>
+                        <p class="text-muted">Ajusta los exponentes y descubre la estrategia correcta</p>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="tansec-controles">
+                                    <label class="form-label">Exponente de tan(x): <strong id="exp-tan-valor">2</strong></label>
+                                    <input type="range" class="form-range" id="exp-tan" min="0" max="5" value="2">
+                                    
+                                    <label class="form-label mt-3">Exponente de sec(x): <strong id="exp-sec-valor">4</strong></label>
+                                    <input type="range" class="form-range" id="exp-sec" min="0" max="6" value="4">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="tansec-resultado">
+                                    <div class="tansec-integral" id="tansec-integral">
+                                        $\int \tan^2(x) \sec^4(x) \, dx$
+                                    </div>
+                                    <div class="tansec-estrategia" id="tansec-estrategia">
+                                        <div class="estrategia-badge estrategia-par">
+                                            <i class="fas fa-check-circle me-2"></i>
+                                            sec tiene exponente PAR
+                                        </div>
+                                        <p class="mt-2 small">Guarda $\sec^2 x$ para el du, convierte el resto a tan usando $\sec^2 = 1 + \tan^2$, y usa $u = \tan x$</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resumen -->
+                    <div class="resumen-tema">
+                        <strong>📌 En resumen:</strong> Para $\int \tan^n x \sec^m x \, dx$: si sec es par, sustituye $u = \tan x$. Si tan es impar, sustituye $u = \sec x$. La identidad clave es $\sec^2 x = 1 + \tan^2 x$.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== TEMA 2.5 ==================== -->
+            <div class="tema-card" id="tema2-5">
+                <div class="tema-header">
+                    <span class="tema-numero">2.5</span>
+                    <h3>Productos de Sen/Cos con Diferente Argumento</h3>
+                </div>
+                
+                <div class="tema-content">
+                    <!-- Pregunta gancho -->
+                    <div class="pregunta-gancho">
+                        <i class="fas fa-question-circle"></i>
+                        <p>¿Cómo integras $\int \sin(3x)\cos(5x) dx$? Los argumentos son diferentes... <strong>¿cómo separamos esto?</strong></p>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Vida Real -->
+                        <div class="col-lg-6">
+                            <div class="bloque-real">
+                                <h5><i class="fas fa-wave-square me-2"></i> La Historia</h5>
+                                <p>Imagina dos ondas de sonido con frecuencias diferentes. Cuando se mezclan, crean un patrón complejo.</p>
+                                <p>Para analizar ese patrón, los ingenieros de sonido lo <strong>descomponen</strong> en ondas simples.</p>
+                                <div class="pregunta-clave">
+                                    🎵 Las fórmulas producto-suma hacen exactamente eso: convierten productos de ondas en sumas.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- La idea matemática -->
+                        <div class="col-lg-6">
+                            <div class="bloque-mate">
+                                <h5><i class="fas fa-exchange-alt me-2"></i> Fórmulas Producto-Suma</h5>
+                                <div class="identidades-grid">
+                                    <div class="identidad-card">
+                                        <span class="identidad-formula small">$\sin A \cos B = \frac{1}{2}[\sin(A+B) + \sin(A-B)]$</span>
+                                    </div>
+                                    <div class="identidad-card">
+                                        <span class="identidad-formula small">$\cos A \cos B = \frac{1}{2}[\cos(A-B) + \cos(A+B)]$</span>
+                                    </div>
+                                    <div class="identidad-card">
+                                        <span class="identidad-formula small">$\sin A \sin B = \frac{1}{2}[\cos(A-B) - \cos(A+B)]$</span>
+                                    </div>
+                                </div>
+                                <p class="mt-3 small text-muted">Estas fórmulas convierten un producto (difícil) en una suma (fácil de integrar).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ejemplo resuelto -->
+                    <div class="ejemplo-box mt-4">
+                        <h5><i class="fas fa-pencil-alt me-2"></i> Ejemplo: $\int \sin(3x)\cos(5x) dx$</h5>
+                        <div class="ejemplo-contenido">
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 1: Aplicar fórmula producto-suma</div>
+                                <div class="paso-body">
+                                    <p>$\sin A \cos B = \frac{1}{2}[\sin(A+B) + \sin(A-B)]$</p>
+                                    <p>Con $A = 3x$ y $B = 5x$:</p>
+                                    <p class="paso-resultado">$\sin(3x)\cos(5x) = \frac{1}{2}[\sin(8x) + \sin(-2x)]$</p>
+                                    <p class="paso-nota">Como $\sin(-\theta) = -\sin(\theta)$:</p>
+                                    <p class="paso-resultado">$= \frac{1}{2}[\sin(8x) - \sin(2x)]$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 2: Integrar término a término</div>
+                                <div class="paso-body">
+                                    <p>$\int \frac{1}{2}[\sin(8x) - \sin(2x)] dx$</p>
+                                    <p class="paso-resultado">$= \frac{1}{2}\left[-\frac{\cos(8x)}{8} + \frac{\cos(2x)}{2}\right] + C$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-resultado-final">
+                                <span class="resultado-label">Resultado:</span>
+                                <span class="resultado-formula">$\int \sin(3x)\cos(5x) dx = \frac{\cos(2x)}{4} - \frac{\cos(8x)}{16} + C$</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- INTERACTIVO -->
+                    <div class="interactivo-box">
+                        <h5><i class="fas fa-gamepad me-2"></i> Visualiza las ondas</h5>
+                        <p class="text-muted">Ajusta las frecuencias y observa cómo el producto se descompone en suma</p>
+                        
+                        <div class="row g-4">
+                            <div class="col-lg-4">
+                                <label class="form-label">Frecuencia A: <strong id="freq-a-valor">3</strong></label>
+                                <input type="range" class="form-range" id="freq-a" min="1" max="7" value="3">
+                                
+                                <label class="form-label mt-3">Frecuencia B: <strong id="freq-b-valor">5</strong></label>
+                                <input type="range" class="form-range" id="freq-b" min="1" max="7" value="5">
+                                
+                                <div class="producto-info mt-3">
+                                    <p class="small mb-1"><strong>Producto:</strong></p>
+                                    <p id="producto-formula">$\sin(3x)\cos(5x)$</p>
+                                    <p class="small mb-1 mt-2"><strong>Equivale a:</strong></p>
+                                    <p id="suma-formula">$\frac{1}{2}[\sin(8x) - \sin(2x)]$</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="chart-container">
+                                    <canvas id="ondasChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resumen -->
+                    <div class="resumen-tema">
+                        <strong>📌 En resumen:</strong> Cuando tienes productos como $\sin(ax)\cos(bx)$, usa las fórmulas producto-suma para convertirlos en sumas de senos o cosenos simples, que son fáciles de integrar.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p><i class="fas fa-graduation-cap me-2"></i> Proyecto de Cálculo Integral</p>
+                    <p class="text-muted">Universidad de Guayaquil | Ingeniería en Sistemas</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted">CI 2025-2026</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Script personalizado -->
+    <script src="script.js"></script>
+</body>
+</html>

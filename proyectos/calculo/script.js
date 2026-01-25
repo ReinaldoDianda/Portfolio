@@ -506,7 +506,7 @@ function initDiferencial() {
             // Preparar datos para el gráfico
             const labels = [];
             const curveData = [];
-            const barData = [];
+
             
             // Puntos para la curva suave
             for (let x = a; x <= b; x += 0.05) {
@@ -779,9 +779,6 @@ function initIntegralDefinida() {
     console.log('✅ Gráfico de integral definida iniciado');
 }
 
-// ==========================================
-// 8. TEMA 1.6 - VALOR MEDIO (Gráfico)
-// ==========================================
 
 // ==========================================
 // 8. TEMA 1.6 - VALOR MEDIO (Gráfico INTERACTIVO)
@@ -982,7 +979,7 @@ function initTeoremaFundamental() {
     console.log('✅ Demo de teorema fundamental iniciado');
 }
     // ==========================================
-    // 7. SMOOTH SCROLL
+    // 10. SMOOTH SCROLL
     // ==========================================
     
     function initSmoothScroll() {
@@ -1006,7 +1003,7 @@ function initTeoremaFundamental() {
     }
     
     // ==========================================
-    // 8. MATHJAX RE-RENDER
+    // 11. MATHJAX RE-RENDER
     // ==========================================
     
     function initMathJax() {
@@ -1018,24 +1015,590 @@ function initTeoremaFundamental() {
             });
         }
     }
+    // ==========================================
+// 12. TEMA 2.1 - SUSTITUCIÓN (Selector)
+// ==========================================
+
+function initSustitucion() {
+    const selector = document.getElementById('sustitucion-selector');
+    const sustU = document.getElementById('sust-u');
+    const sustDu = document.getElementById('sust-du');
+    const sustIntegral = document.getElementById('sust-integral');
+    const sustResultado = document.getElementById('sust-resultado');
     
-    // ==========================================
-    // INICIALIZAR TODO
-    // ==========================================
+    if (!selector || !sustU || !sustDu || !sustIntegral || !sustResultado) {
+        console.warn('Elementos de sustitución no encontrados');
+        return;
+    }
+    
+    const ejemplos = {
+        'ex2': {
+            u: 'x²',
+            du: '2x dx',
+            integral: '∫ eᵘ du',
+            resultado: 'eˣ² + C'
+        },
+        'sin': {
+            u: 'sin(x)',
+            du: 'cos(x) dx',
+            integral: '∫ eᵘ du',
+            resultado: 'e^{sin(x)} + C'
+        },
+        'ln': {
+            u: 'ln(x)',
+            du: '(1/x) dx',
+            integral: '∫ u³ du',
+            resultado: '(ln x)⁴ / 4 + C'
+        },
+        'sqrt': {
+            u: 'x² + 1',
+            du: '2x dx',
+            integral: '∫ u^{-1/2} · (1/2) du',
+            resultado: '√(x² + 1) + C'
+        }
+    };
+    
+    function actualizar() {
+        const seleccion = selector.value;
+        const datos = ejemplos[seleccion];
+        
+        sustU.textContent = datos.u;
+        sustDu.textContent = datos.du;
+        sustIntegral.textContent = datos.integral;
+        sustResultado.textContent = datos.resultado;
+    }
+    
+    selector.addEventListener('change', actualizar);
+    
+    // Inicializar
+    actualizar();
+    
+    console.log('✅ Selector de sustitución iniciado');
+}
 
-    initHeroCanvas();
-    initNavbar();
-    initDiferencial();
-    initErrores();
-    initSigma();
-    initRiemann();
-    initIntegralDefinida();
-    initValorMedio();
-    initTeoremaFundamental();
-    initSmoothScroll();
-    initMathJax();
+// ==========================================
+// 13. TEMA 2.2 - INTEGRACIÓN POR PARTES (Juego)
+// ==========================================
 
-    console.log('🎉 Cálculo Integral - Todo iniciado correctamente');
+function initPartes() {
+    const integralDisplay = document.getElementById('partes-integral');
+    const btnUx = document.getElementById('btn-u-x');
+    const btnUln = document.getElementById('btn-u-ln');
+    const btnDvX = document.getElementById('btn-dv-x');
+    const btnDvLn = document.getElementById('btn-dv-ln');
+    const feedback = document.getElementById('partes-feedback');
+    const btnNueva = document.getElementById('partes-nueva');
+    
+    if (!integralDisplay || !btnUx || !btnUln || !feedback) {
+        console.warn('Elementos de partes no encontrados');
+        return;
+    }
+    
+    const problemas = [
+        {
+            integral: '\\int x \\cdot \\ln(x) \\, dx',
+            opciones: { u1: 'x', u2: 'ln(x)', dv1: 'x dx', dv2: 'ln(x) dx' },
+            correctoU: 'ln',
+            correctoDv: 'x',
+            explicacion: '¡Correcto! ln(x) es Logarítmica (L), va primero en LIATE. Elegimos u = ln(x) y dv = x dx'
+        },
+        {
+            integral: '\\int x \\cdot e^x \\, dx',
+            opciones: { u1: 'x', u2: 'eˣ', dv1: 'x dx', dv2: 'eˣ dx' },
+            correctoU: 'x',
+            correctoDv: 'ex',
+            explicacion: '¡Correcto! x es Algebraica (A), eˣ es Exponencial (E). La A va primero, así que u = x y dv = eˣ dx'
+        },
+        {
+            integral: '\\int x^2 \\cdot \\sin(x) \\, dx',
+            opciones: { u1: 'x²', u2: 'sin(x)', dv1: 'x² dx', dv2: 'sin(x) dx' },
+            correctoU: 'x2',
+            correctoDv: 'sin',
+            explicacion: '¡Correcto! x² es Algebraica (A), sin(x) es Trigonométrica (T). La A va primero en LIATE.'
+        }
+    ];
+    
+    let problemaActual = 0;
+    let seleccionU = null;
+    let seleccionDv = null;
+    
+    function cargarProblema(index) {
+        const prob = problemas[index];
+        integralDisplay.innerHTML = `$${prob.integral}$`;
+        
+        // Actualizar botones según el problema
+        if (index === 0) {
+            btnUx.textContent = 'x';
+            btnUx.dataset.valor = 'x';
+            btnUln.textContent = 'ln(x)';
+            btnUln.dataset.valor = 'ln';
+            btnDvX.textContent = 'x dx';
+            btnDvX.dataset.valor = 'x';
+            btnDvLn.textContent = 'ln(x) dx';
+            btnDvLn.dataset.valor = 'ln';
+        } else if (index === 1) {
+            btnUx.textContent = 'x';
+            btnUx.dataset.valor = 'x';
+            btnUln.textContent = 'eˣ';
+            btnUln.dataset.valor = 'ex';
+            btnDvX.textContent = 'x dx';
+            btnDvX.dataset.valor = 'x';
+            btnDvLn.textContent = 'eˣ dx';
+            btnDvLn.dataset.valor = 'ex';
+        } else {
+            btnUx.textContent = 'x²';
+            btnUx.dataset.valor = 'x2';
+            btnUln.textContent = 'sin(x)';
+            btnUln.dataset.valor = 'sin';
+            btnDvX.textContent = 'x² dx';
+            btnDvX.dataset.valor = 'x2';
+            btnDvLn.textContent = 'sin(x) dx';
+            btnDvLn.dataset.valor = 'sin';
+        }
+        
+        // Resetear estado
+        seleccionU = null;
+        seleccionDv = null;
+        [btnUx, btnUln, btnDvX, btnDvLn].forEach(btn => {
+            btn.classList.remove('selected', 'correct', 'incorrect');
+        });
+        feedback.innerHTML = '<p class="text-muted">👆 Selecciona u y dv para ver si es correcto</p>';
+        feedback.classList.remove('success', 'error');
+        
+        // Re-renderizar MathJax
+        if (typeof MathJax !== 'undefined' && MathJax.typesetPromise) {
+            MathJax.typesetPromise([integralDisplay]).catch(err => console.log('MathJax error:', err));
+        }
+    }
+    
+    function verificarRespuesta() {
+        if (seleccionU === null || seleccionDv === null) return;
+        
+        const prob = problemas[problemaActual];
+        const esCorrectoU = seleccionU === prob.correctoU;
+        const esCorrectoDv = seleccionDv === prob.correctoDv;
+        
+        // Marcar botones U
+        [btnUx, btnUln].forEach(btn => {
+            if (btn.dataset.valor === seleccionU) {
+                btn.classList.add(esCorrectoU ? 'correct' : 'incorrect');
+            }
+        });
+        
+        // Marcar botones Dv
+        [btnDvX, btnDvLn].forEach(btn => {
+            if (btn.dataset.valor === seleccionDv) {
+                btn.classList.add(esCorrectoDv ? 'correct' : 'incorrect');
+            }
+        });
+        
+        if (esCorrectoU && esCorrectoDv) {
+            feedback.innerHTML = `<p><i class="fas fa-check-circle me-2"></i>${prob.explicacion}</p>`;
+            feedback.classList.remove('error');
+            feedback.classList.add('success');
+        } else {
+            feedback.innerHTML = `<p><i class="fas fa-times-circle me-2"></i>No exactamente. Recuerda LIATE: Logaritmos → Inversas trig → Algebraicas → Trigonométricas → Exponenciales</p>`;
+            feedback.classList.remove('success');
+            feedback.classList.add('error');
+        }
+    }
+    
+    // Event listeners para botones U
+    btnUx.addEventListener('click', function() {
+        [btnUx, btnUln].forEach(b => b.classList.remove('selected', 'correct', 'incorrect'));
+        this.classList.add('selected');
+        seleccionU = this.dataset.valor;
+        verificarRespuesta();
+    });
+    
+    btnUln.addEventListener('click', function() {
+        [btnUx, btnUln].forEach(b => b.classList.remove('selected', 'correct', 'incorrect'));
+        this.classList.add('selected');
+        seleccionU = this.dataset.valor;
+        verificarRespuesta();
+    });
+    
+    // Event listeners para botones Dv
+    btnDvX.addEventListener('click', function() {
+        [btnDvX, btnDvLn].forEach(b => b.classList.remove('selected', 'correct', 'incorrect'));
+        this.classList.add('selected');
+        seleccionDv = this.dataset.valor;
+        verificarRespuesta();
+    });
+    
+    btnDvLn.addEventListener('click', function() {
+        [btnDvX, btnDvLn].forEach(b => b.classList.remove('selected', 'correct', 'incorrect'));
+        this.classList.add('selected');
+        seleccionDv = this.dataset.valor;
+        verificarRespuesta();
+    });
+    
+    // Botón nueva integral
+    btnNueva.addEventListener('click', function() {
+        problemaActual = (problemaActual + 1) % problemas.length;
+        cargarProblema(problemaActual);
+    });
+    
+    // Inicializar
+    cargarProblema(0);
+    
+    console.log('✅ Juego de partes iniciado');
+}
+
+// ==========================================
+// 14. TEMA 2.3 - POTENCIAS SEN/COS (Estrategia)
+// ==========================================
+
+function initTrigPotencias() {
+    const expSin = document.getElementById('exp-sin');
+    const expCos = document.getElementById('exp-cos');
+    const expSinValor = document.getElementById('exp-sin-valor');
+    const expCosValor = document.getElementById('exp-cos-valor');
+    const trigIntegral = document.getElementById('trig-integral');
+    const trigEstrategia = document.getElementById('trig-estrategia');
+    
+    if (!expSin || !expCos || !trigIntegral || !trigEstrategia) {
+        console.warn('Elementos de trig potencias no encontrados');
+        return;
+    }
+    
+    function actualizar() {
+        const n = parseInt(expSin.value);
+        const m = parseInt(expCos.value);
+        
+        expSinValor.textContent = n;
+        expCosValor.textContent = m;
+        
+        // Construir la integral
+        let integralStr = '\\int ';
+        if (n > 0) integralStr += `\\sin^${n}(x)`;
+        if (n > 0 && m > 0) integralStr += ' ';
+        if (m > 0) integralStr += `\\cos^${m}(x)`;
+        if (n === 0 && m === 0) integralStr += '1';
+        integralStr += ' \\, dx';
+        
+        trigIntegral.innerHTML = `$${integralStr}$`;
+        
+        // Determinar estrategia
+        let estrategiaHTML = '';
+        
+        if (n === 0 && m === 0) {
+            estrategiaHTML = `
+                <div class="estrategia-badge estrategia-ninguno">
+                    <i class="fas fa-equals me-2"></i>Integral trivial
+                </div>
+                <p class="mt-2 small">$\\int 1 \\, dx = x + C$</p>
+            `;
+        } else if (n % 2 === 1 && n > 0) {
+            // Sin es impar
+            estrategiaHTML = `
+                <div class="estrategia-badge estrategia-impar">
+                    <i class="fas fa-check-circle me-2"></i>Exponente IMPAR en sin
+                </div>
+                <p class="mt-2 small">Separa un $\\sin(x)$, usa $\\sin^2 = 1 - \\cos^2$, sustituye $u = \\cos(x)$</p>
+            `;
+        } else if (m % 2 === 1 && m > 0) {
+            // Cos es impar
+            estrategiaHTML = `
+                <div class="estrategia-badge estrategia-impar">
+                    <i class="fas fa-check-circle me-2"></i>Exponente IMPAR en cos
+                </div>
+                <p class="mt-2 small">Separa un $\\cos(x)$, usa $\\cos^2 = 1 - \\sin^2$, sustituye $u = \\sin(x)$</p>
+            `;
+        } else if (n % 2 === 0 && m % 2 === 0) {
+            // Ambos pares
+            estrategiaHTML = `
+                <div class="estrategia-badge estrategia-ambos-par">
+                    <i class="fas fa-exclamation-circle me-2"></i>Ambos exponentes PARES
+                </div>
+                <p class="mt-2 small">Usa fórmulas de ángulo medio: $\\sin^2 x = \\frac{1-\\cos(2x)}{2}$ y $\\cos^2 x = \\frac{1+\\cos(2x)}{2}$</p>
+            `;
+        }
+        
+        trigEstrategia.innerHTML = estrategiaHTML;
+        
+        // Re-renderizar MathJax
+        if (typeof MathJax !== 'undefined' && MathJax.typesetPromise) {
+            MathJax.typesetPromise([trigIntegral, trigEstrategia]).catch(err => console.log('MathJax error:', err));
+        }
+    }
+    
+    expSin.addEventListener('input', actualizar);
+    expCos.addEventListener('input', actualizar);
+    
+    // Inicializar
+    actualizar();
+    
+    console.log('✅ Estrategia trig potencias iniciada');
+}
+
+// ==========================================
+// 15. TEMA 2.4 - POTENCIAS TAN/SEC (Estrategia)
+// ==========================================
+
+function initTanSecPotencias() {
+    const expTan = document.getElementById('exp-tan');
+    const expSec = document.getElementById('exp-sec');
+    const expTanValor = document.getElementById('exp-tan-valor');
+    const expSecValor = document.getElementById('exp-sec-valor');
+    const tansecIntegral = document.getElementById('tansec-integral');
+    const tansecEstrategia = document.getElementById('tansec-estrategia');
+    
+    if (!expTan || !expSec || !tansecIntegral || !tansecEstrategia) {
+        console.warn('Elementos de tan/sec potencias no encontrados');
+        return;
+    }
+    
+    function actualizar() {
+        const n = parseInt(expTan.value);
+        const m = parseInt(expSec.value);
+        
+        expTanValor.textContent = n;
+        expSecValor.textContent = m;
+        
+        // Construir la integral
+        let integralStr = '\\int ';
+        if (n > 0) integralStr += `\\tan^${n}(x)`;
+        if (n > 0 && m > 0) integralStr += ' ';
+        if (m > 0) integralStr += `\\sec^${m}(x)`;
+        if (n === 0 && m === 0) integralStr += '1';
+        integralStr += ' \\, dx';
+        
+        tansecIntegral.innerHTML = `$${integralStr}$`;
+        
+        // Determinar estrategia
+        let estrategiaHTML = '';
+        
+        if (n === 0 && m === 0) {
+            estrategiaHTML = `
+                <div class="estrategia-badge estrategia-ninguno">
+                    <i class="fas fa-equals me-2"></i>Integral trivial
+                </div>
+                <p class="mt-2 small">$\\int 1 \\, dx = x + C$</p>
+            `;
+        } else if (m >= 2 && m % 2 === 0) {
+            // Sec es par (≥2)
+            estrategiaHTML = `
+                <div class="estrategia-badge estrategia-par">
+                    <i class="fas fa-check-circle me-2"></i>sec tiene exponente PAR
+                </div>
+                <p class="mt-2 small">Guarda $\\sec^2 x$ para el du, convierte el resto a tan usando $\\sec^2 = 1 + \\tan^2$, y usa $u = \\tan x$</p>
+            `;
+        } else if (n >= 1 && n % 2 === 1) {
+            // Tan es impar
+            estrategiaHTML = `
+                <div class="estrategia-badge estrategia-impar">
+                    <i class="fas fa-check-circle me-2"></i>tan tiene exponente IMPAR
+                </div>
+                <p class="mt-2 small">Guarda $\\sec x \\tan x$ para el du, convierte el resto a sec usando $\\tan^2 = \\sec^2 - 1$, y usa $u = \\sec x$</p>
+            `;
+        } else if (m === 0 && n > 0 && n % 2 === 0) {
+            // Solo tan con exponente par
+            estrategiaHTML = `
+                <div class="estrategia-badge estrategia-ambos-par">
+                    <i class="fas fa-exclamation-circle me-2"></i>Solo tan con exponente par
+                </div>
+                <p class="mt-2 small">Usa $\\tan^2 x = \\sec^2 x - 1$ repetidamente para reducir</p>
+            `;
+        } else if (n === 0 && m > 0 && m % 2 === 1) {
+            // Solo sec con exponente impar
+            estrategiaHTML = `
+                <div class="estrategia-badge estrategia-ambos-par">
+                    <i class="fas fa-exclamation-circle me-2"></i>Solo sec con exponente impar
+                </div>
+                <p class="mt-2 small">Requiere integración por partes o fórmulas de reducción</p>
+            `;
+        } else {
+            estrategiaHTML = `
+                <div class="estrategia-badge estrategia-ninguno">
+                    <i class="fas fa-question-circle me-2"></i>Caso especial
+                </div>
+                <p class="mt-2 small">Puede requerir técnicas combinadas o fórmulas de reducción</p>
+            `;
+        }
+        
+        tansecEstrategia.innerHTML = estrategiaHTML;
+        
+        // Re-renderizar MathJax
+        if (typeof MathJax !== 'undefined' && MathJax.typesetPromise) {
+            MathJax.typesetPromise([tansecIntegral, tansecEstrategia]).catch(err => console.log('MathJax error:', err));
+        }
+    }
+    
+    expTan.addEventListener('input', actualizar);
+    expSec.addEventListener('input', actualizar);
+    
+    // Inicializar
+    actualizar();
+    
+    console.log('✅ Estrategia tan/sec potencias iniciada');
+}
+
+// ==========================================
+// 16. TEMA 2.5 - PRODUCTOS SEN/COS (Gráfico)
+// ==========================================
+
+function initProductosSenCos() {
+    const freqA = document.getElementById('freq-a');
+    const freqB = document.getElementById('freq-b');
+    const freqAValor = document.getElementById('freq-a-valor');
+    const freqBValor = document.getElementById('freq-b-valor');
+    const productoFormula = document.getElementById('producto-formula');
+    const sumaFormula = document.getElementById('suma-formula');
+    const canvas = document.getElementById('ondasChart');
+    
+    if (!freqA || !freqB || !canvas) {
+        console.warn('Elementos de productos sen/cos no encontrados');
+        return;
+    }
+    
+    const ctx = canvas.getContext('2d');
+    let chart = null;
+    
+    function actualizar() {
+        const a = parseInt(freqA.value);
+        const b = parseInt(freqB.value);
+        
+        freqAValor.textContent = a;
+        freqBValor.textContent = b;
+        
+        // Actualizar fórmulas
+        productoFormula.innerHTML = `$\\sin(${a}x)\\cos(${b}x)$`;
+        
+        const suma = a + b;
+        const diff = Math.abs(a - b);
+        const signo = a >= b ? '-' : '+';
+        sumaFormula.innerHTML = `$\\frac{1}{2}[\\sin(${suma}x) ${a >= b ? '-' : '+'} \\sin(${diff}x)]$`;
+        
+        // Re-renderizar MathJax
+        if (typeof MathJax !== 'undefined' && MathJax.typesetPromise) {
+            MathJax.typesetPromise([productoFormula, sumaFormula]).catch(err => console.log('MathJax error:', err));
+        }
+        
+        // Generar datos para el gráfico
+        const labels = [];
+        const productoData = [];
+        const sumaData = [];
+        
+        for (let x = 0; x <= 2 * Math.PI; x += 0.05) {
+            labels.push(x.toFixed(2));
+            
+            // Producto original
+            const producto = Math.sin(a * x) * Math.cos(b * x);
+            productoData.push(producto);
+            
+            // Suma equivalente
+            const sumaCalc = 0.5 * (Math.sin((a + b) * x) + Math.sin((a - b) * x));
+            sumaData.push(sumaCalc);
+        }
+        
+        // Destruir gráfico anterior
+        if (chart) {
+            chart.destroy();
+        }
+        
+        // Crear gráfico
+        chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: `sin(${a}x)·cos(${b}x)`,
+                        data: productoData,
+                        borderColor: '#667eea',
+                        borderWidth: 3,
+                        fill: false,
+                        pointRadius: 0,
+                        tension: 0.1
+                    },
+                    {
+                        label: 'Fórmula de suma (verificación)',
+                        data: sumaData,
+                        borderColor: '#f59e0b',
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        fill: false,
+                        pointRadius: 0,
+                        tension: 0.1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: { duration: 300 },
+                scales: {
+                    x: {
+                        title: { display: true, text: 'x', font: { weight: 'bold' } },
+                        ticks: {
+                            callback: function(value, index) {
+                                const label = parseFloat(this.getLabelForValue(value));
+                                if (Math.abs(label - 0) < 0.1) return '0';
+                                if (Math.abs(label - Math.PI) < 0.1) return 'π';
+                                if (Math.abs(label - 2 * Math.PI) < 0.1) return '2π';
+                                return '';
+                            },
+                            maxTicksLimit: 5
+                        },
+                        grid: { color: 'rgba(0,0,0,0.05)' }
+                    },
+                    y: {
+                        min: -1.2,
+                        max: 1.2,
+                        title: { display: true, text: 'y', font: { weight: 'bold' } },
+                        grid: { color: 'rgba(0,0,0,0.05)' }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: { usePointStyle: true, padding: 15 }
+                    },
+                    tooltip: {
+                        enabled: false
+                    }
+                }
+            }
+        });
+    }
+    
+    freqA.addEventListener('input', actualizar);
+    freqB.addEventListener('input', actualizar);
+    
+    // Inicializar
+    actualizar();
+    
+    console.log('✅ Gráfico de productos sen/cos iniciado');
+}
+    // ==========================================
+// INICIALIZAR TODO
+// ==========================================
+
+// Unidad 1
+initHeroCanvas();
+initNavbar();
+initDiferencial();
+initErrores();
+initSigma();
+initRiemann();
+initIntegralDefinida();
+initValorMedio();
+initTeoremaFundamental();
+
+// Unidad 2
+initSustitucion();
+initPartes();
+initTrigPotencias();
+initTanSecPotencias();
+initProductosSenCos();
+
+// General
+initSmoothScroll();
+initMathJax();
+
+console.log('🎉 Cálculo Integral - Todo iniciado correctamente');
         
         
 });
