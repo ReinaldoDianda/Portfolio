@@ -140,8 +140,7 @@
                     <!-- Pregunta gancho -->
                     <div class="pregunta-gancho">
                         <i class="fas fa-question-circle"></i>
-                        <p>Si un helado de 3 cm cuesta $54, y lo haces <strong>solo un poquito más grande</strong> (3.1 cm)... ¿cuánto más deberías cobrar?</p>
-                    </div>
+                        <p>Si un helado de 2 cm cuesta $4, y lo haces <strong>solo un poquito más grande</strong> (2.1 cm)... ¿cuánto más deberías cobrar?</p>                    </div>
 
                     <div class="row g-4">
                         <!-- Vida Real -->
@@ -150,11 +149,12 @@
                                 <h5><i class="fas fa-ice-cream me-2"></i> La Historia</h5>
                                 <p>Tienes una heladería. El precio depende del tamaño (radio) de la bola:</p>
                                 <ul class="lista-simple">
-                                    <li>Radio 2 cm → cuesta $16</li>
-                                    <li>Radio 3 cm → cuesta $54</li>
-                                    <li>Radio 4 cm → cuesta $128</li>
+                                    <li>Radio 1 cm → cuesta $1</li>
+                                    <li>Radio 2 cm → cuesta $4</li>
+                                    <li>Radio 3 cm → cuesta $9</li>
+                                    <li>Radio 4 cm → cuesta $16</li>
                                 </ul>
-                                <p>La fórmula es: <strong>Precio = 2 × radio³</strong></p>
+                                <p>La fórmula es: <strong>Precio = radio²</strong></p>
                                 <div class="pregunta-clave">
                                     💡 ¿Podrías saber cuánto cobrar por 3.1 cm <em>sin usar calculadora</em>?
                                 </div>
@@ -184,11 +184,11 @@
                         <div class="row g-3 align-items-center">
                             <div class="col-md-4">
                                 <label class="form-label">Radio inicial (cm):</label>
-                                <input type="number" class="form-control" id="radio-inicial" value="3" min="1" max="10" step="0.5">
+                                <input type="number" class="form-control" id="radio-inicial" value="2" min="1" max="10" step="0.5">
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label">¿Cuánto aumentas? (cm):</label>
-                                <input type="range" class="form-range" id="delta-radio" min="0.01" max="1" step="0.01" value="0.1">
+                                <input type="range" class="form-range" id="delta-radio" min="0.01" max="0.5" step="0.01" value="0.1">
                                 <div class="text-center"><span id="delta-radio-valor">0.10</span> cm</div>
                             </div>
                             <div class="col-md-4">
@@ -531,6 +531,361 @@
                     </div>
                 </div>
             </div>
+            <!-- ==================== TEMA 1.5 ==================== -->
+            <div class="tema-card" id="tema1-5">
+                <div class="tema-header">
+                    <span class="tema-numero">1.5</span>
+                    <h3>La Integral Definida: El área exacta</h3>
+                </div>
+                
+                <div class="tema-content">
+                    <!-- Pregunta gancho -->
+                    <div class="pregunta-gancho">
+                        <i class="fas fa-question-circle"></i>
+                        <p>Ya sabemos aproximar áreas con rectángulos... pero <strong>¿cómo obtenemos el valor EXACTO?</strong></p>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Vida Real -->
+                        <div class="col-lg-6">
+                            <div class="bloque-real">
+                                <h5><i class="fas fa-gas-pump me-2"></i> La Historia</h5>
+                                <p>Vas en tu auto y el velocímetro marca diferente cada segundo. Al final del viaje quieres saber:</p>
+                                <div class="pregunta-clave">
+                                    🚗 ¿Cuántos kilómetros recorrí en total?
+                                </div>
+                                <p class="mt-3">Si graficas tu velocidad vs tiempo, <strong>el área bajo esa curva = distancia total</strong>.</p>
+                                <p>Con infinitos "rectángulitos" infinitamente delgados, obtienes la distancia <strong>exacta</strong>.</p>
+                            </div>
+                        </div>
+
+                        <!-- La idea matemática -->
+                        <div class="col-lg-6">
+                            <div class="bloque-mate">
+                                <h5><i class="fas fa-infinity me-2"></i> La Integral Definida</h5>
+                                <p>Cuando usamos <strong>infinitos rectángulos</strong>, la suma de Riemann se convierte en integral:</p>
+                                <div class="formula-box">
+                                    <div class="formula">$$ \int_a^b f(x) \, dx $$</div>
+                                    <span class="formula-traduccion">"El área exacta bajo f(x) desde a hasta b"</span>
+                                </div>
+                                <div class="integral-partes mt-3">
+                                    <div class="integral-parte">
+                                        <span class="integral-simbolo">∫</span>
+                                        <span class="integral-desc">= "suma infinita"</span>
+                                    </div>
+                                    <div class="integral-parte">
+                                        <span class="integral-simbolo">a, b</span>
+                                        <span class="integral-desc">= límites (desde, hasta)</span>
+                                    </div>
+                                    <div class="integral-parte">
+                                        <span class="integral-simbolo">f(x)</span>
+                                        <span class="integral-desc">= la función (altura)</span>
+                                    </div>
+                                    <div class="integral-parte">
+                                        <span class="integral-simbolo">dx</span>
+                                        <span class="integral-desc">= "pedacito" de x</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Propiedades -->
+                    <div class="propiedades-box mt-4">
+                        <h5><i class="fas fa-list-check me-2"></i> Propiedades útiles</h5>
+                        <div class="row g-3 mt-2">
+                            <div class="col-md-6">
+                                <div class="propiedad-item">
+                                    <span class="propiedad-formula">$\int_a^a f(x)dx = 0$</span>
+                                    <span class="propiedad-texto">Si no hay distancia, no hay área</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="propiedad-item">
+                                    <span class="propiedad-formula">$\int_a^b f(x)dx = -\int_b^a f(x)dx$</span>
+                                    <span class="propiedad-texto">Invertir límites cambia el signo</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="propiedad-item">
+                                    <span class="propiedad-formula">$\int_a^b kf(x)dx = k\int_a^b f(x)dx$</span>
+                                    <span class="propiedad-texto">Las constantes salen de la integral</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="propiedad-item">
+                                    <span class="propiedad-formula">$\int_a^c f(x)dx = \int_a^b f(x)dx + \int_b^c f(x)dx$</span>
+                                    <span class="propiedad-texto">Puedes partir el intervalo</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- INTERACTIVO: Visualizador de límites -->
+                    <div class="interactivo-box">
+                        <h5><i class="fas fa-gamepad me-2"></i> Explora los límites de integración</h5>
+                        <p class="text-muted">Mueve los límites a y b para ver cómo cambia el área bajo la curva f(x) = x</p>
+                        
+                        <div class="row g-4">
+                            <div class="col-lg-8">
+                                <div class="chart-container">
+                                    <canvas id="integralChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="integral-controles">
+                                    <label class="form-label">Límite inferior (a):</label>
+                                    <input type="range" class="form-range" id="limite-a" min="0" max="4" step="0.5" value="0">
+                                    <div class="limite-valor">a = <span id="limite-a-valor">0</span></div>
+                                    
+                                    <label class="form-label mt-3">Límite superior (b):</label>
+                                    <input type="range" class="form-range" id="limite-b" min="0" max="5" step="0.5" value="3">
+                                    <div class="limite-valor">b = <span id="limite-b-valor">3</span></div>
+                                    
+                                    <div class="integral-resultado-box mt-4">
+                                        <div class="integral-notacion" id="integral-notacion">
+                                            $\int_0^3 x \, dx$
+                                        </div>
+                                        <div class="integral-igual">=</div>
+                                        <div class="integral-valor" id="integral-valor">4.5</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resumen -->
+                    <div class="resumen-tema">
+                        <strong>📌 En resumen:</strong> La integral definida $\int_a^b f(x)dx$ nos da el área EXACTA bajo una curva, entre los puntos a y b. Es como sumar infinitos rectángulos infinitamente delgados.
+                    </div>
+                </div>
+            </div>
+
+  <!-- ==================== TEMA 1.6 ==================== -->
+            <div class="tema-card" id="tema1-6">
+                <div class="tema-header">
+                    <span class="tema-numero">1.6</span>
+                    <h3>Teorema del Valor Medio: El punto "promedio"</h3>
+                </div>
+                
+                <div class="tema-content">
+                    <!-- Pregunta gancho -->
+                    <div class="pregunta-gancho">
+                        <i class="fas fa-question-circle"></i>
+                        <p>Si tu velocidad varió durante todo el viaje... <strong>¿existió algún momento donde ibas exactamente a la velocidad promedio?</strong></p>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Vida Real -->
+                        <div class="col-lg-6">
+                            <div class="bloque-real">
+                                <h5><i class="fas fa-tachometer-alt me-2"></i> La Historia</h5>
+                                <p>Hiciste un viaje de 2 horas:</p>
+                                <ul class="lista-simple">
+                                    <li>Empezaste lento (60 km/h)</li>
+                                    <li>Aceleraste en la autopista (120 km/h)</li>
+                                    <li>Frenaste en la ciudad (40 km/h)</li>
+                                </ul>
+                                <p>Recorriste <strong>150 km en 2 horas</strong>.</p>
+                                <div class="pregunta-clave">
+                                    📊 Tu velocidad promedio fue 75 km/h. ¿En algún momento marcaste exactamente 75 km/h?
+                                </div>
+                                <p class="mt-2 text-muted"><strong>¡Sí!</strong> El teorema garantiza que existió ese momento.</p>
+                            </div>
+                        </div>
+
+                        <!-- La idea matemática -->
+                        <div class="col-lg-6">
+                            <div class="bloque-mate">
+                                <h5><i class="fas fa-balance-scale me-2"></i> El Teorema</h5>
+                                <p>Si f(x) es continua en [a,b], existe un punto <strong>c</strong> donde:</p>
+                                <div class="formula-box">
+                                    <div class="formula">$$ f(c) = \frac{1}{b-a} \int_a^b f(x) \, dx $$</div>
+                                    <span class="formula-traduccion">"Existe un punto donde la función vale exactamente el promedio"</span>
+                                </div>
+                                <p class="mt-3 small text-muted">El valor promedio de f es igual a la altura de un rectángulo que tiene la misma área que la región bajo la curva.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- INTERACTIVO: Visualizador del valor medio -->
+                    <div class="interactivo-box">
+                        <h5><i class="fas fa-gamepad me-2"></i> Encuentra el punto promedio</h5>
+                        <p class="text-muted">Mueve el slider y observa: el área del rectángulo siempre es igual al área bajo la curva</p>
+                        
+                        <div class="row g-4">
+                            <div class="col-lg-8">
+                                <div class="chart-container">
+                                    <canvas id="valorMedioChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="vm-controles">
+                                    <!-- Slider para b -->
+                                    <div class="vm-slider-container">
+                                        <div class="vm-slider-label">
+                                            <span>Límite superior (b):</span>
+                                            <span class="vm-slider-value" id="vm-b-valor">3</span>
+                                        </div>
+                                        <input type="range" class="form-range" id="vm-slider-b" min="1" max="5" step="0.5" value="3">
+                                    </div>
+                                    
+                                    <div class="vm-resultado">
+                                        <div class="vm-label">Área bajo la curva:</div>
+                                        <div class="vm-value" id="vm-area">4.5 u²</div>
+                                    </div>
+                                    <div class="vm-resultado">
+                                        <div class="vm-label">Valor promedio f(c):</div>
+                                        <div class="vm-value" id="vm-promedio">1.5</div>
+                                    </div>
+                                    <div class="vm-resultado">
+                                        <div class="vm-label">Punto c:</div>
+                                        <div class="vm-value" id="vm-punto-c">1.5</div>
+                                    </div>
+                                    
+                                    <div class="vm-explicacion mt-3">
+                                        <i class="fas fa-info-circle"></i>
+                                        <p>El rectángulo azul tiene la <strong>misma área</strong> que la región bajo la curva roja.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resumen -->
+                    <div class="resumen-tema">
+                        <strong>📌 En resumen:</strong> El Teorema del Valor Medio para integrales dice que siempre existe un punto "c" donde la función vale exactamente su promedio. Es como encontrar la altura de un rectángulo que tiene la misma área que la curva.
+                    </div>
+                </div>
+            </div>
+           <!-- ==================== TEMA 1.7 ==================== -->
+            <div class="tema-card" id="tema1-7">
+                <div class="tema-header">
+                    <span class="tema-numero">1.7</span>
+                    <h3>Teorema Fundamental del Cálculo: La conexión mágica</h3>
+                </div>
+                
+                <div class="tema-content">
+                    <!-- Pregunta gancho -->
+                    <div class="pregunta-gancho">
+                        <i class="fas fa-question-circle"></i>
+                        <p>Derivar e integrar parecen operaciones muy diferentes... <strong>¿tienen alguna relación secreta?</strong></p>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Vida Real -->
+                        <div class="col-lg-6">
+                            <div class="bloque-real">
+                                <h5><i class="fas fa-undo-alt me-2"></i> La Historia</h5>
+                                <p>Piensa en esto:</p>
+                                <div class="conexion-visual">
+                                    <div class="conexion-item">
+                                        <span class="conexion-box">Posición</span>
+                                        <span class="conexion-flecha">→ derivar →</span>
+                                        <span class="conexion-box">Velocidad</span>
+                                    </div>
+                                    <div class="conexion-item">
+                                        <span class="conexion-box">Velocidad</span>
+                                        <span class="conexion-flecha">→ integrar →</span>
+                                        <span class="conexion-box">Posición</span>
+                                    </div>
+                                </div>
+                                <div class="pregunta-clave mt-3">
+                                    🔄 ¡Son operaciones INVERSAS! Como sumar y restar.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- La idea matemática -->
+                        <div class="col-lg-6">
+                            <div class="bloque-mate">
+                                <h5><i class="fas fa-link me-2"></i> El Teorema Fundamental</h5>
+                                <p>Para calcular una integral definida, solo necesitas:</p>
+                                <div class="formula-box">
+                                    <div class="formula">$$ \int_a^b f(x) \, dx = F(b) - F(a) $$</div>
+                                    <span class="formula-traduccion">"Encuentra la antiderivada F, evalúa en los límites y resta"</span>
+                                </div>
+                                <p class="mt-3 small"><strong>¿Qué es F(x)?</strong> La antiderivada: una función que al derivarla te da f(x).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ejemplo SIMPLIFICADO -->
+                    <div class="ejemplo-simplificado">
+                        <h5><i class="fas fa-pencil-alt me-2"></i> Ejemplo: Calcular $\int_1^3 2x \, dx$</h5>
+                        
+                        <div class="ejemplo-integral">
+                            <div class="ejemplo-problema">
+                                Queremos resolver: $\displaystyle \int_1^3 2x \, dx$
+                            </div>
+                            
+                            <div class="ejemplo-pasos-simple">
+                                <div class="paso-simple">
+                                    <span class="paso-label">Antiderivada:</span>
+                                    <span class="paso-valor">$\int 2x \, dx = x^2$</span>
+                                    <span class="paso-nota-simple">¿Qué función al derivar da 2x? → x²</span>
+                                </div>
+                                <div class="paso-simple">
+                                    <span class="paso-label">Evaluar F(3):</span>
+                                    <span class="paso-valor">$(3)^2 = 9$</span>
+                                </div>
+                                <div class="paso-simple">
+                                    <span class="paso-label">Evaluar F(1):</span>
+                                    <span class="paso-valor">$(1)^2 = 1$</span>
+                                </div>
+                                <div class="paso-simple paso-resultado">
+                                    <span class="paso-label">F(3) - F(1) =</span>
+                                    <span class="paso-valor">9 - 1 = 8</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- INTERACTIVO: Derivar vs Integrar -->
+                    <div class="interactivo-box">
+                        <h5><i class="fas fa-gamepad me-2"></i> Derivar ↔ Integrar: Operaciones Inversas</h5>
+                        <p class="text-muted">Selecciona una función y observa cómo una operación "deshace" a la otra</p>
+                        
+                        <div class="inversa-selector mb-4">
+                            <select class="form-select" id="selector-funcion">
+                                <option value="x2">f(x) = x²</option>
+                                <option value="x3">f(x) = x³</option>
+                                <option value="sinx">f(x) = sen(x)</option>
+                                <option value="ex">f(x) = eˣ</option>
+                            </select>
+                        </div>
+                        
+                        <div class="inversa-demo">
+                            <div class="inversa-columna">
+                                <div class="inversa-titulo">Empezamos con:</div>
+                                <div class="inversa-funcion" id="funcion-original">$f(x) = x^2$</div>
+                            </div>
+                            <div class="inversa-flecha">
+                                <i class="fas fa-arrow-right"></i>
+                                <span>Derivar</span>
+                            </div>
+                            <div class="inversa-columna">
+                                <div class="inversa-titulo">Obtenemos:</div>
+                                <div class="inversa-funcion" id="funcion-derivada">$f'(x) = 2x$</div>
+                            </div>
+                            <div class="inversa-flecha">
+                                <i class="fas fa-arrow-right"></i>
+                                <span>Integrar</span>
+                            </div>
+                            <div class="inversa-columna">
+                                <div class="inversa-titulo">Volvemos a:</div>
+                                <div class="inversa-funcion" id="funcion-integrada">$\int 2x\,dx = x^2 + C$</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resumen -->
+                    <div class="resumen-tema">
+                        <strong>📌 En resumen:</strong> El Teorema Fundamental conecta la derivada con la integral: son operaciones inversas. Para calcular $\int_a^b f(x)dx$, encuentra la antiderivada F(x) y calcula F(b) - F(a).
+                    </div>
+                </div>
+            </div>
+
 
         </div>
     </section>

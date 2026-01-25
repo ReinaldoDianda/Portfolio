@@ -185,80 +185,98 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // ==========================================
-    // 3. TEMA 1.1 - CALCULADORA DE DIFERENCIAL
-    // ==========================================
+// 3. TEMA 1.1 - CALCULADORA DE DIFERENCIAL
+// ==========================================
+
+function initDiferencial() {
+    const radioInicial = document.getElementById('radio-inicial');
+    const deltaRadio = document.getElementById('delta-radio');
+    const deltaRadioValor = document.getElementById('delta-radio-valor');
+    const btnCalcular = document.getElementById('btn-calcular-diferencial');
+    const precioOriginal = document.getElementById('precio-original');
+    const cambioAproximado = document.getElementById('cambio-aproximado');
+    const cambioReal = document.getElementById('cambio-real');
+    const barraPrecision = document.getElementById('barra-precision');
     
-    function initDiferencial() {
-        const radioInicial = document.getElementById('radio-inicial');
-        const deltaRadio = document.getElementById('delta-radio');
-        const deltaRadioValor = document.getElementById('delta-radio-valor');
-        const btnCalcular = document.getElementById('btn-calcular-diferencial');
-        const precioOriginal = document.getElementById('precio-original');
-        const cambioAproximado = document.getElementById('cambio-aproximado');
-        const cambioReal = document.getElementById('cambio-real');
-        const barraPrecision = document.getElementById('barra-precision');
+    if (!radioInicial || !deltaRadio || !btnCalcular) {
+        console.warn('Elementos de diferencial no encontrados');
+        return;
+    }
+    
+    // NUEVA FÓRMULA MÁS INTUITIVA
+    // Función precio: P = r² (radio al cuadrado)
+    const precio = (r) => r * r;
+    
+    // Derivada: P' = 2r
+    const derivadaPrecio = (r) => 2 * r;
+    
+    // Función para calcular todo
+    function calcular() {
+        const r = parseFloat(radioInicial.value);
+        const dr = parseFloat(deltaRadio.value);
         
-        if (!radioInicial || !deltaRadio || !btnCalcular) {
-            console.warn('Elementos de diferencial no encontrados');
+        // Validar que r sea positivo
+        if (r <= 0 || isNaN(r)) {
+            precioOriginal.textContent = '$0.00';
+            cambioAproximado.textContent = '+$0.00';
+            cambioReal.textContent = '+$0.00';
             return;
         }
         
-        // Función precio: P = 2r³
-        const precio = (r) => 2 * Math.pow(r, 3);
+        // Precio original
+        const P0 = precio(r);
         
-        // Derivada: P' = 6r²
-        const derivadaPrecio = (r) => 6 * Math.pow(r, 2);
+        // Cambio aproximado (usando diferencial): dP = P'(r) × dr = 2r × dr
+        const dP = derivadaPrecio(r) * dr;
         
-        // Actualizar valor del slider
-        deltaRadio.addEventListener('input', () => {
-            deltaRadioValor.textContent = parseFloat(deltaRadio.value).toFixed(2);
-        });
+        // Cambio real: P(r + dr) - P(r)
+        const P1 = precio(r + dr);
+        const deltaP = P1 - P0;
         
-        // Calcular diferencial
-        function calcular() {
-            const r = parseFloat(radioInicial.value);
-            const dr = parseFloat(deltaRadio.value);
-            
-            // Precio original
-            const P0 = precio(r);
-            
-            // Cambio aproximado (usando diferencial)
-            const dP = derivadaPrecio(r) * dr;
-            
-            // Cambio real
-            const P1 = precio(r + dr);
-            const deltaP = P1 - P0;
-            
-            // Precisión
-            const precision = Math.max(0, 100 - Math.abs((dP - deltaP) / deltaP * 100));
-            
-            // Mostrar resultados
-            precioOriginal.textContent = `$${P0.toFixed(2)}`;
-            cambioAproximado.textContent = `+$${dP.toFixed(2)}`;
-            cambioReal.textContent = `+$${deltaP.toFixed(2)}`;
-            
-            barraPrecision.style.width = `${precision}%`;
-            barraPrecision.textContent = `${precision.toFixed(0)}%`;
-            
-            // Color de la barra según precisión
-            if (precision >= 90) {
-                barraPrecision.className = 'progress-bar bg-success';
-            } else if (precision >= 70) {
-                barraPrecision.className = 'progress-bar bg-warning';
-            } else {
-                barraPrecision.className = 'progress-bar bg-danger';
-            }
+        // Precisión (qué tan cerca está la aproximación del valor real)
+        let precision = 0;
+        if (deltaP !== 0) {
+            precision = Math.max(0, 100 - Math.abs((dP - deltaP) / deltaP * 100));
+        } else {
+            precision = 100;
         }
         
-        btnCalcular.addEventListener('click', calcular);
-        radioInicial.addEventListener('change', calcular);
-        deltaRadio.addEventListener('input', calcular);
+        // Mostrar resultados
+        precioOriginal.textContent = `$${P0.toFixed(2)}`;
+        cambioAproximado.textContent = `+$${dP.toFixed(2)}`;
+        cambioReal.textContent = `+$${deltaP.toFixed(2)}`;
         
-        // Calcular inicial
-        calcular();
+        // Actualizar barra de precisión
+        barraPrecision.style.width = `${precision}%`;
+        barraPrecision.textContent = `${precision.toFixed(0)}%`;
         
-        console.log('✅ Calculadora de diferencial iniciada');
+        // Color de la barra según precisión
+        barraPrecision.classList.remove('bg-success', 'bg-warning', 'bg-danger');
+        if (precision >= 90) {
+            barraPrecision.classList.add('bg-success');
+        } else if (precision >= 70) {
+            barraPrecision.classList.add('bg-warning');
+        } else {
+            barraPrecision.classList.add('bg-danger');
+        }
     }
+    
+    // Actualizar valor mostrado del slider cuando se mueve
+    deltaRadio.addEventListener('input', function() {
+        deltaRadioValor.textContent = parseFloat(this.value).toFixed(2);
+        calcular(); // Calcular automáticamente al mover el slider
+    });
+    
+    // Event listeners
+    btnCalcular.addEventListener('click', calcular);
+    radioInicial.addEventListener('input', calcular);
+    radioInicial.addEventListener('change', calcular);
+    
+    // Calcular valores iniciales
+    calcular();
+    
+    console.log('✅ Calculadora de diferencial iniciada');
+}
     
     // ==========================================
     // 4. TEMA 1.2 - SIMULADOR DE ERRORES
@@ -621,7 +639,348 @@ document.addEventListener('DOMContentLoaded', function() {
         
         console.log('✅ Gráfico de Riemann iniciado');
     }
+    // ==========================================
+// 7. TEMA 1.5 - INTEGRAL DEFINIDA (Gráfico)
+// ==========================================
+
+function initIntegralDefinida() {
+    const canvas = document.getElementById('integralChart');
+    const limiteA = document.getElementById('limite-a');
+    const limiteB = document.getElementById('limite-b');
+    const limiteAValor = document.getElementById('limite-a-valor');
+    const limiteBValor = document.getElementById('limite-b-valor');
+    const integralNotacion = document.getElementById('integral-notacion');
+    const integralValor = document.getElementById('integral-valor');
     
+    if (!canvas || !limiteA || !limiteB) {
+        console.warn('Elementos de integral definida no encontrados');
+        return;
+    }
+    
+    const ctx = canvas.getContext('2d');
+    let chart = null;
+    
+    // Función f(x) = x (línea simple para entender)
+    const f = (x) => x;
+    
+    // Integral de x = x²/2
+    const integral = (a, b) => (b * b / 2) - (a * a / 2);
+    
+    function updateChart() {
+        const a = parseFloat(limiteA.value);
+        const b = parseFloat(limiteB.value);
+        
+        // Actualizar etiquetas
+        limiteAValor.textContent = a;
+        limiteBValor.textContent = b;
+        
+        // Calcular integral
+        const area = integral(a, b);
+        
+        // Actualizar notación y valor
+        integralNotacion.innerHTML = `$\\int_${a}^{${b}} x \\, dx$`;
+        integralValor.textContent = area.toFixed(2);
+        
+        // Re-renderizar MathJax
+        if (typeof MathJax !== 'undefined' && MathJax.typesetPromise) {
+            MathJax.typesetPromise([integralNotacion]).catch(err => console.log('MathJax error:', err));
+        }
+        
+        // Preparar datos para el gráfico
+        const labels = [];
+        const curveData = [];
+        const areaData = [];
+        
+        for (let x = 0; x <= 5; x += 0.1) {
+            labels.push(x.toFixed(1));
+            curveData.push(f(x));
+            
+            // Área solo entre a y b
+            if (x >= a && x <= b) {
+                areaData.push(f(x));
+            } else {
+                areaData.push(null);
+            }
+        }
+        
+        // Destruir gráfico anterior
+        if (chart) {
+            chart.destroy();
+        }
+        
+        // Crear gráfico
+        chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Área bajo la curva',
+                        data: areaData,
+                        backgroundColor: 'rgba(102, 126, 234, 0.4)',
+                        borderColor: 'rgba(102, 126, 234, 0.8)',
+                        borderWidth: 2,
+                        fill: true,
+                        pointRadius: 0,
+                        tension: 0.1
+                    },
+                    {
+                        label: 'f(x) = x',
+                        data: curveData,
+                        borderColor: '#ef4444',
+                        borderWidth: 3,
+                        fill: false,
+                        pointRadius: 0,
+                        tension: 0
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: { duration: 300 },
+                scales: {
+                    x: {
+                        title: { display: true, text: 'x', font: { weight: 'bold' } },
+                        ticks: {
+                            callback: function(value, index) {
+                                const label = this.getLabelForValue(value);
+                                const num = parseFloat(label);
+                                return num % 1 === 0 ? num : '';
+                            }
+                        },
+                        grid: { color: 'rgba(0,0,0,0.05)' }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        max: 6,
+                        title: { display: true, text: 'f(x)', font: { weight: 'bold' } },
+                        grid: { color: 'rgba(0,0,0,0.05)' }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: { usePointStyle: true, padding: 15 }
+                    }
+                }
+            }
+        });
+    }
+    
+    // Event listeners
+    limiteA.addEventListener('input', updateChart);
+    limiteB.addEventListener('input', updateChart);
+    
+    // Inicializar
+    updateChart();
+    
+    console.log('✅ Gráfico de integral definida iniciado');
+}
+
+// ==========================================
+// 8. TEMA 1.6 - VALOR MEDIO (Gráfico)
+// ==========================================
+
+// ==========================================
+// 8. TEMA 1.6 - VALOR MEDIO (Gráfico INTERACTIVO)
+// ==========================================
+
+function initValorMedio() {
+    const canvas = document.getElementById('valorMedioChart');
+    const sliderB = document.getElementById('vm-slider-b');
+    const valorB = document.getElementById('vm-b-valor');
+    const vmArea = document.getElementById('vm-area');
+    const vmPromedio = document.getElementById('vm-promedio');
+    const vmPuntoC = document.getElementById('vm-punto-c');
+    
+    if (!canvas || !sliderB) {
+        console.warn('Elementos de valor medio no encontrados');
+        return;
+    }
+    
+    const ctx = canvas.getContext('2d');
+    let chart = null;
+    
+    // Función f(x) = x
+    const f = (x) => x;
+    
+    // Límite inferior fijo
+    const a = 0;
+    
+    function updateChart() {
+        const b = parseFloat(sliderB.value);
+        
+        // Actualizar label del slider
+        valorB.textContent = b;
+        
+        // Área bajo la curva = integral de x de a hasta b = b²/2 - a²/2
+        const area = (b * b / 2) - (a * a / 2);
+        
+        // Valor promedio = área / (b - a)
+        const promedio = b > a ? area / (b - a) : 0;
+        
+        // Punto c donde f(c) = promedio → c = promedio (porque f(x) = x)
+        const puntoC = promedio;
+        
+        // Actualizar valores en pantalla
+        vmArea.textContent = area.toFixed(2) + ' u²';
+        vmPromedio.textContent = promedio.toFixed(2);
+        vmPuntoC.textContent = puntoC.toFixed(2);
+        
+        // Preparar datos para el gráfico
+        const labels = [];
+        const curveData = [];
+        const rectData = [];
+        
+        for (let x = 0; x <= 5; x += 0.1) {
+            labels.push(x.toFixed(1));
+            curveData.push(f(x));
+            
+            // Rectángulo con altura = promedio (solo entre a y b)
+            if (x >= a && x <= b) {
+                rectData.push(promedio);
+            } else {
+                rectData.push(null);
+            }
+        }
+        
+        // Destruir gráfico anterior
+        if (chart) {
+            chart.destroy();
+        }
+        
+        // Crear gráfico
+        chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Rectángulo (área = ' + area.toFixed(2) + ')',
+                        data: rectData,
+                        backgroundColor: 'rgba(102, 126, 234, 0.3)',
+                        borderColor: 'rgba(102, 126, 234, 0.8)',
+                        borderWidth: 2,
+                        fill: true,
+                        pointRadius: 0,
+                        stepped: true
+                    },
+                    {
+                        label: 'f(x) = x',
+                        data: curveData,
+                        borderColor: '#ef4444',
+                        borderWidth: 3,
+                        fill: false,
+                        pointRadius: 0,
+                        tension: 0
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: { duration: 300 },
+                scales: {
+                    x: {
+                        title: { display: true, text: 'x', font: { weight: 'bold' } },
+                        ticks: {
+                            callback: function(value, index) {
+                                const label = this.getLabelForValue(value);
+                                const num = parseFloat(label);
+                                return num % 1 === 0 ? num : '';
+                            }
+                        },
+                        grid: { color: 'rgba(0,0,0,0.05)' }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        max: 6,
+                        title: { display: true, text: 'f(x)', font: { weight: 'bold' } },
+                        grid: { color: 'rgba(0,0,0,0.05)' }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: { usePointStyle: true, padding: 15 }
+                    }
+                }
+            }
+        });
+    }
+    
+    // Event listener del slider
+    sliderB.addEventListener('input', updateChart);
+    
+    // Inicializar
+    updateChart();
+    
+    console.log('✅ Gráfico de valor medio iniciado');
+}
+
+// ==========================================
+// 9. TEMA 1.7 - TEOREMA FUNDAMENTAL (Demo)
+// ==========================================
+
+function initTeoremaFundamental() {
+    const selector = document.getElementById('selector-funcion');
+    const funcionOriginal = document.getElementById('funcion-original');
+    const funcionDerivada = document.getElementById('funcion-derivada');
+    const funcionIntegrada = document.getElementById('funcion-integrada');
+    
+    if (!selector || !funcionOriginal || !funcionDerivada || !funcionIntegrada) {
+        console.warn('Elementos de teorema fundamental no encontrados');
+        return;
+    }
+    
+    const funciones = {
+        'x2': {
+            original: 'f(x) = x^2',
+            derivada: "f'(x) = 2x",
+            integrada: '\\int 2x\\,dx = x^2 + C'
+        },
+        'x3': {
+            original: 'f(x) = x^3',
+            derivada: "f'(x) = 3x^2",
+            integrada: '\\int 3x^2\\,dx = x^3 + C'
+        },
+        'sinx': {
+            original: 'f(x) = \\sin(x)',
+            derivada: "f'(x) = \\cos(x)",
+            integrada: '\\int \\cos(x)\\,dx = \\sin(x) + C'
+        },
+        'ex': {
+            original: 'f(x) = e^x',
+            derivada: "f'(x) = e^x",
+            integrada: '\\int e^x\\,dx = e^x + C'
+        }
+    };
+    
+    function actualizar() {
+        const seleccion = selector.value;
+        const datos = funciones[seleccion];
+        
+        funcionOriginal.innerHTML = `$${datos.original}$`;
+        funcionDerivada.innerHTML = `$${datos.derivada}$`;
+        funcionIntegrada.innerHTML = `$${datos.integrada}$`;
+        
+        // Re-renderizar MathJax
+        if (typeof MathJax !== 'undefined' && MathJax.typesetPromise) {
+            MathJax.typesetPromise([funcionOriginal, funcionDerivada, funcionIntegrada])
+                .catch(err => console.log('MathJax error:', err));
+        }
+    }
+    
+    selector.addEventListener('change', actualizar);
+    
+    // Inicializar
+    actualizar();
+    
+    console.log('✅ Demo de teorema fundamental iniciado');
+}
     // ==========================================
     // 7. SMOOTH SCROLL
     // ==========================================
@@ -663,16 +1022,20 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==========================================
     // INICIALIZAR TODO
     // ==========================================
-    
+
     initHeroCanvas();
     initNavbar();
     initDiferencial();
     initErrores();
     initSigma();
     initRiemann();
+    initIntegralDefinida();
+    initValorMedio();
+    initTeoremaFundamental();
     initSmoothScroll();
     initMathJax();
-    
+
     console.log('🎉 Cálculo Integral - Todo iniciado correctamente');
-    
+        
+        
 });

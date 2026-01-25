@@ -982,3 +982,571 @@ mjx-container {
     overflow-x: auto;
     max-width: 100%;
 }
+/* ============================================
+   PARTE 1-B: TEMAS 1.5 - 1.7
+   ============================================ */
+
+/* ============================================
+   TEMA 1.5 - INTEGRAL DEFINIDA
+   ============================================ */
+
+/* Partes de la integral */
+.integral-partes {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: white;
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    margin-top: 1rem;
+}
+
+.integral-parte {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.integral-simbolo {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--primary);
+    min-width: 50px;
+}
+
+.integral-desc {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Propiedades box */
+.propiedades-box {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    border: 1px solid #bbf7d0;
+}
+
+.propiedades-box h5 {
+    color: #166534;
+    margin-bottom: 0;
+}
+
+.propiedad-item {
+    background: white;
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.propiedad-formula {
+    font-size: 0.95rem;
+    color: var(--text-dark);
+}
+
+.propiedad-texto {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* Controles de integral */
+.integral-controles {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    height: 100%;
+}
+
+.limite-valor {
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.integral-resultado-box {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    text-align: center;
+    color: white;
+}
+
+.integral-notacion {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.integral-igual {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin: 0.25rem 0;
+}
+
+.integral-valor {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+/* ============================================
+   TEMA 1.6 - VALOR MEDIO
+   ============================================ */
+
+.valor-medio-visual {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    background: white;
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+}
+
+.vm-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.vm-formula {
+    font-weight: 600;
+    color: var(--primary);
+    min-width: 180px;
+}
+
+.vm-desc {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Controles valor medio */
+.vm-controles {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    height: 100%;
+}
+
+.vm-resultado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.vm-resultado:last-of-type {
+    border-bottom: none;
+}
+
+.vm-label {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.vm-value {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--primary);
+}
+
+.vm-explicacion {
+    background: #eff6ff;
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+}
+
+.vm-explicacion i {
+    color: var(--primary);
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.vm-explicacion p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+}
+
+/* ============================================
+   TEMA 1.7 - TEOREMA FUNDAMENTAL
+   ============================================ */
+
+/* Conexión visual derivar/integrar */
+.conexion-visual {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin: 1rem 0;
+}
+
+.conexion-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.conexion-box {
+    background: white;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    color: var(--primary);
+    border: 2px solid var(--primary-light);
+}
+
+.conexion-flecha {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+/* Ejemplo box */
+.ejemplo-box {
+    background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);
+    border: 2px solid #facc15;
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+}
+
+.ejemplo-box h5 {
+    color: #a16207;
+    margin-bottom: 1rem;
+}
+
+.ejemplo-pasos {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.ejemplo-paso {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    background: white;
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+}
+
+.ejemplo-paso.paso-final {
+    background: #fef3c7;
+    border: 2px solid #fbbf24;
+}
+
+.paso-numero {
+    width: 32px;
+    height: 32px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.paso-final .paso-numero {
+    background: #f59e0b;
+}
+
+.paso-contenido {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.paso-titulo {
+    font-weight: 600;
+    color: var(--text-dark);
+    font-size: 0.95rem;
+}
+
+.paso-mate {
+    color: var(--primary);
+    font-size: 1.1rem;
+}
+
+.paso-nota {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-style: italic;
+}
+
+.ejemplo-resultado {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: var(--radius-md);
+    margin-top: 1rem;
+    font-size: 1.1rem;
+}
+
+.ejemplo-resultado .resultado-valor {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* Demo de inversas */
+.inversa-demo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    background: white;
+    padding: 2rem;
+    border-radius: var(--radius-md);
+}
+
+.inversa-columna {
+    text-align: center;
+    min-width: 120px;
+}
+
+.inversa-titulo {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.inversa-funcion {
+    background: linear-gradient(135deg, var(--bg-mate) 0%, #e0e7ff 100%);
+    padding: 1rem 1.5rem;
+    border-radius: var(--radius-sm);
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    border: 2px solid var(--primary-light);
+}
+
+.inversa-flecha {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    color: var(--primary);
+}
+
+.inversa-flecha i {
+    font-size: 1.5rem;
+}
+
+.inversa-flecha span {
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.inversa-selector {
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+/* ============================================
+   RESPONSIVE PARTE 1-B
+   ============================================ */
+
+@media (max-width: 991.98px) {
+    .integral-partes {
+        gap: 0.75rem;
+    }
+    
+    .inversa-demo {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .inversa-flecha {
+        transform: rotate(90deg);
+    }
+    
+    .inversa-flecha span {
+        transform: rotate(-90deg);
+    }
+}
+
+@media (max-width: 767.98px) {
+    .propiedad-formula {
+        font-size: 0.85rem;
+    }
+    
+    .ejemplo-paso {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .paso-numero {
+        margin: 0 auto;
+    }
+    
+    .ejemplo-resultado {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .integral-valor {
+        font-size: 2rem;
+    }
+    
+    .vm-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+    
+    .vm-formula {
+        min-width: unset;
+    }
+    
+    .conexion-item {
+        justify-content: center;
+    }
+}/* ============================================
+   CORRECCIONES PARTE 1-B
+   ============================================ */
+
+/* Quitar scroll/flechas de MathJax */
+.formula-box {
+    overflow: hidden;
+}
+
+mjx-container {
+    overflow-x: hidden !important;
+}
+
+.bloque-mate mjx-container,
+.formula-box mjx-container {
+    overflow: hidden !important;
+}
+
+/* ============================================
+   TEMA 1.6 - VALOR MEDIO INTERACTIVO
+   ============================================ */
+
+.vm-slider-container {
+    margin-bottom: 1.5rem;
+}
+
+.vm-slider-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.vm-slider-value {
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 1.1rem;
+}
+
+/* ============================================
+   TEMA 1.7 - EJEMPLO SIMPLIFICADO
+   ============================================ */
+
+.ejemplo-simplificado {
+    background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);
+    border: 2px solid #facc15;
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.ejemplo-simplificado h5 {
+    color: #a16207;
+    margin-bottom: 1.25rem;
+}
+
+.ejemplo-integral {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.ejemplo-problema {
+    font-size: 1.5rem;
+    color: var(--text-dark);
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px dashed #e2e8f0;
+}
+
+.ejemplo-pasos-simple {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: left;
+}
+
+.paso-simple {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    background: #f8fafc;
+    border-radius: var(--radius-sm);
+    border-left: 4px solid var(--primary);
+}
+
+.paso-simple.paso-resultado {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    border-left: none;
+    color: white;
+}
+
+.paso-label {
+    font-weight: 600;
+    min-width: 120px;
+    font-size: 0.9rem;
+}
+
+.paso-simple.paso-resultado .paso-label {
+    color: rgba(255,255,255,0.9);
+}
+
+.paso-valor {
+    font-size: 1.1rem;
+}
+
+.paso-simple.paso-resultado .paso-valor {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.paso-nota-simple {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-left: auto;
+    font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 767.98px) {
+    .paso-simple {
+        flex-wrap: wrap;
+    }
+    
+    .paso-label {
+        min-width: 100%;
+        margin-bottom: 0.25rem;
+    }
+    
+    .paso-nota-simple {
+        margin-left: 0;
+        margin-top: 0.5rem;
+        width: 100%;
+    }
+}
