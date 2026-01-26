@@ -944,4 +944,640 @@
     .caso-expresion {
         font-size: 1rem;
     }
+}/* ============================================
+   TEMA 2.11 - INTEGRALES BINOMIAS
+   ============================================ */
+
+/* Condiciones de Chebyshev */
+.condiciones-chebyshev {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.condicion-cheby {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    background: white;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-sm);
+}
+
+.condicion-num {
+    width: 28px;
+    height: 28px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.condicion-texto {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.condicion-texto strong {
+    color: var(--text-dark);
+}
+
+.condicion-texto span {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* Inputs de Chebyshev */
+.cheby-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.cheby-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.cheby-input-group label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+/* Resultado de Chebyshev */
+.cheby-resultado {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+}
+
+.cheby-integral {
+    font-size: 1.25rem;
+    text-align: center;
+    padding: 1rem;
+    background: #f8fafc;
+    border-radius: var(--radius-sm);
+    margin-bottom: 1rem;
+}
+
+.cheby-verificacion {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.cheby-check {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    background: #fee2e2;
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    color: #991b1b;
+}
+
+.cheby-check i {
+    font-size: 1.1rem;
+}
+
+.cheby-check.cheby-ok {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.cheby-conclusion {
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    text-align: center;
+}
+
+.cheby-conclusion.cheby-solucionable {
+    background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+    color: #166534;
+}
+
+.cheby-conclusion.cheby-no-solucionable {
+    background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+    color: #991b1b;
+}
+
+.cheby-conclusion p {
+    margin: 0.5rem 0 0 0;
+    font-size: 0.9rem;
+}
+
+/* ============================================
+   TEMA 2.12 - SUSTITUCIÓN DE EULER
+   ============================================ */
+
+/* Casos de Euler */
+.casos-euler {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.caso-euler {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    background: white;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-sm);
+}
+
+.caso-euler-num {
+    width: 28px;
+    height: 28px;
+    background: var(--accent-orange);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.caso-euler-texto {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.caso-euler-texto strong {
+    color: var(--text-dark);
+    font-size: 0.9rem;
+}
+
+.caso-euler-texto span {
+    font-size: 0.85rem;
+    color: var(--primary);
+}
+
+/* Inputs de Euler */
+.euler-inputs {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+}
+
+.euler-coef-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+}
+
+.euler-coef label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+/* Resultado de Euler */
+.euler-resultado {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.euler-expresion {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.euler-caso {
+    background: #f8fafc;
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+}
+
+.euler-caso-badge {
+    display: inline-block;
+    padding: 0.35rem 1rem;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+}
+
+.euler-caso-badge.caso-1 {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.euler-caso-badge.caso-2 {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.euler-caso-badge.caso-3 {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.euler-caso-badge.caso-ninguno {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.euler-sustitucion {
+    text-align: left;
+}
+
+.euler-sustitucion strong {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.euler-sustitucion span {
+    display: block;
+    font-size: 1.1rem;
+    color: var(--text-dark);
+    margin-top: 0.25rem;
+}
+
+/* ============================================
+   TEMAS 2.13 y 2.14 - MÉTODOS NUMÉRICOS
+   ============================================ */
+
+/* Controles de métodos numéricos */
+.metodo-controles {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    height: 100%;
+}
+
+.metodo-n-valor {
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-top: 0.5rem;
+}
+
+.metodo-resultados {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 1rem;
+}
+
+.metodo-resultado {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+}
+
+.metodo-resultado .label {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.metodo-resultado .valor {
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.metodo-resultado .valor.exacta {
+    color: var(--accent-green);
+}
+
+.metodo-resultado .valor.error {
+    color: var(--accent-red);
+}
+
+/* Info de métodos numéricos */
+.metodo-numerico-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: white;
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.info-label {
+    font-weight: 700;
+    color: var(--primary);
+    min-width: 60px;
+}
+
+.info-valor {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+/* Comparación de métodos */
+.comparacion-metodos {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.comp-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0.75rem;
+    background: #f8fafc;
+    border-radius: var(--radius-sm);
+}
+
+.comp-item.comp-mejor {
+    background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+}
+
+.comp-metodo {
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.comp-error {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.comp-item.comp-mejor .comp-error {
+    color: #166534;
+    font-weight: 600;
+}
+
+/* Patrón de Simpson */
+.simpson-patron {
+    background: white;
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    text-align: center;
+}
+
+.patron-label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.patron-numeros {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.coef {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f1f5f9;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.coef.coef-4 {
+    background: var(--primary);
+    color: white;
+}
+
+.coef.coef-2 {
+    background: var(--accent-orange);
+    color: white;
+}
+
+/* Comparación de resultados Simpson */
+.comparacion-resultados {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 1rem;
+}
+
+.comp-resultado {
+    background: #f8fafc;
+    border-radius: var(--radius-sm);
+    padding: 0.75rem;
+}
+
+.comp-resultado.comp-mejor {
+    background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+}
+
+.comp-resultado.comp-exacto {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+}
+
+.comp-titulo {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.comp-valor {
+    display: block;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.comp-resultado .comp-error {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+}
+
+.comp-resultado.comp-mejor .comp-titulo,
+.comp-resultado.comp-mejor .comp-error {
+    color: #166534;
+}
+
+/* ============================================
+   TEMA 2.15 - CUADRATURA DE GAUSS
+   ============================================ */
+
+/* Tabla de Gauss */
+.gauss-tabla {
+    background: white;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-sm);
+    margin-top: 0.5rem;
+}
+
+.gauss-titulo,
+.gauss-nodo-titulo {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.gauss-valores {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    padding: 0.25rem 0;
+}
+
+/* Nodos de Gauss */
+.gauss-nodos {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 1rem;
+}
+
+.gauss-nodo-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.gauss-nodo-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0.75rem;
+    background: #f8fafc;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+}
+
+.gauss-nodo-x {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.gauss-nodo-w {
+    color: var(--text-muted);
+}
+
+/* Comparación de Gauss */
+.gauss-comparacion {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+}
+
+.gauss-funcion {
+    text-align: center;
+    padding: 0.75rem;
+    background: #f8fafc;
+    border-radius: var(--radius-sm);
+    margin-bottom: 1rem;
+}
+
+.gauss-tabla-comp {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.gauss-fila {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1.5fr 1fr;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background: #f8fafc;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    align-items: center;
+}
+
+.gauss-fila.gauss-header {
+    background: var(--bg-dark);
+    color: white;
+    font-weight: 600;
+}
+
+.gauss-fila.gauss-mejor {
+    background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+    font-weight: 600;
+}
+
+.gauss-fila.gauss-exacto {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+}
+
+/* Nota importante */
+.nota-importante {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border: 2px solid #f59e0b;
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+}
+
+.nota-importante h5 {
+    color: #92400e;
+    margin-bottom: 0.75rem;
+}
+
+/* ============================================
+   RESPONSIVE PARTE 2-C
+   ============================================ */
+
+@media (max-width: 991.98px) {
+    .euler-coef-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .gauss-fila {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.25rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .condicion-cheby,
+    .caso-euler {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .euler-coef-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .gauss-fila {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .gauss-fila.gauss-header {
+        display: none;
+    }
+    
+    .gauss-valores {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.25rem;
+    }
+    
+    .patron-numeros .coef {
+        width: 28px;
+        height: 28px;
+        font-size: 0.8rem;
+    }
 }

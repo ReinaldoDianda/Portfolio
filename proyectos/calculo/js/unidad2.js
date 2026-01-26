@@ -980,7 +980,679 @@ document.addEventListener('DOMContentLoaded', function() {
         
         console.log('✅ Generador de racionalización iniciado');
     }
+   // ==========================================
+    // 11. TEMA 2.11 - INTEGRALES BINOMIAS (Chebyshev)
     // ==========================================
+    
+    function initChebyshev() {
+        const mInput = document.getElementById('cheby-m');
+        const nInput = document.getElementById('cheby-n');
+        const pInput = document.getElementById('cheby-p');
+        const integralDiv = document.querySelector('.cheby-integral');
+        const check1 = document.getElementById('cheby-check-1');
+        const check2 = document.getElementById('cheby-check-2');
+        const check3 = document.getElementById('cheby-check-3');
+        const conclusion = document.getElementById('cheby-conclusion');
+        
+        if (!mInput || !nInput || !pInput || !conclusion) {
+            console.warn('Elementos de Chebyshev no encontrados');
+            return;
+        }
+        
+        // Función para parsear fracciones como "1/2" o "-1/3"
+        function parseFraction(str) {
+            str = str.trim();
+            if (str.includes('/')) {
+                const parts = str.split('/');
+                return parseFloat(parts[0]) / parseFloat(parts[1]);
+            }
+            return parseFloat(str);
+        }
+        
+        // Función para mostrar número como fracción si es posible
+        function formatNumber(num) {
+            // Fracciones comunes
+            const fracciones = {
+                0.5: '1/2', 0.333: '1/3', 0.667: '2/3', 0.25: '1/4', 
+                0.75: '3/4', 0.2: '1/5', 0.4: '2/5', 0.6: '3/5', 0.8: '4/5',
+                '-0.5': '-1/2', '-0.333': '-1/3', '-0.25': '-1/4'
+            };
+            const key = num.toFixed(3);
+            if (fracciones[key]) return fracciones[key];
+            if (Number.isInteger(num)) return num.toString();
+            return num.toFixed(3);
+        }
+        
+        // Verificar si es entero (con tolerancia para errores de punto flotante)
+        function isInteger(num) {
+            return Math.abs(num - Math.round(num)) < 0.0001;
+        }
+        
+        function actualizar() {
+            const m = parseFloat(mInput.value) || 0;
+            const n = parseFloat(nInput.value) || 1;
+            const pStr = pInput.value.trim();
+            const p = parseFraction(pStr) || 0;
+            
+            if (n === 0) return;
+            
+            // Actualizar la fórmula de la integral dinámicamente
+            if (integralDiv) {
+                let integralLatex = '\\int x';
+                if (m !== 1) {
+                    integralLatex += `^{${m}}`;
+                }
+                integralLatex += ` (a + bx`;
+                if (n !== 1) {
+                    integralLatex += `^{${n}}`;
+                }
+                integralLatex += `)`;
+                // Mostrar p como fracción si es posible
+                if (p === 0.5) {
+                    integralLatex += `^{1/2}`;
+                } else if (p === -0.5) {
+                    integralLatex += `^{-1/2}`;
+                } else if (p === 1/3) {
+                    integralLatex += `^{1/3}`;
+                } else if (p === 2/3) {
+                    integralLatex += `^{2/3}`;
+                } else if (p === -1/3) {
+                    integralLatex += `^{-1/3}`;
+                } else if (p === 0.25) {
+                    integralLatex += `^{1/4}`;
+                } else if (p === 0.75) {
+                    integralLatex += `^{3/4}`;
+                } else if (p !== 1) {
+                    integralLatex += `^{${p}}`;
+                }
+                integralLatex += ' \\, dx';
+                
+                integralDiv.innerHTML = `$${integralLatex}$`;
+            }
+            
+            // Calcular las condiciones
+            const cond1 = isInteger(p);
+            const cond2_valor = (m + 1) / n;
+            const cond2 = isInteger(cond2_valor);
+            const cond3_valor = cond2_valor + p;
+            const cond3 = isInteger(cond3_valor);
+            
+            // Actualizar check 1
+            if (cond1) {
+                check1.innerHTML = `<i class="fas fa-check-circle"></i><span>p = ${pStr} es entero ✓</span>`;
+                check1.classList.add('cheby-ok');
+            } else {
+                check1.innerHTML = `<i class="fas fa-times-circle"></i><span>p = ${pStr} no es entero</span>`;
+                check1.classList.remove('cheby-ok');
+            }
+            
+            // Actualizar check 2
+            const cond2_display = Number.isInteger(cond2_valor) ? cond2_valor : cond2_valor.toFixed(3);
+            if (cond2) {
+                check2.innerHTML = `<i class="fas fa-check-circle"></i><span>(m+1)/n = ${m+1}/${n} = ${cond2_display} ✓ entero</span>`;
+                check2.classList.add('cheby-ok');
+            } else {
+                check2.innerHTML = `<i class="fas fa-times-circle"></i><span>(m+1)/n = ${m+1}/${n} = ${cond2_display} no es entero</span>`;
+                check2.classList.remove('cheby-ok');
+            }
+            
+            // Actualizar check 3
+            const cond3_display = Number.isInteger(cond3_valor) ? cond3_valor : cond3_valor.toFixed(3);
+            if (cond3) {
+                check3.innerHTML = `<i class="fas fa-check-circle"></i><span>(m+1)/n + p = ${cond3_display} ✓ entero</span>`;
+                check3.classList.add('cheby-ok');
+            } else {
+                check3.innerHTML = `<i class="fas fa-times-circle"></i><span>(m+1)/n + p = ${cond3_display} no es entero</span>`;
+                check3.classList.remove('cheby-ok');
+            }
+            
+            // Conclusión
+            if (cond1) {
+                conclusion.innerHTML = `<i class="fas fa-check-circle me-2"></i><strong>¡Sí tiene solución elemental!</strong><p>Usa la condición 1: expande con binomio de Newton</p>`;
+                conclusion.classList.remove('cheby-no-solucionable');
+                conclusion.classList.add('cheby-solucionable');
+            } else if (cond2) {
+                conclusion.innerHTML = `<i class="fas fa-check-circle me-2"></i><strong>¡Sí tiene solución elemental!</strong><p>Usa la condición 2: sustituye $u = a + bx^{${n}}$</p>`;
+                conclusion.classList.remove('cheby-no-solucionable');
+                conclusion.classList.add('cheby-solucionable');
+            } else if (cond3) {
+                conclusion.innerHTML = `<i class="fas fa-check-circle me-2"></i><strong>¡Sí tiene solución elemental!</strong><p>Usa la condición 3: sustituye $u = ax^{-${n}} + b$</p>`;
+                conclusion.classList.remove('cheby-no-solucionable');
+                conclusion.classList.add('cheby-solucionable');
+            } else {
+                conclusion.innerHTML = `<i class="fas fa-times-circle me-2"></i><strong>NO tiene solución elemental</strong><p>Ninguna condición de Chebyshev se cumple</p>`;
+                conclusion.classList.remove('cheby-solucionable');
+                conclusion.classList.add('cheby-no-solucionable');
+            }
+            
+            // Re-renderizar MathJax
+            if (typeof MathJax !== 'undefined' && MathJax.typesetPromise) {
+                MathJax.typesetPromise([integralDiv, conclusion]).catch(err => console.log('MathJax error:', err));
+            }
+        }
+        
+        mInput.addEventListener('input', actualizar);
+        nInput.addEventListener('input', actualizar);
+        pInput.addEventListener('input', actualizar);
+        
+        // Inicializar
+        actualizar();
+        
+        console.log('✅ Verificador de Chebyshev iniciado');
+    }
+    // ==========================================
+    // 12. TEMA 2.12 - SUSTITUCIÓN DE EULER
+    // ==========================================
+    
+    function initEuler() {
+        const aInput = document.getElementById('euler-a');
+        const bInput = document.getElementById('euler-b');
+        const cInput = document.getElementById('euler-c');
+        const resultado = document.getElementById('euler-resultado');
+        
+        if (!aInput || !bInput || !cInput || !resultado) {
+            console.warn('Elementos de Euler no encontrados');
+            return;
+        }
+        
+        function actualizar() {
+            const a = parseFloat(aInput.value) || 0;
+            const b = parseFloat(bInput.value) || 0;
+            const c = parseFloat(cInput.value) || 0;
+            
+            // Construir expresión
+            let expr = '\\sqrt{';
+            if (a !== 0) expr += (a === 1 ? '' : (a === -1 ? '-' : a)) + 'x^2';
+            if (b !== 0) expr += (b > 0 && a !== 0 ? '+' : '') + (b === 1 ? '' : (b === -1 ? '-' : b)) + 'x';
+            if (c !== 0) expr += (c > 0 && (a !== 0 || b !== 0) ? '+' : '') + c;
+            if (a === 0 && b === 0 && c === 0) expr += '0';
+            expr += '}';
+            
+            // Determinar caso
+            let caso, badge, sustitucion;
+            const discriminante = b * b - 4 * a * c;
+            
+            if (a > 0) {
+                caso = 1;
+                badge = '<div class="euler-caso-badge caso-1">Caso 1: $a > 0$</div>';
+                const sqrtA = Math.sqrt(a);
+                const sqrtAStr = sqrtA === Math.floor(sqrtA) ? sqrtA : '\\sqrt{' + a + '}';
+                sustitucion = `$${expr} = t - ${sqrtAStr === 1 ? '' : sqrtAStr}x$`;
+            } else if (c > 0) {
+                caso = 2;
+                badge = '<div class="euler-caso-badge caso-2">Caso 2: $c > 0$</div>';
+                const sqrtC = Math.sqrt(c);
+                const sqrtCStr = sqrtC === Math.floor(sqrtC) ? sqrtC : '\\sqrt{' + c + '}';
+                sustitucion = `$${expr} = tx + ${sqrtCStr}$`;
+            } else if (discriminante >= 0 && a !== 0) {
+                caso = 3;
+                badge = '<div class="euler-caso-badge caso-3">Caso 3: Raíces reales</div>';
+                const r1 = (-b + Math.sqrt(discriminante)) / (2 * a);
+                const r2 = (-b - Math.sqrt(discriminante)) / (2 * a);
+                sustitucion = `$${expr} = t(x - ${r1.toFixed(2)})$`;
+            } else {
+                caso = 0;
+                badge = '<div class="euler-caso-badge caso-ninguno">No aplicable directamente</div>';
+                sustitucion = 'Puede requerir completar el cuadrado primero';
+            }
+            
+            resultado.innerHTML = `
+                <div class="euler-expresion">$${expr}$</div>
+                <div class="euler-caso">
+                    ${badge}
+                    <div class="euler-sustitucion">
+                        <strong>Sustitución:</strong>
+                        <span>${sustitucion}</span>
+                    </div>
+                </div>
+            `;
+            
+            // Re-renderizar MathJax
+            if (typeof MathJax !== 'undefined' && MathJax.typesetPromise) {
+                MathJax.typesetPromise([resultado]).catch(err => console.log('MathJax error:', err));
+            }
+        }
+        
+        aInput.addEventListener('input', actualizar);
+        bInput.addEventListener('input', actualizar);
+        cInput.addEventListener('input', actualizar);
+        
+        // Inicializar
+        actualizar();
+        
+        console.log('✅ Selector de Euler iniciado');
+    }
+    
+    // ==========================================
+    // 13. TEMA 2.13 - MÉTODO DEL TRAPECIO
+    // ==========================================
+    
+    function initTrapecio() {
+        const canvas = document.getElementById('trapecioChart');
+        const slider = document.getElementById('trapecio-n');
+        const nValor = document.getElementById('trapecio-n-valor');
+        const aproxValor = document.getElementById('trapecio-aprox');
+        const errorValor = document.getElementById('trapecio-error');
+        
+        if (!canvas || !slider) {
+            console.warn('Elementos de trapecio no encontrados');
+            return;
+        }
+        
+        const ctx = canvas.getContext('2d');
+        let chart = null;
+        
+        // Función f(x) = e^(-x^2)
+        const f = (x) => Math.exp(-x * x);
+        
+        // Límites
+        const a = 0, b = 2;
+        // Valor exacto aproximado (integral de Gauss)
+        const exacto = 0.88208139;
+        
+        function updateChart(n) {
+            n = parseInt(n);
+            const h = (b - a) / n;
+            
+            // Calcular aproximación por trapecio
+            let suma = f(a) + f(b);
+            for (let i = 1; i < n; i++) {
+                suma += 2 * f(a + i * h);
+            }
+            const aprox = (h / 2) * suma;
+            
+            // Calcular error
+            const error = Math.abs((aprox - exacto) / exacto) * 100;
+            
+            // Actualizar etiquetas
+            nValor.textContent = n;
+            aproxValor.textContent = aprox.toFixed(4);
+            errorValor.textContent = error.toFixed(2) + '%';
+            
+            // Preparar datos para el gráfico
+            const labels = [];
+            const curveData = [];
+            
+            for (let x = a; x <= b; x += 0.02) {
+                labels.push(x.toFixed(2));
+                curveData.push(f(x));
+            }
+            
+            // Datos para los trapecios
+            const trapData = [];
+            for (let x = a; x <= b; x += 0.02) {
+                const xNum = parseFloat(x.toFixed(2));
+                // Encontrar en qué trapecio estamos
+                const i = Math.floor((xNum - a) / h);
+                if (i < n) {
+                    const x0 = a + i * h;
+                    const x1 = a + (i + 1) * h;
+                    const y0 = f(x0);
+                    const y1 = f(x1);
+                    // Interpolación lineal
+                    const t = (xNum - x0) / h;
+                    trapData.push(y0 + t * (y1 - y0));
+                } else {
+                    trapData.push(f(b));
+                }
+            }
+            
+            // Destruir gráfico anterior
+            if (chart) {
+                chart.destroy();
+            }
+            
+            // Crear gráfico
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Trapecios',
+                            data: trapData,
+                            backgroundColor: 'rgba(102, 126, 234, 0.3)',
+                            borderColor: 'rgba(102, 126, 234, 0.8)',
+                            borderWidth: 2,
+                            fill: true,
+                            pointRadius: 0,
+                            tension: 0
+                        },
+                        {
+                            label: 'f(x) = e^(-x²)',
+                            data: curveData,
+                            borderColor: '#ef4444',
+                            borderWidth: 3,
+                            fill: false,
+                            pointRadius: 0,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: { duration: 300 },
+                    scales: {
+                        x: {
+                            title: { display: true, text: 'x', font: { weight: 'bold' } },
+                            ticks: {
+                                callback: function(value, index) {
+                                    const label = parseFloat(this.getLabelForValue(value));
+                                    return label % 0.5 === 0 ? label : '';
+                                }
+                            },
+                            grid: { color: 'rgba(0,0,0,0.05)' }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            max: 1.2,
+                            title: { display: true, text: 'f(x)', font: { weight: 'bold' } },
+                            grid: { color: 'rgba(0,0,0,0.05)' }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: { usePointStyle: true, padding: 15 }
+                        }
+                    }
+                }
+            });
+        }
+        
+        slider.addEventListener('input', function() {
+            updateChart(this.value);
+        });
+        
+        // Inicializar
+        updateChart(4);
+        
+        console.log('✅ Gráfico de trapecio iniciado');
+    }
+    
+    // ==========================================
+    // 14. TEMA 2.14 - MÉTODO DE SIMPSON
+    // ==========================================
+    
+    function initSimpson() {
+        const canvas = document.getElementById('simpsonChart');
+        const slider = document.getElementById('simpson-n');
+        const nValor = document.getElementById('simpson-n-valor');
+        const trapValor = document.getElementById('simpson-trap-valor');
+        const trapError = document.getElementById('simpson-trap-error');
+        const simpValor = document.getElementById('simpson-simp-valor');
+        const simpError = document.getElementById('simpson-simp-error');
+        
+        if (!canvas || !slider) {
+            console.warn('Elementos de Simpson no encontrados');
+            return;
+        }
+        
+        const ctx = canvas.getContext('2d');
+        let chart = null;
+        
+        // Función f(x) = e^(-x^2)
+        const f = (x) => Math.exp(-x * x);
+        
+        // Límites
+        const a = 0, b = 2;
+        const exacto = 0.88208139;
+        
+        function updateChart(n) {
+            n = parseInt(n);
+            const h = (b - a) / n;
+            
+            // Método del trapecio
+            let sumaTrap = f(a) + f(b);
+            for (let i = 1; i < n; i++) {
+                sumaTrap += 2 * f(a + i * h);
+            }
+            const aproxTrap = (h / 2) * sumaTrap;
+            const errorTrap = Math.abs((aproxTrap - exacto) / exacto) * 100;
+            
+            // Método de Simpson
+            let sumaSimp = f(a) + f(b);
+            for (let i = 1; i < n; i++) {
+                const coef = (i % 2 === 0) ? 2 : 4;
+                sumaSimp += coef * f(a + i * h);
+            }
+            const aproxSimp = (h / 3) * sumaSimp;
+            const errorSimp = Math.abs((aproxSimp - exacto) / exacto) * 100;
+            
+            // Actualizar etiquetas
+            nValor.textContent = n;
+            trapValor.textContent = aproxTrap.toFixed(4);
+            trapError.textContent = 'Error: ' + errorTrap.toFixed(3) + '%';
+            simpValor.textContent = aproxSimp.toFixed(4);
+            simpError.textContent = 'Error: ' + errorSimp.toFixed(4) + '%';
+            
+            // Preparar datos para el gráfico
+            const labels = [];
+            const curveData = [];
+            const trapData = [];
+            
+            // Generar puntos de la curva suave
+            for (let x = a; x <= b; x += 0.02) {
+                labels.push(x.toFixed(2));
+                curveData.push(f(x));
+                
+                // Interpolación lineal para trapecios
+                const xNum = parseFloat(x.toFixed(2));
+                const i = Math.floor((xNum - a) / h);
+                if (i < n && xNum <= b) {
+                    const x0 = a + i * h;
+                    const x1 = a + (i + 1) * h;
+                    const y0 = f(x0);
+                    const y1 = f(x1);
+                    const t = (xNum - x0) / h;
+                    trapData.push(y0 + t * (y1 - y0));
+                } else {
+                    trapData.push(f(b));
+                }
+            }
+            
+            // Destruir gráfico anterior
+            if (chart) {
+                chart.destroy();
+            }
+            
+            // Crear gráfico comparativo
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Trapecio (líneas rectas)',
+                            data: trapData,
+                            backgroundColor: 'rgba(249, 115, 22, 0.2)',
+                            borderColor: 'rgba(249, 115, 22, 0.8)',
+                            borderWidth: 2,
+                            fill: true,
+                            pointRadius: 0,
+                            tension: 0
+                        },
+                        {
+                            label: 'f(x) = e^(-x²) (curva real)',
+                            data: curveData,
+                            borderColor: '#ef4444',
+                            borderWidth: 3,
+                            fill: false,
+                            pointRadius: 0,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: { duration: 300 },
+                    scales: {
+                        x: {
+                            title: { display: true, text: 'x', font: { weight: 'bold' } },
+                            ticks: {
+                                callback: function(value, index) {
+                                    const label = parseFloat(this.getLabelForValue(value));
+                                    return label % 0.5 === 0 ? label : '';
+                                }
+                            },
+                            grid: { color: 'rgba(0,0,0,0.05)' }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            max: 1.2,
+                            title: { display: true, text: 'f(x)', font: { weight: 'bold' } },
+                            grid: { color: 'rgba(0,0,0,0.05)' }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: { usePointStyle: true, padding: 15 }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: function(context) {
+                                    return 'x = ' + context[0].label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        slider.addEventListener('input', function() {
+            updateChart(this.value);
+        });
+        
+        // Inicializar
+        updateChart(4);
+        
+        console.log('✅ Comparador Simpson iniciado');
+    }
+    
+    // ==========================================
+    // 15. TEMA 2.15 - CUADRATURA DE GAUSS
+    // ==========================================
+    
+    function initGauss() {
+        const selector = document.getElementById('gauss-n');
+        const nodosLista = document.getElementById('gauss-nodo-lista');
+        const trapPts = document.getElementById('gauss-trap-pts');
+        const trapVal = document.getElementById('gauss-trap-val');
+        const trapErr = document.getElementById('gauss-trap-err');
+        const simpPts = document.getElementById('gauss-simp-pts');
+        const simpVal = document.getElementById('gauss-simp-val');
+        const simpErr = document.getElementById('gauss-simp-err');
+        const gaussPts = document.getElementById('gauss-gauss-pts');
+        const gaussVal = document.getElementById('gauss-gauss-val');
+        const gaussErr = document.getElementById('gauss-gauss-err');
+        
+        if (!selector || !nodosLista) {
+            console.warn('Elementos de Gauss no encontrados');
+            return;
+        }
+        
+        // Nodos y pesos de Gauss-Legendre
+        const gaussData = {
+            2: {
+                nodos: [-0.5773502692, 0.5773502692],
+                pesos: [1.0, 1.0]
+            },
+            3: {
+                nodos: [-0.7745966692, 0.0, 0.7745966692],
+                pesos: [0.5555555556, 0.8888888889, 0.5555555556]
+            },
+            4: {
+                nodos: [-0.8611363116, -0.3399810436, 0.3399810436, 0.8611363116],
+                pesos: [0.3478548451, 0.6521451549, 0.6521451549, 0.3478548451]
+            },
+            5: {
+                nodos: [-0.9061798459, -0.5384693101, 0.0, 0.5384693101, 0.9061798459],
+                pesos: [0.2369268851, 0.4786286705, 0.5688888889, 0.4786286705, 0.2369268851]
+            }
+        };
+        
+        // Función f(x) = e^(-x^2)
+        const f = (x) => Math.exp(-x * x);
+        
+        // Límites originales
+        const a = 0, b = 2;
+        const exacto = 0.88208139;
+        
+        function actualizar() {
+            const n = parseInt(selector.value);
+            const data = gaussData[n];
+            
+            // Mostrar nodos y pesos
+            let nodosHTML = '';
+            for (let i = 0; i < n; i++) {
+                nodosHTML += `
+                    <div class="gauss-nodo-item">
+                        <span class="gauss-nodo-x">x${i+1} = ${data.nodos[i].toFixed(6)}</span>
+                        <span class="gauss-nodo-w">w${i+1} = ${data.pesos[i].toFixed(6)}</span>
+                    </div>
+                `;
+            }
+            nodosLista.innerHTML = nodosHTML;
+            
+            // Calcular integral por Gauss (transformando de [-1,1] a [a,b])
+            let sumaGauss = 0;
+            for (let i = 0; i < n; i++) {
+                // Transformar nodo de [-1,1] a [a,b]
+                const x_transformado = ((b - a) / 2) * data.nodos[i] + (a + b) / 2;
+                sumaGauss += data.pesos[i] * f(x_transformado);
+            }
+            const aproxGauss = ((b - a) / 2) * sumaGauss;
+            const errorGauss = Math.abs((aproxGauss - exacto) / exacto) * 100;
+            
+            // Calcular trapecio con n+1 puntos para comparar
+            const nTrap = n + 1;
+            const hTrap = (b - a) / nTrap;
+            let sumaTrap = f(a) + f(b);
+            for (let i = 1; i < nTrap; i++) {
+                sumaTrap += 2 * f(a + i * hTrap);
+            }
+            const aproxTrap = (hTrap / 2) * sumaTrap;
+            const errorTrap = Math.abs((aproxTrap - exacto) / exacto) * 100;
+            
+            // Calcular Simpson con n puntos (n debe ser par, usar n+1 si es impar)
+            const nSimp = n % 2 === 0 ? n : n + 1;
+            const hSimp = (b - a) / nSimp;
+            let sumaSimp = f(a) + f(b);
+            for (let i = 1; i < nSimp; i++) {
+                const coef = (i % 2 === 0) ? 2 : 4;
+                sumaSimp += coef * f(a + i * hSimp);
+            }
+            const aproxSimp = (hSimp / 3) * sumaSimp;
+            const errorSimp = Math.abs((aproxSimp - exacto) / exacto) * 100;
+            
+            // Actualizar tabla comparativa
+            trapPts.textContent = nTrap + 1;
+            trapVal.textContent = aproxTrap.toFixed(4);
+            trapErr.textContent = errorTrap.toFixed(3) + '%';
+            
+            simpPts.textContent = nSimp + 1;
+            simpVal.textContent = aproxSimp.toFixed(4);
+            simpErr.textContent = errorSimp.toFixed(4) + '%';
+            
+            gaussPts.textContent = n;
+            gaussVal.textContent = aproxGauss.toFixed(4);
+            gaussErr.textContent = errorGauss.toFixed(4) + '%';
+        }
+        
+        selector.addEventListener('change', actualizar);
+        
+        // Inicializar
+        actualizar();
+        
+        console.log('✅ Comparador de Gauss iniciado');
+    }
+   // ==========================================
     // INICIALIZAR MÓDULO UNIDAD 2
     // ==========================================
     
@@ -998,6 +1670,13 @@ document.addEventListener('DOMContentLoaded', function() {
     initWeierstrass();
     initRacionalizacion();
     
-    console.log('✅ Módulo Unidad 2 cargado');
+    // Parte 2-C (Temas 2.11 - 2.15)
+    initChebyshev();
+    initEuler();
+    initTrapecio();
+    initSimpson();
+    initGauss();
+    
+    console.log('✅ Módulo Unidad 2 cargado completamente');
     
 });

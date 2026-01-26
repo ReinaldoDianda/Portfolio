@@ -1373,6 +1373,644 @@
                     </div>
                 </div>
             </div>
+            <!-- ==================== TEMA 2.11 ==================== -->
+            <div class="tema-card" id="tema2-11">
+                <div class="tema-header">
+                    <span class="tema-numero">2.11</span>
+                    <h3>Integrales Binomias: Las condiciones de Chebyshev</h3>
+                </div>
+                
+                <div class="tema-content">
+                    <!-- Pregunta gancho -->
+                    <div class="pregunta-gancho">
+                        <i class="fas fa-question-circle"></i>
+                        <p>¿Cómo integras $\int x^2 (1 + x^3)^{1/2} dx$? Tiene potencias raras... <strong>¿cuándo se puede resolver exactamente?</strong></p>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Vida Real -->
+                        <div class="col-lg-6">
+                            <div class="bloque-real">
+                                <h5><i class="fas fa-filter me-2"></i> La Historia</h5>
+                                <p>No todas las integrales tienen solución con funciones elementales.</p>
+                                <p>Pafnuty Chebyshev (matemático ruso) descubrió que las integrales de la forma:</p>
+                                <div class="formula-box">
+                                    <div class="formula">$\int x^m (a + bx^n)^p \, dx$</div>
+                                </div>
+                                <p class="mt-2">Solo se pueden resolver en <strong>3 casos específicos</strong>.</p>
+                                <div class="pregunta-clave">
+                                    🔍 Chebyshev nos dice cuándo vale la pena intentarlo.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- La idea matemática -->
+                        <div class="col-lg-6">
+                            <div class="bloque-mate">
+                                <h5><i class="fas fa-check-double me-2"></i> Las 3 Condiciones</h5>
+                                <p>La integral $\int x^m (a + bx^n)^p dx$ es elemental si:</p>
+                                <div class="condiciones-chebyshev">
+                                    <div class="condicion-cheby">
+                                        <span class="condicion-num">1</span>
+                                        <div class="condicion-texto">
+                                            <strong>p es entero</strong>
+                                            <span>Expande con binomio de Newton</span>
+                                        </div>
+                                    </div>
+                                    <div class="condicion-cheby">
+                                        <span class="condicion-num">2</span>
+                                        <div class="condicion-texto">
+                                            <strong>$\frac{m+1}{n}$ es entero</strong>
+                                            <span>Sustituye $u = a + bx^n$</span>
+                                        </div>
+                                    </div>
+                                    <div class="condicion-cheby">
+                                        <span class="condicion-num">3</span>
+                                        <div class="condicion-texto">
+                                            <strong>$\frac{m+1}{n} + p$ es entero</strong>
+                                            <span>Sustituye $u = a x^{-n} + b$</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="mt-3 small text-muted">Si ninguna se cumple, la integral NO tiene solución elemental.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ejemplo resuelto -->
+                    <div class="ejemplo-box mt-4">
+                        <h5><i class="fas fa-pencil-alt me-2"></i> Ejemplo: $\int x^2 (1 + x^3)^{1/2} dx$</h5>
+                        <div class="ejemplo-contenido">
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Identificar m, n, p</div>
+                                <div class="paso-body">
+                                    <p>$m = 2$, $n = 3$, $p = 1/2$, $a = 1$, $b = 1$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Verificar condiciones</div>
+                                <div class="paso-body">
+                                    <p>¿p es entero? $p = 1/2$ → No</p>
+                                    <p>¿$(m+1)/n$ es entero? $(2+1)/3 = 1$ → <strong>¡Sí!</strong></p>
+                                    <p class="paso-resultado">Usamos condición 2: $u = 1 + x^3$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Resolver</div>
+                                <div class="paso-body">
+                                    <p>$u = 1 + x^3 \Rightarrow du = 3x^2 dx \Rightarrow x^2 dx = \frac{1}{3}du$</p>
+                                    <p class="paso-resultado">$\int u^{1/2} \cdot \frac{1}{3} du = \frac{1}{3} \cdot \frac{2}{3} u^{3/2} + C$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-resultado-final">
+                                <span class="resultado-label">Resultado:</span>
+                                <span class="resultado-formula">$\int x^2 (1 + x^3)^{1/2} dx = \frac{2}{9}(1 + x^3)^{3/2} + C$</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- INTERACTIVO -->
+                    <div class="interactivo-box">
+                        <h5><i class="fas fa-gamepad me-2"></i> Verificador de Chebyshev</h5>
+                        <p class="text-muted">Ingresa los valores de m, n, p y te diré si la integral tiene solución elemental</p>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-5">
+                                <div class="cheby-inputs">
+                                    <div class="cheby-input-group">
+                                        <label>m (exponente de x):</label>
+                                        <input type="number" class="form-control" id="cheby-m" value="2" step="1">
+                                    </div>
+                                    <div class="cheby-input-group">
+                                        <label>n (exponente dentro del paréntesis):</label>
+                                        <input type="number" class="form-control" id="cheby-n" value="3" min="1" step="1">
+                                    </div>
+                                    <div class="cheby-input-group">
+                                        <label>p (exponente del paréntesis):</label>
+                                        <input type="text" class="form-control" id="cheby-p" value="1/2" placeholder="Ej: 1/2, -1/3, 2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="cheby-resultado" id="cheby-resultado">
+                                    <div class="cheby-integral">
+                                        $\int x^2 (a + bx^3)^{1/2} dx$
+                                    </div>
+                                    <div class="cheby-verificacion">
+                                        <div class="cheby-check" id="cheby-check-1">
+                                            <i class="fas fa-times-circle"></i>
+                                            <span>p = 1/2 no es entero</span>
+                                        </div>
+                                        <div class="cheby-check cheby-ok" id="cheby-check-2">
+                                            <i class="fas fa-check-circle"></i>
+                                            <span>(m+1)/n = 3/3 = 1 ✓ entero</span>
+                                        </div>
+                                        <div class="cheby-check" id="cheby-check-3">
+                                            <i class="fas fa-times-circle"></i>
+                                            <span>(m+1)/n + p = 1.5 no es entero</span>
+                                        </div>
+                                    </div>
+                                    <div class="cheby-conclusion cheby-solucionable" id="cheby-conclusion">
+                                        <i class="fas fa-check-circle me-2"></i>
+                                        <strong>¡Sí tiene solución elemental!</strong>
+                                        <p>Usa la condición 2: sustituye $u = a + bx^n$</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resumen -->
+                    <div class="resumen-tema">
+                        <strong>📌 En resumen:</strong> Las integrales binomias $\int x^m(a+bx^n)^p dx$ solo tienen solución elemental si p es entero, o $(m+1)/n$ es entero, o $(m+1)/n + p$ es entero. Si ninguna se cumple, no se puede resolver con funciones básicas.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== TEMA 2.12 ==================== -->
+            <div class="tema-card" id="tema2-12">
+                <div class="tema-header">
+                    <span class="tema-numero">2.12</span>
+                    <h3>Sustitución de Euler: Raíces cuadráticas complejas</h3>
+                </div>
+                
+                <div class="tema-content">
+                    <!-- Pregunta gancho -->
+                    <div class="pregunta-gancho">
+                        <i class="fas fa-question-circle"></i>
+                        <p>¿Qué pasa cuando tienes $\int \frac{1}{\sqrt{x^2 + x + 1}} dx$? La sustitución trigonométrica no aplica directamente... <strong>¡Euler tiene la solución!</strong></p>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Vida Real -->
+                        <div class="col-lg-6">
+                            <div class="bloque-real">
+                                <h5><i class="fas fa-square-root-alt me-2"></i> La Historia</h5>
+                                <p>Leonhard Euler desarrolló sustituciones para integrales con:</p>
+                                <div class="formula-box">
+                                    <div class="formula">$\sqrt{ax^2 + bx + c}$</div>
+                                </div>
+                                <p class="mt-2">Dependiendo de los coeficientes, hay <strong>3 casos</strong> diferentes.</p>
+                                <div class="pregunta-clave">
+                                    🧮 Cada caso tiene su propia sustitución mágica.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- La idea matemática -->
+                        <div class="col-lg-6">
+                            <div class="bloque-mate">
+                                <h5><i class="fas fa-code-branch me-2"></i> Los 3 Casos de Euler</h5>
+                                <div class="casos-euler">
+                                    <div class="caso-euler">
+                                        <span class="caso-euler-num">1</span>
+                                        <div class="caso-euler-texto">
+                                            <strong>Si $a > 0$:</strong>
+                                            <span>$\sqrt{ax^2+bx+c} = t \pm x\sqrt{a}$</span>
+                                        </div>
+                                    </div>
+                                    <div class="caso-euler">
+                                        <span class="caso-euler-num">2</span>
+                                        <div class="caso-euler-texto">
+                                            <strong>Si $c > 0$:</strong>
+                                            <span>$\sqrt{ax^2+bx+c} = tx \pm \sqrt{c}$</span>
+                                        </div>
+                                    </div>
+                                    <div class="caso-euler">
+                                        <span class="caso-euler-num">3</span>
+                                        <div class="caso-euler-texto">
+                                            <strong>Si tiene raíces reales $r_1, r_2$:</strong>
+                                            <span>$\sqrt{a(x-r_1)(x-r_2)} = t(x-r_1)$</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ejemplo resuelto -->
+                    <div class="ejemplo-box mt-4">
+                        <h5><i class="fas fa-pencil-alt me-2"></i> Ejemplo: $\int \frac{1}{\sqrt{x^2 + 1}} dx$ (Caso 1: $a = 1 > 0$)</h5>
+                        <div class="ejemplo-contenido">
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Aplicar sustitución de Euler (Caso 1)</div>
+                                <div class="paso-body">
+                                    <p>Como $a = 1 > 0$, usamos: $\sqrt{x^2 + 1} = t - x$</p>
+                                    <p>Elevando al cuadrado: $x^2 + 1 = t^2 - 2tx + x^2$</p>
+                                    <p class="paso-resultado">Despejando: $x = \frac{t^2 - 1}{2t}$ y $dx = \frac{t^2 + 1}{2t^2}dt$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Sustituir y simplificar</div>
+                                <div class="paso-body">
+                                    <p>$\sqrt{x^2+1} = t - x = t - \frac{t^2-1}{2t} = \frac{t^2+1}{2t}$</p>
+                                    <p class="paso-resultado">$\int \frac{1}{\frac{t^2+1}{2t}} \cdot \frac{t^2+1}{2t^2} dt = \int \frac{1}{t} dt = \ln|t| + C$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Volver a x</div>
+                                <div class="paso-body">
+                                    <p>$t = \sqrt{x^2+1} + x$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-resultado-final">
+                                <span class="resultado-label">Resultado:</span>
+                                <span class="resultado-formula">$\int \frac{1}{\sqrt{x^2+1}} dx = \ln|x + \sqrt{x^2+1}| + C$</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- INTERACTIVO -->
+                    <div class="interactivo-box">
+                        <h5><i class="fas fa-gamepad me-2"></i> Selector de caso de Euler</h5>
+                        <p class="text-muted">Ingresa los coeficientes y te diré qué sustitución usar</p>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-5">
+                                <div class="euler-inputs">
+                                    <label class="form-label">Coeficientes de $\sqrt{ax^2 + bx + c}$:</label>
+                                    <div class="euler-coef-grid">
+                                        <div class="euler-coef">
+                                            <label>a:</label>
+                                            <input type="number" class="form-control" id="euler-a" value="1" step="1">
+                                        </div>
+                                        <div class="euler-coef">
+                                            <label>b:</label>
+                                            <input type="number" class="form-control" id="euler-b" value="0" step="1">
+                                        </div>
+                                        <div class="euler-coef">
+                                            <label>c:</label>
+                                            <input type="number" class="form-control" id="euler-c" value="1" step="1">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="euler-resultado" id="euler-resultado">
+                                    <div class="euler-expresion">
+                                        $\sqrt{x^2 + 1}$
+                                    </div>
+                                    <div class="euler-caso" id="euler-caso">
+                                        <div class="euler-caso-badge caso-1">Caso 1: $a > 0$</div>
+                                        <div class="euler-sustitucion">
+                                            <strong>Sustitución:</strong>
+                                            <span id="euler-sust">$\sqrt{x^2 + 1} = t - x$</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resumen -->
+                    <div class="resumen-tema">
+                        <strong>📌 En resumen:</strong> La sustitución de Euler maneja $\sqrt{ax^2+bx+c}$ según el signo de los coeficientes. Si $a>0$ usa el caso 1, si $c>0$ usa el caso 2, y si el trinomio tiene raíces reales usa el caso 3.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== TEMA 2.13 ==================== -->
+            <div class="tema-card" id="tema2-13">
+                <div class="tema-header">
+                    <span class="tema-numero">2.13</span>
+                    <h3>Método del Trapecio: Aproximación numérica</h3>
+                </div>
+                
+                <div class="tema-content">
+                    <!-- Pregunta gancho -->
+                    <div class="pregunta-gancho">
+                        <i class="fas fa-question-circle"></i>
+                        <p>¿Qué haces cuando una integral <strong>no tiene solución analítica</strong>? Por ejemplo $\int e^{-x^2} dx$... <strong>¡La aproximas numéricamente!</strong></p>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Vida Real -->
+                        <div class="col-lg-6">
+                            <div class="bloque-real">
+                                <h5><i class="fas fa-ruler-combined me-2"></i> La Historia</h5>
+                                <p>Algunas integrales importantes (como la campana de Gauss) <strong>no se pueden resolver exactamente</strong>.</p>
+                                <p>La solución: aproximar el área usando figuras geométricas simples.</p>
+                                <p>El método del trapecio usa <strong>trapecios</strong> en lugar de rectángulos, lo que da mejor aproximación.</p>
+                                <div class="pregunta-clave">
+                                    📐 Los trapecios se adaptan mejor a las curvas que los rectángulos.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- La idea matemática -->
+                        <div class="col-lg-6">
+                            <div class="bloque-mate">
+                                <h5><i class="fas fa-calculator me-2"></i> La Fórmula</h5>
+                                <div class="formula-box">
+                                    <span class="formula-label">Regla del trapecio compuesta:</span>
+                                    <div class="formula">$\int_a^b f(x)dx \approx \frac{h}{2}[f(x_0) + 2\sum_{i=1}^{n-1}f(x_i) + f(x_n)]$</div>
+                                </div>
+                                <div class="metodo-numerico-info mt-3">
+                                    <div class="info-item">
+                                        <span class="info-label">h =</span>
+                                        <span class="info-valor">$(b-a)/n$ (ancho de cada trapecio)</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">n =</span>
+                                        <span class="info-valor">número de subintervalos</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Error ≈</span>
+                                        <span class="info-valor">$O(h^2)$ (disminuye con más trapecios)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- INTERACTIVO -->
+                    <div class="interactivo-box">
+                        <h5><i class="fas fa-gamepad me-2"></i> Visualizador del Método del Trapecio</h5>
+                        <p class="text-muted">Ajusta el número de trapecios y observa cómo mejora la aproximación</p>
+                        
+                        <div class="row g-4">
+                            <div class="col-lg-8">
+                                <div class="chart-container">
+                                    <canvas id="trapecioChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="metodo-controles">
+                                    <label class="form-label">Función: $f(x) = e^{-x^2}$</label>
+                                    <p class="small text-muted">Intervalo: [0, 2]</p>
+                                    
+                                    <label class="form-label mt-3">Número de trapecios (n):</label>
+                                    <input type="range" class="form-range" id="trapecio-n" min="1" max="20" value="4">
+                                    <div class="metodo-n-valor">n = <span id="trapecio-n-valor">4</span></div>
+                                    
+                                    <div class="metodo-resultados mt-4">
+                                        <div class="metodo-resultado">
+                                            <span class="label">Aproximación:</span>
+                                            <span class="valor" id="trapecio-aprox">0.8818</span>
+                                        </div>
+                                        <div class="metodo-resultado">
+                                            <span class="label">Valor real:</span>
+                                            <span class="valor exacta">0.8821</span>
+                                        </div>
+                                        <div class="metodo-resultado">
+                                            <span class="label">Error:</span>
+                                            <span class="valor error" id="trapecio-error">0.03%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resumen -->
+                    <div class="resumen-tema">
+                        <strong>📌 En resumen:</strong> El método del trapecio aproxima la integral dividiendo el área en trapecios. Es más preciso que los rectángulos y muy fácil de implementar. A más trapecios, mejor aproximación.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== TEMA 2.14 ==================== -->
+            <div class="tema-card" id="tema2-14">
+                <div class="tema-header">
+                    <span class="tema-numero">2.14</span>
+                    <h3>Método de Simpson: Parábolas para mayor precisión</h3>
+                </div>
+                
+                <div class="tema-content">
+                    <!-- Pregunta gancho -->
+                    <div class="pregunta-gancho">
+                        <i class="fas fa-question-circle"></i>
+                        <p>¿Se puede hacer algo mejor que trapecios? <strong>¡Sí! Usar parábolas en lugar de líneas rectas.</strong></p>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Vida Real -->
+                        <div class="col-lg-6">
+                            <div class="bloque-real">
+                                <h5><i class="fas fa-wave-square me-2"></i> La Historia</h5>
+                                <p>Thomas Simpson mejoró el método del trapecio usando <strong>parábolas</strong> para conectar los puntos.</p>
+                                <p>Las parábolas se adaptan mucho mejor a las curvas que las líneas rectas.</p>
+                                <div class="comparacion-metodos">
+                                    <div class="comp-item">
+                                        <span class="comp-metodo">Rectángulos:</span>
+                                        <span class="comp-error">Error ≈ $O(h)$</span>
+                                    </div>
+                                    <div class="comp-item">
+                                        <span class="comp-metodo">Trapecios:</span>
+                                        <span class="comp-error">Error ≈ $O(h^2)$</span>
+                                    </div>
+                                    <div class="comp-item comp-mejor">
+                                        <span class="comp-metodo">Simpson:</span>
+                                        <span class="comp-error">Error ≈ $O(h^4)$ ⭐</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- La idea matemática -->
+                        <div class="col-lg-6">
+                            <div class="bloque-mate">
+                                <h5><i class="fas fa-calculator me-2"></i> La Fórmula</h5>
+                                <div class="formula-box">
+                                    <span class="formula-label">Regla de Simpson (n par):</span>
+                                    <div class="formula small">$\int_a^b f(x)dx \approx \frac{h}{3}[f_0 + 4f_1 + 2f_2 + 4f_3 + ... + 4f_{n-1} + f_n]$</div>
+                                </div>
+                                <div class="simpson-patron mt-3">
+                                    <span class="patron-label">Patrón de coeficientes:</span>
+                                    <div class="patron-numeros">
+                                        <span class="coef">1</span>
+                                        <span class="coef coef-4">4</span>
+                                        <span class="coef coef-2">2</span>
+                                        <span class="coef coef-4">4</span>
+                                        <span class="coef coef-2">2</span>
+                                        <span class="coef">...</span>
+                                        <span class="coef coef-4">4</span>
+                                        <span class="coef">1</span>
+                                    </div>
+                                </div>
+                                <p class="mt-2 small text-muted"><strong>Importante:</strong> n debe ser PAR (número par de subintervalos).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- INTERACTIVO -->
+                    <div class="interactivo-box">
+                        <h5><i class="fas fa-gamepad me-2"></i> Comparador: Trapecio vs Simpson</h5>
+                        <p class="text-muted">Observa cómo Simpson da mejor resultado con menos subdivisiones</p>
+                        
+                        <div class="row g-4">
+                            <div class="col-lg-8">
+                                <div class="chart-container">
+                                    <canvas id="simpsonChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="metodo-controles">
+                                    <label class="form-label">Función: $f(x) = e^{-x^2}$</label>
+                                    <p class="small text-muted">Intervalo: [0, 2]</p>
+                                    
+                                    <label class="form-label mt-3">Número de subintervalos (n):</label>
+                                    <input type="range" class="form-range" id="simpson-n" min="2" max="20" step="2" value="4">
+                                    <div class="metodo-n-valor">n = <span id="simpson-n-valor">4</span> (debe ser par)</div>
+                                    
+                                    <div class="comparacion-resultados mt-4">
+                                        <div class="comp-resultado">
+                                            <span class="comp-titulo">Trapecio:</span>
+                                            <span class="comp-valor" id="simpson-trap-valor">0.8818</span>
+                                            <span class="comp-error" id="simpson-trap-error">Error: 0.03%</span>
+                                        </div>
+                                        <div class="comp-resultado comp-mejor">
+                                            <span class="comp-titulo">Simpson:</span>
+                                            <span class="comp-valor" id="simpson-simp-valor">0.8821</span>
+                                            <span class="comp-error" id="simpson-simp-error">Error: 0.001%</span>
+                                        </div>
+                                        <div class="comp-resultado comp-exacto">
+                                            <span class="comp-titulo">Valor exacto:</span>
+                                            <span class="comp-valor">0.88208...</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resumen -->
+                    <div class="resumen-tema">
+                        <strong>📌 En resumen:</strong> El método de Simpson usa parábolas para aproximar la integral, dando error $O(h^4)$ — ¡mucho mejor que trapecios! El patrón es 1-4-2-4-2-...-4-1, y n debe ser par.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== TEMA 2.15 ==================== -->
+            <div class="tema-card" id="tema2-15">
+                <div class="tema-header">
+                    <span class="tema-numero">2.15</span>
+                    <h3>Cuadratura de Gauss: La precisión óptima</h3>
+                </div>
+                
+                <div class="tema-content">
+                    <!-- Pregunta gancho -->
+                    <div class="pregunta-gancho">
+                        <i class="fas fa-question-circle"></i>
+                        <p>¿Qué pasa si en lugar de usar puntos equidistantes, usamos los <strong>puntos óptimos</strong>? <strong>¡Gauss encontró la respuesta!</strong></p>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Vida Real -->
+                        <div class="col-lg-6">
+                            <div class="bloque-real">
+                                <h5><i class="fas fa-bullseye me-2"></i> La Historia</h5>
+                                <p>Los métodos anteriores usan puntos equidistantes. Pero, ¿son los mejores puntos posibles?</p>
+                                <p>Carl Friedrich Gauss descubrió que hay <strong>puntos especiales</strong> (nodos) donde evaluar la función para obtener la máxima precisión con el mínimo esfuerzo.</p>
+                                <div class="pregunta-clave">
+                                    🎯 Con solo 2 puntos de Gauss, obtienes la misma precisión que Simpson con 3 puntos.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- La idea matemática -->
+                        <div class="col-lg-6">
+                            <div class="bloque-mate">
+                                <h5><i class="fas fa-calculator me-2"></i> La Fórmula</h5>
+                                <div class="formula-box">
+                                    <span class="formula-label">Cuadratura de Gauss:</span>
+                                    <div class="formula">$\int_{-1}^{1} f(x)dx \approx \sum_{i=1}^{n} w_i \cdot f(x_i)$</div>
+                                </div>
+                                <p class="mt-3 small">Donde $x_i$ son los <strong>nodos de Gauss</strong> y $w_i$ son los <strong>pesos</strong>.</p>
+                                <div class="gauss-tabla mt-3">
+                                    <div class="gauss-titulo">Nodos y pesos (n=2):</div>
+                                    <div class="gauss-valores">
+                                        <span>$x_1 = -\frac{1}{\sqrt{3}} \approx -0.577$</span>
+                                        <span>$w_1 = 1$</span>
+                                    </div>
+                                    <div class="gauss-valores">
+                                        <span>$x_2 = +\frac{1}{\sqrt{3}} \approx +0.577$</span>
+                                        <span>$w_2 = 1$</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cambio de intervalo -->
+                    <div class="nota-importante mt-4">
+                        <h5><i class="fas fa-exclamation-triangle me-2"></i> Cambio de intervalo</h5>
+                        <p>La fórmula de Gauss funciona en $[-1, 1]$. Para otro intervalo $[a, b]$, se transforma:</p>
+                        <div class="formula-box">
+                            <div class="formula">$\int_a^b f(x)dx = \frac{b-a}{2} \int_{-1}^{1} f\left(\frac{b-a}{2}t + \frac{a+b}{2}\right) dt$</div>
+                        </div>
+                    </div>
+
+                    <!-- INTERACTIVO -->
+                    <div class="interactivo-box">
+                        <h5><i class="fas fa-gamepad me-2"></i> Comparador de métodos numéricos</h5>
+                        <p class="text-muted">Observa cómo Gauss logra más precisión con menos puntos</p>
+                        
+                        <div class="row g-4">
+                            <div class="col-lg-5">
+                                <label class="form-label">Número de puntos de Gauss:</label>
+                                <select class="form-select" id="gauss-n">
+                                    <option value="2">n = 2 (precisión grado 3)</option>
+                                    <option value="3">n = 3 (precisión grado 5)</option>
+                                    <option value="4">n = 4 (precisión grado 7)</option>
+                                    <option value="5">n = 5 (precisión grado 9)</option>
+                                </select>
+                                
+                                <div class="gauss-nodos mt-3" id="gauss-nodos">
+                                    <div class="gauss-nodo-titulo">Nodos y pesos:</div>
+                                    <div class="gauss-nodo-lista" id="gauss-nodo-lista">
+                                        <!-- Se llena con JS -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="gauss-comparacion">
+                                    <div class="gauss-funcion">
+                                        <strong>Función:</strong> $f(x) = e^{-x^2}$ en $[0, 2]$
+                                    </div>
+                                    <div class="gauss-tabla-comp">
+                                        <div class="gauss-fila gauss-header">
+                                            <span>Método</span>
+                                            <span>Puntos</span>
+                                            <span>Resultado</span>
+                                            <span>Error</span>
+                                        </div>
+                                        <div class="gauss-fila" id="gauss-fila-trap">
+                                            <span>Trapecio</span>
+                                            <span id="gauss-trap-pts">5</span>
+                                            <span id="gauss-trap-val">0.8818</span>
+                                            <span id="gauss-trap-err">0.03%</span>
+                                        </div>
+                                        <div class="gauss-fila" id="gauss-fila-simp">
+                                            <span>Simpson</span>
+                                            <span id="gauss-simp-pts">5</span>
+                                            <span id="gauss-simp-val">0.8821</span>
+                                            <span id="gauss-simp-err">0.001%</span>
+                                        </div>
+                                        <div class="gauss-fila gauss-mejor" id="gauss-fila-gauss">
+                                            <span>Gauss</span>
+                                            <span id="gauss-gauss-pts">2</span>
+                                            <span id="gauss-gauss-val">0.8821</span>
+                                            <span id="gauss-gauss-err">0.002%</span>
+                                        </div>
+                                        <div class="gauss-fila gauss-exacto">
+                                            <span>Exacto</span>
+                                            <span>∞</span>
+                                            <span>0.88208...</span>
+                                            <span>0%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resumen -->
+                    <div class="resumen-tema">
+                        <strong>📌 En resumen:</strong> La cuadratura de Gauss usa puntos óptimos (no equidistantes) para obtener máxima precisión con mínimos cálculos. Con n puntos, es exacta para polinomios de grado hasta 2n-1.
+                    </div>
+                </div>
+            </div>
 
         </div>
     </section>
