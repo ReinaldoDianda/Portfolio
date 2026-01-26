@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unidad 2: Métodos de Integración | Cálculo Integral</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/unidad2.css">
     
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -707,6 +709,670 @@
                     </div>
                 </div>
             </div>
+            <!-- ==================== TEMA 2.6 ==================== -->
+            <div class="tema-card" id="tema2-6">
+                <div class="tema-header">
+                    <span class="tema-numero">2.6</span>
+                    <h3>Funciones Hiperbólicas: Los primos del seno y coseno</h3>
+                </div>
+                
+                <div class="tema-content">
+                    <!-- Pregunta gancho -->
+                    <div class="pregunta-gancho">
+                        <i class="fas fa-question-circle"></i>
+                        <p>¿Sabías que existe un "seno" y "coseno" que no tienen nada que ver con círculos? <strong>Se llaman hiperbólicos y aparecen en cables colgantes.</strong></p>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Vida Real -->
+                        <div class="col-lg-6">
+                            <div class="bloque-real">
+                                <h5><i class="fas fa-link me-2"></i> La Historia</h5>
+                                <p>¿Has visto cómo cuelga un cable de electricidad entre dos postes?</p>
+                                <p>Esa curva <strong>no es una parábola</strong>. Es una <strong>catenaria</strong>, y su ecuación usa funciones hiperbólicas:</p>
+                                <div class="formula-box">
+                                    <div class="formula">$y = a \cdot \cosh\left(\frac{x}{a}\right)$</div>
+                                </div>
+                                <div class="pregunta-clave">
+                                    🔗 Los cables, cadenas y arcos arquitectónicos siguen esta forma natural.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- La idea matemática -->
+                        <div class="col-lg-6">
+                            <div class="bloque-mate">
+                                <h5><i class="fas fa-superscript me-2"></i> Las Funciones</h5>
+                                <p>Se definen usando exponenciales:</p>
+                                <div class="hiperbolicas-grid">
+                                    <div class="hiper-card">
+                                        <span class="hiper-nombre">Seno hiperbólico:</span>
+                                        <span class="hiper-formula">$\sinh(x) = \frac{e^x - e^{-x}}{2}$</span>
+                                    </div>
+                                    <div class="hiper-card">
+                                        <span class="hiper-nombre">Coseno hiperbólico:</span>
+                                        <span class="hiper-formula">$\cosh(x) = \frac{e^x + e^{-x}}{2}$</span>
+                                    </div>
+                                    <div class="hiper-card">
+                                        <span class="hiper-nombre">Tangente hiperbólica:</span>
+                                        <span class="hiper-formula">$\tanh(x) = \frac{\sinh(x)}{\cosh(x)}$</span>
+                                    </div>
+                                </div>
+                                <div class="identidad-hiper mt-3">
+                                    <strong>Identidad fundamental:</strong>
+                                    <span>$\cosh^2(x) - \sinh^2(x) = 1$</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tabla de integrales -->
+                    <div class="tabla-integrales mt-4">
+                        <h5><i class="fas fa-table me-2"></i> Integrales de funciones hiperbólicas</h5>
+                        <div class="row g-3 mt-2">
+                            <div class="col-md-6">
+                                <div class="integral-item">
+                                    <span class="integral-izq">$\int \sinh(x) \, dx$</span>
+                                    <span class="integral-der">$= \cosh(x) + C$</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="integral-item">
+                                    <span class="integral-izq">$\int \cosh(x) \, dx$</span>
+                                    <span class="integral-der">$= \sinh(x) + C$</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="integral-item">
+                                    <span class="integral-izq">$\int \tanh(x) \, dx$</span>
+                                    <span class="integral-der">$= \ln|\cosh(x)| + C$</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="integral-item">
+                                    <span class="integral-izq">$\int \text{sech}^2(x) \, dx$</span>
+                                    <span class="integral-der">$= \tanh(x) + C$</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- INTERACTIVO -->
+                    <div class="interactivo-box">
+                        <h5><i class="fas fa-gamepad me-2"></i> Compara: Trigonométricas vs Hiperbólicas</h5>
+                        <p class="text-muted">Observa las diferencias entre sin/cos y sinh/cosh</p>
+                        
+                        <div class="row g-4">
+                            <div class="col-lg-4">
+                                <div class="hiper-selector">
+                                    <label class="form-label">Selecciona la función:</label>
+                                    <select class="form-select" id="hiper-funcion">
+                                        <option value="sin-sinh">sin(x) vs sinh(x)</option>
+                                        <option value="cos-cosh">cos(x) vs cosh(x)</option>
+                                        <option value="tan-tanh">tan(x) vs tanh(x)</option>
+                                    </select>
+                                    
+                                    <div class="hiper-diferencias mt-3">
+                                        <div class="dif-item">
+                                            <span class="dif-label">Trigonométrica:</span>
+                                            <span class="dif-valor" id="hiper-trig-desc">Oscila entre -1 y 1</span>
+                                        </div>
+                                        <div class="dif-item">
+                                            <span class="dif-label">Hiperbólica:</span>
+                                            <span class="dif-valor" id="hiper-hiper-desc">Crece sin límite</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="chart-container">
+                                    <canvas id="hiperbolicasChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resumen -->
+                    <div class="resumen-tema">
+                        <strong>📌 En resumen:</strong> Las funciones hiperbólicas (sinh, cosh, tanh) son "primas" de las trigonométricas pero basadas en exponenciales. Su identidad fundamental es $\cosh^2 - \sinh^2 = 1$ (nota el signo menos, no más).
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== TEMA 2.7 ==================== -->
+            <div class="tema-card" id="tema2-7">
+                <div class="tema-header">
+                    <span class="tema-numero">2.7</span>
+                    <h3>Sustitución Trigonométrica: Eliminando raíces</h3>
+                </div>
+                
+                <div class="tema-content">
+                    <!-- Pregunta gancho -->
+                    <div class="pregunta-gancho">
+                        <i class="fas fa-question-circle"></i>
+                        <p>¿Cómo integras $\int \sqrt{1 - x^2} \, dx$? Esa raíz es molesta... <strong>¿y si la hacemos desaparecer con trigonometría?</strong></p>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Vida Real -->
+                        <div class="col-lg-6">
+                            <div class="bloque-real">
+                                <h5><i class="fas fa-circle me-2"></i> La Historia</h5>
+                                <p>$\sqrt{1 - x^2}$ es la ecuación del <strong>semicírculo</strong> superior de radio 1.</p>
+                                <p>¿Quieres calcular el área del círculo? Necesitas integrar esa raíz.</p>
+                                <p>El truco: si $x = \sin(\theta)$, entonces:</p>
+                                <div class="formula-box">
+                                    <div class="formula">$\sqrt{1 - x^2} = \sqrt{1 - \sin^2\theta} = \cos\theta$</div>
+                                </div>
+                                <div class="pregunta-clave">
+                                    ✨ ¡La raíz desaparece gracias a la identidad pitagórica!
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- La idea matemática -->
+                        <div class="col-lg-6">
+                            <div class="bloque-mate">
+                                <h5><i class="fas fa-exchange-alt me-2"></i> Los Tres Casos</h5>
+                                <div class="casos-trigsub">
+                                    <div class="caso-trigsub caso-1">
+                                        <div class="caso-expresion">$\sqrt{a^2 - x^2}$</div>
+                                        <div class="caso-sustitucion">Usa: $x = a\sin\theta$</div>
+                                        <div class="caso-resultado">Resulta: $a\cos\theta$</div>
+                                    </div>
+                                    <div class="caso-trigsub caso-2">
+                                        <div class="caso-expresion">$\sqrt{a^2 + x^2}$</div>
+                                        <div class="caso-sustitucion">Usa: $x = a\tan\theta$</div>
+                                        <div class="caso-resultado">Resulta: $a\sec\theta$</div>
+                                    </div>
+                                    <div class="caso-trigsub caso-3">
+                                        <div class="caso-expresion">$\sqrt{x^2 - a^2}$</div>
+                                        <div class="caso-sustitucion">Usa: $x = a\sec\theta$</div>
+                                        <div class="caso-resultado">Resulta: $a\tan\theta$</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ejemplo resuelto -->
+                    <div class="ejemplo-box mt-4">
+                        <h5><i class="fas fa-pencil-alt me-2"></i> Ejemplo: $\int \frac{1}{\sqrt{4 - x^2}} \, dx$</h5>
+                        <div class="ejemplo-contenido">
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 1: Identificar el caso</div>
+                                <div class="paso-body">
+                                    <p>Tenemos $\sqrt{a^2 - x^2}$ con $a = 2$</p>
+                                    <p class="paso-resultado">Usamos: $x = 2\sin\theta$, entonces $dx = 2\cos\theta \, d\theta$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 2: Sustituir</div>
+                                <div class="paso-body">
+                                    <p>$\sqrt{4 - x^2} = \sqrt{4 - 4\sin^2\theta} = 2\cos\theta$</p>
+                                    <p class="paso-resultado">$\int \frac{2\cos\theta}{2\cos\theta} d\theta = \int 1 \, d\theta = \theta + C$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 3: Volver a x</div>
+                                <div class="paso-body">
+                                    <p>Como $x = 2\sin\theta$, entonces $\theta = \arcsin(x/2)$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-resultado-final">
+                                <span class="resultado-label">Resultado:</span>
+                                <span class="resultado-formula">$\int \frac{1}{\sqrt{4 - x^2}} dx = \arcsin\left(\frac{x}{2}\right) + C$</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- INTERACTIVO -->
+                    <div class="interactivo-box">
+                        <h5><i class="fas fa-gamepad me-2"></i> ¿Qué sustitución usar?</h5>
+                        <p class="text-muted">Selecciona el tipo de raíz y te diré qué sustitución aplicar</p>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-5">
+                                <label class="form-label">Tipo de expresión:</label>
+                                <select class="form-select" id="trigsub-tipo">
+                                    <option value="a2-x2">$\sqrt{a^2 - x^2}$ (diferencia)</option>
+                                    <option value="a2+x2">$\sqrt{a^2 + x^2}$ (suma)</option>
+                                    <option value="x2-a2">$\sqrt{x^2 - a^2}$ (x² primero)</option>
+                                </select>
+                                
+                                <label class="form-label mt-3">Valor de a:</label>
+                                <input type="number" class="form-control" id="trigsub-a" value="3" min="1" max="10">
+                            </div>
+                            <div class="col-md-7">
+                                <div class="trigsub-resultado">
+                                    <div class="trigsub-expresion" id="trigsub-expresion">
+                                        $\sqrt{9 - x^2}$
+                                    </div>
+                                    <div class="trigsub-flecha">
+                                        <i class="fas fa-arrow-down"></i>
+                                    </div>
+                                    <div class="trigsub-sustitucion" id="trigsub-sustitucion">
+                                        <div class="sust-principal">Sustituye: $x = 3\sin\theta$</div>
+                                        <div class="sust-dx">Entonces: $dx = 3\cos\theta \, d\theta$</div>
+                                        <div class="sust-simplifica">La raíz se convierte en: $3\cos\theta$</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resumen -->
+                    <div class="resumen-tema">
+                        <strong>📌 En resumen:</strong> La sustitución trigonométrica elimina raíces cuadráticas. Usa $x = a\sin\theta$ para $\sqrt{a^2-x^2}$, $x = a\tan\theta$ para $\sqrt{a^2+x^2}$, y $x = a\sec\theta$ para $\sqrt{x^2-a^2}$.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== TEMA 2.8 ==================== -->
+            <div class="tema-card" id="tema2-8">
+                <div class="tema-header">
+                    <span class="tema-numero">2.8</span>
+                    <h3>Fracciones Parciales: Divide y vencerás</h3>
+                </div>
+                
+                <div class="tema-content">
+                    <!-- Pregunta gancho -->
+                    <div class="pregunta-gancho">
+                        <i class="fas fa-question-circle"></i>
+                        <p>¿Cómo integras $\int \frac{1}{x^2 - 1} dx$? El denominador es complicado... <strong>¿y si lo separamos en fracciones más simples?</strong></p>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Vida Real -->
+                        <div class="col-lg-6">
+                            <div class="bloque-real">
+                                <h5><i class="fas fa-puzzle-piece me-2"></i> La Historia</h5>
+                                <p>Imagina que tienes una pizza cortada en pedazos raros. Es más fácil comerla si la <strong>recortas en pedazos normales</strong>.</p>
+                                <p>Las fracciones parciales hacen exactamente eso con fracciones algebraicas:</p>
+                                <div class="formula-box">
+                                    <div class="formula">$\frac{1}{x^2 - 1} = \frac{1}{(x-1)(x+1)}$</div>
+                                    <span class="formula-traduccion">Se puede escribir como:</span>
+                                    <div class="formula mt-2">$= \frac{A}{x-1} + \frac{B}{x+1}$</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- La idea matemática -->
+                        <div class="col-lg-6">
+                            <div class="bloque-mate">
+                                <h5><i class="fas fa-sitemap me-2"></i> Los Casos</h5>
+                                <div class="casos-fp">
+                                    <div class="caso-fp">
+                                        <span class="caso-fp-tipo">Factores lineales distintos:</span>
+                                        <span class="caso-fp-ejemplo">$(x-a)(x-b) \rightarrow \frac{A}{x-a} + \frac{B}{x-b}$</span>
+                                    </div>
+                                    <div class="caso-fp">
+                                        <span class="caso-fp-tipo">Factores lineales repetidos:</span>
+                                        <span class="caso-fp-ejemplo">$(x-a)^2 \rightarrow \frac{A}{x-a} + \frac{B}{(x-a)^2}$</span>
+                                    </div>
+                                    <div class="caso-fp">
+                                        <span class="caso-fp-tipo">Factores cuadráticos:</span>
+                                        <span class="caso-fp-ejemplo">$(x^2+bx+c) \rightarrow \frac{Ax+B}{x^2+bx+c}$</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ejemplo resuelto -->
+                    <div class="ejemplo-box mt-4">
+                        <h5><i class="fas fa-pencil-alt me-2"></i> Ejemplo: $\int \frac{1}{x^2 - 1} dx$</h5>
+                        <div class="ejemplo-contenido">
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 1: Factorizar el denominador</div>
+                                <div class="paso-body">
+                                    <p class="paso-resultado">$x^2 - 1 = (x-1)(x+1)$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 2: Plantear la descomposición</div>
+                                <div class="paso-body">
+                                    <p class="paso-resultado">$\frac{1}{(x-1)(x+1)} = \frac{A}{x-1} + \frac{B}{x+1}$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 3: Encontrar A y B</div>
+                                <div class="paso-body">
+                                    <p>Multiplicando por $(x-1)(x+1)$: $1 = A(x+1) + B(x-1)$</p>
+                                    <p>Si $x = 1$: $1 = 2A \rightarrow A = \frac{1}{2}$</p>
+                                    <p>Si $x = -1$: $1 = -2B \rightarrow B = -\frac{1}{2}$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 4: Integrar</div>
+                                <div class="paso-body">
+                                    <p class="paso-resultado">$\int \frac{1/2}{x-1} dx - \int \frac{1/2}{x+1} dx = \frac{1}{2}\ln|x-1| - \frac{1}{2}\ln|x+1| + C$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-resultado-final">
+                                <span class="resultado-label">Resultado:</span>
+                                <span class="resultado-formula">$\int \frac{1}{x^2-1} dx = \frac{1}{2}\ln\left|\frac{x-1}{x+1}\right| + C$</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- INTERACTIVO -->
+                    <div class="interactivo-box">
+                        <h5><i class="fas fa-gamepad me-2"></i> Descomponedor de fracciones</h5>
+                        <p class="text-muted">Selecciona una fracción y observa su descomposición paso a paso</p>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-5">
+                                <label class="form-label">Elige una fracción:</label>
+                                <select class="form-select" id="fp-selector">
+                                    <option value="caso1">$\frac{1}{x^2-1}$ (factores distintos)</option>
+                                    <option value="caso2">$\frac{x}{(x-1)^2}$ (factor repetido)</option>
+                                    <option value="caso3">$\frac{1}{x(x^2+1)}$ (factor cuadrático)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="fp-resultado" id="fp-resultado">
+                                    <div class="fp-original">
+                                        <span class="fp-label">Original:</span>
+                                        <span class="fp-formula" id="fp-original">$\frac{1}{x^2-1}$</span>
+                                    </div>
+                                    <div class="fp-flecha"><i class="fas fa-arrow-down"></i></div>
+                                    <div class="fp-factorizado">
+                                        <span class="fp-label">Factorizado:</span>
+                                        <span class="fp-formula" id="fp-factorizado">$\frac{1}{(x-1)(x+1)}$</span>
+                                    </div>
+                                    <div class="fp-flecha"><i class="fas fa-arrow-down"></i></div>
+                                    <div class="fp-descompuesto">
+                                        <span class="fp-label">Descompuesto:</span>
+                                        <span class="fp-formula" id="fp-descompuesto">$\frac{1/2}{x-1} - \frac{1/2}{x+1}$</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resumen -->
+                    <div class="resumen-tema">
+                        <strong>📌 En resumen:</strong> Las fracciones parciales separan una fracción complicada en fracciones simples que son fáciles de integrar (generalmente dan logaritmos o arcotangentes).
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== TEMA 2.9 ==================== -->
+            <div class="tema-card" id="tema2-9">
+                <div class="tema-header">
+                    <span class="tema-numero">2.9</span>
+                    <h3>Sustitución de Weierstrass: El truco universal</h3>
+                </div>
+                
+                <div class="tema-content">
+                    <!-- Pregunta gancho -->
+                    <div class="pregunta-gancho">
+                        <i class="fas fa-question-circle"></i>
+                        <p>¿Existe una sustitución que funcione para <strong>cualquier integral</strong> con senos y cosenos? <strong>¡Sí, y se llama sustitución de Weierstrass!</strong></p>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Vida Real -->
+                        <div class="col-lg-6">
+                            <div class="bloque-real">
+                                <h5><i class="fas fa-magic me-2"></i> La Historia</h5>
+                                <p>Karl Weierstrass fue un matemático alemán que descubrió un truco genial:</p>
+                                <p>Si defines $t = \tan\left(\frac{x}{2}\right)$, entonces puedes expresar <strong>todo</strong> en términos de $t$:</p>
+                                <ul class="lista-simple">
+                                    <li>$\sin(x)$ se vuelve una fracción de $t$</li>
+                                    <li>$\cos(x)$ se vuelve una fracción de $t$</li>
+                                    <li>$dx$ se vuelve una fracción de $dt$</li>
+                                </ul>
+                                <div class="pregunta-clave">
+                                    🧙‍♂️ Convierte cualquier integral trigonométrica en una integral racional.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- La idea matemática -->
+                        <div class="col-lg-6">
+                            <div class="bloque-mate">
+                                <h5><i class="fas fa-key me-2"></i> Las Fórmulas Mágicas</h5>
+                                <p>Si $t = \tan\left(\frac{x}{2}\right)$, entonces:</p>
+                                <div class="weierstrass-formulas">
+                                    <div class="weier-formula">
+                                        <span class="weier-izq">$\sin(x)$</span>
+                                        <span class="weier-igual">=</span>
+                                        <span class="weier-der">$\frac{2t}{1 + t^2}$</span>
+                                    </div>
+                                    <div class="weier-formula">
+                                        <span class="weier-izq">$\cos(x)$</span>
+                                        <span class="weier-igual">=</span>
+                                        <span class="weier-der">$\frac{1 - t^2}{1 + t^2}$</span>
+                                    </div>
+                                    <div class="weier-formula">
+                                        <span class="weier-izq">$dx$</span>
+                                        <span class="weier-igual">=</span>
+                                        <span class="weier-der">$\frac{2}{1 + t^2} dt$</span>
+                                    </div>
+                                </div>
+                                <p class="mt-3 small text-muted">Esto transforma integrales trigonométricas en integrales racionales (que se resuelven con fracciones parciales).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ejemplo resuelto -->
+                    <div class="ejemplo-box mt-4">
+                        <h5><i class="fas fa-pencil-alt me-2"></i> Ejemplo: $\int \frac{1}{1 + \sin(x)} dx$</h5>
+                        <div class="ejemplo-contenido">
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 1: Aplicar sustitución de Weierstrass</div>
+                                <div class="paso-body">
+                                    <p>$t = \tan(x/2)$, entonces $\sin(x) = \frac{2t}{1+t^2}$ y $dx = \frac{2}{1+t^2}dt$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 2: Sustituir todo</div>
+                                <div class="paso-body">
+                                    <p class="paso-resultado">$\int \frac{1}{1 + \frac{2t}{1+t^2}} \cdot \frac{2}{1+t^2} dt = \int \frac{2}{1+t^2+2t} dt = \int \frac{2}{(1+t)^2} dt$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 3: Integrar y volver a x</div>
+                                <div class="paso-body">
+                                    <p>$= -\frac{2}{1+t} + C = -\frac{2}{1+\tan(x/2)} + C$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-resultado-final">
+                                <span class="resultado-label">Resultado:</span>
+                                <span class="resultado-formula">$\int \frac{1}{1+\sin(x)} dx = -\frac{2}{1+\tan(x/2)} + C$</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- INTERACTIVO -->
+                    <div class="interactivo-box">
+                        <h5><i class="fas fa-gamepad me-2"></i> Calculadora de Weierstrass</h5>
+                        <p class="text-muted">Ingresa un valor de x y observa cómo se transforma con $t = \tan(x/2)$</p>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-4">
+                                <label class="form-label">Valor de x (en grados):</label>
+                                <input type="range" class="form-range" id="weier-x" min="0" max="170" value="60">
+                                <div class="text-center mt-2">
+                                    <strong id="weier-x-valor">60°</strong>
+                                    <span class="text-muted">= <span id="weier-x-rad">π/3</span> rad</span>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="weier-comparacion">
+                                    <div class="weier-fila">
+                                        <span class="weier-nombre">$t = \tan(x/2)$</span>
+                                        <span class="weier-valor" id="weier-t">0.577</span>
+                                    </div>
+                                    <div class="weier-fila">
+                                        <span class="weier-nombre">$\sin(x)$ directo</span>
+                                        <span class="weier-valor" id="weier-sin-directo">0.866</span>
+                                    </div>
+                                    <div class="weier-fila">
+                                        <span class="weier-nombre">$\frac{2t}{1+t^2}$</span>
+                                        <span class="weier-valor weier-destacado" id="weier-sin-formula">0.866</span>
+                                    </div>
+                                    <div class="weier-fila">
+                                        <span class="weier-nombre">$\cos(x)$ directo</span>
+                                        <span class="weier-valor" id="weier-cos-directo">0.500</span>
+                                    </div>
+                                    <div class="weier-fila">
+                                        <span class="weier-nombre">$\frac{1-t^2}{1+t^2}$</span>
+                                        <span class="weier-valor weier-destacado" id="weier-cos-formula">0.500</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resumen -->
+                    <div class="resumen-tema">
+                        <strong>📌 En resumen:</strong> La sustitución de Weierstrass $t = \tan(x/2)$ convierte CUALQUIER integral trigonométrica racional en una integral racional, que luego se resuelve con fracciones parciales.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== TEMA 2.10 ==================== -->
+            <div class="tema-card" id="tema2-10">
+                <div class="tema-header">
+                    <span class="tema-numero">2.10</span>
+                    <h3>Racionalización: Quitando raíces molestas</h3>
+                </div>
+                
+                <div class="tema-content">
+                    <!-- Pregunta gancho -->
+                    <div class="pregunta-gancho">
+                        <i class="fas fa-question-circle"></i>
+                        <p>¿Cómo integras $\int \frac{1}{\sqrt{x} + 1} dx$? Esa raíz en el denominador es incómoda... <strong>¿y si la quitamos con un cambio de variable?</strong></p>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Vida Real -->
+                        <div class="col-lg-6">
+                            <div class="bloque-real">
+                                <h5><i class="fas fa-eraser me-2"></i> La Historia</h5>
+                                <p>A veces las integrales tienen raíces que no encajan en ningún patrón conocido.</p>
+                                <p>La estrategia: hacer que la raíz <strong>sea</strong> la nueva variable.</p>
+                                <div class="formula-box">
+                                    <span class="formula-label">Si tienes $\sqrt[n]{ax + b}$:</span>
+                                    <div class="formula">$u = \sqrt[n]{ax + b}$</div>
+                                    <span class="formula-traduccion">Entonces $x = \frac{u^n - b}{a}$ y la raíz desaparece</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- La idea matemática -->
+                        <div class="col-lg-6">
+                            <div class="bloque-mate">
+                                <h5><i class="fas fa-lightbulb me-2"></i> El Método</h5>
+                                <div class="metodo-pasos">
+                                    <div class="metodo-paso">
+                                        <span class="paso-num">1</span>
+                                        <span>Identifica la raíz: $\sqrt[n]{ax + b}$</span>
+                                    </div>
+                                    <div class="metodo-paso">
+                                        <span class="paso-num">2</span>
+                                        <span>Define $u = \sqrt[n]{ax + b}$</span>
+                                    </div>
+                                    <div class="metodo-paso">
+                                        <span class="paso-num">3</span>
+                                        <span>Despeja $x$ y calcula $dx$</span>
+                                    </div>
+                                    <div class="metodo-paso">
+                                        <span class="paso-num">4</span>
+                                        <span>Sustituye todo en términos de $u$</span>
+                                    </div>
+                                    <div class="metodo-paso">
+                                        <span class="paso-num">5</span>
+                                        <span>Integra y vuelve a $x$</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ejemplo resuelto -->
+                    <div class="ejemplo-box mt-4">
+                        <h5><i class="fas fa-pencil-alt me-2"></i> Ejemplo: $\int \frac{1}{\sqrt{x} + 1} dx$</h5>
+                        <div class="ejemplo-contenido">
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 1: Definir la sustitución</div>
+                                <div class="paso-body">
+                                    <p>$u = \sqrt{x}$, entonces $u^2 = x$ y $2u \, du = dx$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 2: Sustituir</div>
+                                <div class="paso-body">
+                                    <p class="paso-resultado">$\int \frac{1}{u + 1} \cdot 2u \, du = \int \frac{2u}{u + 1} du$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 3: Simplificar y resolver</div>
+                                <div class="paso-body">
+                                    <p>Dividimos: $\frac{2u}{u+1} = 2 - \frac{2}{u+1}$</p>
+                                    <p class="paso-resultado">$\int \left(2 - \frac{2}{u+1}\right) du = 2u - 2\ln|u+1| + C$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 4: Volver a x</div>
+                                <div class="paso-body">
+                                    <p>$= 2\sqrt{x} - 2\ln|\sqrt{x}+1| + C$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-resultado-final">
+                                <span class="resultado-label">Resultado:</span>
+                                <span class="resultado-formula">$\int \frac{1}{\sqrt{x}+1} dx = 2\sqrt{x} - 2\ln|\sqrt{x}+1| + C$</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- INTERACTIVO -->
+                    <div class="interactivo-box">
+                        <h5><i class="fas fa-gamepad me-2"></i> Generador de sustituciones</h5>
+                        <p class="text-muted">Elige el tipo de raíz y te muestro qué sustitución usar</p>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-5">
+                                <label class="form-label">Tipo de raíz:</label>
+                                <select class="form-select" id="racion-tipo">
+                                    <option value="sqrt">$\sqrt{x}$ (raíz cuadrada)</option>
+                                    <option value="cbrt">$\sqrt[3]{x}$ (raíz cúbica)</option>
+                                    <option value="sqrt-lin">$\sqrt{2x + 1}$ (raíz de lineal)</option>
+                                    <option value="multi">$\sqrt{x}$ y $\sqrt[3]{x}$ juntas</option>
+                                </select>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="racion-resultado" id="racion-resultado">
+                                    <div class="racion-item">
+                                        <span class="racion-label">Sustitución:</span>
+                                        <span class="racion-valor" id="racion-sust">$u = \sqrt{x}$</span>
+                                    </div>
+                                    <div class="racion-item">
+                                        <span class="racion-label">Entonces:</span>
+                                        <span class="racion-valor" id="racion-x">$x = u^2$</span>
+                                    </div>
+                                    <div class="racion-item">
+                                        <span class="racion-label">Y:</span>
+                                        <span class="racion-valor" id="racion-dx">$dx = 2u \, du$</span>
+                                    </div>
+                                    <div class="racion-nota" id="racion-nota">
+                                        <i class="fas fa-info-circle me-2"></i>
+                                        La raíz desaparece completamente
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resumen -->
+                    <div class="resumen-tema">
+                        <strong>📌 En resumen:</strong> Para racionalizar, haz que la raíz sea la nueva variable. Si tienes $\sqrt[n]{ax+b}$, usa $u = \sqrt[n]{ax+b}$ y la integral se vuelve racional.
+                    </div>
+                </div>
+            </div>
 
         </div>
     </section>
@@ -730,6 +1396,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
     <!-- Script personalizado -->
-    <script src="script.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/unidad2.js"></script>
 </body>
 </html>

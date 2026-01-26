@@ -1,0 +1,758 @@
+/* ============================================
+   UNIDAD1.CSS - Estilos de Temas 1.1 - 1.7
+   Proyecto: Cálculo Integral
+   ============================================ */
+
+/* ============================================
+   TEMA 1.1 - DIFERENCIAL
+   ============================================ */
+
+/* Resultados interactivos */
+.resultado-interactivo {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+}
+
+.resultado-item {
+    padding: 1rem;
+}
+
+.resultado-label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.25rem;
+}
+
+.resultado-valor {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.resultado-subtexto {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-light);
+}
+
+.resultado-destacado {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    border-radius: var(--radius-md);
+    color: white;
+}
+
+.resultado-destacado .resultado-label,
+.resultado-destacado .resultado-valor,
+.resultado-destacado .resultado-subtexto {
+    color: white;
+}
+
+.precision-bar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.9rem;
+}
+
+.precision-bar .progress {
+    flex: 1;
+    height: 10px;
+    border-radius: var(--radius-full);
+}
+
+/* ============================================
+   TEMA 1.2 - ERRORES (PIZZA)
+   ============================================ */
+
+.pizza-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-height: 200px;
+}
+
+.pizza-circulo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+        inset 0 -5px 15px rgba(0,0,0,0.2),
+        0 10px 30px rgba(245, 158, 11, 0.3);
+    transition: var(--transition-normal);
+}
+
+.pizza-area {
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.pizza-error {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background: #fee2e2;
+    color: #dc2626;
+    border-radius: var(--radius-full);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* Insight box */
+.insight-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    background: #ecfdf5;
+    border: 1px solid #10b981;
+    border-radius: var(--radius-md);
+    padding: 1rem 1.25rem;
+}
+
+.insight-box i {
+    color: #10b981;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.insight-box strong {
+    color: #059669;
+}
+
+/* ============================================
+   TEMA 1.3 - SIGMA
+   ============================================ */
+
+/* Sigma explicado */
+.sigma-explicado {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    background: white;
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    font-family: monospace;
+}
+
+.sigma-parte {
+    font-size: 0.9rem;
+}
+
+.sigma-arriba, .sigma-abajo {
+    color: var(--primary);
+    font-weight: bold;
+}
+
+.sigma-simbolo {
+    font-size: 2rem;
+    color: var(--text-dark);
+}
+
+/* Sigma resultado */
+.sigma-resultado {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    text-align: center;
+}
+
+.sigma-notacion {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.sigma-expansion {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    font-family: monospace;
+    margin-bottom: 0.5rem;
+}
+
+.sigma-total {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+/* Tabla ventas */
+.tabla-ventas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.venta-mes {
+    background: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* ============================================
+   TEMA 1.4 - RIEMANN
+   ============================================ */
+
+.riemann-controles {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    height: 100%;
+}
+
+.riemann-n-valor {
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-top: 0.5rem;
+}
+
+.riemann-resultados {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 1rem;
+}
+
+.riemann-resultado {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+}
+
+.riemann-resultado .label {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.riemann-resultado .valor {
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.riemann-resultado .valor.exacta {
+    color: var(--accent-green);
+}
+
+.riemann-resultado .valor.error {
+    color: var(--accent-red);
+}
+
+.riemann-insight {
+    background: #fef3c7;
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+    font-size: 0.9rem;
+    color: #92400e;
+    text-align: center;
+}
+
+.riemann-insight i {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+}
+
+/* Idea genial */
+.idea-genial {
+    background: white;
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.idea-genial ol {
+    margin: 0.75rem 0 0 1.25rem;
+    padding: 0;
+}
+
+.idea-genial li {
+    padding: 0.25rem 0;
+}
+
+/* Conexión integral */
+.conexion-integral {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    border: 2px solid #22c55e;
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.conexion-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.conexion-header i {
+    color: #22c55e;
+    font-size: 1.5rem;
+}
+
+.conexion-header h5 {
+    margin: 0;
+    color: #166534;
+    font-weight: 700;
+}
+
+/* ============================================
+   TEMA 1.5 - INTEGRAL DEFINIDA
+   ============================================ */
+
+/* Partes de la integral */
+.integral-partes {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: white;
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    margin-top: 1rem;
+}
+
+.integral-parte {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.integral-simbolo {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--primary);
+    min-width: 50px;
+}
+
+.integral-desc {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Propiedades box */
+.propiedades-box {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    border: 1px solid #bbf7d0;
+}
+
+.propiedades-box h5 {
+    color: #166534;
+    margin-bottom: 0;
+}
+
+.propiedad-item {
+    background: white;
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.propiedad-formula {
+    font-size: 0.95rem;
+    color: var(--text-dark);
+}
+
+.propiedad-texto {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* Controles de integral */
+.integral-controles {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    height: 100%;
+}
+
+.limite-valor {
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.integral-resultado-box {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    text-align: center;
+    color: white;
+}
+
+.integral-notacion {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.integral-igual {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin: 0.25rem 0;
+}
+
+.integral-valor {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+/* ============================================
+   TEMA 1.6 - VALOR MEDIO
+   ============================================ */
+
+.valor-medio-visual {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    background: white;
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+}
+
+.vm-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.vm-formula {
+    font-weight: 600;
+    color: var(--primary);
+    min-width: 180px;
+}
+
+.vm-desc {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Controles valor medio */
+.vm-controles {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    height: 100%;
+}
+
+.vm-slider-container {
+    margin-bottom: 1.5rem;
+}
+
+.vm-slider-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.vm-slider-value {
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 1.1rem;
+}
+
+.vm-resultado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.vm-resultado:last-of-type {
+    border-bottom: none;
+}
+
+.vm-label {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.vm-value {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--primary);
+}
+
+.vm-explicacion {
+    background: #eff6ff;
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+}
+
+.vm-explicacion i {
+    color: var(--primary);
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.vm-explicacion p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+}
+
+/* ============================================
+   TEMA 1.7 - TEOREMA FUNDAMENTAL
+   ============================================ */
+
+/* Conexión visual derivar/integrar */
+.conexion-visual {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin: 1rem 0;
+}
+
+.conexion-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.conexion-box {
+    background: white;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    color: var(--primary);
+    border: 2px solid var(--primary-light);
+}
+
+.conexion-flecha {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+/* Ejemplo simplificado */
+.ejemplo-simplificado {
+    background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);
+    border: 2px solid #facc15;
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.ejemplo-simplificado h5 {
+    color: #a16207;
+    margin-bottom: 1.25rem;
+}
+
+.ejemplo-integral {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.ejemplo-problema {
+    font-size: 1.5rem;
+    color: var(--text-dark);
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px dashed #e2e8f0;
+}
+
+.ejemplo-pasos-simple {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: left;
+}
+
+.paso-simple {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    background: #f8fafc;
+    border-radius: var(--radius-sm);
+    border-left: 4px solid var(--primary);
+}
+
+.paso-simple.paso-resultado {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    border-left: none;
+    color: white;
+}
+
+.paso-label {
+    font-weight: 600;
+    min-width: 120px;
+    font-size: 0.9rem;
+}
+
+.paso-simple.paso-resultado .paso-label {
+    color: rgba(255,255,255,0.9);
+}
+
+.paso-valor {
+    font-size: 1.1rem;
+}
+
+.paso-simple.paso-resultado .paso-valor {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.paso-nota-simple {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-left: auto;
+    font-style: italic;
+}
+
+/* Demo de inversas */
+.inversa-demo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    background: white;
+    padding: 2rem;
+    border-radius: var(--radius-md);
+}
+
+.inversa-columna {
+    text-align: center;
+    min-width: 120px;
+}
+
+.inversa-titulo {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.inversa-funcion {
+    background: linear-gradient(135deg, var(--bg-mate) 0%, #e0e7ff 100%);
+    padding: 1rem 1.5rem;
+    border-radius: var(--radius-sm);
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    border: 2px solid var(--primary-light);
+}
+
+.inversa-flecha {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    color: var(--primary);
+}
+
+.inversa-flecha i {
+    font-size: 1.5rem;
+}
+
+.inversa-flecha span {
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.inversa-selector {
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+/* ============================================
+   RESPONSIVE UNIDAD 1
+   ============================================ */
+
+@media (max-width: 991.98px) {
+    .integral-partes {
+        gap: 0.75rem;
+    }
+    
+    .inversa-demo {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .inversa-flecha {
+        transform: rotate(90deg);
+    }
+    
+    .inversa-flecha span {
+        transform: rotate(-90deg);
+    }
+}
+
+@media (max-width: 767.98px) {
+    .resultado-valor {
+        font-size: 1.2rem;
+    }
+    
+    .sigma-resultado {
+        padding: 1.25rem;
+    }
+    
+    .sigma-total {
+        font-size: 1.5rem;
+    }
+    
+    .propiedad-formula {
+        font-size: 0.85rem;
+    }
+    
+    .integral-valor {
+        font-size: 2rem;
+    }
+    
+    .vm-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+    
+    .vm-formula {
+        min-width: unset;
+    }
+    
+    .conexion-item {
+        justify-content: center;
+    }
+    
+    .paso-simple {
+        flex-wrap: wrap;
+    }
+    
+    .paso-label {
+        min-width: 100%;
+        margin-bottom: 0.25rem;
+    }
+    
+    .paso-nota-simple {
+        margin-left: 0;
+        margin-top: 0.5rem;
+        width: 100%;
+    }
+}

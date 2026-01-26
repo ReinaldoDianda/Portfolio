@@ -1,0 +1,325 @@
+/* ============================================
+   INDEX.CSS - Estilos exclusivos de index.html
+   Proyecto: Cálculo Integral
+   ============================================ */
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-dark-light) 100%);
+    overflow: hidden;
+}
+
+#heroCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+    padding: 2rem;
+    max-width: 800px;
+}
+
+.hero-content h1 {
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 1rem;
+    line-height: 1.7;
+}
+
+.hero-text {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 2rem;
+}
+
+.btn-hero {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: var(--transition-normal);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-hero:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+    color: white;
+}
+
+/* ============================================
+   SECCIÓN INTRODUCCIÓN
+   ============================================ */
+.section-intro {
+    padding: 5rem 0;
+    background: var(--bg-light);
+}
+
+.section-title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+}
+
+/* Tarjetas de introducción */
+.intro-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    text-align: center;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition-normal);
+    height: 100%;
+}
+
+.intro-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+}
+
+.intro-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 2rem;
+}
+
+.intro-icon-orange {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    color: #d97706;
+}
+
+.intro-icon-blue {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    color: #2563eb;
+}
+
+.intro-icon-green {
+    background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+    color: #059669;
+}
+
+.intro-card h5 {
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--text-dark);
+}
+
+.intro-card p {
+    color: var(--text-muted);
+    margin-bottom: 0;
+    font-size: 0.95rem;
+}
+
+/* Big idea box */
+.big-idea {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    padding: 1.25rem 2rem;
+    border-radius: var(--radius-full);
+    font-size: 1.1rem;
+    box-shadow: var(--shadow-lg);
+}
+
+.big-idea i {
+    font-size: 1.5rem;
+    color: #fbbf24;
+}
+
+/* ============================================
+   SELECTOR DE UNIDADES
+   ============================================ */
+.section-unidades {
+    padding: 5rem 0;
+    background: var(--bg-white);
+}
+
+.unidad-card-link {
+    text-decoration: none;
+    display: block;
+}
+
+.unidad-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    height: 100%;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+    border: 2px solid transparent;
+}
+
+.unidad-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-xl);
+}
+
+.unidad-card-1 { border-color: #667eea; }
+.unidad-card-2 { border-color: #f59e0b; }
+.unidad-card-3 { border-color: #10b981; }
+
+.unidad-card-1:hover { background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%); }
+.unidad-card-2:hover { background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); }
+.unidad-card-3:hover { background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); }
+
+.unidad-numero {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: 700;
+    opacity: 0.15;
+}
+
+.unidad-card-1 .unidad-numero { background: #667eea; color: #667eea; }
+.unidad-card-2 .unidad-numero { background: #f59e0b; color: #f59e0b; }
+.unidad-card-3 .unidad-numero { background: #10b981; color: #10b981; }
+
+.unidad-contenido {
+    position: relative;
+    z-index: 1;
+}
+
+.unidad-contenido h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--text-dark);
+}
+
+.unidad-contenido > p {
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+    font-size: 0.95rem;
+}
+
+.unidad-temas {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem 0;
+}
+
+.unidad-temas li {
+    padding: 0.35rem 0;
+    padding-left: 1.25rem;
+    position: relative;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.unidad-temas li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+.unidad-card-1 .unidad-temas li::before { color: #667eea; }
+.unidad-card-2 .unidad-temas li::before { color: #f59e0b; }
+.unidad-card-3 .unidad-temas li::before { color: #10b981; }
+
+.unidad-cta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    transition: var(--transition-fast);
+}
+
+.unidad-card-1 .unidad-cta { color: #667eea; }
+.unidad-card-2 .unidad-cta { color: #f59e0b; }
+.unidad-card-3 .unidad-cta { color: #10b981; }
+
+.unidad-card:hover .unidad-cta {
+    gap: 1rem;
+}
+
+/* ============================================
+   RESPONSIVE INDEX
+   ============================================ */
+@media (max-width: 767.98px) {
+    .hero-content h1 {
+        font-size: 1.75rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .big-idea {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem;
+        border-radius: var(--radius-lg);
+    }
+    
+    .section-intro {
+        padding: 3rem 0;
+    }
+    
+    .section-unidades {
+        padding: 3rem 0;
+    }
+    
+    .unidad-card {
+        padding: 1.5rem;
+    }
+    
+    .unidad-contenido h3 {
+        font-size: 1.25rem;
+    }
+}
