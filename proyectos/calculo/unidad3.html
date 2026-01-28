@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unidad 3: Aplicaciones - Cálculo Integral</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- MathJax -->
+    <!-- MathJax -->
+   <!-- MathJax Configuration -->
+<script>
+    MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true
+        },
+        options: {
+            skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+        }
+    };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/unidad3.css">
+</head>
+<body>
+    <!-- Navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <span class="brand-integral">∫</span> Cálculo Integral
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="unidad1.html">Unidad 1</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="unidad2.html">Unidad 2</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="unidad3.html">Unidad 3</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <main>
+        <section class="section-unit">
+            <div class="container">
+                <!-- Header de la Unidad -->
+                <div class="unit-header">
+                    <span class="unit-badge">UNIDAD 3</span>
+                    <h2>Aplicaciones de la Integral</h2>
+                    <p>Del papel a la realidad: áreas, volúmenes, trabajo y más</p>
+                </div>
+
+                <!-- ==================== TEMA 3.1 ==================== -->
+                <div class="tema-card" id="tema3-1">
+                    <div class="tema-header">
+                        <span class="tema-numero">3.1</span>
+                        <h3>Área entre Curvas: Midiendo regiones complicadas</h3>
+                    </div>
+                    
+                    <div class="tema-content">
+                        <!-- Pregunta gancho -->
+                        <div class="pregunta-gancho">
+                            <i class="fas fa-question-circle"></i>
+                            <p>¿Cuánto césped necesitas para cubrir un jardín con forma irregular? <strong>La integral te da el área exacta.</strong></p>
+                        </div>
+
+                        <div class="row g-4">
+                            <!-- Vida Real -->
+                            <div class="col-lg-6">
+                                <div class="bloque-real">
+                                    <h5><i class="fas fa-leaf me-2"></i> La Historia</h5>
+                                    <p>Imagina un terreno limitado por un río (curva) arriba y una cerca recta abajo.</p>
+                                    <p>El área no es un simple rectángulo, pero podemos calcularla <strong>integrando la diferencia</strong> entre las curvas.</p>
+                                    <div class="formula-box">
+                                        <span class="formula-label">Idea clave:</span>
+                                        <div class="formula">Área = $\int$ (curva de arriba − curva de abajo)</div>
+                                    </div>
+                                    <div class="pregunta-clave">
+                                        🌿 Funciona para cualquier forma, no importa qué tan irregular sea.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- La idea matemática -->
+                            <div class="col-lg-6">
+                                <div class="bloque-mate">
+                                    <h5><i class="fas fa-calculator me-2"></i> La Fórmula</h5>
+                                    <p>Si $f(x) \geq g(x)$ en $[a, b]$:</p>
+                                    <div class="formula-grande">
+                                        $A = \int_a^b [f(x) - g(x)] \, dx$
+                                    </div>
+                                    <div class="area-explicacion">
+                                        <div class="area-item">
+                                            <span class="area-color area-arriba"></span>
+                                            <span>$f(x)$ = curva superior</span>
+                                        </div>
+                                        <div class="area-item">
+                                            <span class="area-color area-abajo"></span>
+                                            <span>$g(x)$ = curva inferior</span>
+                                        </div>
+                                        <div class="area-item">
+                                            <span class="area-color area-entre"></span>
+                                            <span>$f(x) - g(x)$ = altura en cada punto</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                      <!-- Ejemplo resuelto -->
+                        <div class="ejemplo-box mt-4">
+                            <h5><i class="fas fa-pencil-alt me-2"></i> Ejemplo: El jardín entre el sendero y la cerca</h5>
+                            <div class="ejemplo-contexto">
+                                <p>🌳 <strong>Situación:</strong> Tienes un jardín donde el borde norte sigue un sendero curvo con forma $y = x$ (en metros) y el borde sur sigue una cerca curva $y = x^2$. Ambos se encuentran en la esquina (0,0) y en el punto (1,1). ¿Cuántos metros cuadrados de césped necesitas?</p>
+                            </div>
+                            <div class="ejemplo-contenido">
+                                <div class="ejemplo-paso-detallado">
+                                    <div class="paso-header">Paso 1: Traducir al lenguaje matemático</div>
+                                    <div class="paso-body">
+                                        <p>Sendero (arriba): $f(x) = x$</p>
+                                        <p>Cerca (abajo): $g(x) = x^2$</p>
+                                        <p class="paso-resultado">Necesitamos el área entre ambas curvas de $x = 0$ a $x = 1$ metros</p>
+                                    </div>
+                                </div>
+                                <div class="ejemplo-paso-detallado">
+                                    <div class="paso-header">Paso 2: Plantear la integral</div>
+                                    <div class="paso-body">
+                                        <p>Área = (curva de arriba) − (curva de abajo)</p>
+                                        <p class="paso-resultado">$A = \int_0^1 (x - x^2) \, dx$</p>
+                                    </div>
+                                </div>
+                                <div class="ejemplo-paso-detallado">
+                                    <div class="paso-header">Paso 3: Resolver</div>
+                                    <div class="paso-body">
+                                        <p>$A = \left[\frac{x^2}{2} - \frac{x^3}{3}\right]_0^1 = \frac{1}{2} - \frac{1}{3} = \frac{1}{6}$</p>
+                                    </div>
+                                </div>
+                                <div class="ejemplo-resultado-final">
+                                    <span class="resultado-label">🌿 Respuesta:</span>
+                                    <span class="resultado-formula">Necesitas $\frac{1}{6}$ m² ≈ 0.167 m² de césped</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- INTERACTIVO -->
+                        <div class="interactivo-box">
+                            <h5><i class="fas fa-gamepad me-2"></i> Visualizador de Área entre Curvas</h5>
+                            <p class="text-muted">Selecciona dos funciones y observa el área entre ellas</p>
+                            
+                            <div class="row g-4">
+                                <div class="col-lg-4">
+                                    <div class="area-controles">
+                                        <label class="form-label">Función superior f(x):</label>
+                                        <select class="form-select" id="area-f">
+                                            <option value="x">y = x</option>
+                                            <option value="sqrt">y = √x</option>
+                                            <option value="2x">y = 2x</option>
+                                            <option value="1">y = 1</option>
+                                        </select>
+                                        
+                                        <label class="form-label mt-3">Función inferior g(x):</label>
+                                        <select class="form-select" id="area-g">
+                                            <option value="x2">y = x²</option>
+                                            <option value="x3">y = x³</option>
+                                            <option value="0">y = 0</option>
+                                        </select>
+                                        
+                                        <div class="area-resultado mt-4">
+                                            <div class="area-dato">
+                                                <span class="area-label">Intersecciones:</span>
+                                                <span class="area-valor" id="area-intersecciones">x = 0, x = 1</span>
+                                            </div>
+                                            <div class="area-dato area-principal">
+                                                <span class="area-label">Área:</span>
+                                                <span class="area-valor" id="area-valor">1/6 ≈ 0.167</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8">
+                                    <div class="chart-container">
+                                        <canvas id="areaCurvasChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Resumen -->
+                        <div class="resumen-tema">
+                            <strong>📌 En resumen:</strong> El área entre dos curvas es $\int_a^b [f(x) - g(x)] dx$, donde $f$ es la curva de arriba y $g$ la de abajo. Primero encuentra las intersecciones para los límites.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==================== TEMA 3.2 ==================== -->
+                <div class="tema-card" id="tema3-2">
+                    <div class="tema-header">
+                        <span class="tema-numero">3.2</span>
+                        <h3>Volumen por Discos: Girando curvas en 3D</h3>
+                    </div>
+                    
+                    <div class="tema-content">
+                        <!-- Pregunta gancho -->
+                        <div class="pregunta-gancho">
+                            <i class="fas fa-question-circle"></i>
+                            <p>¿Cómo calculas el volumen de un jarrón hecho en un torno de alfarero? <strong>Gira una curva y obtienes un sólido.</strong></p>
+                        </div>
+
+                        <div class="row g-4">
+                            <!-- Vida Real -->
+                            <div class="col-lg-6">
+                                <div class="bloque-real">
+                                    <h5><i class="fas fa-circle-notch me-2"></i> La Historia</h5>
+                                    <p>Un alfarero toma un perfil (una curva) y lo gira alrededor de un eje. El resultado es un sólido de revolución.</p>
+                                    <p>Para calcular su volumen, imaginamos que está hecho de muchos <strong>discos delgados</strong> apilados.</p>
+                                    <div class="visual-discos">
+                                        <div class="disco"></div>
+                                        <div class="disco"></div>
+                                        <div class="disco"></div>
+                                        <div class="disco"></div>
+                                        <div class="disco"></div>
+                                    </div>
+                                    <div class="pregunta-clave">
+                                        🏺 Cada disco tiene volumen $\pi r^2 \cdot dx$ (área del círculo × grosor)
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- La idea matemática -->
+                            <div class="col-lg-6">
+                                <div class="bloque-mate">
+                                    <h5><i class="fas fa-calculator me-2"></i> La Fórmula</h5>
+                                    <p>Girando $y = f(x)$ alrededor del eje x:</p>
+                                    <div class="formula-grande">
+                                        $V = \pi \int_a^b [f(x)]^2 \, dx$
+                                    </div>
+                                    <div class="disco-explicacion mt-3">
+                                        <div class="disco-item">
+                                            <span class="disco-simbolo">$r$</span>
+                                            <span>= $f(x)$ (radio del disco)</span>
+                                        </div>
+                                        <div class="disco-item">
+                                            <span class="disco-simbolo">$\pi r^2$</span>
+                                            <span>= área del disco circular</span>
+                                        </div>
+                                        <div class="disco-item">
+                                            <span class="disco-simbolo">$dx$</span>
+                                            <span>= grosor infinitesimal</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ejemplo resuelto -->
+                        <div class="ejemplo-box mt-4">
+                            <h5><i class="fas fa-pencil-alt me-2"></i> Ejemplo: El cono de helado</h5>
+                            <div class="ejemplo-contexto">
+                                <p>🍦 <strong>Situación:</strong> Un cono de helado tiene forma cónica: su perfil es una línea recta $y = x$ que va desde la punta (0,0) hasta el borde superior donde $x = 1$ dm (10 cm de radio). ¿Cuántos decímetros cúbicos de helado caben?</p>
+                            </div>
+                            <div class="ejemplo-contenido">
+                                <div class="ejemplo-paso-detallado">
+                                    <div class="paso-header">Paso 1: Visualizar el problema</div>
+                                    <div class="paso-body">
+                                        <p>El cono se forma al girar la línea $y = x$ alrededor del eje x</p>
+                                        <p class="paso-resultado">Radio en cada punto: $r = f(x) = x$</p>
+                                    </div>
+                                </div>
+                                <div class="ejemplo-paso-detallado">
+                                    <div class="paso-header">Paso 2: Aplicar fórmula de discos</div>
+                                    <div class="paso-body">
+                                        <p>$V = \pi \int_0^1 [\text{radio}]^2 \, dx = \pi \int_0^1 x^2 \, dx$</p>
+                                    </div>
+                                </div>
+                                <div class="ejemplo-paso-detallado">
+                                    <div class="paso-header">Paso 3: Resolver</div>
+                                    <div class="paso-body">
+                                        <p>$V = \pi \left[\frac{x^3}{3}\right]_0^1 = \pi \cdot \frac{1}{3} = \frac{\pi}{3}$</p>
+                                    </div>
+                                </div>
+                                <div class="ejemplo-resultado-final">
+                                    <span class="resultado-label">🍦 Respuesta:</span>
+                                    <span class="resultado-formula">Caben $\frac{\pi}{3}$ dm³ ≈ 1.047 dm³ ≈ 1 litro de helado</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- INTERACTIVO -->
+                        <div class="interactivo-box">
+                            <h5><i class="fas fa-gamepad me-2"></i> Calculadora de Volumen por Discos</h5>
+                            <p class="text-muted">Selecciona una función y observa el sólido generado</p>
+                            
+                            <div class="row g-4">
+                                <div class="col-lg-4">
+                                    <div class="vol-controles">
+                                        <label class="form-label">Función f(x):</label>
+                                        <select class="form-select" id="disco-funcion">
+                                            <option value="x">y = x (cono)</option>
+                                            <option value="sqrt">y = √x (paraboloide)</option>
+                                            <option value="1">y = 1 (cilindro)</option>
+                                            <option value="sin">y = sin(x)</option>
+                                        </select>
+                                        
+                                        <label class="form-label mt-3">Límite inferior a:</label>
+                                        <input type="range" class="form-range" id="disco-a" min="0" max="2" step="0.1" value="0">
+                                        <div class="limite-valor">a = <span id="disco-a-valor">0</span></div>
+                                        
+                                        <label class="form-label mt-3">Límite superior b:</label>
+                                        <input type="range" class="form-range" id="disco-b" min="0.5" max="3" step="0.1" value="1">
+                                        <div class="limite-valor">b = <span id="disco-b-valor">1</span></div>
+                                        
+                                        <div class="vol-resultado mt-4">
+                                            <span class="vol-label">Volumen:</span>
+                                            <span class="vol-valor" id="disco-volumen">π/3 ≈ 1.047</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8">
+                                    <div class="chart-container">
+                                        <canvas id="discoChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Resumen -->
+                        <div class="resumen-tema">
+                            <strong>📌 En resumen:</strong> El método de discos calcula volúmenes de revolución como $V = \pi \int_a^b [f(x)]^2 dx$. Imagina el sólido como una pila de discos circulares infinitamente delgados.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==================== TEMA 3.3 ==================== -->
+                <div class="tema-card" id="tema3-3">
+                    <div class="tema-header">
+                        <span class="tema-numero">3.3</span>
+                        <h3>Volumen por Arandelas: Sólidos con hueco</h3>
+                    </div>
+                    
+                    <div class="tema-content">
+                        <!-- Pregunta gancho -->
+                        <div class="pregunta-gancho">
+                            <i class="fas fa-question-circle"></i>
+                            <p>¿Cómo calculas el volumen de una dona o un tubo? <strong>Son sólidos con un agujero en el centro.</strong></p>
+                        </div>
+
+                        <div class="row g-4">
+                            <!-- Vida Real -->
+                            <div class="col-lg-6">
+                                <div class="bloque-real">
+                                    <h5><i class="fas fa-ring me-2"></i> La Historia</h5>
+                                    <p>Una arandela (washer) es un disco con un agujero. Si giras el área <strong>entre dos curvas</strong>, obtienes un sólido hueco.</p>
+                                    <p>El volumen es la diferencia: disco exterior menos disco interior.</p>
+                                    <div class="arandela-visual">
+                                        <div class="arandela-exterior"></div>
+                                        <div class="arandela-interior"></div>
+                                    </div>
+                                    <div class="pregunta-clave">
+                                        🍩 Volumen de arandela = $\pi R^2 - \pi r^2 = \pi(R^2 - r^2)$
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- La idea matemática -->
+                            <div class="col-lg-6">
+                                <div class="bloque-mate">
+                                    <h5><i class="fas fa-calculator me-2"></i> La Fórmula</h5>
+                                    <p>Girando el área entre $f(x)$ y $g(x)$:</p>
+                                    <div class="formula-grande">
+                                        $V = \pi \int_a^b \left([f(x)]^2 - [g(x)]^2\right) dx$
+                                    </div>
+                                    <div class="arandela-explicacion mt-3">
+                                        <div class="arandela-item">
+                                            <span class="arandela-simbolo">$R$</span>
+                                            <span>= $f(x)$ (radio exterior)</span>
+                                        </div>
+                                        <div class="arandela-item">
+                                            <span class="arandela-simbolo">$r$</span>
+                                            <span>= $g(x)$ (radio interior)</span>
+                                        </div>
+                                        <div class="arandela-item">
+                                            <span class="arandela-simbolo">$R^2 - r^2$</span>
+                                            <span>= área de la arandela</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ejemplo resuelto -->
+                        <div class="ejemplo-box mt-4">
+                            <h5><i class="fas fa-pencil-alt me-2"></i> Ejemplo: El florero hueco</h5>
+                            <div class="ejemplo-contexto">
+                                <p>🏺 <strong>Situación:</strong> Un artesano fabrica un florero girando una región en un torno. El perfil exterior sigue $y = x$ y el interior sigue $y = x^2$ (ambos en dm). ¿Cuánto material (en dm³) necesita para hacer el florero desde $x = 0$ hasta $x = 1$ dm?</p>
+                            </div>
+                            <div class="ejemplo-contenido">
+                                <div class="ejemplo-paso-detallado">
+                                    <div class="paso-header">Paso 1: Identificar los radios</div>
+                                    <div class="paso-body">
+                                        <p>Radio exterior (pared externa): $R = x$</p>
+                                        <p>Radio interior (hueco): $r = x^2$</p>
+                                        <p class="paso-resultado">El material está entre ambas paredes</p>
+                                    </div>
+                                </div>
+                                <div class="ejemplo-paso-detallado">
+                                    <div class="paso-header">Paso 2: Aplicar fórmula de arandelas</div>
+                                    <div class="paso-body">
+                                        <p>$V = \pi \int_0^1 (R^2 - r^2) \, dx = \pi \int_0^1 (x^2 - x^4) \, dx$</p>
+                                    </div>
+                                </div>
+                                <div class="ejemplo-paso-detallado">
+                                    <div class="paso-header">Paso 3: Resolver</div>
+                                    <div class="paso-body">
+                                        <p>$V = \pi \left[\frac{x^3}{3} - \frac{x^5}{5}\right]_0^1 = \pi \left(\frac{1}{3} - \frac{1}{5}\right) = \pi \cdot \frac{2}{15} = \frac{2\pi}{15}$</p>
+                                    </div>
+                                </div>
+                                <div class="ejemplo-resultado-final">
+                                    <span class="resultado-label">🏺 Respuesta:</span>
+                                    <span class="resultado-formula">Necesita $\frac{2\pi}{15}$ dm³ ≈ 0.419 dm³ de material</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- INTERACTIVO -->
+                        <div class="interactivo-box">
+                            <h5><i class="fas fa-gamepad me-2"></i> Calculadora de Volumen por Arandelas</h5>
+                            <p class="text-muted">Visualiza el sólido hueco generado al girar dos curvas</p>
+                            
+                            <div class="row g-4">
+                                <div class="col-lg-4">
+                                    <div class="vol-controles">
+                                        <label class="form-label">Radio exterior R = f(x):</label>
+                                        <select class="form-select" id="arandela-R">
+                                            <option value="x">y = x</option>
+                                            <option value="sqrt">y = √x</option>
+                                            <option value="1">y = 1</option>
+                                        </select>
+                                        
+                                        <label class="form-label mt-3">Radio interior r = g(x):</label>
+                                        <select class="form-select" id="arandela-r">
+                                            <option value="x2">y = x²</option>
+                                            <option value="x3">y = x³</option>
+                                            <option value="0">y = 0 (disco sólido)</option>
+                                        </select>
+                                        
+                                        <div class="vol-resultado mt-4">
+                                            <div class="vol-dato">
+                                                <span class="vol-label-sm">Intervalo:</span>
+                                                <span class="vol-valor-sm" id="arandela-intervalo">[0, 1]</span>
+                                            </div>
+                                            <div class="vol-dato vol-principal">
+                                                <span class="vol-label">Volumen:</span>
+                                                <span class="vol-valor" id="arandela-volumen">2π/15 ≈ 0.419</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8">
+                                    <div class="chart-container">
+                                        <canvas id="arandelaChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Resumen -->
+                        <div class="resumen-tema">
+                            <strong>📌 En resumen:</strong> El método de arandelas extiende el de discos para sólidos huecos: $V = \pi \int_a^b ([f(x)]^2 - [g(x)]^2) dx$. Resta el volumen del agujero interior.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==================== TEMA 3.4 ==================== -->
+                <div class="tema-card" id="tema3-4">
+                    <div class="tema-header">
+                        <span class="tema-numero">3.4</span>
+                        <h3>Volumen por Capas Cilíndricas: El método del papel enrollado</h3>
+                    </div>
+                    
+                    <div class="tema-content">
+                        <!-- Pregunta gancho -->
+                        <div class="pregunta-gancho">
+                            <i class="fas fa-question-circle"></i>
+                            <p>¿Alguna vez enrollaste papel higiénico? <strong>Eso son capas cilíndricas, y sirven para calcular volúmenes.</strong></p>
+                        </div>
+
+                        <div class="row g-4">
+                            <!-- Vida Real -->
+                            <div class="col-lg-6">
+                                <div class="bloque-real">
+                                    <h5><i class="fas fa-toilet-paper me-2"></i> La Historia</h5>
+                                    <p>A veces girar alrededor del eje y con discos es complicado (hay que despejar x).</p>
+                                    <p>El truco: imagina el sólido como <strong>capas cilíndricas</strong> concéntricas, como las capas de una cebolla.</p>
+                                    <div class="capas-visual">
+                                        <div class="capa capa-1"></div>
+                                        <div class="capa capa-2"></div>
+                                        <div class="capa capa-3"></div>
+                                    </div>
+                                    <div class="pregunta-clave">
+                                        🧅 Cada capa es un cilindro de radio $x$, altura $f(x)$, y grosor $dx$
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- La idea matemática -->
+                            <div class="col-lg-6">
+                                <div class="bloque-mate">
+                                    <h5><i class="fas fa-calculator me-2"></i> La Fórmula</h5>
+                                    <p>Girando alrededor del eje y:</p>
+                                    <div class="formula-grande">
+                                        $V = 2\pi \int_a^b x \cdot f(x) \, dx$
+                                    </div>
+                                    <div class="capa-explicacion mt-3">
+                                        <div class="capa-item">
+                                            <span class="capa-simbolo">$2\pi x$</span>
+                                            <span>= circunferencia del cilindro</span>
+                                        </div>
+                                        <div class="capa-item">
+                                            <span class="capa-simbolo">$f(x)$</span>
+                                            <span>= altura del cilindro</span>
+                                        </div>
+                                        <div class="capa-item">
+                                            <span class="capa-simbolo">$dx$</span>
+                                            <span>= grosor de la capa</span>
+                                        </div>
+                                    </div>
+                                    <p class="mt-3 small text-muted"><strong>Área lateral del cilindro:</strong> $2\pi r \cdot h$ (circunferencia × altura)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Comparación de métodos -->
+                        <div class="comparacion-metodos-vol mt-4">
+                            <h5><i class="fas fa-balance-scale me-2"></i> ¿Cuándo usar cada método?</h5>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="metodo-card metodo-discos">
+                                        <h6>Discos/Arandelas</h6>
+                                        <ul>
+                                            <li>Eje de rotación perpendicular a la variable de integración</li>
+                                            <li>Girar alrededor del eje x → integrar en x</li>
+                                            <li>Fácil si $f(x)$ es simple</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="metodo-card metodo-capas">
+                                        <h6>Capas Cilíndricas</h6>
+                                        <ul>
+                                            <li>Eje de rotación paralelo a la variable de integración</li>
+                                            <li>Girar alrededor del eje y → integrar en x</li>
+                                            <li>Útil cuando despejar x es difícil</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                       <!-- Ejemplo resuelto -->
+                        <div class="ejemplo-box mt-4">
+                            <h5><i class="fas fa-pencil-alt me-2"></i> Ejemplo: El tazón de cerámica</h5>
+                            <div class="ejemplo-contexto">
+                                <p>🥣 <strong>Situación:</strong> Un ceramista hace un tazón cuyo interior tiene forma de paraboloide: si lo miras de lado, el perfil es $y = x^2$ (en dm). El tazón va desde el centro ($x = 0$) hasta el borde ($x = 1$ dm). ¿Cuánta sopa cabe si lo giramos alrededor del eje vertical (eje y)?</p>
+                            </div>
+                            <div class="ejemplo-contenido">
+                                <div class="ejemplo-paso-detallado">
+                                    <div class="paso-header">Paso 1: ¿Por qué capas cilíndricas?</div>
+                                    <div class="paso-body">
+                                        <p>Giramos alrededor del eje y, pero la función está dada como $y = f(x)$</p>
+                                        <p class="paso-resultado">Usamos capas cilíndricas: cada "anillo" tiene radio $x$ y altura $f(x) = x^2$</p>
+                                    </div>
+                                </div>
+                                <div class="ejemplo-paso-detallado">
+                                    <div class="paso-header">Paso 2: Aplicar la fórmula</div>
+                                    <div class="paso-body">
+                                        <p>$V = 2\pi \int_0^1 x \cdot f(x) \, dx = 2\pi \int_0^1 x \cdot x^2 \, dx = 2\pi \int_0^1 x^3 \, dx$</p>
+                                    </div>
+                                </div>
+                                <div class="ejemplo-paso-detallado">
+                                    <div class="paso-header">Paso 3: Resolver</div>
+                                    <div class="paso-body">
+                                        <p>$V = 2\pi \left[\frac{x^4}{4}\right]_0^1 = 2\pi \cdot \frac{1}{4} = \frac{\pi}{2}$</p>
+                                    </div>
+                                </div>
+                                <div class="ejemplo-resultado-final">
+                                    <span class="resultado-label">🥣 Respuesta:</span>
+                                    <span class="resultado-formula">Caben $\frac{\pi}{2}$ dm³ ≈ 1.57 dm³ ≈ 1.57 litros de sopa</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- INTERACTIVO -->
+                        <div class="interactivo-box">
+                            <h5><i class="fas fa-gamepad me-2"></i> Calculadora de Volumen por Capas Cilíndricas</h5>
+                            <p class="text-muted">Visualiza las capas cilíndricas que forman el sólido</p>
+                            
+                            <div class="row g-4">
+                                <div class="col-lg-4">
+                                    <div class="vol-controles">
+                                        <label class="form-label">Función f(x):</label>
+                                        <select class="form-select" id="capa-funcion">
+                                            <option value="x2">y = x²</option>
+                                            <option value="x">y = x</option>
+                                            <option value="sqrt">y = √x</option>
+                                            <option value="sin">y = sin(πx)</option>
+                                        </select>
+                                        
+                                        <label class="form-label mt-3">Límite superior b:</label>
+                                        <input type="range" class="form-range" id="capa-b" min="0.5" max="2" step="0.1" value="1">
+                                        <div class="limite-valor">b = <span id="capa-b-valor">1</span></div>
+                                        
+                                        <div class="vol-resultado mt-4">
+                                            <div class="vol-dato">
+                                                <span class="vol-label-sm">Fórmula:</span>
+                                                <span class="vol-valor-sm" id="capa-formula">$2\pi \int_0^1 x \cdot x^2 \, dx$</span>
+                                            </div>
+                                            <div class="vol-dato vol-principal">
+                                                <span class="vol-label">Volumen:</span>
+                                                <span class="vol-valor" id="capa-volumen">π/2 ≈ 1.571</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8">
+                                    <div class="chart-container">
+                                        <canvas id="capaChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Resumen -->
+                        <div class="resumen-tema">
+                            <strong>📌 En resumen:</strong> El método de capas cilíndricas usa $V = 2\pi \int_a^b x \cdot f(x) dx$. Es ideal cuando giras alrededor del eje y y la función está dada como $y = f(x)$.
+                        </div>
+                    </div>
+                </div>
+                <!-- ==================== TEMA 3.5 ==================== -->
+            <div class="tema-card" id="tema3-5">
+                <div class="tema-header">
+                    <span class="tema-numero">3.5</span>
+                    <h3>Longitud de Arco: Midiendo curvas</h3>
+                </div>
+                
+                <div class="tema-content">
+                    <!-- Pregunta gancho -->
+                    <div class="pregunta-gancho">
+                        <i class="fas fa-question-circle"></i>
+                        <p>¿Cuánto mide una montaña rusa? No puedes usar una regla recta... <strong>La integral mide curvas de cualquier forma.</strong></p>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Vida Real -->
+                        <div class="col-lg-6">
+                            <div class="bloque-real">
+                                <h5><i class="fas fa-route me-2"></i> La Historia</h5>
+                                <p>Imagina que quieres saber cuántos metros de riel necesitas para una montaña rusa.</p>
+                                <p>El truco: dividir la curva en <strong>pequeños segmentos rectos</strong> y sumar sus longitudes.</p>
+                                <div class="arco-visual">
+                                    <svg viewBox="0 0 200 100" class="arco-svg">
+                                        <path d="M 10 80 Q 50 10, 100 50 T 190 30" stroke="#667eea" stroke-width="3" fill="none"/>
+                                        <line x1="10" y1="80" x2="50" y2="35" stroke="#f59e0b" stroke-width="2" stroke-dasharray="5,3"/>
+                                        <line x1="50" y1="35" x2="100" y2="50" stroke="#f59e0b" stroke-width="2" stroke-dasharray="5,3"/>
+                                        <line x1="100" y1="50" x2="150" y2="25" stroke="#f59e0b" stroke-width="2" stroke-dasharray="5,3"/>
+                                        <line x1="150" y1="25" x2="190" y2="30" stroke="#f59e0b" stroke-width="2" stroke-dasharray="5,3"/>
+                                    </svg>
+                                </div>
+                                <div class="pregunta-clave">
+                                    📏 Cada segmento tiene longitud $\sqrt{dx^2 + dy^2}$ (Pitágoras)
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- La idea matemática -->
+                        <div class="col-lg-6">
+                            <div class="bloque-mate">
+                                <h5><i class="fas fa-calculator me-2"></i> La Fórmula</h5>
+                                <p>Longitud de la curva $y = f(x)$ de $a$ a $b$:</p>
+                                <div class="formula-grande">
+                                    $L = \int_a^b \sqrt{1 + \left(\frac{dy}{dx}\right)^2} \, dx$
+                                </div>
+                                <div class="arco-explicacion mt-3">
+                                    <div class="arco-item">
+                                        <span class="arco-simbolo">$\frac{dy}{dx}$</span>
+                                        <span>= pendiente de la curva (derivada)</span>
+                                    </div>
+                                    <div class="arco-item">
+                                        <span class="arco-simbolo">$\sqrt{1 + (y')^2}$</span>
+                                        <span>= factor de "estiramiento" por la inclinación</span>
+                                    </div>
+                                </div>
+                                <p class="mt-3 small text-muted"><strong>Idea:</strong> Si la curva es horizontal ($y'=0$), la longitud es simplemente $b - a$.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ejemplo resuelto -->
+                    <div class="ejemplo-box mt-4">
+                        <h5><i class="fas fa-pencil-alt me-2"></i> Ejemplo: El cable del teleférico</h5>
+                        <div class="ejemplo-contexto">
+                            <p>🚡 <strong>Situación:</strong> Un teleférico sigue la curva $y = \frac{x^{3/2}}{3}$ (en hectómetros) desde la base ($x=0$) hasta la cima ($x=4$ hm). ¿Cuántos hectómetros de cable se necesitan?</p>
+                        </div>
+                        <div class="ejemplo-contenido">
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 1: Calcular la derivada</div>
+                                <div class="paso-body">
+                                    <p>$y = \frac{x^{3/2}}{3}$</p>
+                                    <p class="paso-resultado">$\frac{dy}{dx} = \frac{1}{3} \cdot \frac{3}{2} x^{1/2} = \frac{\sqrt{x}}{2}$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 2: Armar el integrando</div>
+                                <div class="paso-body">
+                                    <p>$1 + \left(\frac{dy}{dx}\right)^2 = 1 + \frac{x}{4} = \frac{4+x}{4}$</p>
+                                    <p class="paso-resultado">$\sqrt{1 + (y')^2} = \frac{\sqrt{4+x}}{2}$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 3: Integrar</div>
+                                <div class="paso-body">
+                                    <p>$L = \int_0^4 \frac{\sqrt{4+x}}{2} dx = \frac{1}{2} \cdot \frac{2}{3}(4+x)^{3/2} \Big|_0^4$</p>
+                                    <p>$= \frac{1}{3}\left[8^{3/2} - 4^{3/2}\right] = \frac{1}{3}\left[16\sqrt{2} - 8\right]$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-resultado-final">
+                                <span class="resultado-label">🚡 Respuesta:</span>
+                                <span class="resultado-formula">$L = \frac{16\sqrt{2} - 8}{3} \approx 4.87$ hm de cable</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- INTERACTIVO -->
+                    <div class="interactivo-box">
+                        <h5><i class="fas fa-gamepad me-2"></i> Calculadora de Longitud de Arco</h5>
+                        <p class="text-muted">Selecciona una curva y observa su longitud</p>
+                        
+                        <div class="row g-4">
+                            <div class="col-lg-4">
+                                <div class="arco-controles">
+                                    <label class="form-label">Curva:</label>
+                                    <select class="form-select" id="arco-funcion">
+                                        <option value="x2">$y = x^2$ (parábola)</option>
+                                        <option value="sqrt">$y = \sqrt{x}$</option>
+                                        <option value="sin">$y = \sin(x)$</option>
+                                        <option value="x">$y = x$ (línea recta)</option>
+                                    </select>
+                                    
+                                    <label class="form-label mt-3">Intervalo [0, b]:</label>
+                                    <input type="range" class="form-range" id="arco-b" min="0.5" max="3" step="0.1" value="1">
+                                    <div class="limite-valor">b = <span id="arco-b-valor">1</span></div>
+                                    
+                                    <div class="arco-resultado mt-4">
+                                        <div class="arco-dato">
+                                            <span class="arco-label">Distancia horizontal:</span>
+                                            <span class="arco-valor-sm" id="arco-horizontal">1</span>
+                                        </div>
+                                        <div class="arco-dato arco-principal">
+                                            <span class="arco-label">Longitud del arco:</span>
+                                            <span class="arco-valor" id="arco-longitud">1.478</span>
+                                        </div>
+                                        <div class="arco-dato">
+                                            <span class="arco-label">Diferencia:</span>
+                                            <span class="arco-valor-sm" id="arco-diferencia">+47.8% más largo</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="chart-container">
+                                    <canvas id="arcoChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resumen -->
+                    <div class="resumen-tema">
+                        <strong>📌 En resumen:</strong> La longitud de una curva es $L = \int_a^b \sqrt{1 + (y')^2} \, dx$. La raíz cuadrada viene de aplicar Pitágoras a cada pequeño segmento de la curva.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== TEMA 3.6 ==================== -->
+            <div class="tema-card" id="tema3-6">
+                <div class="tema-header">
+                    <span class="tema-numero">3.6</span>
+                    <h3>Área de Superficie de Revolución: Pintando sólidos 3D</h3>
+                </div>
+                
+                <div class="tema-content">
+                    <!-- Pregunta gancho -->
+                    <div class="pregunta-gancho">
+                        <i class="fas fa-question-circle"></i>
+                        <p>¿Cuánta pintura necesitas para cubrir una cúpula? <strong>La integral calcula el área de cualquier superficie curva.</strong></p>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Vida Real -->
+                        <div class="col-lg-6">
+                            <div class="bloque-real">
+                                <h5><i class="fas fa-paint-roller me-2"></i> La Historia</h5>
+                                <p>Cuando giras una curva alrededor de un eje, creas una superficie 3D (como un jarrón o una cúpula).</p>
+                                <p>Para calcular su área, imaginamos que la superficie está hecha de <strong>cintas delgadas</strong> enrolladas.</p>
+                                <div class="superficie-visual">
+                                    <div class="cinta cinta-1"></div>
+                                    <div class="cinta cinta-2"></div>
+                                    <div class="cinta cinta-3"></div>
+                                    <div class="cinta cinta-4"></div>
+                                </div>
+                                <div class="pregunta-clave">
+                                    🎀 Cada cinta tiene área = circunferencia × ancho del arco
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- La idea matemática -->
+                        <div class="col-lg-6">
+                            <div class="bloque-mate">
+                                <h5><i class="fas fa-calculator me-2"></i> La Fórmula</h5>
+                                <p>Girando $y = f(x)$ alrededor del eje x:</p>
+                                <div class="formula-grande">
+                                    $S = 2\pi \int_a^b f(x) \sqrt{1 + (f'(x))^2} \, dx$
+                                </div>
+                                <div class="superficie-explicacion mt-3">
+                                    <div class="superficie-item">
+                                        <span class="superficie-simbolo">$2\pi f(x)$</span>
+                                        <span>= circunferencia de cada cinta</span>
+                                    </div>
+                                    <div class="superficie-item">
+                                        <span class="superficie-simbolo">$\sqrt{1+(f')^2}\,dx$</span>
+                                        <span>= ancho real de la cinta (longitud de arco)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ejemplo resuelto -->
+                    <div class="ejemplo-box mt-4">
+                        <h5><i class="fas fa-pencil-alt me-2"></i> Ejemplo: La cúpula del observatorio</h5>
+                        <div class="ejemplo-contexto">
+                            <p>🔭 <strong>Situación:</strong> Una cúpula hemisférica tiene forma de semicírculo $y = \sqrt{r^2 - x^2}$ girado. Si el radio es $r = 5$ metros, ¿cuántos metros cuadrados de superficie tiene la media esfera?</p>
+                        </div>
+                        <div class="ejemplo-contenido">
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 1: Usar la fórmula conocida</div>
+                                <div class="paso-body">
+                                    <p>Para una esfera completa: $S = 4\pi r^2$</p>
+                                    <p class="paso-resultado">Para media esfera: $S = 2\pi r^2$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 2: Sustituir valores</div>
+                                <div class="paso-body">
+                                    <p>$S = 2\pi (5)^2 = 2\pi \cdot 25 = 50\pi$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-resultado-final">
+                                <span class="resultado-label">🔭 Respuesta:</span>
+                                <span class="resultado-formula">$S = 50\pi \approx 157$ m² de superficie</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- INTERACTIVO -->
+                    <div class="interactivo-box">
+                        <h5><i class="fas fa-gamepad me-2"></i> Calculadora de Área de Superficie</h5>
+                        <p class="text-muted">Selecciona una curva y calcula el área de la superficie generada</p>
+                        
+                        <div class="row g-4">
+                            <div class="col-lg-4">
+                                <div class="superficie-controles">
+                                    <label class="form-label">Curva a girar:</label>
+                                    <select class="form-select" id="superficie-funcion">
+                                        <option value="x">$y = x$ (cono)</option>
+                                        <option value="sqrt">$y = \sqrt{x}$ (paraboloide)</option>
+                                        <option value="1">$y = 1$ (cilindro)</option>
+                                        <option value="sin">$y = \sin(x)$</option>
+                                    </select>
+                                    
+                                    <label class="form-label mt-3">Intervalo [0, b]:</label>
+                                    <input type="range" class="form-range" id="superficie-b" min="0.5" max="3" step="0.1" value="1">
+                                    <div class="limite-valor">b = <span id="superficie-b-valor">1</span></div>
+                                    
+                                    <div class="superficie-resultado mt-4">
+                                        <div class="superficie-dato superficie-principal">
+                                            <span class="superficie-label">Área de superficie:</span>
+                                            <span class="superficie-valor" id="superficie-area">4.44</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="chart-container">
+                                    <canvas id="superficieChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resumen -->
+                    <div class="resumen-tema">
+                        <strong>📌 En resumen:</strong> El área de superficie de revolución es $S = 2\pi \int f(x) \sqrt{1 + (f')^2} \, dx$. Combina la circunferencia ($2\pi r$) con la longitud de arco para cada "cinta" de la superficie.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== TEMA 3.7 ==================== -->
+            <div class="tema-card" id="tema3-7">
+                <div class="tema-header">
+                    <span class="tema-numero">3.7</span>
+                    <h3>Trabajo Mecánico: La física de mover cosas</h3>
+                </div>
+                
+                <div class="tema-content">
+                    <!-- Pregunta gancho -->
+                    <div class="pregunta-gancho">
+                        <i class="fas fa-question-circle"></i>
+                        <p>¿Cuánta energía necesitas para estirar un resorte o subir agua de un pozo? <strong>El trabajo es fuerza × distancia... pero ¿qué pasa si la fuerza cambia?</strong></p>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Vida Real -->
+                        <div class="col-lg-6">
+                            <div class="bloque-real">
+                                <h5><i class="fas fa-dumbbell me-2"></i> La Historia</h5>
+                                <p>Si empujas una caja con fuerza constante, el trabajo es simple: $W = F \cdot d$.</p>
+                                <p>Pero si la fuerza cambia (como al estirar un resorte), necesitas <strong>sumar el trabajo en cada pequeño tramo</strong>.</p>
+                                <div class="trabajo-visual">
+                                    <div class="resorte">
+                                        <span class="resorte-inicio">|</span>
+                                        <span class="resorte-espiral">～～～</span>
+                                        <span class="resorte-bloque">▮</span>
+                                    </div>
+                                    <div class="trabajo-flecha">→ F = kx</div>
+                                </div>
+                                <div class="pregunta-clave">
+                                    🔧 Ley de Hooke: la fuerza del resorte es proporcional a cuánto lo estiras
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- La idea matemática -->
+                        <div class="col-lg-6">
+                            <div class="bloque-mate">
+                                <h5><i class="fas fa-calculator me-2"></i> La Fórmula</h5>
+                                <p>Trabajo cuando la fuerza varía con la posición:</p>
+                                <div class="formula-grande">
+                                    $W = \int_a^b F(x) \, dx$
+                                </div>
+                                <div class="trabajo-casos mt-3">
+                                    <div class="trabajo-caso">
+                                        <span class="caso-nombre">Resorte (Ley de Hooke):</span>
+                                        <span class="caso-formula">$F(x) = kx$</span>
+                                    </div>
+                                    <div class="trabajo-caso">
+                                        <span class="caso-nombre">Gravedad (cerca de la Tierra):</span>
+                                        <span class="caso-formula">$F = mg$ (constante)</span>
+                                    </div>
+                                    <div class="trabajo-caso">
+                                        <span class="caso-nombre">Bombear agua:</span>
+                                        <span class="caso-formula">$F(y) = \rho g A \cdot y$</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ejemplo resuelto -->
+                    <div class="ejemplo-box mt-4">
+                        <h5><i class="fas fa-pencil-alt me-2"></i> Ejemplo: Estirando el resorte de la puerta</h5>
+                        <div class="ejemplo-contexto">
+                            <p>🚪 <strong>Situación:</strong> Un resorte de puerta tiene constante $k = 200$ N/m. ¿Cuánto trabajo (en Joules) se necesita para estirarlo desde su posición natural hasta 15 cm?</p>
+                        </div>
+                        <div class="ejemplo-contenido">
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 1: Identificar la fuerza variable</div>
+                                <div class="paso-body">
+                                    <p>Ley de Hooke: $F(x) = kx = 200x$ (en Newtons, con x en metros)</p>
+                                    <p class="paso-resultado">Límites: de $x = 0$ m a $x = 0.15$ m</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 2: Plantear la integral</div>
+                                <div class="paso-body">
+                                    <p>$W = \int_0^{0.15} 200x \, dx$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 3: Resolver</div>
+                                <div class="paso-body">
+                                    <p>$W = 200 \cdot \frac{x^2}{2} \Big|_0^{0.15} = 100 \cdot (0.15)^2 = 100 \cdot 0.0225 = 2.25$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-resultado-final">
+                                <span class="resultado-label">🚪 Respuesta:</span>
+                                <span class="resultado-formula">$W = 2.25$ Joules de trabajo</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- INTERACTIVO -->
+                    <div class="interactivo-box">
+                        <h5><i class="fas fa-gamepad me-2"></i> Calculadora de Trabajo del Resorte</h5>
+                        <p class="text-muted">Ajusta la constante del resorte y la distancia de estiramiento</p>
+                        
+                        <div class="row g-4">
+                            <div class="col-lg-4">
+                                <div class="trabajo-controles">
+                                    <label class="form-label">Constante k (N/m):</label>
+                                    <input type="range" class="form-range" id="trabajo-k" min="50" max="500" step="10" value="200">
+                                    <div class="limite-valor">k = <span id="trabajo-k-valor">200</span> N/m</div>
+                                    
+                                    <label class="form-label mt-3">Estiramiento x (cm):</label>
+                                    <input type="range" class="form-range" id="trabajo-x" min="1" max="30" step="1" value="15">
+                                    <div class="limite-valor">x = <span id="trabajo-x-valor">15</span> cm</div>
+                                    
+                                    <div class="trabajo-resultado mt-4">
+                                        <div class="trabajo-dato">
+                                            <span class="trabajo-label">Fuerza máxima:</span>
+                                            <span class="trabajo-valor-sm" id="trabajo-fuerza">30 N</span>
+                                        </div>
+                                        <div class="trabajo-dato trabajo-principal">
+                                            <span class="trabajo-label">Trabajo realizado:</span>
+                                            <span class="trabajo-valor" id="trabajo-w">2.25 J</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="chart-container">
+                                    <canvas id="trabajoChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resumen -->
+                    <div class="resumen-tema">
+                        <strong>📌 En resumen:</strong> El trabajo con fuerza variable es $W = \int_a^b F(x) \, dx$. Para un resorte ($F = kx$), esto da $W = \frac{1}{2}kx^2$. El trabajo es el área bajo la curva de fuerza vs desplazamiento.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== TEMA 3.8 ==================== -->
+            <div class="tema-card" id="tema3-8">
+                <div class="tema-header">
+                    <span class="tema-numero">3.8</span>
+                    <h3>Presión Hidrostática: El peso del agua</h3>
+                </div>
+                
+                <div class="tema-content">
+                    <!-- Pregunta gancho -->
+                    <div class="pregunta-gancho">
+                        <i class="fas fa-question-circle"></i>
+                        <p>¿Por qué las presas son más gruesas en la base? <strong>La presión del agua aumenta con la profundidad.</strong></p>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Vida Real -->
+                        <div class="col-lg-6">
+                            <div class="bloque-real">
+                                <h5><i class="fas fa-water me-2"></i> La Historia</h5>
+                                <p>El agua ejerce presión sobre las paredes de un tanque, piscina o presa.</p>
+                                <p>La presión <strong>no es uniforme</strong>: es mayor en el fondo que en la superficie.</p>
+                                <div class="presion-visual">
+                                    <div class="tanque">
+                                        <div class="agua">
+                                            <div class="flecha-presion flecha-1">→</div>
+                                            <div class="flecha-presion flecha-2">→→</div>
+                                            <div class="flecha-presion flecha-3">→→→</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pregunta-clave">
+                                    🌊 A mayor profundidad, mayor presión: $P = \rho g h$
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- La idea matemática -->
+                        <div class="col-lg-6">
+                            <div class="bloque-mate">
+                                <h5><i class="fas fa-calculator me-2"></i> La Fórmula</h5>
+                                <p>Fuerza total sobre una superficie sumergida:</p>
+                                <div class="formula-grande">
+                                    $F = \int_a^b \rho g \cdot h(y) \cdot w(y) \, dy$
+                                </div>
+                                <div class="presion-explicacion mt-3">
+                                    <div class="presion-item">
+                                        <span class="presion-simbolo">$\rho$</span>
+                                        <span>= densidad del agua (1000 kg/m³)</span>
+                                    </div>
+                                    <div class="presion-item">
+                                        <span class="presion-simbolo">$g$</span>
+                                        <span>= gravedad (9.8 m/s²)</span>
+                                    </div>
+                                    <div class="presion-item">
+                                        <span class="presion-simbolo">$h(y)$</span>
+                                        <span>= profundidad en el punto y</span>
+                                    </div>
+                                    <div class="presion-item">
+                                        <span class="presion-simbolo">$w(y)$</span>
+                                        <span>= ancho de la superficie a esa altura</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ejemplo resuelto -->
+                    <div class="ejemplo-box mt-4">
+                        <h5><i class="fas fa-pencil-alt me-2"></i> Ejemplo: La ventana del acuario</h5>
+                        <div class="ejemplo-contexto">
+                            <p>🐠 <strong>Situación:</strong> Un acuario tiene una ventana rectangular de 2 m de ancho y 1 m de alto. El borde superior está a 0.5 m bajo la superficie del agua. ¿Qué fuerza total ejerce el agua sobre la ventana?</p>
+                        </div>
+                        <div class="ejemplo-contenido">
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 1: Definir el sistema de coordenadas</div>
+                                <div class="paso-body">
+                                    <p>Sea $y$ la profundidad desde la superficie</p>
+                                    <p>La ventana va de $y = 0.5$ m a $y = 1.5$ m</p>
+                                    <p class="paso-resultado">Ancho constante: $w = 2$ m</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 2: Plantear la integral</div>
+                                <div class="paso-body">
+                                    <p>$F = \int_{0.5}^{1.5} \rho g \cdot y \cdot 2 \, dy = 2\rho g \int_{0.5}^{1.5} y \, dy$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 3: Resolver</div>
+                                <div class="paso-body">
+                                    <p>$F = 2 \cdot 1000 \cdot 9.8 \cdot \left[\frac{y^2}{2}\right]_{0.5}^{1.5}$</p>
+                                    <p>$= 2 \cdot 1000 \cdot 9.8 \cdot \frac{1}{2}(2.25 - 0.25) = 1000 \cdot 9.8 \cdot 2 = 19600$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-resultado-final">
+                                <span class="resultado-label">🐠 Respuesta:</span>
+                                <span class="resultado-formula">$F = 19,600$ N ≈ 2 toneladas de fuerza</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- INTERACTIVO -->
+                    <div class="interactivo-box">
+                        <h5><i class="fas fa-gamepad me-2"></i> Calculadora de Presión Hidrostática</h5>
+                        <p class="text-muted">Ajusta las dimensiones de la ventana sumergida</p>
+                        
+                        <div class="row g-4">
+                            <div class="col-lg-4">
+                                <div class="presion-controles">
+                                    <label class="form-label">Profundidad del borde superior (m):</label>
+                                    <input type="range" class="form-range" id="presion-prof" min="0" max="5" step="0.1" value="0.5">
+                                    <div class="limite-valor"><span id="presion-prof-valor">0.5</span> m</div>
+                                    
+                                    <label class="form-label mt-3">Altura de la ventana (m):</label>
+                                    <input type="range" class="form-range" id="presion-alto" min="0.5" max="3" step="0.1" value="1">
+                                    <div class="limite-valor"><span id="presion-alto-valor">1</span> m</div>
+                                    
+                                    <label class="form-label mt-3">Ancho de la ventana (m):</label>
+                                    <input type="range" class="form-range" id="presion-ancho" min="0.5" max="4" step="0.1" value="2">
+                                    <div class="limite-valor"><span id="presion-ancho-valor">2</span> m</div>
+                                    
+                                    <div class="presion-resultado mt-4">
+                                        <div class="presion-dato presion-principal">
+                                            <span class="presion-label">Fuerza total:</span>
+                                            <span class="presion-valor" id="presion-fuerza">19,600 N</span>
+                                        </div>
+                                        <div class="presion-dato">
+                                            <span class="presion-label">Equivalente a:</span>
+                                            <span class="presion-valor-sm" id="presion-equiv">≈ 2 toneladas</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="chart-container">
+                                    <canvas id="presionChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resumen -->
+                    <div class="resumen-tema">
+                        <strong>📌 En resumen:</strong> La presión hidrostática aumenta con la profundidad ($P = \rho g h$). La fuerza total sobre una superficie sumergida se calcula integrando la presión sobre toda el área.
+                    </div>
+                </div>
+            </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container text-center">
+            <p class="mb-1">Cálculo Integral - Universidad de Guayaquil</p>
+            <p class="mb-0 small">Período 2025-2026</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="js/common.js"></script>
+    <script src="js/unidad3.js"></script>
+</body>
+</html>

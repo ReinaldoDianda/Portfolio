@@ -1,0 +1,1119 @@
+/* ============================================
+   UNIDAD3.CSS - Estilos de Temas 3.1 - 3.11
+   Proyecto: Cálculo Integral
+   ============================================ */
+/* ============================================
+   ESTILOS COMPARTIDOS (EJEMPLOS Y FÓRMULAS)
+   Copiados de unidad2.css para consistencia
+   ============================================ */
+
+/* Ejemplo box */
+.ejemplo-box {
+    background: linear-gradient(135deg, #fef9c3 0%, #fef08a 100%);
+    border: 2px solid #facc15;
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+}
+
+.ejemplo-box h5 {
+    color: #854d0e;
+    margin-bottom: 1rem;
+}
+
+.ejemplo-contenido {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+/* Pasos detallados */
+.ejemplo-paso-detallado {
+    background: white;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.paso-header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.paso-body {
+    padding: 1rem;
+}
+
+.paso-body p {
+    margin-bottom: 0.5rem;
+}
+
+.paso-body p:last-child {
+    margin-bottom: 0;
+}
+
+.paso-resultado {
+    background: #f0fdf4;
+    border-left: 3px solid var(--accent-green);
+    padding: 0.5rem 0.75rem;
+    margin-top: 0.5rem;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-weight: 600;
+    color: #166534;
+}
+
+/* Resultado final */
+.ejemplo-resultado-final {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.resultado-label {
+    color: rgba(255,255,255,0.9);
+    font-weight: 600;
+}
+
+.resultado-formula {
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+/* Formula box */
+.formula-box {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    text-align: center;
+    margin: 0.5rem 0;
+}
+
+.formula-label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.formula {
+    font-size: 1.1rem;
+    color: var(--text-dark);
+}
+
+.formula-traduccion {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+/* Formula grande */
+.formula-grande {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    text-align: center;
+    font-size: 1.3rem;
+    color: var(--text-dark);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* Pregunta clave */
+.pregunta-clave {
+    background: rgba(255,255,255,0.7);
+    border-radius: var(--radius-sm);
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+    margin-top: 1rem;
+}
+
+/* Lista simple */
+.lista-simple {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0;
+}
+
+.lista-simple li {
+    padding: 0.25rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.lista-simple li::before {
+    content: "•";
+    position: absolute;
+    left: 0.5rem;
+    color: var(--primary);
+    font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 767.98px) {
+    .ejemplo-resultado-final {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .resultado-formula {
+        font-size: 1.1rem;
+    }
+    
+    .formula-grande {
+        font-size: 1.1rem;
+        padding: 1rem;
+    }
+}
+/* ============================================
+   TEMA 3.1 - ÁREA ENTRE CURVAS
+   ============================================ */
+
+/* Explicación visual del área */
+.area-explicacion {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    background: white;
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+}
+
+.area-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+}
+
+.area-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.area-color.area-arriba {
+    background: #ef4444;
+}
+
+.area-color.area-abajo {
+    background: #3b82f6;
+}
+
+.area-color.area-entre {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.5) 0%, rgba(79, 172, 254, 0.5) 100%);
+    border: 2px solid var(--primary);
+}
+
+/* Controles del área */
+.area-controles {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    height: 100%;
+}
+
+.area-resultado {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 1rem;
+}
+
+.area-dato {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.area-dato.area-principal {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    color: white;
+    margin-bottom: 0;
+}
+
+.area-label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.area-dato.area-principal .area-label {
+    color: rgba(255,255,255,0.9);
+}
+
+.area-valor {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.area-dato.area-principal .area-valor {
+    color: white;
+    font-size: 1.25rem;
+}
+
+/* ============================================
+   TEMA 3.2 - VOLUMEN POR DISCOS
+   ============================================ */
+
+/* Visual de discos apilados */
+.visual-discos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin: 1.5rem 0;
+}
+
+.disco {
+    height: 12px;
+    background: linear-gradient(90deg, #667eea 0%, #4facfe 50%, #667eea 100%);
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.disco:nth-child(1) { width: 40px; }
+.disco:nth-child(2) { width: 60px; }
+.disco:nth-child(3) { width: 80px; }
+.disco:nth-child(4) { width: 100px; }
+.disco:nth-child(5) { width: 120px; }
+
+/* Explicación del disco */
+.disco-explicacion {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: white;
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+}
+
+.disco-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+}
+
+.disco-simbolo {
+    min-width: 50px;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+/* Controles de volumen */
+.vol-controles {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    height: 100%;
+}
+
+.limite-valor {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-top: 0.25rem;
+}
+
+.vol-resultado {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 1rem;
+}
+
+.vol-dato {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.vol-dato.vol-principal {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    color: white;
+    margin-bottom: 0;
+}
+
+.vol-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.vol-label-sm {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.vol-valor {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.vol-valor-sm {
+    font-size: 0.95rem;
+    color: var(--text-dark);
+}
+
+.vol-dato.vol-principal .vol-label {
+    color: rgba(255,255,255,0.9);
+}
+
+.vol-dato.vol-principal .vol-valor {
+    color: white;
+    font-size: 1.5rem;
+}
+
+/* ============================================
+   TEMA 3.3 - VOLUMEN POR ARANDELAS
+   ============================================ */
+
+/* Visual de arandela */
+.arandela-visual {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 1.5rem auto;
+}
+
+.arandela-exterior {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #4facfe 100%);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.arandela-interior {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: white;
+    box-shadow: inset 0 2px 10px rgba(0,0,0,0.2);
+}
+
+/* Explicación de arandela */
+.arandela-explicacion {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: white;
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+}
+
+.arandela-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+}
+
+.arandela-simbolo {
+    min-width: 60px;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+/* ============================================
+   TEMA 3.4 - VOLUMEN POR CAPAS CILÍNDRICAS
+   ============================================ */
+
+/* Visual de capas */
+.capas-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1.5rem 0;
+    position: relative;
+    height: 100px;
+}
+
+.capa {
+    position: absolute;
+    border-radius: 50%;
+    border: 3px solid;
+    background: transparent;
+}
+
+.capa.capa-1 {
+    width: 100px;
+    height: 100px;
+    border-color: rgba(102, 126, 234, 0.3);
+}
+
+.capa.capa-2 {
+    width: 70px;
+    height: 70px;
+    border-color: rgba(102, 126, 234, 0.5);
+}
+
+.capa.capa-3 {
+    width: 40px;
+    height: 40px;
+    border-color: rgba(102, 126, 234, 0.8);
+    background: rgba(102, 126, 234, 0.2);
+}
+
+/* Explicación de capas */
+.capa-explicacion {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: white;
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+}
+
+.capa-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+}
+
+.capa-simbolo {
+    min-width: 50px;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+/* Comparación de métodos de volumen */
+.comparacion-metodos-vol {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+}
+
+.comparacion-metodos-vol h5 {
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+
+.metodo-card {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    height: 100%;
+    border-left: 4px solid;
+}
+
+.metodo-card.metodo-discos {
+    border-left-color: var(--primary);
+}
+
+.metodo-card.metodo-capas {
+    border-left-color: var(--accent-orange);
+}
+
+.metodo-card h6 {
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+
+.metodo-card.metodo-discos h6 {
+    color: var(--primary);
+}
+
+.metodo-card.metodo-capas h6 {
+    color: var(--accent-orange);
+}
+
+.metodo-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.metodo-card li {
+    padding: 0.35rem 0;
+    padding-left: 1.25rem;
+    position: relative;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.metodo-card li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+.metodo-card.metodo-discos li::before {
+    color: var(--primary);
+}
+
+.metodo-card.metodo-capas li::before {
+    color: var(--accent-orange);
+}
+
+/* ============================================
+   ESTILOS COMPARTIDOS UNIDAD 3
+   ============================================ */
+
+/* Resultado de volumen destacado */
+.vol-resultado-destacado {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    text-align: center;
+    color: white;
+}
+
+.vol-resultado-destacado .vol-label {
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.vol-resultado-destacado .vol-valor {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+/* ============================================
+   RESPONSIVE UNIDAD 3
+   ============================================ */
+
+@media (max-width: 991.98px) {
+    .visual-discos {
+        transform: scale(0.9);
+    }
+    
+    .arandela-visual {
+        transform: scale(0.9);
+    }
+    
+    .capas-visual {
+        transform: scale(0.9);
+    }
+}
+
+@media (max-width: 767.98px) {
+    .area-controles,
+    .vol-controles {
+        margin-bottom: 1rem;
+    }
+    
+    .disco-item,
+    .arandela-item,
+    .capa-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.25rem;
+    }
+    
+    .disco-simbolo,
+    .arandela-simbolo,
+    .capa-simbolo {
+        min-width: unset;
+    }
+    
+    .area-explicacion .area-item {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .visual-discos {
+        transform: scale(0.8);
+    }
+    
+    .arandela-visual {
+        transform: scale(0.8);
+    }
+    
+    .capas-visual {
+        transform: scale(0.8);
+    }
+    
+    .metodo-card {
+        margin-bottom: 1rem;
+    }
+    
+    .vol-dato.vol-principal .vol-valor {
+        font-size: 1.25rem;
+    }
+    
+    .comparacion-metodos-vol {
+        padding: 1rem;
+    }
+}/* Contexto del ejemplo (situación real) */
+.ejemplo-contexto {
+    background: white;
+    border-left: 4px solid #f59e0b;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.ejemplo-contexto p {
+    margin: 0;
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+.ejemplo-contexto strong {
+    color: #92400e;
+}/* ============================================
+   TEMA 3.5 - LONGITUD DE ARCO
+   ============================================ */
+
+/* Visual del arco */
+.arco-visual {
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.arco-svg {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+}
+
+/* Explicación del arco */
+.arco-explicacion {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: white;
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+}
+
+.arco-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+}
+
+.arco-simbolo {
+    min-width: 80px;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+/* Controles del arco */
+.arco-controles {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    height: 100%;
+}
+
+.arco-resultado {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 1rem;
+}
+
+.arco-dato {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.arco-dato.arco-principal {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    color: white;
+}
+
+.arco-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.arco-dato.arco-principal .arco-label {
+    color: rgba(255,255,255,0.9);
+}
+
+.arco-valor {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.arco-valor-sm {
+    font-size: 0.95rem;
+    color: var(--text-dark);
+}
+
+.arco-dato.arco-principal .arco-valor {
+    color: white;
+}
+
+/* ============================================
+   TEMA 3.6 - ÁREA DE SUPERFICIE
+   ============================================ */
+
+/* Visual de superficie */
+.superficie-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    margin: 1.5rem 0;
+}
+
+.cinta {
+    height: 10px;
+    background: linear-gradient(90deg, rgba(102,126,234,0.3) 0%, rgba(102,126,234,0.8) 50%, rgba(102,126,234,0.3) 100%);
+    border-radius: 50%;
+}
+
+.cinta.cinta-1 { width: 40px; }
+.cinta.cinta-2 { width: 70px; }
+.cinta.cinta-3 { width: 90px; }
+.cinta.cinta-4 { width: 100px; }
+
+/* Explicación de superficie */
+.superficie-explicacion {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: white;
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+}
+
+.superficie-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+}
+
+.superficie-simbolo {
+    min-width: 100px;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+/* Controles de superficie */
+.superficie-controles {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    height: 100%;
+}
+
+.superficie-resultado {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 1rem;
+}
+
+.superficie-dato {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.superficie-dato.superficie-principal {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    color: white;
+}
+
+.superficie-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.superficie-dato.superficie-principal .superficie-label {
+    color: rgba(255,255,255,0.9);
+}
+
+.superficie-valor {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.superficie-dato.superficie-principal .superficie-valor {
+    color: white;
+}
+
+/* ============================================
+   TEMA 3.7 - TRABAJO MECÁNICO
+   ============================================ */
+
+/* Visual del resorte */
+.trabajo-visual {
+    text-align: center;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: #f8fafc;
+    border-radius: var(--radius-sm);
+}
+
+.resorte {
+    font-size: 1.5rem;
+    font-family: monospace;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+}
+
+.resorte-bloque {
+    color: #f59e0b;
+}
+
+.trabajo-flecha {
+    margin-top: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Casos de trabajo */
+.trabajo-casos {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: white;
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+}
+
+.trabajo-caso {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.trabajo-caso:last-child {
+    border-bottom: none;
+}
+
+.caso-nombre {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.caso-formula {
+    font-weight: 600;
+    color: var(--primary);
+}
+
+/* Controles de trabajo */
+.trabajo-controles {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    height: 100%;
+}
+
+.trabajo-resultado {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 1rem;
+}
+
+.trabajo-dato {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.trabajo-dato.trabajo-principal {
+    background: linear-gradient(135deg, var(--accent-orange) 0%, #f59e0b 100%);
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    color: white;
+    margin-bottom: 0;
+}
+
+.trabajo-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.trabajo-dato.trabajo-principal .trabajo-label {
+    color: rgba(255,255,255,0.9);
+}
+
+.trabajo-valor {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.trabajo-valor-sm {
+    font-size: 0.95rem;
+    color: var(--text-dark);
+}
+
+.trabajo-dato.trabajo-principal .trabajo-valor {
+    color: white;
+}
+
+/* ============================================
+   TEMA 3.8 - PRESIÓN HIDROSTÁTICA
+   ============================================ */
+
+/* Visual de presión */
+.presion-visual {
+    margin: 1.5rem 0;
+    display: flex;
+    justify-content: center;
+}
+
+.tanque {
+    width: 120px;
+    height: 100px;
+    border: 4px solid #64748b;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.agua {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 90%;
+    background: linear-gradient(180deg, rgba(59,130,246,0.3) 0%, rgba(59,130,246,0.7) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding-left: 5px;
+}
+
+.flecha-presion {
+    color: #1e40af;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+/* Explicación de presión */
+.presion-explicacion {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: white;
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+}
+
+.presion-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.85rem;
+}
+
+.presion-simbolo {
+    min-width: 40px;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+/* Controles de presión */
+.presion-controles {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    height: 100%;
+}
+
+.presion-resultado {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 1rem;
+}
+
+.presion-dato {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.presion-dato.presion-principal {
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    color: white;
+}
+
+.presion-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.presion-dato.presion-principal .presion-label {
+    color: rgba(255,255,255,0.9);
+}
+
+.presion-valor {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.presion-valor-sm {
+    font-size: 0.95rem;
+    color: var(--text-dark);
+}
+
+.presion-dato.presion-principal .presion-valor {
+    color: white;
+}
+
+/* ============================================
+   RESPONSIVE PARTE 3-B
+   ============================================ */
+
+@media (max-width: 767.98px) {
+    .arco-item,
+    .superficie-item,
+    .presion-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.25rem;
+    }
+    
+    .arco-simbolo,
+    .superficie-simbolo,
+    .presion-simbolo {
+        min-width: unset;
+    }
+    
+    .trabajo-caso {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.25rem;
+    }
+    
+    .arco-controles,
+    .superficie-controles,
+    .trabajo-controles,
+    .presion-controles {
+        margin-bottom: 1rem;
+    }
+}   
