@@ -1008,283 +1008,240 @@ document.addEventListener('DOMContentLoaded', function() {
     // 7. TEMA 3.7 - TRABAJO MECÁNICO (CORREGIDO)
     // ==========================================
     
-    function initTrabajoMecanico() {
-        const sliderK = document.getElementById('trabajo-k');
-        const sliderX = document.getElementById('trabajo-x');
-        const kValor = document.getElementById('trabajo-k-valor');
-        const xValor = document.getElementById('trabajo-x-valor');
-        const fuerzaSpan = document.getElementById('trabajo-fuerza');
-        const trabajoSpan = document.getElementById('trabajo-w');
-        const canvas = document.getElementById('trabajoChart');
+  function initTrabajoMecanico() {
+    const sliderK = document.getElementById('trabajo-k');
+    const sliderX = document.getElementById('trabajo-x');
+    const kValor = document.getElementById('trabajo-k-valor');
+    const xValor = document.getElementById('trabajo-x-valor');
+    const fuerzaSpan = document.getElementById('trabajo-fuerza');
+    const trabajoSpan = document.getElementById('trabajo-w');
+    const canvas = document.getElementById('trabajoChart');
+    
+    if (!sliderK || !sliderX || !canvas) {
+        console.warn('Elementos de trabajo mecánico no encontrados');
+        return;
+    }
+    
+    const ctx = canvas.getContext('2d');
+    let chart = null;
+    
+    function actualizar() {
+        const k = parseFloat(sliderK.value);
+        const xCm = parseFloat(sliderX.value);
+        const xM = xCm / 100;
         
-        if (!sliderK || !sliderX || !canvas) {
-            console.warn('Elementos de trabajo mecánico no encontrados');
-            return;
+        kValor.textContent = k + ' N/m';
+        xValor.textContent = xCm + ' cm';
+        
+        const fuerzaMax = k * xM;
+        const trabajo = 0.5 * k * xM * xM;
+        
+        fuerzaSpan.textContent = fuerzaMax.toFixed(1) + ' N';
+        trabajoSpan.textContent = trabajo.toFixed(2) + ' J';
+        
+        const numPuntos = 50;
+        const labels = [];
+        const fuerzaData = [];
+        const areaData = [];
+        
+        for (let i = 0; i <= numPuntos; i++) {
+            const xGraficoCm = (xCm / numPuntos) * i;
+            const xGraficoM = xGraficoCm / 100;
+            
+            labels.push(xGraficoCm.toFixed(1));
+            fuerzaData.push(k * xGraficoM);
+            areaData.push(k * xGraficoM);
         }
         
-        const ctx = canvas.getContext('2d');
-        let chart = null;
+        if (chart) chart.destroy();
         
-        function actualizar() {
-            const k = parseFloat(sliderK.value);
-            const xCm = parseFloat(sliderX.value);
-            const xM = xCm / 100; // convertir cm a metros
-            
-            kValor.textContent = k;
-            xValor.textContent = xCm;
-            
-            // W = ∫₀ˣ kx dx = k[x²/2]₀ˣ = kx²/2 (VERIFICADO)
-            const fuerzaMax = k * xM;
-            const trabajo = 0.5 * k * xM * xM;
-            
-            fuerzaSpan.textContent = fuerzaMax.toFixed(1) + ' N';
-            trabajoSpan.textContent = trabajo.toFixed(2) + ' J';
-            
-            // Datos para el gráfico (F vs x) - CORREGIDO
-            // Generar puntos desde 0 hasta xCm (en cm para el eje X)
-            const labels = [];
-            const fuerzaData = [];
-            const areaData = [];
-            
-            const numPuntos = 50;
-            const paso = xCm / numPuntos;
-            
-            for (let i = 0; i <= numPuntos + 5; i++) {
-                const xGraficoCm = i * paso;
-                const xGraficoM = xGraficoCm / 100;
-                
-                labels.push(xGraficoCm.toFixed(1));
-                fuerzaData.push(k * xGraficoM);
-                
-                if (xGraficoCm <= xCm) {
-                    areaData.push(k * xGraficoM);
-                } else {
-                    areaData.push(null);
+        chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Trabajo W = área sombreada',
+                        data: areaData,
+                        backgroundColor: 'rgba(249, 115, 22, 0.4)',
+                        borderColor: 'rgba(249, 115, 22, 0.8)',
+                        borderWidth: 2,
+                        fill: true,
+                        pointRadius: 0,
+                        tension: 0
+                    },
+                    {
+                        label: 'F = kx (Ley de Hooke)',
+                        data: fuerzaData,
+                        borderColor: '#ef4444',
+                        borderWidth: 3,
+                        fill: false,
+                        pointRadius: 0,
+                        tension: 0
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: { duration: 300 },
+                scales: {
+                    x: {
+                        title: { display: true, text: 'Desplazamiento (cm)', font: { weight: 'bold' } },
+                        ticks: {
+                            callback: function(value, index) {
+                                if (index % 10 === 0) return this.getLabelForValue(value);
+                                return '';
+                            }
+                        },
+                        grid: { color: 'rgba(0,0,0,0.05)' }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Fuerza F (N)', font: { weight: 'bold' } },
+                        grid: { color: 'rgba(0,0,0,0.05)' }
+                    }
+                },
+                plugins: {
+                    legend: { display: true, position: 'top', labels: { usePointStyle: true, padding: 15 } }
                 }
             }
-            
-            if (chart) chart.destroy();
-            
-            chart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [
-                        {
-                            label: 'Trabajo W = área sombreada',
-                            data: areaData,
-                            backgroundColor: 'rgba(249, 115, 22, 0.4)',
-                            borderColor: 'rgba(249, 115, 22, 0.8)',
-                            borderWidth: 2,
-                            fill: true,
-                            pointRadius: 0,
-                            tension: 0
-                        },
-                        {
-                            label: 'F = kx (Ley de Hooke)',
-                            data: fuerzaData,
-                            borderColor: '#ef4444',
-                            borderWidth: 3,
-                            fill: false,
-                            pointRadius: 0,
-                            tension: 0
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    animation: { duration: 300 },
-                    scales: {
-                        x: {
-                            title: { display: true, text: 'Desplazamiento x (cm)', font: { weight: 'bold' } },
-                            ticks: {
-                                callback: function(value, index) {
-                                    const label = parseFloat(this.getLabelForValue(value));
-                                    // Mostrar cada 5 cm aproximadamente
-                                    if (index % Math.ceil(numPuntos / 6) === 0) {
-                                        return label.toFixed(0);
-                                    }
-                                    return '';
-                                }
-                            },
-                            grid: { color: 'rgba(0,0,0,0.05)' }
-                        },
-                        y: {
-                            beginAtZero: true,
-                            title: { display: true, text: 'Fuerza F (N)', font: { weight: 'bold' } },
-                            grid: { color: 'rgba(0,0,0,0.05)' }
-                        }
-                    },
-                    plugins: {
-                        legend: { 
-                            display: true, 
-                            position: 'top',
-                            labels: { usePointStyle: true, padding: 15 }
-                        }
-                    }
-                }
-            });
-        }
-        
-        sliderK.addEventListener('input', actualizar);
-        sliderX.addEventListener('input', actualizar);
-        
-        actualizar();
-        console.log('✅ Calculadora de trabajo mecánico iniciada');
+        });
     }
+    
+    sliderK.addEventListener('input', actualizar);
+    sliderX.addEventListener('input', actualizar);
+    
+    actualizar();
+    console.log('✅ Calculadora de trabajo mecánico iniciada');
+}
     
     // ==========================================
     // 8. TEMA 3.8 - PRESIÓN HIDROSTÁTICA (CORREGIDO)
     // ==========================================
     
-    function initPresionHidrostatica() {
-        const sliderProf = document.getElementById('presion-prof');
-        const sliderAlto = document.getElementById('presion-alto');
-        const sliderAncho = document.getElementById('presion-ancho');
-        const profValor = document.getElementById('presion-prof-valor');
-        const altoValor = document.getElementById('presion-alto-valor');
-        const anchoValor = document.getElementById('presion-ancho-valor');
-        const fuerzaSpan = document.getElementById('presion-fuerza');
-        const equivSpan = document.getElementById('presion-equiv');
-        const canvas = document.getElementById('presionChart');
+   function initPresionHidrostatica() {
+    const sliderProf = document.getElementById('presion-prof');
+    const sliderAlto = document.getElementById('presion-alto');
+    const sliderAncho = document.getElementById('presion-ancho');
+    const profValor = document.getElementById('presion-prof-valor');
+    const altoValor = document.getElementById('presion-alto-valor');
+    const anchoValor = document.getElementById('presion-ancho-valor');
+    const fuerzaSpan = document.getElementById('presion-fuerza');
+    const equivSpan = document.getElementById('presion-equiv');
+    const canvas = document.getElementById('presionChart');
+    
+    if (!sliderProf || !sliderAlto || !sliderAncho || !canvas) {
+        console.warn('Elementos de presión hidrostática no encontrados');
+        return;
+    }
+    
+    const ctx = canvas.getContext('2d');
+    let chart = null;
+    
+    const rho = 1000;
+    const g = 9.8;
+    
+    function actualizar() {
+        const profSuperior = parseFloat(sliderProf.value);
+        const alto = parseFloat(sliderAlto.value);
+        const ancho = parseFloat(sliderAncho.value);
+        const profInferior = profSuperior + alto;
         
-        if (!sliderProf || !sliderAlto || !sliderAncho || !canvas) {
-            console.warn('Elementos de presión hidrostática no encontrados');
-            return;
+        profValor.textContent = profSuperior.toFixed(1) + ' m';
+        altoValor.textContent = alto.toFixed(1) + ' m';
+        anchoValor.textContent = ancho.toFixed(1) + ' m';
+        
+        const fuerza = rho * g * ancho * (profInferior * profInferior - profSuperior * profSuperior) / 2;
+        const toneladas = fuerza / 9800;
+        
+        fuerzaSpan.textContent = fuerza.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' N';
+        equivSpan.textContent = '≈ ' + toneladas.toFixed(1) + ' toneladas';
+        
+        const profMax = profInferior + 1;
+        const numPuntos = 50;
+        const labels = [];
+        const presionData = [];
+        const ventanaData = [];
+        
+        for (let i = 0; i <= numPuntos; i++) {
+            const y = (profMax / numPuntos) * i;
+            labels.push(y.toFixed(2));
+            
+            const presion = rho * g * y / 1000;
+            presionData.push(presion);
+            
+            if (y >= profSuperior && y <= profInferior) {
+                ventanaData.push(presion);
+            } else {
+                ventanaData.push(null);
+            }
         }
         
-        const ctx = canvas.getContext('2d');
-        let chart = null;
+        if (chart) chart.destroy();
         
-        const rho = 1000; // kg/m³ (densidad del agua)
-        const g = 9.8;    // m/s² (gravedad)
-        
-        function actualizar() {
-            const profSuperior = parseFloat(sliderProf.value);
-            const alto = parseFloat(sliderAlto.value);
-            const ancho = parseFloat(sliderAncho.value);
-            const profInferior = profSuperior + alto;
-            
-            profValor.textContent = profSuperior.toFixed(1);
-            altoValor.textContent = alto.toFixed(1);
-            anchoValor.textContent = ancho.toFixed(1);
-            
-            // F = ρg·w · ∫y dy = ρg·w · [y²/2] de profSup a profInf
-            // F = ρg·w · (profInf² - profSup²) / 2 (VERIFICADO)
-            const fuerza = rho * g * ancho * (profInferior * profInferior - profSuperior * profSuperior) / 2;
-            
-            const toneladas = fuerza / 9800; // convertir a toneladas-fuerza
-            
-            fuerzaSpan.textContent = fuerza.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' N';
-            equivSpan.textContent = `≈ ${toneladas.toFixed(1)} toneladas`;
-            
-            // CORREGIDO: Gráfico que muestra la ventana sumergida
-            // Eje X = profundidad, Eje Y = presión
-            const profMax = profInferior + 1;
-            const numPuntos = 50;
-            const paso = profMax / numPuntos;
-            
-            const labels = [];
-            const presionData = [];
-            const ventanaData = [];
-            
-            for (let i = 0; i <= numPuntos; i++) {
-                const y = i * paso;
-                labels.push(y.toFixed(2));
-                
-                const presion = rho * g * y / 1000; // en kPa
-                presionData.push(presion);
-                
-                // Área sombreada solo en la zona de la ventana
-                if (y >= profSuperior && y <= profInferior) {
-                    ventanaData.push(presion);
-                } else {
-                    ventanaData.push(null);
+        chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Ventana (' + profSuperior.toFixed(1) + 'm - ' + profInferior.toFixed(1) + 'm)',
+                        data: ventanaData,
+                        backgroundColor: 'rgba(59, 130, 246, 0.5)',
+                        borderColor: '#1d4ed8',
+                        borderWidth: 3,
+                        fill: true,
+                        pointRadius: 0,
+                        tension: 0
+                    },
+                    {
+                        label: 'Presión P = ρgh',
+                        data: presionData,
+                        borderColor: '#94a3b8',
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        fill: false,
+                        pointRadius: 0,
+                        tension: 0
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: { duration: 300 },
+                scales: {
+                    x: {
+                        title: { display: true, text: 'Profundidad (m)', font: { weight: 'bold' } },
+                        ticks: {
+                            callback: function(value, index) {
+                                if (index % 10 === 0) return parseFloat(this.getLabelForValue(value)).toFixed(1);
+                                return '';
+                            }
+                        },
+                        grid: { color: 'rgba(0,0,0,0.05)' }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Presión (kPa)', font: { weight: 'bold' } },
+                        grid: { color: 'rgba(0,0,0,0.05)' }
+                    }
+                },
+                plugins: {
+                    legend: { display: true, position: 'top', labels: { usePointStyle: true, padding: 15 } }
                 }
             }
-            
-            if (chart) chart.destroy();
-            
-            chart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [
-                        {
-                            label: `Ventana (${profSuperior.toFixed(1)}m - ${profInferior.toFixed(1)}m)`,
-                            data: ventanaData,
-                            backgroundColor: 'rgba(59, 130, 246, 0.5)',
-                            borderColor: '#1d4ed8',
-                            borderWidth: 3,
-                            fill: true,
-                            pointRadius: 0,
-                            tension: 0
-                        },
-                        {
-                            label: 'Presión P = ρgh',
-                            data: presionData,
-                            borderColor: '#94a3b8',
-                            borderWidth: 2,
-                            borderDash: [5, 5],
-                            fill: false,
-                            pointRadius: 0,
-                            tension: 0
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    animation: { duration: 300 },
-                    scales: {
-                        x: {
-                            title: { display: true, text: 'Profundidad (m)', font: { weight: 'bold' } },
-                            ticks: {
-                                callback: function(value, index) {
-                                    const label = parseFloat(this.getLabelForValue(value));
-                                    if (index % Math.ceil(numPuntos / 8) === 0) {
-                                        return label.toFixed(1);
-                                    }
-                                    return '';
-                                }
-                            },
-                            grid: { color: 'rgba(0,0,0,0.05)' }
-                        },
-                        y: {
-                            beginAtZero: true,
-                            title: { display: true, text: 'Presión (kPa)', font: { weight: 'bold' } },
-                            grid: { color: 'rgba(0,0,0,0.05)' }
-                        }
-                    },
-                    plugins: {
-                        legend: { 
-                            display: true, 
-                            position: 'top',
-                            labels: { usePointStyle: true, padding: 15 }
-                        },
-                        tooltip: {
-                            callbacks: {
-                                title: function(context) {
-                                    return `Profundidad: ${context[0].label} m`;
-                                },
-                                label: function(context) {
-                                    return `Presión: ${context.raw.toFixed(2)} kPa`;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-        }
-        
-        sliderProf.addEventListener('input', actualizar);
-        sliderAlto.addEventListener('input', actualizar);
-        sliderAncho.addEventListener('input', actualizar);
-        
-        actualizar();
-        console.log('✅ Calculadora de presión hidrostática iniciada');
+        });
     }
+    
+    sliderProf.addEventListener('input', actualizar);
+    sliderAlto.addEventListener('input', actualizar);
+    sliderAncho.addEventListener('input', actualizar);
+    
+    actualizar();
+    console.log('✅ Calculadora de presión hidrostática iniciada');
+}
     
     // ==========================================
     // 9. TEMA 3.9 - CENTRO DE MASA
@@ -1437,203 +1394,98 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==========================================
     
     function initMomentoInercia() {
-        const selectForma = document.getElementById('inercia-forma');
-        const selectEje = document.getElementById('inercia-eje');
-        const areaSpan = document.getElementById('inercia-area');
-        const inerciaSpan = document.getElementById('inercia-I');
-        const canvas = document.getElementById('inerciaChart');
-        
-        if (!selectForma || !selectEje || !canvas) {
-            console.warn('Elementos de momento de inercia no encontrados');
-            return;
-        }
-        
-        const ctx = canvas.getContext('2d');
-        let chart = null;
-        
-        // Formas y sus momentos de inercia (VERIFICADOS Y CORREGIDOS)
-        const formas = {
-            'rectangulo': {
-                f: (x) => 1,
-                nombre: 'Rectángulo',
-                xMax: 1,
-                area: 1,
-                Iy: 1/3,
-                Ix: 1/3
-            },
-            'triangulo': {
-                f: (x) => 1 - x,
-                nombre: 'Triángulo',
-                xMax: 1,
-                area: 0.5,
-                Iy: 1/12,
-                Ix: 1/12
-            },
-            'parabola': {
-                f: (x) => 1 - x * x,
-                nombre: 'Parábola',
-                xMax: 1,
-                area: 2/3,
-                Iy: 2/15,
-                Ix: 16/105
-            }
-        };
-        
-        function actualizar() {
-            const formaKey = selectForma.value;
-            const ejeKey = selectEje.value;
-            const forma = formas[formaKey];
-            
-            const I = ejeKey === 'y' ? forma.Iy : forma.Ix;
-            
-            areaSpan.textContent = forma.area.toFixed(3) + ' u²';
-            inerciaSpan.textContent = I.toFixed(4) + ' u⁴';
-            
-            // Generar datos para el gráfico
-            const labels = [];
-            const curveData = [];
-            const numPuntos = 50;
-            const paso = (forma.xMax + 0.2) / numPuntos;
-            
-            for (let i = 0; i <= numPuntos; i++) {
-                const x = i * paso;
-                labels.push(x.toFixed(2));
-                if (x <= forma.xMax) {
-                    curveData.push(forma.f(x));
-                } else {
-                    curveData.push(null);
-                }
-            }
-            
-            // Datos para visualizar el eje de rotación
-            const ejeData = [];
-            if (ejeKey === 'y') {
-                // Eje Y: línea vertical en x = 0
-                for (let i = 0; i <= numPuntos; i++) {
-                    const x = i * paso;
-                    if (Math.abs(x) < 0.05) {
-                        ejeData.push(1.3); // Altura visible del eje
-                    } else {
-                        ejeData.push(null);
-                    }
-                }
-            } else {
-                // Eje X: línea horizontal en y = 0
-                for (let i = 0; i <= numPuntos; i++) {
-                    ejeData.push(0);
-                }
-            }
-            
-            if (chart) chart.destroy();
-            
-            const ejeColor = ejeKey === 'y' ? '#8b5cf6' : '#f59e0b';
-            const ejeNombre = ejeKey === 'y' ? 'Eje Y (rotación)' : 'Eje X (rotación)';
-            
-            chart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [
-                        {
-                            label: forma.nombre,
-                            data: curveData,
-                            backgroundColor: 'rgba(102, 126, 234, 0.3)',
-                            borderColor: '#667eea',
-                            borderWidth: 3,
-                            fill: true,
-                            pointRadius: 0,
-                            tension: 0.4
-                        },
-                        {
-                            label: ejeNombre,
-                            data: ejeData,
-                            borderColor: ejeColor,
-                            borderWidth: 4,
-                            borderDash: ejeKey === 'x' ? [] : undefined,
-                            fill: false,
-                            pointRadius: 0,
-                            tension: 0
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    animation: { duration: 300 },
-                    scales: {
-                        x: {
-                            title: { display: true, text: 'x', font: { weight: 'bold' } },
-                            min: -0.1,
-                            ticks: {
-                                callback: function(value, index) {
-                                    const label = parseFloat(this.getLabelForValue(value));
-                                    return label % 0.5 === 0 ? label.toFixed(1) : '';
-                                }
-                            },
-                            grid: { 
-                                color: (context) => {
-                                    // Destacar el eje Y si está seleccionado
-                                    if (ejeKey === 'y' && context.tick && Math.abs(context.tick.value) < 0.01) {
-                                        return ejeColor;
-                                    }
-                                    return 'rgba(0,0,0,0.05)';
-                                },
-                                lineWidth: (context) => {
-                                    if (ejeKey === 'y' && context.tick && Math.abs(context.tick.value) < 0.01) {
-                                        return 4;
-                                    }
-                                    return 1;
-                                }
-                            }
-                        },
-                        y: {
-                            beginAtZero: true,
-                            max: 1.4,
-                            title: { display: true, text: 'y', font: { weight: 'bold' } },
-                            grid: { 
-                                color: (context) => {
-                                    // Destacar el eje X si está seleccionado
-                                    if (ejeKey === 'x' && context.tick && context.tick.value === 0) {
-                                        return ejeColor;
-                                    }
-                                    return 'rgba(0,0,0,0.05)';
-                                },
-                                lineWidth: (context) => {
-                                    if (ejeKey === 'x' && context.tick && context.tick.value === 0) {
-                                        return 4;
-                                    }
-                                    return 1;
-                                }
-                            }
-                        }
-                    },
-                    plugins: {
-                        legend: { 
-                            display: true, 
-                            position: 'top',
-                            labels: { 
-                                usePointStyle: true, 
-                                padding: 15,
-                                generateLabels: function(chart) {
-                                    const original = Chart.defaults.plugins.legend.labels.generateLabels(chart);
-                                    // Colorear el label del eje
-                                    original[1].fillStyle = ejeColor;
-                                    original[1].strokeStyle = ejeColor;
-                                    return original;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-        }
-        
-        selectForma.addEventListener('change', actualizar);
-        selectEje.addEventListener('change', actualizar);
-        actualizar();
-        
-        console.log('✅ Calculadora de momento de inercia iniciada');
+    const selectForma = document.getElementById('inercia-forma');
+    const selectEje = document.getElementById('inercia-eje');
+    const areaSpan = document.getElementById('inercia-area');
+    const inerciaSpan = document.getElementById('inercia-I');
+    const canvas = document.getElementById('inerciaChart');
+    
+    if (!selectForma || !selectEje || !canvas) {
+        console.warn('Elementos de momento de inercia no encontrados');
+        return;
     }
+    
+    const ctx = canvas.getContext('2d');
+    let chart = null;
+    
+    const formas = {
+        'rectangulo': { f: (x) => 1, nombre: 'Rectángulo', xMax: 1, area: 1, Iy: 1/3, Ix: 1/3 },
+        'triangulo': { f: (x) => 1 - x, nombre: 'Triángulo', xMax: 1, area: 0.5, Iy: 1/12, Ix: 1/12 },
+        'parabola': { f: (x) => 1 - x * x, nombre: 'Parábola', xMax: 1, area: 2/3, Iy: 2/15, Ix: 16/105 }
+    };
+    
+    function actualizar() {
+        const formaKey = selectForma.value;
+        const ejeKey = selectEje.value;
+        const forma = formas[formaKey];
+        
+        const I = ejeKey === 'y' ? forma.Iy : forma.Ix;
+        
+        areaSpan.textContent = forma.area.toFixed(3) + ' u²';
+        inerciaSpan.textContent = I.toFixed(4) + ' u⁴';
+        
+        const labels = [];
+        const curveData = [];
+        const numPuntos = 50;
+        
+        for (let i = 0; i <= numPuntos; i++) {
+            const x = (forma.xMax / numPuntos) * i;
+            labels.push(x.toFixed(2));
+            curveData.push(forma.f(x));
+        }
+        
+        if (chart) chart.destroy();
+        
+        const ejeColor = ejeKey === 'y' ? '#8b5cf6' : '#f59e0b';
+        const ejeNombre = ejeKey === 'y' ? 'Eje Y (rotación)' : 'Eje X (rotación)';
+        
+        chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: forma.nombre,
+                        data: curveData,
+                        backgroundColor: 'rgba(102, 126, 234, 0.3)',
+                        borderColor: '#667eea',
+                        borderWidth: 3,
+                        fill: true,
+                        pointRadius: 0,
+                        tension: 0.4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: { duration: 300 },
+                scales: {
+                    x: {
+                        title: { display: true, text: 'x', font: { weight: 'bold', color: ejeKey === 'y' ? ejeColor : '#666' } },
+                        grid: { color: 'rgba(0,0,0,0.05)' }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        max: 1.2,
+                        title: { display: true, text: 'y', font: { weight: 'bold', color: ejeKey === 'x' ? ejeColor : '#666' } },
+                        grid: { color: 'rgba(0,0,0,0.05)' }
+                    }
+                },
+                plugins: {
+                    legend: { display: true, position: 'top' },
+                    title: { display: true, text: 'Eje de rotación: ' + ejeNombre, color: ejeColor, font: { size: 14, weight: 'bold' } }
+                }
+            }
+        });
+    }
+    
+    selectForma.addEventListener('change', actualizar);
+    selectEje.addEventListener('change', actualizar);
+    actualizar();
+    
+    console.log('✅ Calculadora de momento de inercia iniciada');
+}
     
     // ==========================================
     // 11. TEMA 3.11 - APLICACIONES EN ECONOMÍA
