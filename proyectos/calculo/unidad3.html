@@ -1213,6 +1213,426 @@
                     </div>
                 </div>
             </div>
+            <!-- ==================== TEMA 3.9 ==================== -->
+            <div class="tema-card" id="tema3-9">
+                <div class="tema-header">
+                    <span class="tema-numero">3.9</span>
+                    <h3>Centro de Masa: El punto de equilibrio</h3>
+                </div>
+                
+                <div class="tema-content">
+                    <!-- Pregunta gancho -->
+                    <div class="pregunta-gancho">
+                        <i class="fas fa-question-circle"></i>
+                        <p>¿Dónde debes poner el dedo para equilibrar una regla? <strong>En el centro de masa, el punto donde se concentra todo el "peso".</strong></p>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Vida Real -->
+                        <div class="col-lg-6">
+                            <div class="bloque-real">
+                                <h5><i class="fas fa-balance-scale me-2"></i> La Historia</h5>
+                                <p>Imagina una placa de metal con forma irregular. Si quieres colgarla de un solo punto sin que se incline, debes encontrar su <strong>centro de masa</strong>.</p>
+                                <p>Para objetos con densidad uniforme, el centro de masa depende solo de la geometría.</p>
+                                <div class="centromasa-visual">
+                                    <div class="placa">
+                                        <div class="punto-cm">⊕</div>
+                                    </div>
+                                </div>
+                                <div class="pregunta-clave">
+                                    ⚖️ El centro de masa es el "promedio ponderado" de todas las posiciones
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- La idea matemática -->
+                        <div class="col-lg-6">
+                            <div class="bloque-mate">
+                                <h5><i class="fas fa-calculator me-2"></i> La Fórmula</h5>
+                                <p>Para una región plana entre $f(x)$ y el eje x:</p>
+                                <div class="formula-grande">
+                                    $\bar{x} = \frac{1}{A}\int_a^b x \cdot f(x) \, dx$
+                                </div>
+                                <div class="formula-grande mt-2">
+                                    $\bar{y} = \frac{1}{A}\int_a^b \frac{[f(x)]^2}{2} \, dx$
+                                </div>
+                                <div class="cm-explicacion mt-3">
+                                    <div class="cm-item">
+                                        <span class="cm-simbolo">$A$</span>
+                                        <span>= área total de la región</span>
+                                    </div>
+                                    <div class="cm-item">
+                                        <span class="cm-simbolo">$(\bar{x}, \bar{y})$</span>
+                                        <span>= coordenadas del centro de masa</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ejemplo resuelto -->
+                    <div class="ejemplo-box mt-4">
+                        <h5><i class="fas fa-pencil-alt me-2"></i> Ejemplo: La señal de tráfico triangular</h5>
+                        <div class="ejemplo-contexto">
+                            <p>🚧 <strong>Situación:</strong> Una señal de "ceda el paso" tiene forma triangular definida por $y = 2 - 2x$ desde $x = 0$ hasta $x = 1$ (en metros). ¿Dónde está su centro de masa para colocar el poste de soporte?</p>
+                        </div>
+                        <div class="ejemplo-contenido">
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 1: Calcular el área</div>
+                                <div class="paso-body">
+                                    <p>$A = \int_0^1 (2 - 2x) \, dx = \left[2x - x^2\right]_0^1 = 2 - 1 = 1$ m²</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 2: Calcular $\bar{x}$</div>
+                                <div class="paso-body">
+                                    <p>$\bar{x} = \frac{1}{1}\int_0^1 x(2 - 2x) \, dx = \int_0^1 (2x - 2x^2) \, dx$</p>
+                                    <p>$= \left[x^2 - \frac{2x^3}{3}\right]_0^1 = 1 - \frac{2}{3} = \frac{1}{3}$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 3: Calcular $\bar{y}$</div>
+                                <div class="paso-body">
+                                    <p>$\bar{y} = \frac{1}{1}\int_0^1 \frac{(2-2x)^2}{2} \, dx = \frac{1}{2}\int_0^1 (4 - 8x + 4x^2) \, dx$</p>
+                                    <p>$= \frac{1}{2}\left[4x - 4x^2 + \frac{4x^3}{3}\right]_0^1 = \frac{1}{2}\left(4 - 4 + \frac{4}{3}\right) = \frac{2}{3}$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-resultado-final">
+                                <span class="resultado-label">🚧 Respuesta:</span>
+                                <span class="resultado-formula">Centro de masa en $\left(\frac{1}{3}, \frac{2}{3}\right)$ metros</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- INTERACTIVO -->
+                    <div class="interactivo-box">
+                        <h5><i class="fas fa-gamepad me-2"></i> Calculadora de Centro de Masa</h5>
+                        <p class="text-muted">Selecciona una forma y encuentra su centro de masa</p>
+                        
+                        <div class="row g-4">
+                            <div class="col-lg-4">
+                                <div class="cm-controles">
+                                    <label class="form-label">Forma (curva superior):</label>
+                                    <select class="form-select" id="cm-funcion">
+                                        <option value="lineal">Triángulo: y = 1 - x</option>
+                                        <option value="parabola">Parábola: y = 1 - x²</option>
+                                        <option value="sqrt">Raíz: y = √(1 - x)</option>
+                                        <option value="constante">Rectángulo: y = 1</option>
+                                    </select>
+                                    
+                                    <div class="cm-resultado mt-4">
+                                        <div class="cm-dato">
+                                            <span class="cm-label">Área:</span>
+                                            <span class="cm-valor-sm" id="cm-area">0.5 u²</span>
+                                        </div>
+                                        <div class="cm-dato cm-principal">
+                                            <span class="cm-label">Centro de masa:</span>
+                                            <span class="cm-valor" id="cm-coords">(0.333, 0.333)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="chart-container">
+                                    <canvas id="cmChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resumen -->
+                    <div class="resumen-tema">
+                        <strong>📌 En resumen:</strong> El centro de masa $(\bar{x}, \bar{y})$ es el punto de equilibrio de una región. Se calcula como el promedio ponderado de las posiciones, usando integrales para sumar todas las contribuciones.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== TEMA 3.10 ==================== -->
+            <div class="tema-card" id="tema3-10">
+                <div class="tema-header">
+                    <span class="tema-numero">3.10</span>
+                    <h3>Momentos de Inercia: La resistencia a girar</h3>
+                </div>
+                
+                <div class="tema-content">
+                    <!-- Pregunta gancho -->
+                    <div class="pregunta-gancho">
+                        <i class="fas fa-question-circle"></i>
+                        <p>¿Por qué es más difícil hacer girar una puerta empujando cerca de las bisagras? <strong>El momento de inercia mide cuánto "cuesta" rotar un objeto.</strong></p>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Vida Real -->
+                        <div class="col-lg-6">
+                            <div class="bloque-real">
+                                <h5><i class="fas fa-sync-alt me-2"></i> La Historia</h5>
+                                <p>El momento de inercia es a la rotación lo que la masa es al movimiento lineal.</p>
+                                <p>Depende no solo de cuánta masa hay, sino de <strong>qué tan lejos está del eje de rotación</strong>.</p>
+                                <div class="inercia-visual">
+                                    <div class="eje-rotacion"></div>
+                                    <div class="masa masa-cerca">●</div>
+                                    <div class="masa masa-lejos">●</div>
+                                    <div class="inercia-labels">
+                                        <span class="label-cerca">Fácil de girar</span>
+                                        <span class="label-lejos">Difícil de girar</span>
+                                    </div>
+                                </div>
+                                <div class="pregunta-clave">
+                                    🔄 Masa lejos del eje = mayor momento de inercia = más difícil de girar
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- La idea matemática -->
+                        <div class="col-lg-6">
+                            <div class="bloque-mate">
+                                <h5><i class="fas fa-calculator me-2"></i> La Fórmula</h5>
+                                <p>Momento de inercia respecto al eje x:</p>
+                                <div class="formula-grande">
+                                    $I_x = \int_a^b \rho \cdot y^2 \cdot dA$
+                                </div>
+                                <p class="mt-3">Para una región bajo $f(x)$:</p>
+                                <div class="formula-grande">
+                                    $I_x = \rho \int_a^b \frac{[f(x)]^3}{3} \, dx$
+                                </div>
+                                <div class="inercia-explicacion mt-3">
+                                    <div class="inercia-item">
+                                        <span class="inercia-simbolo">$\rho$</span>
+                                        <span>= densidad (masa por unidad de área)</span>
+                                    </div>
+                                    <div class="inercia-item">
+                                        <span class="inercia-simbolo">$y^2$</span>
+                                        <span>= distancia al eje, al cuadrado</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ejemplo resuelto -->
+                    <div class="ejemplo-box mt-4">
+                        <h5><i class="fas fa-pencil-alt me-2"></i> Ejemplo: La puerta rectangular</h5>
+                        <div class="ejemplo-contexto">
+                            <p>🚪 <strong>Situación:</strong> Una puerta rectangular de 1 m de ancho y 2 m de alto (densidad uniforme $\rho = 1$) gira alrededor del eje y (las bisagras). ¿Cuál es su momento de inercia?</p>
+                        </div>
+                        <div class="ejemplo-contenido">
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 1: Plantear el problema</div>
+                                <div class="paso-body">
+                                    <p>La puerta va de $x = 0$ a $x = 1$, con altura constante $h = 2$</p>
+                                    <p class="paso-resultado">Respecto al eje y: $I_y = \rho \int_0^1 x^2 \cdot h \, dx$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 2: Integrar</div>
+                                <div class="paso-body">
+                                    <p>$I_y = 1 \cdot 2 \int_0^1 x^2 \, dx = 2 \left[\frac{x^3}{3}\right]_0^1 = 2 \cdot \frac{1}{3} = \frac{2}{3}$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-resultado-final">
+                                <span class="resultado-label">🚪 Respuesta:</span>
+                                <span class="resultado-formula">$I_y = \frac{2}{3}$ kg·m² (con $\rho = 1$ kg/m²)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- INTERACTIVO -->
+                    <div class="interactivo-box">
+                        <h5><i class="fas fa-gamepad me-2"></i> Calculadora de Momento de Inercia</h5>
+                        <p class="text-muted">Compara el momento de inercia de diferentes formas</p>
+                        
+                        <div class="row g-4">
+                            <div class="col-lg-4">
+                                <div class="inercia-controles">
+                                    <label class="form-label">Forma:</label>
+                                    <select class="form-select" id="inercia-forma">
+                                        <option value="rectangulo">Rectángulo (0 a 1, altura 1)</option>
+                                        <option value="triangulo">Triángulo (y = 1 - x)</option>
+                                        <option value="parabola">Parábola (y = 1 - x²)</option>
+                                    </select>
+                                    
+                                    <label class="form-label mt-3">Eje de rotación:</label>
+                                    <select class="form-select" id="inercia-eje">
+                                        <option value="y">Eje Y (vertical)</option>
+                                        <option value="x">Eje X (horizontal)</option>
+                                    </select>
+                                    
+                                    <div class="inercia-resultado mt-4">
+                                        <div class="inercia-dato">
+                                            <span class="inercia-label">Área:</span>
+                                            <span class="inercia-valor-sm" id="inercia-area">1 u²</span>
+                                        </div>
+                                        <div class="inercia-dato inercia-principal">
+                                            <span class="inercia-label">Momento de inercia:</span>
+                                            <span class="inercia-valor" id="inercia-I">0.333</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="chart-container">
+                                    <canvas id="inerciaChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resumen -->
+                    <div class="resumen-tema">
+                        <strong>📌 En resumen:</strong> El momento de inercia mide la resistencia a la rotación. Depende de cómo está distribuida la masa respecto al eje: masa más lejos = mayor momento de inercia.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== TEMA 3.11 ==================== -->
+            <div class="tema-card" id="tema3-11">
+                <div class="tema-header">
+                    <span class="tema-numero">3.11</span>
+                    <h3>Aplicaciones en Economía: El cálculo del dinero</h3>
+                </div>
+                
+                <div class="tema-content">
+                    <!-- Pregunta gancho -->
+                    <div class="pregunta-gancho">
+                        <i class="fas fa-question-circle"></i>
+                        <p>¿Cuánto ganan los consumidores cuando el precio de mercado es menor que lo que estaban dispuestos a pagar? <strong>La integral calcula el excedente del consumidor.</strong></p>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Vida Real -->
+                        <div class="col-lg-6">
+                            <div class="bloque-real">
+                                <h5><i class="fas fa-chart-line me-2"></i> La Historia</h5>
+                                <p>En economía, la <strong>curva de demanda</strong> muestra cuánto están dispuestos a pagar los consumidores por cada unidad.</p>
+                                <p>Si el precio de mercado es más bajo, los consumidores "ganan" la diferencia: ese es el <strong>excedente del consumidor</strong>.</p>
+                                <div class="economia-visual">
+                                    <div class="curva-demanda">
+                                        <div class="area-excedente"></div>
+                                        <div class="linea-precio"></div>
+                                    </div>
+                                </div>
+                                <div class="pregunta-clave">
+                                    💰 Excedente = lo que habrían pagado − lo que realmente pagan
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- La idea matemática -->
+                        <div class="col-lg-6">
+                            <div class="bloque-mate">
+                                <h5><i class="fas fa-calculator me-2"></i> La Fórmula</h5>
+                                <p>Si $D(q)$ es la curva de demanda y $p_0$ el precio de mercado:</p>
+                                <div class="formula-grande">
+                                    $EC = \int_0^{q_0} [D(q) - p_0] \, dq$
+                                </div>
+                                <p class="mt-3">Excedente del productor (curva de oferta $S(q)$):</p>
+                                <div class="formula-grande">
+                                    $EP = \int_0^{q_0} [p_0 - S(q)] \, dq$
+                                </div>
+                                <div class="economia-explicacion mt-3">
+                                    <div class="economia-item">
+                                        <span class="economia-simbolo">$EC$</span>
+                                        <span>= beneficio extra para compradores</span>
+                                    </div>
+                                    <div class="economia-item">
+                                        <span class="economia-simbolo">$EP$</span>
+                                        <span>= beneficio extra para vendedores</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ejemplo resuelto -->
+                    <div class="ejemplo-box mt-4">
+                        <h5><i class="fas fa-pencil-alt me-2"></i> Ejemplo: El mercado de café</h5>
+                        <div class="ejemplo-contexto">
+                            <p>☕ <strong>Situación:</strong> La demanda de café está dada por $D(q) = 20 - 2q$ (precio en $ por kg). Si el precio de mercado es $p_0 = 10$ $/kg, ¿cuál es el excedente del consumidor?</p>
+                        </div>
+                        <div class="ejemplo-contenido">
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 1: Encontrar la cantidad de equilibrio</div>
+                                <div class="paso-body">
+                                    <p>Cuando $D(q) = p_0$: $20 - 2q = 10$</p>
+                                    <p class="paso-resultado">$q_0 = 5$ kg</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-paso-detallado">
+                                <div class="paso-header">Paso 2: Calcular el excedente</div>
+                                <div class="paso-body">
+                                    <p>$EC = \int_0^{5} [(20 - 2q) - 10] \, dq = \int_0^{5} (10 - 2q) \, dq$</p>
+                                    <p>$= \left[10q - q^2\right]_0^5 = 50 - 25 = 25$</p>
+                                </div>
+                            </div>
+                            <div class="ejemplo-resultado-final">
+                                <span class="resultado-label">☕ Respuesta:</span>
+                                <span class="resultado-formula">$EC = \$25$ de beneficio extra para los consumidores</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- INTERACTIVO -->
+                    <div class="interactivo-box">
+                        <h5><i class="fas fa-gamepad me-2"></i> Calculadora de Excedentes</h5>
+                        <p class="text-muted">Ajusta las curvas de oferta y demanda para ver los excedentes</p>
+                        
+                        <div class="row g-4">
+                            <div class="col-lg-4">
+                                <div class="economia-controles">
+                                    <label class="form-label">Curva de demanda: D(q) = a - bq</label>
+                                    <div class="param-grupo">
+                                        <label class="form-label small">Intercepto a:</label>
+                                        <input type="range" class="form-range" id="eco-a" min="10" max="50" step="1" value="20">
+                                        <div class="param-valor">a = <span id="eco-a-valor">20</span></div>
+                                    </div>
+                                    <div class="param-grupo">
+                                        <label class="form-label small">Pendiente b:</label>
+                                        <input type="range" class="form-range" id="eco-b" min="0.5" max="5" step="0.1" value="2">
+                                        <div class="param-valor">b = <span id="eco-b-valor">2</span></div>
+                                    </div>
+                                    
+                                    <label class="form-label mt-3">Curva de oferta: S(q) = c + dq</label>
+                                    <div class="param-grupo">
+                                        <label class="form-label small">Intercepto c:</label>
+                                        <input type="range" class="form-range" id="eco-c" min="0" max="10" step="0.5" value="2">
+                                        <div class="param-valor">c = <span id="eco-c-valor">2</span></div>
+                                    </div>
+                                    <div class="param-grupo">
+                                        <label class="form-label small">Pendiente d:</label>
+                                        <input type="range" class="form-range" id="eco-d" min="0.5" max="5" step="0.1" value="1">
+                                        <div class="param-valor">d = <span id="eco-d-valor">1</span></div>
+                                    </div>
+                                    
+                                    <div class="economia-resultado mt-4">
+                                        <div class="economia-dato">
+                                            <span class="economia-label">Equilibrio:</span>
+                                            <span class="economia-valor-sm" id="eco-equilibrio">(6, 8)</span>
+                                        </div>
+                                        <div class="economia-dato eco-consumidor">
+                                            <span class="economia-label">Excedente consumidor:</span>
+                                            <span class="economia-valor" id="eco-EC">$36</span>
+                                        </div>
+                                        <div class="economia-dato eco-productor">
+                                            <span class="economia-label">Excedente productor:</span>
+                                            <span class="economia-valor" id="eco-EP">$18</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="chart-container">
+                                    <canvas id="economiaChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resumen -->
+                    <div class="resumen-tema">
+                        <strong>📌 En resumen:</strong> Las integrales calculan excedentes económicos: el área entre la curva de demanda/oferta y el precio de mercado representa el beneficio extra que obtienen consumidores y productores.
+                    </div>
+                </div>
+            </div>
 
             </div>
         </section>
