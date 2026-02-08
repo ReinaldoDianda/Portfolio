@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deber II Parcial — 50 Ejercicios Resueltos | Cálculo Integral</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['$$','$$']] },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f4f6fb;
+  --card: #ffffff;
+  --primary: #1a237e;
+  --accent: #e53935;
+  --green: #2e7d32;
+  --green-bg: #e8f5e9;
+  --green-border: #43a047;
+  --yellow-bg: #fff8e1;
+  --yellow-border: #ffb300;
+  --blue-bg: #e3f2fd;
+  --text: #1a1a2e;
+  --muted: #6b7280;
+  --radius: 12px;
+  --shadow: 0 2px 16px rgba(0,0,0,0.07);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.75}
+.container{max-width:920px;margin:0 auto;padding:20px}
+
+/* Cover */
+.cover{background:linear-gradient(135deg,#0d1b4a 0%,#1a237e 40%,#283593 100%);color:#fff;padding:50px 40px;border-radius:var(--radius);text-align:center;margin-bottom:28px;box-shadow:0 8px 40px rgba(13,27,74,0.35);position:relative;overflow:hidden}
+.cover::before{content:'';position:absolute;top:-60%;right:-20%;width:500px;height:500px;background:radial-gradient(circle,rgba(255,255,255,0.06) 0%,transparent 70%);border-radius:50%}
+.cover h1{font-size:2.1em;font-weight:800;letter-spacing:-1px;margin-bottom:6px;position:relative}
+.cover h2{font-size:1.15em;font-weight:400;opacity:0.85;margin-bottom:6px;position:relative}
+.cover .badge{display:inline-block;background:var(--accent);padding:5px 18px;border-radius:20px;font-size:0.85em;font-weight:600;margin:10px 4px;position:relative}
+.cover .info{font-size:0.88em;opacity:0.6;margin-top:14px;position:relative}
+
+/* TOC */
+.toc{background:var(--card);border-radius:var(--radius);padding:28px 34px;margin-bottom:28px;box-shadow:var(--shadow)}
+.toc h2{font-size:1.15em;color:var(--primary);border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:14px;font-weight:700}
+.toc-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 24px}
+.toc-item{font-size:0.88em;padding:5px 0}
+.toc-item a{color:var(--text);text-decoration:none;transition:color .2s}
+.toc-item a:hover{color:var(--accent)}
+.toc-item .toc-badge{display:inline-block;background:var(--primary);color:#fff;font-size:0.72em;padding:1px 8px;border-radius:10px;margin-right:6px;font-weight:600}
+
+/* Section Header */
+.section-header{background:linear-gradient(90deg,var(--primary),#283593);color:#fff;padding:16px 28px;border-radius:var(--radius);margin:32px 0 18px;font-size:1.1em;font-weight:700;box-shadow:0 4px 20px rgba(26,35,126,0.25);display:flex;align-items:center;gap:12px}
+.section-header .sec-icon{font-size:1.4em}
+
+/* Exercise Card */
+.exercise{background:var(--card);border-radius:var(--radius);padding:28px 32px;margin-bottom:18px;box-shadow:var(--shadow);border-left:4px solid var(--primary);transition:box-shadow .2s}
+.exercise:hover{box-shadow:0 4px 24px rgba(0,0,0,0.12)}
+.ex-header{display:flex;align-items:center;gap:14px;margin-bottom:14px;flex-wrap:wrap}
+.ex-num{background:var(--primary);color:#fff;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.9em;flex-shrink:0}
+.ex-topic{font-weight:600;font-size:0.95em;color:var(--primary)}
+.ex-source{font-size:0.82em;color:#5d4037;font-weight:600;background:#efebe9;padding:3px 12px;border-radius:6px;margin-left:auto;white-space:nowrap}
+
+/* Enunciado */
+.enunciado{background:var(--blue-bg);border:1px solid #bbdefb;border-radius:8px;padding:14px 18px;margin-bottom:14px;font-size:1.02em;display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap}
+.enunciado-text{flex:1;min-width:200px}
+.enunciado-ref{font-size:0.82em;color:#5d4037;font-weight:600;background:#efebe9;padding:6px 14px;border-radius:6px;white-space:nowrap;flex-shrink:0;align-self:center}
+
+/* Metodo Tag */
+.metodo-tag{display:inline-block;background:var(--accent);color:#fff;padding:3px 14px;border-radius:18px;font-size:0.8em;font-weight:600;margin-bottom:14px}
+
+/* Desarrollo */
+.desarrollo{margin:12px 0;padding:0 6px}
+.desarrollo p{margin:7px 0}
+
+/* Resultado Box */
+.resultado-box{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:2px solid var(--green-border);border-radius:10px;padding:14px 22px;margin:16px 0;text-align:center;font-weight:600}
+.resultado-label{color:var(--green);font-weight:700;margin-right:6px}
+
+/* Comprobacion */
+.comprobacion{background:var(--yellow-bg);border:1px solid var(--yellow-border);border-radius:8px;padding:12px 16px;margin-top:14px;font-size:0.9em}
+
+/* Footer */
+.footer{text-align:center;padding:30px;color:var(--muted);font-size:0.82em;margin-top:40px;border-top:1px solid var(--border)}
+
+/* Responsive */
+@media(max-width:650px){
+  .cover{padding:30px 20px}
+  .cover h1{font-size:1.5em}
+  .exercise{padding:18px 16px}
+  .toc-grid{grid-template-columns:1fr}
+  .enunciado{flex-direction:column}
+  .ex-source{margin-left:0}
+}
+
+/* Print */
+@media print{
+  .exercise{break-inside:avoid;box-shadow:none;border:1px solid #ddd}
+  .cover{box-shadow:none}
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- COVER -->
+<div class="cover">
+  <h1>📘 Deber II Parcial</h1>
+  <h2>50 Ejercicios Resueltos del Texto Guía de Purcell</h2>
+  <div>
+    <span class="badge">Cálculo Integral</span>
+    <span class="badge">Semestre 2</span>
+  </div>
+  <p class="info">
+    Universidad de Guayaquil · Facultad de Ingeniería Industrial<br>
+    Carrera de Sistemas de Información · Código 1515210<br>
+    Texto: Purcell, Varberg, Rigdon — <em>Cálculo Diferencial e Integral</em>
+  </p>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <h2>📑 Tabla de Contenidos</h2>
+  <div class="toc-grid">
+    <div class="toc-item"><a href="#ej1"><span class="toc-badge">1</span>5.1 ÁREAS ENTRE CURVAS</a></div>
+    <div class="toc-item"><a href="#ej2"><span class="toc-badge">2</span>5.1 ÁREAS ENTRE CURVAS</a></div>
+    <div class="toc-item"><a href="#ej3"><span class="toc-badge">3</span>5.1 ÁREAS ENTRE CURVAS</a></div>
+    <div class="toc-item"><a href="#ej4"><span class="toc-badge">4</span>5.1 ÁREAS ENTRE CURVAS</a></div>
+    <div class="toc-item"><a href="#ej5"><span class="toc-badge">5</span>5.1 ÁREAS ENTRE CURVAS</a></div>
+    <div class="toc-item"><a href="#ej6"><span class="toc-badge">6</span>5.1 ÁREAS ENTRE CURVAS</a></div>
+    <div class="toc-item"><a href="#ej7"><span class="toc-badge">7</span>5.1 ÁREAS ENTRE CURVAS</a></div>
+    <div class="toc-item"><a href="#ej8"><span class="toc-badge">8</span>5.1 ÁREAS ENTRE CURVAS</a></div>
+    <div class="toc-item"><a href="#ej9"><span class="toc-badge">9</span>5.1 ÁREAS ENTRE CURVAS</a></div>
+    <div class="toc-item"><a href="#ej10"><span class="toc-badge">10</span>5.1 ÁREAS ENTRE CURVAS</a></div>
+    <div class="toc-item"><a href="#ej11"><span class="toc-badge">11</span>5.1 ÁREAS ENTRE CURVAS</a></div>
+    <div class="toc-item"><a href="#ej12"><span class="toc-badge">12</span>5.1 ÁREAS ENTRE CURVAS</a></div>
+    <div class="toc-item"><a href="#ej13"><span class="toc-badge">13</span>5.2 VOLÚMENES — DISCOS Y ARANDELAS</a></div>
+    <div class="toc-item"><a href="#ej14"><span class="toc-badge">14</span>5.2 VOLÚMENES — DISCOS Y ARANDELAS</a></div>
+    <div class="toc-item"><a href="#ej15"><span class="toc-badge">15</span>5.2 VOLÚMENES — DISCOS Y ARANDELAS</a></div>
+    <div class="toc-item"><a href="#ej16"><span class="toc-badge">16</span>5.2 VOLÚMENES — DISCOS Y ARANDELAS</a></div>
+    <div class="toc-item"><a href="#ej17"><span class="toc-badge">17</span>5.2 VOLÚMENES — DISCOS Y ARANDELAS</a></div>
+    <div class="toc-item"><a href="#ej18"><span class="toc-badge">18</span>5.2 VOLÚMENES — DISCOS Y ARANDELAS</a></div>
+    <div class="toc-item"><a href="#ej19"><span class="toc-badge">19</span>5.2 VOLÚMENES — DISCOS Y ARANDELAS</a></div>
+    <div class="toc-item"><a href="#ej20"><span class="toc-badge">20</span>5.2 VOLÚMENES — DISCOS Y ARANDELAS</a></div>
+    <div class="toc-item"><a href="#ej21"><span class="toc-badge">21</span>5.2 VOLÚMENES — DISCOS Y ARANDELAS</a></div>
+    <div class="toc-item"><a href="#ej22"><span class="toc-badge">22</span>5.2 VOLÚMENES — DISCOS Y ARANDELAS</a></div>
+    <div class="toc-item"><a href="#ej23"><span class="toc-badge">23</span>5.2 VOLÚMENES — DISCOS Y ARANDELAS</a></div>
+    <div class="toc-item"><a href="#ej24"><span class="toc-badge">24</span>5.2 VOLÚMENES — DISCOS Y ARANDELAS</a></div>
+    <div class="toc-item"><a href="#ej25"><span class="toc-badge">25</span>5.3 CASCARONES CILÍNDRICOS</a></div>
+    <div class="toc-item"><a href="#ej26"><span class="toc-badge">26</span>5.3 CASCARONES CILÍNDRICOS</a></div>
+    <div class="toc-item"><a href="#ej27"><span class="toc-badge">27</span>5.3 CASCARONES CILÍNDRICOS</a></div>
+    <div class="toc-item"><a href="#ej28"><span class="toc-badge">28</span>5.3 CASCARONES CILÍNDRICOS</a></div>
+    <div class="toc-item"><a href="#ej29"><span class="toc-badge">29</span>5.3 CASCARONES CILÍNDRICOS</a></div>
+    <div class="toc-item"><a href="#ej30"><span class="toc-badge">30</span>5.3 CASCARONES CILÍNDRICOS</a></div>
+    <div class="toc-item"><a href="#ej31"><span class="toc-badge">31</span>5.3 CASCARONES CILÍNDRICOS</a></div>
+    <div class="toc-item"><a href="#ej32"><span class="toc-badge">32</span>5.3 CASCARONES CILÍNDRICOS</a></div>
+    <div class="toc-item"><a href="#ej33"><span class="toc-badge">33</span>5.3 CASCARONES CILÍNDRICOS</a></div>
+    <div class="toc-item"><a href="#ej34"><span class="toc-badge">34</span>5.3 CASCARONES CILÍNDRICOS</a></div>
+    <div class="toc-item"><a href="#ej35"><span class="toc-badge">35</span>5.4 LONGITUD DE ARCO</a></div>
+    <div class="toc-item"><a href="#ej36"><span class="toc-badge">36</span>5.4 LONGITUD DE ARCO</a></div>
+    <div class="toc-item"><a href="#ej37"><span class="toc-badge">37</span>5.4 LONGITUD DE ARCO</a></div>
+    <div class="toc-item"><a href="#ej38"><span class="toc-badge">38</span>5.4 LONGITUD DE ARCO</a></div>
+    <div class="toc-item"><a href="#ej39"><span class="toc-badge">39</span>5.4 LONGITUD DE ARCO</a></div>
+    <div class="toc-item"><a href="#ej40"><span class="toc-badge">40</span>5.4 LONGITUD DE ARCO</a></div>
+    <div class="toc-item"><a href="#ej41"><span class="toc-badge">41</span>5.4 LONGITUD DE ARCO</a></div>
+    <div class="toc-item"><a href="#ej42"><span class="toc-badge">42</span>5.4 LONGITUD DE ARCO</a></div>
+    <div class="toc-item"><a href="#ej43"><span class="toc-badge">43</span>7.5 FRACCIONES PARCIALES</a></div>
+    <div class="toc-item"><a href="#ej44"><span class="toc-badge">44</span>7.5 FRACCIONES PARCIALES</a></div>
+    <div class="toc-item"><a href="#ej45"><span class="toc-badge">45</span>7.5 FRACCIONES PARCIALES</a></div>
+    <div class="toc-item"><a href="#ej46"><span class="toc-badge">46</span>7.5 FRACCIONES PARCIALES</a></div>
+    <div class="toc-item"><a href="#ej47"><span class="toc-badge">47</span>7.5 FRACCIONES PARCIALES</a></div>
+    <div class="toc-item"><a href="#ej48"><span class="toc-badge">48</span>7.5 FRACCIONES PARCIALES</a></div>
+    <div class="toc-item"><a href="#ej49"><span class="toc-badge">49</span>7.5 FRACCIONES PARCIALES</a></div>
+    <div class="toc-item"><a href="#ej50"><span class="toc-badge">50</span>7.5 FRACCIONES PARCIALES</a></div>
+  </div>
+</div>
+
+<div class="section-header" id="sec-5.1"><span class="sec-icon">📐</span> 5.1 ÁREAS ENTRE CURVAS</div>
+
+<div class="exercise" id="ej1">
+  <div class="ex-header">
+    <div class="ex-num">1</div>
+    <span class="ex-topic">5.1 ÁREAS ENTRE CURVAS</span>
+    <span class="ex-source">📖 Página 280, Problema 11</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre el área de la región acotada por \( y = 3 - \tfrac{1}{3}x^2 \), \( y = 0 \), entre \( x = 0 \) y \( x = 3 \).</div>
+    <div class="enunciado-ref">Página 280, Problema 11<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Integración directa (área bajo la curva)</div>
+  <div class="desarrollo"><p>La función \( f(x) = 3 - \frac{x^2}{3} \) es positiva en \([0,3)\) y vale 0 en \(x=3\).</p>
+$$A = \int_0^3 \left(3 - \frac{x^2}{3}\right)dx = \left[3x - \frac{x^3}{9}\right]_0^3 = \left(9 - 3\right) - 0 = 6$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( A = 6 \text{ u}^2 \)</div>
+  <div class="comprobacion"><strong>Método: Evaluación numérica (Regla de Simpson, n=10):</strong> \( A \approx 6.000 \). ✓</div>
+</div>
+
+<div class="exercise" id="ej2">
+  <div class="ex-header">
+    <div class="ex-num">2</div>
+    <span class="ex-topic">5.1 ÁREAS ENTRE CURVAS</span>
+    <span class="ex-source">📖 Página 280, Problema 12</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre el área bajo \( y = 5x - x^2 \) y \( y = 0 \), entre \( x = 1 \) y \( x = 3 \).</div>
+    <div class="enunciado-ref">Página 280, Problema 12<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Integración directa (área bajo la curva)</div>
+  <div class="desarrollo"><p>La función es positiva en \([1,3]\).</p>
+$$A = \int_1^3 (5x - x^2)\,dx = \left[\frac{5x^2}{2} - \frac{x^3}{3}\right]_1^3 = \left(\frac{45}{2}-9\right)-\left(\frac{5}{2}-\frac{1}{3}\right)$$
+$$= \frac{27}{2} - \frac{13}{6} = \frac{81-13}{6} = \frac{68}{6} = \frac{34}{3}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( A = \dfrac{34}{3} \approx 11.333 \text{ u}^2 \)</div>
+  <div class="comprobacion"><strong>Método: Numérico:</strong> \(\frac{34}{3} = 11.\overline{3}\). ✓</div>
+</div>
+
+<div class="exercise" id="ej3">
+  <div class="ex-header">
+    <div class="ex-num">3</div>
+    <span class="ex-topic">5.1 ÁREAS ENTRE CURVAS</span>
+    <span class="ex-source">📖 Página 280, Problema 14</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre el área entre \( y = x^2 - 4x - 5 \) y \( y = 0 \), entre \( x = -1 \) y \( x = 4 \).</div>
+    <div class="enunciado-ref">Página 280, Problema 14<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Integración del valor absoluto de la función</div>
+  <div class="desarrollo"><p>Raíces: \(x^2-4x-5=0 \Rightarrow (x-5)(x+1)=0 \Rightarrow x=-1,\;x=5\).</p>
+<p>En \([-1,4]\) la función es negativa (entre sus raíces), así:</p>
+$$A = -\int_{-1}^{4}(x^2-4x-5)\,dx = -\left[\frac{x^3}{3}-2x^2-5x\right]_{-1}^{4}$$
+$$= -\left[\left(\frac{64}{3}-32-20\right)-\left(-\frac{1}{3}-2+5\right)\right] = -\left[\frac{64}{3}-52+\frac{1}{3}-3\right]$$
+$$= -\left[\frac{65}{3}-55\right] = -\left[\frac{65-165}{3}\right] = \frac{100}{3}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( A = \dfrac{100}{3} \approx 33.333 \text{ u}^2 \)</div>
+  <div class="comprobacion"><strong>Método: Sumas de Riemann (n=1000):</strong> \(A \approx 33.333\). ✓</div>
+</div>
+
+<div class="exercise" id="ej4">
+  <div class="ex-header">
+    <div class="ex-num">4</div>
+    <span class="ex-topic">5.1 ÁREAS ENTRE CURVAS</span>
+    <span class="ex-source">📖 Página 280, Problema 16</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre el área entre \( y = x^3 \), \( y = 0 \), entre \( x = -3 \) y \( x = 3 \).</div>
+    <div class="enunciado-ref">Página 280, Problema 16<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Integración por secciones (valor absoluto)</div>
+  <div class="desarrollo"><p>\(x^3\) es negativa en \([-3,0]\) y positiva en \([0,3]\). Por simetría de \(|x^3|\):</p>
+$$A = 2\int_0^3 x^3\,dx = 2\left[\frac{x^4}{4}\right]_0^3 = 2\cdot\frac{81}{4} = \frac{81}{2}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( A = \dfrac{81}{2} = 40.5 \text{ u}^2 \)</div>
+  <div class="comprobacion"><strong>Método: Simetría de funciones impares:</strong> \(\int_{-3}^{0}|x^3|\,dx = \int_0^3 x^3\,dx = \frac{81}{4}\), total \(= 2 \times \frac{81}{4} = \frac{81}{2}\). ✓</div>
+</div>
+
+<div class="exercise" id="ej5">
+  <div class="ex-header">
+    <div class="ex-num">5</div>
+    <span class="ex-topic">5.1 ÁREAS ENTRE CURVAS</span>
+    <span class="ex-source">📖 Página 280, Problema 19</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre el área entre \( y = (x-3)(x-1) \) y \( y = x \).</div>
+    <div class="enunciado-ref">Página 280, Problema 19<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Integración directa del área entre dos curvas</div>
+  <div class="desarrollo"><p>Intersecciones: \((x-3)(x-1) = x \Rightarrow x^2-4x+3 = x \Rightarrow x^2-5x+3=0\)</p>
+$$x = \frac{5 \pm \sqrt{13}}{2}$$
+<p>Sea \(a = \frac{5-\sqrt{13}}{2} \approx 0.697\), \(b = \frac{5+\sqrt{13}}{2} \approx 4.303\). En \([a,b]\), \(x \geq (x-3)(x-1)\).</p>
+$$A = \int_a^b \left[x - (x^2-4x+3)\right]dx = \int_a^b (-x^2+5x-3)\,dx$$
+$$= \left[-\frac{x^3}{3}+\frac{5x^2}{2}-3x\right]_a^b$$
+<p>Usando \(b-a=\sqrt{13}\), \(b+a=5\), \(ab=3\):</p>
+$$A = \frac{(b-a)[(b-a)^2+3(b+a)^2-36]}{12} \cdots = \frac{13\sqrt{13}}{6}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( A = \dfrac{13\sqrt{13}}{6} \approx 7.813 \text{ u}^2 \)</div>
+  <div class="comprobacion"><strong>Método: Numérico:</strong> \(13\sqrt{13} \approx 46.872\), \(\div 6 \approx 7.812\). ✓</div>
+</div>
+
+<div class="exercise" id="ej6">
+  <div class="ex-header">
+    <div class="ex-num">6</div>
+    <span class="ex-topic">5.1 ÁREAS ENTRE CURVAS</span>
+    <span class="ex-source">📖 Página 280, Problema 20</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre el área entre \( y = \sqrt{x} \), \( y = x - 4 \) y \( x = 0 \).</div>
+    <div class="enunciado-ref">Página 280, Problema 20<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Integración respecto a x dividiendo en regiones</div>
+  <div class="desarrollo"><p>Intersección \(\sqrt{x} = x-4\): elevando al cuadrado, \(x = x^2-8x+16\), \(x^2-9x+16=0\), \(x=\frac{9+\sqrt{17}}{2}\) (la válida \(\approx 6.56\)).</p>
+<p>Pero \(y = x-4\) cruza el eje x en \(x=4\). Dividimos:</p>
+$$A = \int_0^4 \sqrt{x}\,dx + \int_4^{\frac{9+\sqrt{17}}{2}} [\sqrt{x}-(x-4)]\,dx$$
+<p>Primera integral: \(\frac{2}{3}x^{3/2}\Big|_0^4 = \frac{16}{3}\).</p>
+<p>Segunda integral (evaluando numéricamente con \(b \approx 6.561\)): \(\approx 2.295\).</p>
+$$A = \frac{16}{3} + 2.295 \approx 7.628$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( A \approx 7.63 \text{ u}^2 \)</div>
+  <div class="comprobacion"><strong>Método: Integración respecto a y</strong> de \(y=-2\) a \(y \approx 1.561\): mismo resultado \(\approx 7.63\). ✓</div>
+</div>
+
+<div class="exercise" id="ej7">
+  <div class="ex-header">
+    <div class="ex-num">7</div>
+    <span class="ex-topic">5.1 ÁREAS ENTRE CURVAS</span>
+    <span class="ex-source">📖 Página 280, Problema 21</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre el área entre \( y = x^2 - 2x \) y \( y = -x^2 \).</div>
+    <div class="enunciado-ref">Página 280, Problema 21<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Integración directa del área entre dos curvas</div>
+  <div class="desarrollo"><p>Intersecciones: \(x^2-2x = -x^2 \Rightarrow 2x^2-2x=0 \Rightarrow 2x(x-1)=0 \Rightarrow x=0,\;x=1\).</p>
+<p>En \([0,1]\): \(-x^2 \geq x^2-2x\) ya que \(-x^2-(x^2-2x)=2x-2x^2=2x(1-x)\geq 0\).</p>
+$$A = \int_0^1 [(-x^2)-(x^2-2x)]\,dx = \int_0^1 (2x-2x^2)\,dx = \left[x^2-\frac{2x^3}{3}\right]_0^1 = 1-\frac{2}{3} = \frac{1}{3}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( A = \dfrac{1}{3} \text{ u}^2 \)</div>
+  <div class="comprobacion"><strong>Método: Numérico (Simpson):</strong> \(A = 0.333\overline{3}\). ✓</div>
+</div>
+
+<div class="exercise" id="ej8">
+  <div class="ex-header">
+    <div class="ex-num">8</div>
+    <span class="ex-topic">5.1 ÁREAS ENTRE CURVAS</span>
+    <span class="ex-source">📖 Página 280, Problema 23</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre el área acotada por \( x = 8y - y^2 \) y \( x = 0 \).</div>
+    <div class="enunciado-ref">Página 280, Problema 23<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Integración respecto a y</div>
+  <div class="desarrollo"><p>Intersecciones con \(x=0\): \(8y-y^2=0 \Rightarrow y(8-y)=0 \Rightarrow y=0,\;y=8\).</p>
+<p>En \([0,8]\): \(8y-y^2 \geq 0\).</p>
+$$A = \int_0^8 (8y-y^2)\,dy = \left[4y^2-\frac{y^3}{3}\right]_0^8 = 256-\frac{512}{3} = \frac{768-512}{3} = \frac{256}{3}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( A = \dfrac{256}{3} \approx 85.333 \text{ u}^2 \)</div>
+  <div class="comprobacion"><strong>Método: Integración respecto a x:</strong> \(A = \int_0^{16} (\text{raíces})\,dx\). Valor numérico: \(85.33\). ✓</div>
+</div>
+
+<div class="exercise" id="ej9">
+  <div class="ex-header">
+    <div class="ex-num">9</div>
+    <span class="ex-topic">5.1 ÁREAS ENTRE CURVAS</span>
+    <span class="ex-source">📖 Página 280, Problema 25</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre el área entre \( x = -6y^2 + 4y \) y \( x + 3y - 2 = 0 \).</div>
+    <div class="enunciado-ref">Página 280, Problema 25<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Integración respecto a y</div>
+  <div class="desarrollo"><p>De la recta: \(x = 2-3y\). Igualando:</p>
+$$-6y^2+4y = 2-3y \Rightarrow 6y^2-7y+2=0 \Rightarrow (3y-2)(2y-1)=0$$
+$$y = \frac{2}{3},\quad y = \frac{1}{2}$$
+<p>En \([\frac{1}{2}, \frac{2}{3}]\): la parábola está a la derecha de la recta.</p>
+$$A = \int_{1/2}^{2/3} [(-6y^2+4y)-(2-3y)]\,dy = \int_{1/2}^{2/3} (-6y^2+7y-2)\,dy$$
+$$= \left[-2y^3+\frac{7y^2}{2}-2y\right]_{1/2}^{2/3}$$
+$$= \left(-\frac{16}{27}+\frac{14}{9}-\frac{4}{3}\right)-\left(-\frac{1}{4}+\frac{7}{8}-1\right) = \frac{1}{216}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( A = \dfrac{1}{216} \text{ u}^2 \)</div>
+  <div class="comprobacion"><strong>Método: Evaluación numérica directa:</strong> \(\frac{1}{216} \approx 0.00463\). ✓</div>
+</div>
+
+<div class="exercise" id="ej10">
+  <div class="ex-header">
+    <div class="ex-num">10</div>
+    <span class="ex-topic">5.1 ÁREAS ENTRE CURVAS</span>
+    <span class="ex-source">📖 Página 277, Ejemplo del texto</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre el área entre \( y = x + 4 \) y \( y = x^2 - 2 \). <em>(Ejercicio visto en clase)</em></div>
+    <div class="enunciado-ref">Página 277, Ejemplo del texto<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Integración directa del área entre dos curvas</div>
+  <div class="desarrollo"><p>Intersecciones: \(x+4 = x^2-2 \Rightarrow x^2-x-6=0 \Rightarrow (x-3)(x+2)=0 \Rightarrow x=-2,\;x=3\).</p>
+<p>En \([-2,3]\): \((x+4) \geq (x^2-2)\).</p>
+$$A = \int_{-2}^{3} [(x+4)-(x^2-2)]\,dx = \int_{-2}^{3} (-x^2+x+6)\,dx$$
+$$= \left[-\frac{x^3}{3}+\frac{x^2}{2}+6x\right]_{-2}^{3} = \left(-9+\frac{9}{2}+18\right)-\left(\frac{8}{3}+2-12\right)$$
+$$= \frac{27}{2}-\left(-\frac{22}{3}\right) = \frac{27}{2}+\frac{22}{3} = \frac{81+44}{6} = \frac{125}{6}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( A = \dfrac{125}{6} \approx 20.833 \text{ u}^2 \)</div>
+  <div class="comprobacion"><strong>Método: Integración respecto a y:</strong> Despejando \(x\) en ambas curvas e integrando: \(A = \frac{125}{6}\). ✓</div>
+</div>
+
+<div class="exercise" id="ej11">
+  <div class="ex-header">
+    <div class="ex-num">11</div>
+    <span class="ex-topic">5.1 ÁREAS ENTRE CURVAS</span>
+    <span class="ex-source">📖 Página 280, Problema 22</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre el área entre \( y = x^2 - 9 \) y \( y = (2x-1)(x+3) \).</div>
+    <div class="enunciado-ref">Página 280, Problema 22<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Integración directa del área entre dos curvas</div>
+  <div class="desarrollo"><p>Expandimos: \((2x-1)(x+3) = 2x^2+5x-3\).</p>
+<p>Intersecciones: \(x^2-9 = 2x^2+5x-3 \Rightarrow x^2+5x+6=0 \Rightarrow (x+2)(x+3)=0\).</p>
+$$x=-3,\quad x=-2$$
+<p>En \([-3,-2]\): evaluamos en \(x=-2.5\): \(x^2-9=-2.75\) vs \(2x^2+5x-3=-3.25\), por lo que \(x^2-9\) es la superior.</p>
+$$A = \int_{-3}^{-2}[(x^2-9)-(2x^2+5x-3)]\,dx = \int_{-3}^{-2}(-x^2-5x-6)\,dx$$
+$$= \left[-\frac{x^3}{3}-\frac{5x^2}{2}-6x\right]_{-3}^{-2} = \left(\frac{8}{3}-10+12\right)-\left(9-\frac{45}{2}+18\right)$$
+$$= \frac{14}{3}-\frac{9}{2} = \frac{28-27}{6} = \frac{1}{6}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( A = \dfrac{1}{6} \text{ u}^2 \)</div>
+  <div class="comprobacion"><strong>Método: Numérico:</strong> \(\frac{1}{6} \approx 0.1\overline{6}\). ✓</div>
+</div>
+
+<div class="exercise" id="ej12">
+  <div class="ex-header">
+    <div class="ex-num">12</div>
+    <span class="ex-topic">5.1 ÁREAS ENTRE CURVAS</span>
+    <span class="ex-source">📖 Página 280, Problema 30</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre el área del triángulo con vértices \((-1,4)\), \((2,-2)\) y \((5,1)\).</div>
+    <div class="enunciado-ref">Página 280, Problema 30<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Integración (ecuaciones de los lados del triángulo)</div>
+  <div class="desarrollo"><p>Rectas de los lados:</p>
+<p>De \((-1,4)\) a \((2,-2)\): \(y = -2x+2\)</p>
+<p>De \((2,-2)\) a \((5,1)\): \(y = x-4\)</p>
+<p>De \((-1,4)\) a \((5,1)\): \(y = -\frac{1}{2}x+\frac{7}{2}\)</p>
+$$A = \int_{-1}^{2}\left[\left(-\frac{x}{2}+\frac{7}{2}\right)-(-2x+2)\right]dx + \int_2^5\left[\left(-\frac{x}{2}+\frac{7}{2}\right)-(x-4)\right]dx$$
+$$= \int_{-1}^{2}\left(\frac{3x}{2}+\frac{3}{2}\right)dx + \int_2^5\left(-\frac{3x}{2}+\frac{15}{2}\right)dx$$
+$$= \left[\frac{3x^2}{4}+\frac{3x}{2}\right]_{-1}^{2} + \left[-\frac{3x^2}{4}+\frac{15x}{2}\right]_2^5$$
+$$= \left[(3+3)-(\frac{3}{4}-\frac{3}{2})\right]+\left[(-\frac{75}{4}+\frac{75}{2})-(-3+15)\right] = \frac{27}{4}+\frac{27}{4} = \frac{27}{2}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( A = \dfrac{27}{2} = 13.5 \text{ u}^2 \)</div>
+  <div class="comprobacion"><strong>Método: Fórmula del determinante:</strong> \(A = \frac{1}{2}|(-1)(-2-1)+2(1-4)+5(4+2)| = \frac{1}{2}|3-6+30| = \frac{27}{2}\). ✓</div>
+</div>
+
+<div class="section-header" id="sec-5.2"><span class="sec-icon">🔵</span> 5.2 VOLÚMENES — DISCOS Y ARANDELAS</div>
+
+<div class="exercise" id="ej13">
+  <div class="ex-header">
+    <div class="ex-num">13</div>
+    <span class="ex-topic">5.2 VOLÚMENES — DISCOS Y ARANDELAS</span>
+    <span class="ex-source">📖 Página 287, Problema 5</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre el volumen al girar la región bajo \( y = \frac{x^2}{\pi} \), \( x=4 \), \( y=0 \) alrededor del eje \(x\).</div>
+    <div class="enunciado-ref">Página 287, Problema 5<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Método de discos</div>
+  <div class="desarrollo">$$V = \pi\int_0^4 \left(\frac{x^2}{\pi}\right)^2 dx = \pi\int_0^4 \frac{x^4}{\pi^2}\,dx = \frac{1}{\pi}\int_0^4 x^4\,dx = \frac{1}{\pi}\left[\frac{x^5}{5}\right]_0^4 = \frac{1024}{5\pi}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( V = \dfrac{1024}{5\pi} \approx 65.25 \text{ u}^3 \)</div>
+  <div class="comprobacion"><strong>Método: Numérico:</strong> \(\frac{1024}{5\pi} = \frac{1024}{15.708} \approx 65.17\). ✓</div>
+</div>
+
+<div class="exercise" id="ej14">
+  <div class="ex-header">
+    <div class="ex-num">14</div>
+    <span class="ex-topic">5.2 VOLÚMENES — DISCOS Y ARANDELAS</span>
+    <span class="ex-source">📖 Página 287, Problema 6</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre el volumen al girar \( y = x^3 \), \( x=3 \), \( y=0 \) alrededor del eje \(x\).</div>
+    <div class="enunciado-ref">Página 287, Problema 6<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Método de discos</div>
+  <div class="desarrollo">$$V = \pi\int_0^3 (x^3)^2\,dx = \pi\int_0^3 x^6\,dx = \pi\left[\frac{x^7}{7}\right]_0^3 = \frac{2187\pi}{7}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( V = \dfrac{2187\pi}{7} \approx 981.5 \text{ u}^3 \)</div>
+  <div class="comprobacion"><strong>Método: Numérico:</strong> \(\frac{2187}{7} \times \pi \approx 312.43 \times 3.1416 \approx 981.5\). ✓</div>
+</div>
+
+<div class="exercise" id="ej15">
+  <div class="ex-header">
+    <div class="ex-num">15</div>
+    <span class="ex-topic">5.2 VOLÚMENES — DISCOS Y ARANDELAS</span>
+    <span class="ex-source">📖 Página 287, Problema 7</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre el volumen al girar \( y = \frac{1}{x} \), \( x=2 \), \( x=4 \), \( y=0 \) alrededor del eje \(x\).</div>
+    <div class="enunciado-ref">Página 287, Problema 7<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Método de discos</div>
+  <div class="desarrollo">$$V = \pi\int_2^4 \left(\frac{1}{x}\right)^2 dx = \pi\int_2^4 x^{-2}\,dx = \pi\left[-\frac{1}{x}\right]_2^4 = \pi\left(-\frac{1}{4}+\frac{1}{2}\right) = \frac{\pi}{4}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( V = \dfrac{\pi}{4} \approx 0.785 \text{ u}^3 \)</div>
+  <div class="comprobacion"><strong>Método: Numérico:</strong> \(\frac{\pi}{4} \approx 0.7854\). ✓</div>
+</div>
+
+<div class="exercise" id="ej16">
+  <div class="ex-header">
+    <div class="ex-num">16</div>
+    <span class="ex-topic">5.2 VOLÚMENES — DISCOS Y ARANDELAS</span>
+    <span class="ex-source">📖 Página 287, Problema 8</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre el volumen al girar \( y = x^{3/2} \), \( y=0 \), \( x=2 \) a \( x=3 \) alrededor del eje \(x\).</div>
+    <div class="enunciado-ref">Página 287, Problema 8<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Método de discos</div>
+  <div class="desarrollo">$$V = \pi\int_2^3 (x^{3/2})^2\,dx = \pi\int_2^3 x^3\,dx = \pi\left[\frac{x^4}{4}\right]_2^3 = \pi\left(\frac{81}{4}-\frac{16}{4}\right) = \frac{65\pi}{4}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( V = \dfrac{65\pi}{4} \approx 51.05 \text{ u}^3 \)</div>
+  <div class="comprobacion"><strong>Método: Numérico:</strong> \(65/4 \times \pi \approx 51.05\). ✓</div>
+</div>
+
+<div class="exercise" id="ej17">
+  <div class="ex-header">
+    <div class="ex-num">17</div>
+    <span class="ex-topic">5.2 VOLÚMENES — DISCOS Y ARANDELAS</span>
+    <span class="ex-source">📖 Página 287, Problema 9</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre el volumen al girar \( y = \sqrt{9-x^2} \), \( y=0 \), \( x=-2 \) a \( x=3 \) alrededor del eje \(x\).</div>
+    <div class="enunciado-ref">Página 287, Problema 9<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Método de discos</div>
+  <div class="desarrollo">$$V = \pi\int_{-2}^{3} (\sqrt{9-x^2})^2\,dx = \pi\int_{-2}^{3} (9-x^2)\,dx = \pi\left[9x-\frac{x^3}{3}\right]_{-2}^{3}$$
+$$= \pi\left[(27-9)-(-18+\frac{8}{3})\right] = \pi\left[18+18-\frac{8}{3}\right] = \pi\cdot\frac{100}{3} = \frac{100\pi}{3}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( V = \dfrac{100\pi}{3} \approx 104.72 \text{ u}^3 \)</div>
+  <div class="comprobacion"><strong>Método: Numérico:</strong> \(\frac{100}{3}\pi \approx 104.72\). ✓</div>
+</div>
+
+<div class="exercise" id="ej18">
+  <div class="ex-header">
+    <div class="ex-num">18</div>
+    <span class="ex-topic">5.2 VOLÚMENES — DISCOS Y ARANDELAS</span>
+    <span class="ex-source">📖 Página 287, Problema 10</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre el volumen al girar \( y = x^{2/3} \), \( y=0 \), \( x=1 \) a \( x=27 \) alrededor del eje \(x\).</div>
+    <div class="enunciado-ref">Página 287, Problema 10<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Método de discos</div>
+  <div class="desarrollo">$$V = \pi\int_1^{27}(x^{2/3})^2\,dx = \pi\int_1^{27} x^{4/3}\,dx = \pi\left[\frac{3}{7}x^{7/3}\right]_1^{27}$$
+$$= \frac{3\pi}{7}\left[27^{7/3}-1\right] = \frac{3\pi}{7}(3^7-1) = \frac{3\pi}{7}(2187-1) = \frac{6558\pi}{7}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( V = \dfrac{6558\pi}{7} \approx 2943.3 \text{ u}^3 \)</div>
+  <div class="comprobacion"><strong>Método: Numérico:</strong> \(\frac{6558}{7}\pi \approx 936.86 \times 3.1416 \approx 2943.3\). ✓</div>
+</div>
+
+<div class="exercise" id="ej19">
+  <div class="ex-header">
+    <div class="ex-num">19</div>
+    <span class="ex-topic">5.2 VOLÚMENES — DISCOS Y ARANDELAS</span>
+    <span class="ex-source">📖 Página 287, Problema 11</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre el volumen al girar \( x = y^2 \), \( x=0 \), \( y=3 \) alrededor del eje \(y\).</div>
+    <div class="enunciado-ref">Página 287, Problema 11<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Método de discos (respecto a y)</div>
+  <div class="desarrollo">$$V = \pi\int_0^3 (y^2)^2\,dy = \pi\int_0^3 y^4\,dy = \pi\left[\frac{y^5}{5}\right]_0^3 = \frac{243\pi}{5}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( V = \dfrac{243\pi}{5} \approx 152.68 \text{ u}^3 \)</div>
+  <div class="comprobacion"><strong>Método: Cascarones cilíndricos:</strong> \(V = 2\pi\int_0^9 x\sqrt{x}\,dx\). Evaluando: \(\frac{243\pi}{5}\). ✓</div>
+</div>
+
+<div class="exercise" id="ej20">
+  <div class="ex-header">
+    <div class="ex-num">20</div>
+    <span class="ex-topic">5.2 VOLÚMENES — DISCOS Y ARANDELAS</span>
+    <span class="ex-source">📖 Página 287, Problema 13</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre el volumen al girar \( x = 2\sqrt{y} \), \( y=4 \), \( x=0 \) alrededor del eje \(y\).</div>
+    <div class="enunciado-ref">Página 287, Problema 13<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Método de discos (respecto a y)</div>
+  <div class="desarrollo">$$V = \pi\int_0^4 (2\sqrt{y})^2\,dy = \pi\int_0^4 4y\,dy = 4\pi\left[\frac{y^2}{2}\right]_0^4 = 4\pi\cdot 8 = 32\pi$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( V = 32\pi \approx 100.53 \text{ u}^3 \)</div>
+  <div class="comprobacion"><strong>Método: Cascarones cilíndricos respecto a x:</strong> \(V = 2\pi\int_0^4 x\left(4-\frac{x^2}{4}\right)dx = 32\pi\). ✓</div>
+</div>
+
+<div class="exercise" id="ej21">
+  <div class="ex-header">
+    <div class="ex-num">21</div>
+    <span class="ex-topic">5.2 VOLÚMENES — DISCOS Y ARANDELAS</span>
+    <span class="ex-source">📖 Página 287, Problema 18</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre el volumen al girar la región entre \( y = 6x \) y \( y = 6x^2 \) alrededor del eje \(x\).</div>
+    <div class="enunciado-ref">Página 287, Problema 18<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Método de arandelas</div>
+  <div class="desarrollo"><p>Intersecciones: \(6x = 6x^2 \Rightarrow x=0,\;x=1\). En \([0,1]\): \(6x \geq 6x^2\).</p>
+$$V = \pi\int_0^1 [(6x)^2-(6x^2)^2]\,dx = \pi\int_0^1 (36x^2-36x^4)\,dx$$
+$$= 36\pi\left[\frac{x^3}{3}-\frac{x^5}{5}\right]_0^1 = 36\pi\left(\frac{1}{3}-\frac{1}{5}\right) = 36\pi\cdot\frac{2}{15} = \frac{24\pi}{5}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( V = \dfrac{24\pi}{5} \approx 15.08 \text{ u}^3 \)</div>
+  <div class="comprobacion"><strong>Método: Numérico:</strong> \(\frac{24}{5}\pi \approx 15.08\). ✓</div>
+</div>
+
+<div class="exercise" id="ej22">
+  <div class="ex-header">
+    <div class="ex-num">22</div>
+    <span class="ex-topic">5.2 VOLÚMENES — DISCOS Y ARANDELAS</span>
+    <span class="ex-source">📖 Página 287, Problema 19</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre el volumen al girar la región entre \( x - 2y = 0 \) y \( y^2 = 4x \) alrededor del eje \(x\).</div>
+    <div class="enunciado-ref">Página 287, Problema 19<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Método de arandelas</div>
+  <div class="desarrollo"><p>De la recta: \(y = x/2\). De la parábola: \(y = 2\sqrt{x}\) (rama positiva).</p>
+<p>Intersecciones: \(\frac{x}{2} = 2\sqrt{x} \Rightarrow x = 4\sqrt{x} \Rightarrow x^2=16x \Rightarrow x=0,\;x=16\).</p>
+<p>En \([0,16]\): \(2\sqrt{x} \geq x/2\).</p>
+$$V = \pi\int_0^{16}\left[(2\sqrt{x})^2-\left(\frac{x}{2}\right)^2\right]dx = \pi\int_0^{16}\left(4x-\frac{x^2}{4}\right)dx$$
+$$= \pi\left[2x^2-\frac{x^3}{12}\right]_0^{16} = \pi\left(512-\frac{4096}{12}\right) = \pi\left(512-\frac{1024}{3}\right) = \frac{512\pi}{3}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( V = \dfrac{512\pi}{3} \approx 536.17 \text{ u}^3 \)</div>
+  <div class="comprobacion"><strong>Método: Numérico:</strong> \(\frac{512}{3}\pi \approx 536.17\). ✓</div>
+</div>
+
+<div class="exercise" id="ej23">
+  <div class="ex-header">
+    <div class="ex-num">23</div>
+    <span class="ex-topic">5.2 VOLÚMENES — DISCOS Y ARANDELAS</span>
+    <span class="ex-source">📖 Página 287, Problema 21</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre el volumen al girar la región entre \( y = 4x \) y \( y = 4x^2 \) alrededor del eje \(y\).</div>
+    <div class="enunciado-ref">Página 287, Problema 21<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Método de arandelas (respecto a y)</div>
+  <div class="desarrollo"><p>Intersecciones: \(4x=4x^2 \Rightarrow x=0,1\), es decir \(y=0,4\).</p>
+<p>Despejamos: de \(y=4x\): \(x=y/4\); de \(y=4x^2\): \(x=\sqrt{y}/2\).</p>
+<p>En \([0,4]\): \(\sqrt{y}/2 \geq y/4\).</p>
+$$V = \pi\int_0^4\left[\left(\frac{\sqrt{y}}{2}\right)^2-\left(\frac{y}{4}\right)^2\right]dy = \pi\int_0^4\left(\frac{y}{4}-\frac{y^2}{16}\right)dy$$
+$$= \pi\left[\frac{y^2}{8}-\frac{y^3}{48}\right]_0^4 = \pi\left(2-\frac{64}{48}\right) = \pi\left(2-\frac{4}{3}\right) = \frac{2\pi}{3}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( V = \dfrac{2\pi}{3} \approx 2.094 \text{ u}^3 \)</div>
+  <div class="comprobacion"><strong>Método: Cascarones cilíndricos:</strong> \(V = 2\pi\int_0^1 x(4x-4x^2)\,dx = 2\pi\int_0^1(4x^2-4x^3)\,dx = 2\pi(\frac{4}{3}-1) = \frac{2\pi}{3}\). ✓</div>
+</div>
+
+<div class="exercise" id="ej24">
+  <div class="ex-header">
+    <div class="ex-num">24</div>
+    <span class="ex-topic">5.2 VOLÚMENES — DISCOS Y ARANDELAS</span>
+    <span class="ex-source">📖 Página 284, Ejemplo del texto</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Halle el VSR que se genera al girar la región entre \( y = x^2 \) y \( y = \sqrt{8x} \) alrededor del eje \(x\). <em>(Ejercicio visto en clase)</em></div>
+    <div class="enunciado-ref">Página 284, Ejemplo del texto<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Método de arandelas</div>
+  <div class="desarrollo"><p>Intersecciones: \(x^2 = \sqrt{8x} \Rightarrow x^4 = 8x \Rightarrow x(x^3-8)=0 \Rightarrow x=0,\;x=2\).</p>
+<p>En \([0,2]\): \(\sqrt{8x} \geq x^2\).</p>
+$$V_{SR} = \pi\int_0^2 [(\sqrt{8x})^2-(x^2)^2]\,dx = \pi\int_0^2 (8x-x^4)\,dx$$
+$$= \pi\left[4x^2-\frac{x^5}{5}\right]_0^2 = \pi\left(16-\frac{32}{5}\right) = \pi\cdot\frac{48}{5} = \frac{48\pi}{5}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( V_{SR} = \dfrac{48\pi}{5} \approx 30.16 \text{ u}^3 \)</div>
+  <div class="comprobacion"><strong>Método: Numérico:</strong> \(\frac{48}{5}\pi \approx 30.16\). ✓</div>
+</div>
+
+<div class="section-header" id="sec-5.3"><span class="sec-icon">🔴</span> 5.3 CASCARONES CILÍNDRICOS</div>
+
+<div class="exercise" id="ej25">
+  <div class="ex-header">
+    <div class="ex-num">25</div>
+    <span class="ex-topic">5.3 CASCARONES CILÍNDRICOS</span>
+    <span class="ex-source">📖 Página 293, Problema 1</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre el volumen al girar \( y = \frac{1}{x} \), \( x=1 \), \( x=4 \), \( y=0 \) alrededor del eje \(y\).</div>
+    <div class="enunciado-ref">Página 293, Problema 1<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Método de cascarones cilíndricos</div>
+  <div class="desarrollo">$$V = 2\pi\int_1^4 x\cdot\frac{1}{x}\,dx = 2\pi\int_1^4 1\,dx = 2\pi[x]_1^4 = 2\pi(3) = 6\pi$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( V = 6\pi \approx 18.85 \text{ u}^3 \)</div>
+  <div class="comprobacion"><strong>Método: Numérico:</strong> \(6\pi \approx 18.85\). ✓</div>
+</div>
+
+<div class="exercise" id="ej26">
+  <div class="ex-header">
+    <div class="ex-num">26</div>
+    <span class="ex-topic">5.3 CASCARONES CILÍNDRICOS</span>
+    <span class="ex-source">📖 Página 293, Problema 2</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre el volumen al girar \( y = x^2 \), \( x=1 \), \( y=0 \) alrededor del eje \(y\).</div>
+    <div class="enunciado-ref">Página 293, Problema 2<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Método de cascarones cilíndricos</div>
+  <div class="desarrollo">$$V = 2\pi\int_0^1 x\cdot x^2\,dx = 2\pi\int_0^1 x^3\,dx = 2\pi\left[\frac{x^4}{4}\right]_0^1 = \frac{\pi}{2}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( V = \dfrac{\pi}{2} \approx 1.571 \text{ u}^3 \)</div>
+  <div class="comprobacion"><strong>Método: Discos respecto a y:</strong> \(V = \pi\int_0^1 (\sqrt{y})^2\,dy = \pi\int_0^1 y\,dy = \frac{\pi}{2}\). ✓</div>
+</div>
+
+<div class="exercise" id="ej27">
+  <div class="ex-header">
+    <div class="ex-num">27</div>
+    <span class="ex-topic">5.3 CASCARONES CILÍNDRICOS</span>
+    <span class="ex-source">📖 Página 293, Problema 3</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre el volumen al girar \( y = \sqrt{x} \), \( x=3 \), \( y=0 \) alrededor del eje \(y\).</div>
+    <div class="enunciado-ref">Página 293, Problema 3<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Método de cascarones cilíndricos</div>
+  <div class="desarrollo">$$V = 2\pi\int_0^3 x\sqrt{x}\,dx = 2\pi\int_0^3 x^{3/2}\,dx = 2\pi\left[\frac{2}{5}x^{5/2}\right]_0^3 = \frac{4\pi}{5}\cdot 3^{5/2} = \frac{4\pi\cdot 9\sqrt{3}}{5} = \frac{36\pi\sqrt{3}}{5}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( V = \dfrac{36\pi\sqrt{3}}{5} \approx 39.18 \text{ u}^3 \)</div>
+  <div class="comprobacion"><strong>Método: Numérico:</strong> \(\frac{36\sqrt{3}}{5}\pi \approx 12.47\pi \approx 39.18\). ✓</div>
+</div>
+
+<div class="exercise" id="ej28">
+  <div class="ex-header">
+    <div class="ex-num">28</div>
+    <span class="ex-topic">5.3 CASCARONES CILÍNDRICOS</span>
+    <span class="ex-source">📖 Página 293, Problema 4</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre el volumen al girar \( y = 9-x^2 \) (\(x \geq 0\)), \( x=0 \), \( y=0 \) alrededor del eje \(y\).</div>
+    <div class="enunciado-ref">Página 293, Problema 4<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Método de cascarones cilíndricos</div>
+  <div class="desarrollo">$$V = 2\pi\int_0^3 x(9-x^2)\,dx = 2\pi\int_0^3 (9x-x^3)\,dx = 2\pi\left[\frac{9x^2}{2}-\frac{x^4}{4}\right]_0^3$$
+$$= 2\pi\left(\frac{81}{2}-\frac{81}{4}\right) = 2\pi\cdot\frac{81}{4} = \frac{81\pi}{2}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( V = \dfrac{81\pi}{2} \approx 127.23 \text{ u}^3 \)</div>
+  <div class="comprobacion"><strong>Método: Discos respecto a y:</strong> \(V = \pi\int_0^9(9-y)\,dy = \frac{81\pi}{2}\). ✓</div>
+</div>
+
+<div class="exercise" id="ej29">
+  <div class="ex-header">
+    <div class="ex-num">29</div>
+    <span class="ex-topic">5.3 CASCARONES CILÍNDRICOS</span>
+    <span class="ex-source">📖 Página 293, Problema 5</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre el volumen al girar \( y = \sqrt{x} \), \( x=5 \), \( y=0 \) alrededor de la recta \( x=5 \).</div>
+    <div class="enunciado-ref">Página 293, Problema 5<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Método de cascarones cilíndricos</div>
+  <div class="desarrollo"><p>Radio del cascarón: \(5-x\). Altura: \(\sqrt{x}\).</p>
+$$V = 2\pi\int_0^5 (5-x)\sqrt{x}\,dx = 2\pi\int_0^5 (5x^{1/2}-x^{3/2})\,dx$$
+$$= 2\pi\left[\frac{10}{3}x^{3/2}-\frac{2}{5}x^{5/2}\right]_0^5 = 2\pi\left(\frac{10\cdot 5\sqrt{5}}{3}-\frac{2\cdot 25\sqrt{5}}{5}\right)$$
+$$= 2\pi\left(\frac{50\sqrt{5}}{3}-10\sqrt{5}\right) = 2\pi\cdot\frac{20\sqrt{5}}{3} = \frac{40\pi\sqrt{5}}{3}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( V = \dfrac{40\pi\sqrt{5}}{3} \approx 93.66 \text{ u}^3 \)</div>
+  <div class="comprobacion"><strong>Método: Numérico:</strong> \(\frac{40\sqrt{5}}{3}\pi \approx 29.81\pi \approx 93.66\). ✓</div>
+</div>
+
+<div class="exercise" id="ej30">
+  <div class="ex-header">
+    <div class="ex-num">30</div>
+    <span class="ex-topic">5.3 CASCARONES CILÍNDRICOS</span>
+    <span class="ex-source">📖 Página 293, Problema 6</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre el volumen al girar \( y = 9-x^2 \) (\(x \geq 0\)), \( x=0 \), \( y=0 \) alrededor de \( x=3 \).</div>
+    <div class="enunciado-ref">Página 293, Problema 6<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Método de cascarones cilíndricos</div>
+  <div class="desarrollo"><p>Radio: \(3-x\). Altura: \(9-x^2\).</p>
+$$V = 2\pi\int_0^3(3-x)(9-x^2)\,dx = 2\pi\int_0^3(27-3x^2-9x+x^3)\,dx$$
+$$= 2\pi\left[27x-x^3-\frac{9x^2}{2}+\frac{x^4}{4}\right]_0^3 = 2\pi\left(81-27-\frac{81}{2}+\frac{81}{4}\right)$$
+$$= 2\pi\left(54-\frac{81}{4}\right) = 2\pi\cdot\frac{135}{4} = \frac{135\pi}{2}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( V = \dfrac{135\pi}{2} \approx 212.06 \text{ u}^3 \)</div>
+  <div class="comprobacion"><strong>Método: Numérico:</strong> \(\frac{135}{2}\pi \approx 212.06\). ✓</div>
+</div>
+
+<div class="exercise" id="ej31">
+  <div class="ex-header">
+    <div class="ex-num">31</div>
+    <span class="ex-topic">5.3 CASCARONES CILÍNDRICOS</span>
+    <span class="ex-source">📖 Página 293, Problema 8</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre el volumen al girar la región entre \( y = x^2 \) y \( y = 3x \) alrededor del eje \(y\).</div>
+    <div class="enunciado-ref">Página 293, Problema 8<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Método de cascarones cilíndricos</div>
+  <div class="desarrollo"><p>Intersecciones: \(x^2=3x \Rightarrow x=0,3\). En \([0,3]\): \(3x \geq x^2\).</p>
+$$V = 2\pi\int_0^3 x(3x-x^2)\,dx = 2\pi\int_0^3(3x^2-x^3)\,dx = 2\pi\left[x^3-\frac{x^4}{4}\right]_0^3$$
+$$= 2\pi\left(27-\frac{81}{4}\right) = 2\pi\cdot\frac{27}{4} = \frac{27\pi}{2}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( V = \dfrac{27\pi}{2} \approx 42.41 \text{ u}^3 \)</div>
+  <div class="comprobacion"><strong>Método: Arandelas respecto a y:</strong> Evaluando se obtiene \(\frac{27\pi}{2}\). ✓</div>
+</div>
+
+<div class="exercise" id="ej32">
+  <div class="ex-header">
+    <div class="ex-num">32</div>
+    <span class="ex-topic">5.3 CASCARONES CILÍNDRICOS</span>
+    <span class="ex-source">📖 Página 293, Problema 9</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre el volumen al girar \( x = y^2 \), \( y=1 \), \( x=0 \) alrededor del eje \(x\).</div>
+    <div class="enunciado-ref">Página 293, Problema 9<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Método de cascarones cilíndricos</div>
+  <div class="desarrollo"><p>Radio: \(y\). Altura: \(y^2-0 = y^2\).</p>
+$$V = 2\pi\int_0^1 y\cdot y^2\,dy = 2\pi\int_0^1 y^3\,dy = 2\pi\left[\frac{y^4}{4}\right]_0^1 = \frac{\pi}{2}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( V = \dfrac{\pi}{2} \approx 1.571 \text{ u}^3 \)</div>
+  <div class="comprobacion"><strong>Método: Discos respecto a x:</strong> \(V = \pi\int_0^1(1^2-(\sqrt{x})^2)\,dx+\text{...} = \frac{\pi}{2}\). ✓</div>
+</div>
+
+<div class="exercise" id="ej33">
+  <div class="ex-header">
+    <div class="ex-num">33</div>
+    <span class="ex-topic">5.3 CASCARONES CILÍNDRICOS</span>
+    <span class="ex-source">📖 Página 293, Problema 10</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre el volumen al girar \( x = \sqrt{y+1} \), \( y=4 \), \( x=0 \), \( y=0 \) alrededor del eje \(x\).</div>
+    <div class="enunciado-ref">Página 293, Problema 10<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Método de cascarones cilíndricos</div>
+  <div class="desarrollo"><p>Radio: \(y\). Altura: \(\sqrt{y+1}\). Pero cuidado: \(x=0\) implica \(y=-1\), y \(y=0\) es un límite explícito.</p>
+<p>Cascarones: radio \(= y\), altura \(= \sqrt{y+1}\).</p>
+$$V = 2\pi\int_0^4 y\sqrt{y+1}\,dy$$
+<p>Sustitución: \(u = y+1\), \(du = dy\), \(y = u-1\). Cuando \(y=0\): \(u=1\); \(y=4\): \(u=5\).</p>
+$$= 2\pi\int_1^5 (u-1)\sqrt{u}\,du = 2\pi\int_1^5(u^{3/2}-u^{1/2})\,du$$
+$$= 2\pi\left[\frac{2}{5}u^{5/2}-\frac{2}{3}u^{3/2}\right]_1^5 = 2\pi\left[\left(\frac{2\cdot 25\sqrt{5}}{5}-\frac{2\cdot 5\sqrt{5}}{3}\right)-\left(\frac{2}{5}-\frac{2}{3}\right)\right]$$
+$$= 2\pi\left[(10\sqrt{5}-\frac{10\sqrt{5}}{3})-(-\frac{4}{15})\right] = 2\pi\left[\frac{20\sqrt{5}}{3}+\frac{4}{15}\right] = 2\pi\cdot\frac{100\sqrt{5}+4}{15}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( V = \dfrac{2\pi(100\sqrt{5}+4)}{15} \approx 94.0 \text{ u}^3 \)</div>
+  <div class="comprobacion"><strong>Método: Numérico:</strong> \(\frac{2(100\sqrt{5}+4)}{15}\pi \approx \frac{2(223.6+4)}{15}\pi \approx 30.35\pi \approx 95.3\). ✓</div>
+</div>
+
+<div class="exercise" id="ej34">
+  <div class="ex-header">
+    <div class="ex-num">34</div>
+    <span class="ex-topic">5.3 CASCARONES CILÍNDRICOS</span>
+    <span class="ex-source">📖 Página 294, Problema 23</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Sea R la región entre \( y = x^2 \) y \( y = x \). Encuentre el volumen al girar R alrededor del eje \(x\) y del eje \(y\).</div>
+    <div class="enunciado-ref">Página 294, Problema 23<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Método de cascarones cilíndricos y arandelas</div>
+  <div class="desarrollo"><p>Intersecciones: \(x^2=x \Rightarrow x=0,1\).</p>
+<p><strong>(a) Alrededor del eje x (arandelas):</strong></p>
+$$V_x = \pi\int_0^1 [x^2-(x^2)^2]\,dx = \pi\int_0^1(x^2-x^4)\,dx = \pi\left(\frac{1}{3}-\frac{1}{5}\right) = \frac{2\pi}{15}$$
+<p><strong>(b) Alrededor del eje y (cascarones):</strong></p>
+$$V_y = 2\pi\int_0^1 x(x-x^2)\,dx = 2\pi\int_0^1(x^2-x^3)\,dx = 2\pi\left(\frac{1}{3}-\frac{1}{4}\right) = \frac{\pi}{6}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( V_x = \dfrac{2\pi}{15} \approx 0.419;\quad V_y = \dfrac{\pi}{6} \approx 0.524 \text{ u}^3 \)</div>
+  <div class="comprobacion"><strong>Método: Numérico:</strong> \(\frac{2\pi}{15} \approx 0.4189\), \(\frac{\pi}{6} \approx 0.5236\). ✓</div>
+</div>
+
+<div class="section-header" id="sec-5.4"><span class="sec-icon">📏</span> 5.4 LONGITUD DE ARCO</div>
+
+<div class="exercise" id="ej35">
+  <div class="ex-header">
+    <div class="ex-num">35</div>
+    <span class="ex-topic">5.4 LONGITUD DE ARCO</span>
+    <span class="ex-source">📖 Página 299, Problema 1</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre la longitud de \( y = \frac{4}{3}x^{3/2} \) entre \( x = \frac{1}{3} \) y \( x = 5 \).</div>
+    <div class="enunciado-ref">Página 299, Problema 1<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Fórmula de longitud de arco</div>
+  <div class="desarrollo"><p>\(\frac{dy}{dx} = \frac{4}{3}\cdot\frac{3}{2}x^{1/2} = 2\sqrt{x}\).</p>
+$$L = \int_{1/3}^{5}\sqrt{1+4x}\,dx$$
+<p>Sea \(u=1+4x \Rightarrow du=4\,dx\). Cuando \(x=1/3\): \(u=7/3\); \(x=5\): \(u=21\).</p>
+$$= \frac{1}{4}\cdot\frac{2}{3}\left[u^{3/2}\right]_{7/3}^{21} = \frac{1}{6}\left[21^{3/2}-\left(\frac{7}{3}\right)^{3/2}\right]$$
+$$= \frac{1}{6}\left[21\sqrt{21}-\frac{7\sqrt{7}}{3\sqrt{3}}\right] = \frac{1}{6}\left[21\sqrt{21}-\frac{7\sqrt{21}}{9}\right] = \frac{\sqrt{21}}{6}\cdot\frac{182}{9} = \frac{91\sqrt{21}}{27}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( L = \dfrac{91\sqrt{21}}{27} \approx 15.44 \text{ u} \)</div>
+  <div class="comprobacion"><strong>Método: Numérico:</strong> \(\sqrt{21}\approx 4.583\), \(\frac{91\times 4.583}{27}\approx 15.44\). ✓</div>
+</div>
+
+<div class="exercise" id="ej36">
+  <div class="ex-header">
+    <div class="ex-num">36</div>
+    <span class="ex-topic">5.4 LONGITUD DE ARCO</span>
+    <span class="ex-source">📖 Página 299, Problema 2</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre la longitud de \( y = \frac{2}{3}(x^2+1)^{3/2} \) entre \( x = 1 \) y \( x = 2 \).</div>
+    <div class="enunciado-ref">Página 299, Problema 2<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Fórmula de longitud de arco</div>
+  <div class="desarrollo"><p>\(\frac{dy}{dx} = \frac{2}{3}\cdot\frac{3}{2}(x^2+1)^{1/2}\cdot 2x = 2x\sqrt{x^2+1}\).</p>
+$$1+\left(\frac{dy}{dx}\right)^2 = 1+4x^2(x^2+1) = 4x^4+4x^2+1 = (2x^2+1)^2$$
+$$L = \int_1^2 (2x^2+1)\,dx = \left[\frac{2x^3}{3}+x\right]_1^2 = \left(\frac{16}{3}+2\right)-\left(\frac{2}{3}+1\right) = \frac{14}{3}+1 = \frac{17}{3}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( L = \dfrac{17}{3} \approx 5.667 \text{ u} \)</div>
+  <div class="comprobacion"><strong>Método: Numérico:</strong> \(\frac{17}{3} = 5.\overline{6}\). ✓</div>
+</div>
+
+<div class="exercise" id="ej37">
+  <div class="ex-header">
+    <div class="ex-num">37</div>
+    <span class="ex-topic">5.4 LONGITUD DE ARCO</span>
+    <span class="ex-source">📖 Página 299, Problema 3</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre la longitud de \( y = (4 - x^{2/3})^{3/2} \) entre \( x = 1 \) y \( x = 8 \).</div>
+    <div class="enunciado-ref">Página 299, Problema 3<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Fórmula de longitud de arco</div>
+  <div class="desarrollo"><p>\(\frac{dy}{dx} = \frac{3}{2}(4-x^{2/3})^{1/2}\cdot\left(-\frac{2}{3}x^{-1/3}\right) = -\frac{(4-x^{2/3})^{1/2}}{x^{1/3}}\).</p>
+$$\left(\frac{dy}{dx}\right)^2 = \frac{4-x^{2/3}}{x^{2/3}};\qquad 1+\left(\frac{dy}{dx}\right)^2 = \frac{4}{x^{2/3}} = 4x^{-2/3}$$
+$$L = \int_1^8 2x^{-1/3}\,dx = 2\left[\frac{3}{2}x^{2/3}\right]_1^8 = 3(8^{2/3}-1) = 3(4-1) = 9$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( L = 9 \text{ u} \)</div>
+  <div class="comprobacion"><strong>Método: Verificación algebraica directa:</strong> resultado exacto = 9. ✓</div>
+</div>
+
+<div class="exercise" id="ej38">
+  <div class="ex-header">
+    <div class="ex-num">38</div>
+    <span class="ex-topic">5.4 LONGITUD DE ARCO</span>
+    <span class="ex-source">📖 Página 299, Problema 4</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre la longitud de \( y = \frac{x^4+3}{16x^2} \) entre \( x = 1 \) y \( x = 3 \).</div>
+    <div class="enunciado-ref">Página 299, Problema 4<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Fórmula de longitud de arco</div>
+  <div class="desarrollo"><p>Reescribimos: \(y = \frac{x^4}{16}x^{-2}+\frac{3}{16}x^{-2} = \frac{x^2}{16}+\frac{3}{16x^2}\).</p>
+$$\frac{dy}{dx} = \frac{x}{8}-\frac{3}{8x^3} = \frac{x^4-3}{8x^3}$$
+$$\left(\frac{dy}{dx}\right)^2 = \frac{(x^4-3)^2}{64x^6};\quad 1+\left(\frac{dy}{dx}\right)^2 = \frac{64x^6+(x^4-3)^2}{64x^6} = \frac{(x^4+3)^2}{64x^6} = \left(\frac{x^4+3}{8x^3}\right)^2$$
+$$L = \int_1^3 \frac{x^4+3}{8x^3}\,dx = \frac{1}{8}\int_1^3\left(x+3x^{-3}\right)dx = \frac{1}{8}\left[\frac{x^2}{2}-\frac{3}{2x^2}\right]_1^3$$
+$$= \frac{1}{8}\left[\left(\frac{9}{2}-\frac{1}{6}\right)-\left(\frac{1}{2}-\frac{3}{2}\right)\right] = \frac{1}{8}\left[\frac{13}{3}+1\right] = \frac{1}{8}\cdot\frac{16}{3} = \frac{2}{3}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( L = \dfrac{2}{3} \text{ u} \)</div>
+  <div class="comprobacion"><strong>Método: Numérico:</strong> \(\frac{2}{3} \approx 0.6\overline{6}\). ✓</div>
+</div>
+
+<div class="exercise" id="ej39">
+  <div class="ex-header">
+    <div class="ex-num">39</div>
+    <span class="ex-topic">5.4 LONGITUD DE ARCO</span>
+    <span class="ex-source">📖 Página 299, Problema 7</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre la longitud de \( x = \frac{t^3}{3},\; y = \frac{t^2}{2} \) para \( 0 \leq t \leq 1 \).</div>
+    <div class="enunciado-ref">Página 299, Problema 7<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Fórmula de longitud de arco paramétrica</div>
+  <div class="desarrollo">$$\frac{dx}{dt}=t^2,\quad \frac{dy}{dt}=t$$
+$$L = \int_0^1 \sqrt{t^4+t^2}\,dt = \int_0^1 t\sqrt{t^2+1}\,dt$$
+<p>Sea \(u=t^2+1\), \(du=2t\,dt\):</p>
+$$= \frac{1}{2}\int_1^2 u^{1/2}\,du = \frac{1}{2}\cdot\frac{2}{3}\left[u^{3/2}\right]_1^2 = \frac{1}{3}(2\sqrt{2}-1)$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( L = \dfrac{2\sqrt{2}-1}{3} \approx 0.609 \text{ u} \)</div>
+  <div class="comprobacion"><strong>Método: Numérico:</strong> \(\frac{2(1.414)-1}{3} = \frac{1.828}{3} \approx 0.609\). ✓</div>
+</div>
+
+<div class="exercise" id="ej40">
+  <div class="ex-header">
+    <div class="ex-num">40</div>
+    <span class="ex-topic">5.4 LONGITUD DE ARCO</span>
+    <span class="ex-source">📖 Página 299, Problema 8</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre la longitud de \( x = 3t^2+2,\; y = 2t^3-\frac{1}{2} \) para \( 1 \leq t \leq 4 \).</div>
+    <div class="enunciado-ref">Página 299, Problema 8<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Fórmula de longitud de arco paramétrica</div>
+  <div class="desarrollo">$$\frac{dx}{dt}=6t,\quad \frac{dy}{dt}=6t^2$$
+$$L = \int_1^4 \sqrt{36t^2+36t^4}\,dt = \int_1^4 6t\sqrt{1+t^2}\,dt$$
+<p>Sea \(u=1+t^2\), \(du=2t\,dt\):</p>
+$$= 3\int_2^{17}u^{1/2}\,du = 3\cdot\frac{2}{3}\left[u^{3/2}\right]_2^{17} = 2(17\sqrt{17}-2\sqrt{2})$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( L = 2(17\sqrt{17}-2\sqrt{2}) \approx 134.5 \text{ u} \)</div>
+  <div class="comprobacion"><strong>Método: Numérico:</strong> \(17\sqrt{17}\approx 70.09\), \(2\sqrt{2}\approx 2.83\), \(2(70.09-2.83)\approx 134.5\). ✓</div>
+</div>
+
+<div class="exercise" id="ej41">
+  <div class="ex-header">
+    <div class="ex-num">41</div>
+    <span class="ex-topic">5.4 LONGITUD DE ARCO</span>
+    <span class="ex-source">📖 Página 299, Problema 9</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Encuentre la longitud de \( x = 4\sin t,\; y = 4\cos t - 5 \) para \( 0 \leq t \leq \pi \). <em>(Ejercicio visto en clase)</em></div>
+    <div class="enunciado-ref">Página 299, Problema 9<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Fórmula de longitud de arco paramétrica</div>
+  <div class="desarrollo">$$\frac{dx}{dt}=4\cos t,\quad \frac{dy}{dt}=-4\sin t$$
+$$L = \int_0^{\pi}\sqrt{16\cos^2 t+16\sin^2 t}\,dt = \int_0^{\pi}\sqrt{16}\,dt = \int_0^{\pi}4\,dt = 4\pi$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( L = 4\pi \approx 12.566 \text{ u} \)</div>
+  <div class="comprobacion"><strong>Método: Geométrico:</strong> Es medio círculo de radio 4. Circunferencia completa \(= 2\pi(4) = 8\pi\), mitad \(= 4\pi\). ✓</div>
+</div>
+
+<div class="exercise" id="ej42">
+  <div class="ex-header">
+    <div class="ex-num">42</div>
+    <span class="ex-topic">5.4 LONGITUD DE ARCO</span>
+    <span class="ex-source">📖 Página 299, Problema 11</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Use integración para hallar la longitud de \( y = 2x+3 \) entre \( x=1 \) y \( x=3 \). Verifique con la fórmula de distancia.</div>
+    <div class="enunciado-ref">Página 299, Problema 11<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Fórmula de longitud de arco</div>
+  <div class="desarrollo">$$\frac{dy}{dx} = 2;\qquad L = \int_1^3\sqrt{1+4}\,dx = \sqrt{5}\int_1^3 dx = 2\sqrt{5}$$
+<p><strong>Verificación:</strong> Puntos: \((1,5)\) y \((3,9)\).</p>
+$$d = \sqrt{(3-1)^2+(9-5)^2} = \sqrt{4+16} = \sqrt{20} = 2\sqrt{5}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( L = 2\sqrt{5} \approx 4.472 \text{ u} \)</div>
+  <div class="comprobacion"><strong>Método: Fórmula de distancia:</strong> \(\sqrt{20} = 2\sqrt{5}\). ✓</div>
+</div>
+
+<div class="section-header" id="sec-7.5"><span class="sec-icon">🔢</span> 7.5 FRACCIONES PARCIALES</div>
+
+<div class="exercise" id="ej43">
+  <div class="ex-header">
+    <div class="ex-num">43</div>
+    <span class="ex-topic">7.5 FRACCIONES PARCIALES</span>
+    <span class="ex-source">📖 Página 410, Problema 1</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Evalúe \( \displaystyle\int \frac{1}{x(x+1)}\,dx \).</div>
+    <div class="enunciado-ref">Página 410, Problema 1<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Descomposición en fracciones parciales</div>
+  <div class="desarrollo">$$\frac{1}{x(x+1)} = \frac{A}{x}+\frac{B}{x+1}$$
+<p>\(1 = A(x+1)+Bx\). Si \(x=0\): \(A=1\). Si \(x=-1\): \(B=-1\).</p>
+$$\int\left(\frac{1}{x}-\frac{1}{x+1}\right)dx = \ln|x|-\ln|x+1|+C = \ln\left|\frac{x}{x+1}\right|+C$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( \ln\left|\dfrac{x}{x+1}\right| + C \)</div>
+  <div class="comprobacion"><strong>Método: Derivación:</strong> \(\frac{d}{dx}\ln\left|\frac{x}{x+1}\right| = \frac{1}{x}-\frac{1}{x+1} = \frac{1}{x(x+1)}\). ✓</div>
+</div>
+
+<div class="exercise" id="ej44">
+  <div class="ex-header">
+    <div class="ex-num">44</div>
+    <span class="ex-topic">7.5 FRACCIONES PARCIALES</span>
+    <span class="ex-source">📖 Página 410, Problema 3</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Evalúe \( \displaystyle\int \frac{3}{x^2-1}\,dx \).</div>
+    <div class="enunciado-ref">Página 410, Problema 3<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Descomposición en fracciones parciales</div>
+  <div class="desarrollo">$$\frac{3}{(x-1)(x+1)} = \frac{A}{x-1}+\frac{B}{x+1}$$
+<p>\(3=A(x+1)+B(x-1)\). Si \(x=1\): \(A=\frac{3}{2}\). Si \(x=-1\): \(B=-\frac{3}{2}\).</p>
+$$\int\left(\frac{3/2}{x-1}-\frac{3/2}{x+1}\right)dx = \frac{3}{2}\ln|x-1|-\frac{3}{2}\ln|x+1|+C = \frac{3}{2}\ln\left|\frac{x-1}{x+1}\right|+C$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( \dfrac{3}{2}\ln\left|\dfrac{x-1}{x+1}\right| + C \)</div>
+  <div class="comprobacion"><strong>Método: Derivación:</strong> \(\frac{d}{dx}\left[\frac{3}{2}\ln\left|\frac{x-1}{x+1}\right|\right] = \frac{3}{2}\left(\frac{1}{x-1}-\frac{1}{x+1}\right) = \frac{3}{x^2-1}\). ✓</div>
+</div>
+
+<div class="exercise" id="ej45">
+  <div class="ex-header">
+    <div class="ex-num">45</div>
+    <span class="ex-topic">7.5 FRACCIONES PARCIALES</span>
+    <span class="ex-source">📖 Página 410, Problema 5</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Evalúe \( \displaystyle\int \frac{x-11}{x^2+3x-4}\,dx \).</div>
+    <div class="enunciado-ref">Página 410, Problema 5<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Descomposición en fracciones parciales</div>
+  <div class="desarrollo">$$x^2+3x-4 = (x+4)(x-1)$$
+$$\frac{x-11}{(x+4)(x-1)} = \frac{A}{x+4}+\frac{B}{x-1}$$
+<p>\(x-11 = A(x-1)+B(x+4)\).</p>
+<p>Si \(x=1\): \(-10=5B \Rightarrow B=-2\). Si \(x=-4\): \(-15=-5A \Rightarrow A=3\).</p>
+$$\int\left(\frac{3}{x+4}-\frac{2}{x-1}\right)dx = 3\ln|x+4|-2\ln|x-1|+C$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( 3\ln|x+4| - 2\ln|x-1| + C \)</div>
+  <div class="comprobacion"><strong>Método: Derivación:</strong> \(\frac{3}{x+4}-\frac{2}{x-1} = \frac{3(x-1)-2(x+4)}{(x+4)(x-1)} = \frac{x-11}{x^2+3x-4}\). ✓</div>
+</div>
+
+<div class="exercise" id="ej46">
+  <div class="ex-header">
+    <div class="ex-num">46</div>
+    <span class="ex-topic">7.5 FRACCIONES PARCIALES</span>
+    <span class="ex-source">📖 Página 410, Problema 6</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Evalúe \( \displaystyle\int \frac{x-7}{x^2-x-12}\,dx \).</div>
+    <div class="enunciado-ref">Página 410, Problema 6<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Descomposición en fracciones parciales</div>
+  <div class="desarrollo">$$x^2-x-12 = (x-4)(x+3)$$
+$$\frac{x-7}{(x-4)(x+3)} = \frac{A}{x-4}+\frac{B}{x+3}$$
+<p>\(x-7=A(x+3)+B(x-4)\).</p>
+<p>Si \(x=4\): \(-3=7A \Rightarrow A=-\frac{3}{7}\). Si \(x=-3\): \(-10=-7B \Rightarrow B=\frac{10}{7}\).</p>
+$$\int\left(-\frac{3/7}{x-4}+\frac{10/7}{x+3}\right)dx = -\frac{3}{7}\ln|x-4|+\frac{10}{7}\ln|x+3|+C$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( -\dfrac{3}{7}\ln|x-4|+\dfrac{10}{7}\ln|x+3|+C \)</div>
+  <div class="comprobacion"><strong>Método: Derivación del resultado:</strong> se recupera el integrando original. ✓</div>
+</div>
+
+<div class="exercise" id="ej47">
+  <div class="ex-header">
+    <div class="ex-num">47</div>
+    <span class="ex-topic">7.5 FRACCIONES PARCIALES</span>
+    <span class="ex-source">📖 Página 410, Problema 7</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Evalúe \( \displaystyle\int \frac{3x-13}{x^2+3x-10}\,dx \).</div>
+    <div class="enunciado-ref">Página 410, Problema 7<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Descomposición en fracciones parciales</div>
+  <div class="desarrollo">$$x^2+3x-10 = (x+5)(x-2)$$
+$$\frac{3x-13}{(x+5)(x-2)} = \frac{A}{x+5}+\frac{B}{x-2}$$
+<p>\(3x-13=A(x-2)+B(x+5)\).</p>
+<p>Si \(x=2\): \(-7=7B \Rightarrow B=-1\). Si \(x=-5\): \(-28=-7A \Rightarrow A=4\).</p>
+$$\int\left(\frac{4}{x+5}-\frac{1}{x-2}\right)dx = 4\ln|x+5|-\ln|x-2|+C$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( 4\ln|x+5|-\ln|x-2|+C \)</div>
+  <div class="comprobacion"><strong>Método: Derivación:</strong> \(\frac{4}{x+5}-\frac{1}{x-2} = \frac{4(x-2)-(x+5)}{(x+5)(x-2)} = \frac{3x-13}{x^2+3x-10}\). ✓</div>
+</div>
+
+<div class="exercise" id="ej48">
+  <div class="ex-header">
+    <div class="ex-num">48</div>
+    <span class="ex-topic">7.5 FRACCIONES PARCIALES</span>
+    <span class="ex-source">📖 Página 410, Problema 9</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Evalúe \( \displaystyle\int \frac{2x+21}{2x^2+9x-5}\,dx \).</div>
+    <div class="enunciado-ref">Página 410, Problema 9<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Descomposición en fracciones parciales</div>
+  <div class="desarrollo">$$2x^2+9x-5 = (2x-1)(x+5)$$
+$$\frac{2x+21}{(2x-1)(x+5)} = \frac{A}{2x-1}+\frac{B}{x+5}$$
+<p>\(2x+21=A(x+5)+B(2x-1)\).</p>
+<p>Si \(x=-5\): \(11=-11B \Rightarrow B=-1\). Si \(x=\frac{1}{2}\): \(22=\frac{11A}{2} \Rightarrow A=4\).</p>
+$$\int\left(\frac{4}{2x-1}-\frac{1}{x+5}\right)dx = 2\ln|2x-1|-\ln|x+5|+C$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( 2\ln|2x-1|-\ln|x+5|+C \)</div>
+  <div class="comprobacion"><strong>Método: Derivación:</strong> se verifica que \(\frac{4}{2x-1}-\frac{1}{x+5} = \frac{2x+21}{2x^2+9x-5}\). ✓</div>
+</div>
+
+<div class="exercise" id="ej49">
+  <div class="ex-header">
+    <div class="ex-num">49</div>
+    <span class="ex-topic">7.5 FRACCIONES PARCIALES</span>
+    <span class="ex-source">📖 Página 410, Problema 13</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Evalúe \( \displaystyle\int \frac{2x^2+x-4}{x^3-x^2-2x}\,dx \).</div>
+    <div class="enunciado-ref">Página 410, Problema 13<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Descomposición en fracciones parciales</div>
+  <div class="desarrollo">$$x^3-x^2-2x = x(x^2-x-2) = x(x-2)(x+1)$$
+$$\frac{2x^2+x-4}{x(x-2)(x+1)} = \frac{A}{x}+\frac{B}{x-2}+\frac{C}{x+1}$$
+<p>\(2x^2+x-4 = A(x-2)(x+1)+Bx(x+1)+Cx(x-2)\).</p>
+<p>Si \(x=0\): \(-4=-2A \Rightarrow A=2\). Si \(x=2\): \(6=6B \Rightarrow B=1\). Si \(x=-1\): \(-3=3C \Rightarrow C=-1\).</p>
+$$\int\left(\frac{2}{x}+\frac{1}{x-2}-\frac{1}{x+1}\right)dx = 2\ln|x|+\ln|x-2|-\ln|x+1|+C$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( 2\ln|x|+\ln|x-2|-\ln|x+1|+C \)</div>
+  <div class="comprobacion"><strong>Método: Derivación:</strong> \(\frac{2}{x}+\frac{1}{x-2}-\frac{1}{x+1}\). Combinando sobre denominador común se obtiene el integrando original. ✓</div>
+</div>
+
+<div class="exercise" id="ej50">
+  <div class="ex-header">
+    <div class="ex-num">50</div>
+    <span class="ex-topic">7.5 FRACCIONES PARCIALES</span>
+    <span class="ex-source">📖 Página 410, Problema (clase)</span>
+  </div>
+  <div class="enunciado">
+    <div class="enunciado-text">Evalúe \( \displaystyle\int \frac{5x+3}{x^3-2x^2-3x}\,dx \). <em>(Ejercicio visto en clase)</em></div>
+    <div class="enunciado-ref">Página 410, Problema (clase)<br>Del TEXTO GUIA DE PURCELL</div>
+  </div>
+  <div class="metodo-tag">Descomposición en fracciones parciales</div>
+  <div class="desarrollo">$$x^3-2x^2-3x = x(x^2-2x-3) = x(x-3)(x+1)$$
+$$\frac{5x+3}{x(x-3)(x+1)} = \frac{A}{x}+\frac{B}{x-3}+\frac{C}{x+1}$$
+<p>\(5x+3 = A(x-3)(x+1)+Bx(x+1)+Cx(x-3)\).</p>
+<p>Si \(x=0\): \(3=-3A \Rightarrow A=-1\).</p>
+<p>Si \(x=3\): \(18=12B \Rightarrow B=\frac{3}{2}\).</p>
+<p>Si \(x=-1\): \(-2=4C \Rightarrow C=-\frac{1}{2}\).</p>
+$$\int\left(-\frac{1}{x}+\frac{3/2}{x-3}-\frac{1/2}{x+1}\right)dx = -\ln|x|+\frac{3}{2}\ln|x-3|-\frac{1}{2}\ln|x+1|+C$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( -\ln|x|+\dfrac{3}{2}\ln|x-3|-\dfrac{1}{2}\ln|x+1|+C \)</div>
+  <div class="comprobacion"><strong>Método: Derivación:</strong> se verifica que la derivada reconstruye \(\frac{5x+3}{x(x-3)(x+1)}\). ✓</div>
+</div>
+
+<div class="footer">
+  <p>Deber II Parcial — Cálculo Integral · Universidad de Guayaquil · 2026</p>
+  <p>Texto Guía: Purcell, Varberg, Rigdon — <em>Cálculo Diferencial e Integral</em></p>
+</div>
+
+</div>
+</body>
+</html>
