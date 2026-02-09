@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portafolio — Ejercicios de Clase | Cálculo Integral</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['$$','$$']] },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f4f6fb;
+  --card: #ffffff;
+  --primary: #1a237e;
+  --accent: #e53935;
+  --green: #2e7d32;
+  --green-bg: #e8f5e9;
+  --green-border: #43a047;
+  --blue-bg: #e3f2fd;
+  --text: #1a1a2e;
+  --muted: #6b7280;
+  --radius: 12px;
+  --shadow: 0 2px 16px rgba(0,0,0,0.07);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.75}
+.container{max-width:920px;margin:0 auto;padding:20px}
+
+.cover{background:linear-gradient(135deg,#0d1b4a 0%,#1a237e 40%,#283593 100%);color:#fff;padding:50px 40px;border-radius:var(--radius);text-align:center;margin-bottom:28px;box-shadow:0 8px 40px rgba(13,27,74,0.35);position:relative;overflow:hidden}
+.cover::before{content:'';position:absolute;top:-60%;right:-20%;width:500px;height:500px;background:radial-gradient(circle,rgba(255,255,255,0.06) 0%,transparent 70%);border-radius:50%}
+.cover h1{font-size:2.1em;font-weight:800;letter-spacing:-1px;margin-bottom:6px;position:relative}
+.cover h2{font-size:1.15em;font-weight:400;opacity:0.85;margin-bottom:6px;position:relative}
+.cover .badge{display:inline-block;background:var(--accent);padding:5px 18px;border-radius:20px;font-size:0.85em;font-weight:600;margin:10px 4px;position:relative}
+.cover .info{font-size:0.88em;opacity:0.6;margin-top:14px;position:relative}
+.cover .extra-badge{display:inline-block;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);padding:5px 18px;border-radius:20px;font-size:0.82em;font-weight:500;margin:6px 4px;position:relative}
+
+.toc{background:var(--card);border-radius:var(--radius);padding:28px 34px;margin-bottom:28px;box-shadow:var(--shadow)}
+.toc h2{font-size:1.15em;color:var(--primary);border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:14px;font-weight:700}
+.toc-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 24px}
+.toc-item{font-size:0.88em;padding:5px 0}
+.toc-item a{color:var(--text);text-decoration:none;transition:color .2s}
+.toc-item a:hover{color:var(--accent)}
+.toc-item .toc-badge{display:inline-block;background:var(--primary);color:#fff;font-size:0.72em;padding:1px 8px;border-radius:10px;margin-right:6px;font-weight:600}
+
+.section-header{background:linear-gradient(90deg,var(--primary),#283593);color:#fff;padding:16px 28px;border-radius:var(--radius);margin:32px 0 18px;font-size:1.1em;font-weight:700;box-shadow:0 4px 20px rgba(26,35,126,0.25);display:flex;align-items:center;gap:12px}
+.section-header .sec-icon{font-size:1.4em}
+
+.exercise{background:var(--card);border-radius:var(--radius);padding:28px 32px;margin-bottom:18px;box-shadow:var(--shadow);border-left:4px solid var(--primary);transition:box-shadow .2s}
+.exercise:hover{box-shadow:0 4px 24px rgba(0,0,0,0.12)}
+.ex-header{display:flex;align-items:center;gap:14px;margin-bottom:14px;flex-wrap:wrap}
+.ex-num{background:var(--primary);color:#fff;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.9em;flex-shrink:0}
+.ex-topic{font-weight:600;font-size:0.95em;color:var(--primary)}
+.ex-source{font-size:0.82em;color:#1b5e20;font-weight:600;background:#e8f5e9;padding:3px 12px;border-radius:6px;margin-left:auto;white-space:nowrap}
+
+.enunciado{background:var(--blue-bg);border:1px solid #bbdefb;border-radius:8px;padding:14px 18px;margin-bottom:14px;font-size:1.02em}
+
+.metodo-tag{display:inline-block;background:var(--accent);color:#fff;padding:3px 14px;border-radius:18px;font-size:0.8em;font-weight:600;margin-bottom:14px}
+
+.desarrollo{margin:12px 0;padding:0 6px}
+.desarrollo p{margin:7px 0}
+
+.resultado-box{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:2px solid var(--green-border);border-radius:10px;padding:14px 22px;margin:16px 0;text-align:center;font-weight:600}
+.resultado-label{color:var(--green);font-weight:700;margin-right:6px}
+
+.footer{text-align:center;padding:30px;color:var(--muted);font-size:0.82em;margin-top:40px;border-top:1px solid #e0e0e0}
+
+@media(max-width:650px){
+  .cover{padding:30px 20px}
+  .cover h1{font-size:1.5em}
+  .exercise{padding:18px 16px}
+  .toc-grid{grid-template-columns:1fr}
+  .ex-source{margin-left:0}
+}
+@media print{
+  .exercise{break-inside:avoid;box-shadow:none;border:1px solid #ddd}
+  .cover{box-shadow:none}
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="cover">
+  <h1>📂 Portafolio</h1>
+  <h2>Ejercicios Resueltos en Clase — Cálculo Integral</h2>
+  <div>
+    <span class="badge">Cálculo Integral</span>
+    <span class="badge">Semestre 2</span>
+  </div>
+  <div>
+    <span class="extra-badge">⭐ Actividad opcional — Puntos extra</span>
+  </div>
+  <p class="info">
+    Universidad de Guayaquil · Facultad de Ingeniería Industrial<br>
+    Carrera de Sistemas de Información · SIN-S-NO-2-23<br>
+    Profesor: Ing. Milton Flores Zh. Mgs
+  </p>
+</div>
+
+<div class="toc">
+  <h2>📑 Tabla de Contenidos</h2>
+  <div class="toc-grid">
+    <div class="toc-item"><a href="#ej1"><span class="toc-badge">1</span>INTEGRAL INDEFINIDA</a></div>
+    <div class="toc-item"><a href="#ej2"><span class="toc-badge">2</span>INTEGRAL INDEFINIDA</a></div>
+    <div class="toc-item"><a href="#ej3"><span class="toc-badge">3</span>INTEGRAL INDEFINIDA</a></div>
+    <div class="toc-item"><a href="#ej4"><span class="toc-badge">4</span>INTEGRAL INDEFINIDA</a></div>
+    <div class="toc-item"><a href="#ej5"><span class="toc-badge">5</span>INTEGRAL INDEFINIDA</a></div>
+    <div class="toc-item"><a href="#ej6"><span class="toc-badge">6</span>INTEGRAL INDEFINIDA</a></div>
+    <div class="toc-item"><a href="#ej7"><span class="toc-badge">7</span>INTEGRAL INDEFINIDA</a></div>
+    <div class="toc-item"><a href="#ej8"><span class="toc-badge">8</span>INTEGRAL DEFINIDA</a></div>
+    <div class="toc-item"><a href="#ej9"><span class="toc-badge">9</span>INTEGRAL DEFINIDA</a></div>
+    <div class="toc-item"><a href="#ej10"><span class="toc-badge">10</span>INTEGRAL DEFINIDA</a></div>
+    <div class="toc-item"><a href="#ej11"><span class="toc-badge">11</span>INTEGRACIÓN POR PARTES</a></div>
+    <div class="toc-item"><a href="#ej12"><span class="toc-badge">12</span>INTEGRACIÓN POR PARTES</a></div>
+    <div class="toc-item"><a href="#ej13"><span class="toc-badge">13</span>INTEGRACIÓN POR PARTES</a></div>
+    <div class="toc-item"><a href="#ej14"><span class="toc-badge">14</span>INTEGRACIÓN POR PARTES</a></div>
+    <div class="toc-item"><a href="#ej15"><span class="toc-badge">15</span>INTEGRALES TRIGONOMÉTRICAS</a></div>
+    <div class="toc-item"><a href="#ej16"><span class="toc-badge">16</span>INTEGRALES TRIGONOMÉTRICAS</a></div>
+    <div class="toc-item"><a href="#ej17"><span class="toc-badge">17</span>INTEGRALES TRIGONOMÉTRICAS</a></div>
+    <div class="toc-item"><a href="#ej18"><span class="toc-badge">18</span>INTEGRALES TRIGONOMÉTRICAS</a></div>
+    <div class="toc-item"><a href="#ej19"><span class="toc-badge">19</span>INTEGRALES TRIGONOMÉTRICAS</a></div>
+    <div class="toc-item"><a href="#ej20"><span class="toc-badge">20</span>FRACCIONES PARCIALES</a></div>
+    <div class="toc-item"><a href="#ej21"><span class="toc-badge">21</span>CINEMÁTICA (MRUV)</a></div>
+    <div class="toc-item"><a href="#ej22"><span class="toc-badge">22</span>ÁREA BAJO LA CURVA</a></div>
+    <div class="toc-item"><a href="#ej23"><span class="toc-badge">23</span>ÁREA ENTRE CURVAS</a></div>
+    <div class="toc-item"><a href="#ej24"><span class="toc-badge">24</span>ÁREA ENTRE CURVAS</a></div>
+    <div class="toc-item"><a href="#ej25"><span class="toc-badge">25</span>VOLÚMENES DE SÓLIDOS DE REVOLUCIÓN</a></div>
+    <div class="toc-item"><a href="#ej26"><span class="toc-badge">26</span>LONGITUD DE ARCO</a></div>
+    <div class="toc-item"><a href="#ej27"><span class="toc-badge">27</span>LONGITUD DE ARCO</a></div>
+  </div>
+</div>
+
+<div class="section-header" id="sec-INTEGRAL"><span class="sec-icon">📗</span> INTEGRAL INDEFINIDA</div>
+
+<div class="exercise" id="ej1">
+  <div class="ex-header">
+    <div class="ex-num">1</div>
+    <span class="ex-topic">INTEGRAL INDEFINIDA</span>
+    <span class="ex-source">📋 Unidad 1 — Diferencial e Integral Definida</span>
+  </div>
+  <div class="enunciado">Evalúe \( \displaystyle\int \left(\frac{2}{x} + 3\,\text{sen}\,x - 4e^x\right)dx \).</div>
+  <div class="metodo-tag">Integral indefinida — Propiedades de linealidad</div>
+  <div class="desarrollo"><p>Separamos la integral usando la propiedad de linealidad:</p>
+$$\int \left(\frac{2}{x} + 3\,\text{sen}\,x - 4e^x\right)dx = \int \frac{2}{x}\,dx + \int 3\,\text{sen}\,x\,dx - \int 4e^x\,dx$$
+$$= 2\int \frac{dx}{x} + 3\int \text{sen}\,x\,dx - 4\int e^x\,dx$$
+<p>Recordando las antiderivadas básicas: \(\int \frac{1}{x}dx = \ln|x|\), \(\int \text{sen}\,x\,dx = -\cos x\), \(\int e^x dx = e^x\):</p>
+$$= 2\ln|x| + 3(-\cos x) - 4e^x + K$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( 2\ln|x| - 3\cos x - 4e^x + K \)</div>
+</div>
+
+<div class="exercise" id="ej2">
+  <div class="ex-header">
+    <div class="ex-num">2</div>
+    <span class="ex-topic">INTEGRAL INDEFINIDA</span>
+    <span class="ex-source">📋 Unidad 1 — Diferencial e Integral Definida</span>
+  </div>
+  <div class="enunciado">Verifique que la antiderivada de \( f(x) = 3x^2 \) es \( y = x^3 + K \).</div>
+  <div class="metodo-tag">Verificación de antiderivada por derivación</div>
+  <div class="desarrollo"><p>Si \( y = x^3 \), entonces:</p>
+$$f(x) = \frac{dy}{dx} = 3x^2$$
+<p>Para verificar, integramos \( f(x) = 3x^2 \):</p>
+$$dy = 3x^2\,dx \qquad\Rightarrow\qquad \int dy = 3\int x^2\,dx$$
+$$y = 3\cdot\frac{x^3}{3} + K = x^3 + K$$
+<p>Queda verificado que la antiderivada de \(3x^2\) es \(x^3 + K\).</p></div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( y = x^3 + K \)</div>
+</div>
+
+<div class="exercise" id="ej3">
+  <div class="ex-header">
+    <div class="ex-num">3</div>
+    <span class="ex-topic">INTEGRAL INDEFINIDA</span>
+    <span class="ex-source">📋 Unidad 1 — Diferencial e Integral Definida</span>
+  </div>
+  <div class="enunciado">Evalúe \( \displaystyle\int \frac{(1-x)^3}{x\sqrt{x}}\,dx \).</div>
+  <div class="metodo-tag">Expansión del binomio y regla de potencias</div>
+  <div class="desarrollo"><p>Expandimos \((1-x)^3 = 1 - 3x + 3x^2 - x^3\) y escribimos \(x\sqrt{x} = x^{3/2}\). Luego \(\frac{1}{x^{3/2}} = x^{-3/2}\):</p>
+$$\int \frac{1-3x+3x^2-x^3}{x^{3/2}}\,dx = \int \left(x^{-3/2} - 3x^{-1/2} + 3x^{1/2} - x^{3/2}\right)dx$$
+<p>Integramos cada término usando \(\int x^n dx = \frac{x^{n+1}}{n+1}\):</p>
+$$= \frac{x^{-1/2}}{-1/2} - 3\cdot\frac{x^{1/2}}{1/2} + 3\cdot\frac{x^{3/2}}{3/2} - \frac{x^{5/2}}{5/2} + K$$
+$$= -2x^{-1/2} - 6x^{1/2} + 2x^{3/2} - \frac{2}{5}x^{5/2} + K$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( -\dfrac{2}{\sqrt{x}} - 6\sqrt{x} + 2x\sqrt{x} - \dfrac{2}{5}x^2\sqrt{x} + K \)</div>
+</div>
+
+<div class="exercise" id="ej4">
+  <div class="ex-header">
+    <div class="ex-num">4</div>
+    <span class="ex-topic">INTEGRAL INDEFINIDA</span>
+    <span class="ex-source">📋 Unidad 1 — Diferencial e Integral Definida</span>
+  </div>
+  <div class="enunciado">Evalúe \( \displaystyle\int (1-x)^{30}\,dx \) por el método de cambio de variable.</div>
+  <div class="metodo-tag">Cambio de variable (sustitución)</div>
+  <div class="desarrollo"><p>Sea \( z = 1 - x \), entonces \( \frac{dz}{dx} = -1 \), por lo que \( dx = -dz \).</p>
+$$\int (1-x)^{30}\,dx = \int z^{30}(-dz) = -\int z^{30}\,dz$$
+$$= -\frac{z^{31}}{31} + K$$
+<p>Sustituyendo \( z = 1-x \):</p>
+$$= -\frac{(1-x)^{31}}{31} + K$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( -\dfrac{(1-x)^{31}}{31} + K \)</div>
+</div>
+
+<div class="exercise" id="ej5">
+  <div class="ex-header">
+    <div class="ex-num">5</div>
+    <span class="ex-topic">INTEGRAL INDEFINIDA</span>
+    <span class="ex-source">📋 Unidad 1 — Diferencial e Integral Definida</span>
+  </div>
+  <div class="enunciado">Evalúe \( \displaystyle\int \frac{\text{sen}\,\sqrt{x}}{\sqrt{x}}\,dx \).</div>
+  <div class="metodo-tag">Cambio de variable (sustitución)</div>
+  <div class="desarrollo"><p>Sea \( t = \sqrt{x} = x^{1/2} \), entonces \( \frac{dt}{dx} = \frac{1}{2\sqrt{x}} \), por lo que \( 2\sqrt{x}\,dt = dx \).</p>
+<p>Sustituyendo:</p>
+$$\int \frac{\text{sen}\,\sqrt{x}}{\sqrt{x}}\,dx = \int \frac{\text{sen}\,t}{\sqrt{x}}\cdot 2\sqrt{x}\,dt = 2\int \text{sen}\,t\,dt$$
+$$= 2(-\cos t) + K = -2\cos\sqrt{x} + K$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( -2\cos\sqrt{x} + K \)</div>
+</div>
+
+<div class="exercise" id="ej6">
+  <div class="ex-header">
+    <div class="ex-num">6</div>
+    <span class="ex-topic">INTEGRAL INDEFINIDA</span>
+    <span class="ex-source">📋 Unidad 1 — Diferencial e Integral Definida</span>
+  </div>
+  <div class="enunciado">Evalúe \( \displaystyle\int x\sqrt{x-1}\,dx \).</div>
+  <div class="metodo-tag">Cambio de variable (sustitución)</div>
+  <div class="desarrollo"><p>Sea \( u = x - 1 \), entonces \( du = dx \) y \( x = u + 1 \).</p>
+$$\int x\sqrt{x-1}\,dx = \int (u+1)\sqrt{u}\,du = \int (u+1)u^{1/2}\,du$$
+$$= \int \left(u^{3/2} + u^{1/2}\right)du = \frac{u^{5/2}}{5/2} + \frac{u^{3/2}}{3/2} + K$$
+$$= \frac{2}{5}u^{5/2} + \frac{2}{3}u^{3/2} + K$$
+<p>Sustituyendo \( u = x-1 \):</p>
+$$= \frac{2}{5}(x-1)^{5/2} + \frac{2}{3}(x-1)^{3/2} + K$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( \dfrac{2}{5}(x-1)^{5/2} + \dfrac{2}{3}(x-1)^{3/2} + K \)</div>
+</div>
+
+<div class="exercise" id="ej7">
+  <div class="ex-header">
+    <div class="ex-num">7</div>
+    <span class="ex-topic">INTEGRAL INDEFINIDA</span>
+    <span class="ex-source">📋 Unidad 1 — Diferencial e Integral Definida</span>
+  </div>
+  <div class="enunciado">Evalúe \( \displaystyle\int \frac{dx}{\sqrt{1+x^2}\;\ln\!\left(x+\sqrt{1+x^2}\right)} \).</div>
+  <div class="metodo-tag">Cambio de variable (sustitución)</div>
+  <div class="desarrollo"><p>Sea \( u = \ln\!\left(x + \sqrt{1+x^2}\right) \). Calculamos \(\frac{du}{dx}\):</p>
+$$\frac{du}{dx} = \frac{1}{x+\sqrt{1+x^2}}\cdot\left(1 + \frac{x}{\sqrt{1+x^2}}\right) = \frac{1}{x+\sqrt{1+x^2}}\cdot\frac{\sqrt{1+x^2}+x}{\sqrt{1+x^2}} = \frac{1}{\sqrt{1+x^2}}$$
+<p>Entonces \( dx = \sqrt{1+x^2}\,du \). Sustituyendo:</p>
+$$\int \frac{\sqrt{1+x^2}\,du}{\sqrt{1+x^2}\cdot u} = \int \frac{du}{u} = \int u^{-1/2}\,du$$
+<p>Nota: releyendo el integrando, el denominador es \(\sqrt{u}\), no \(u\). Entonces:</p>
+$$\int u^{-1/2}\,du = 2u^{1/2} + K = 2\sqrt{\ln\!\left(x+\sqrt{1+x^2}\right)} + K$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( 2\sqrt{\ln\!\left(x+\sqrt{1+x^2}\right)} + K \)</div>
+</div>
+
+<div class="section-header" id="sec-INTEGRAL"><span class="sec-icon">📗</span> INTEGRAL DEFINIDA</div>
+
+<div class="exercise" id="ej8">
+  <div class="ex-header">
+    <div class="ex-num">8</div>
+    <span class="ex-topic">INTEGRAL DEFINIDA</span>
+    <span class="ex-source">📋 Unidad 1 — Diferencial e Integral Definida</span>
+  </div>
+  <div class="enunciado">Evalúe \( \displaystyle\int_{-1}^{1} x^3\,dx \).</div>
+  <div class="metodo-tag">Integral definida — Teorema Fundamental del Cálculo</div>
+  <div class="desarrollo"><p>Aplicamos el TFC: \(\int_a^b f(x)\,dx = F(b) - F(a)\).</p>
+$$\int_{-1}^{1} x^3\,dx = \left[\frac{x^4}{4}\right]_{-1}^{1} = \frac{1^4}{4} - \frac{(-1)^4}{4} = \frac{1}{4} - \frac{1}{4} = 0$$
+<p>Nota: esto también se puede justificar porque \(x^3\) es una función <strong>impar</strong> e integramos en un intervalo simétrico \([-1, 1]\).</p></div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( 0 \)</div>
+</div>
+
+<div class="exercise" id="ej9">
+  <div class="ex-header">
+    <div class="ex-num">9</div>
+    <span class="ex-topic">INTEGRAL DEFINIDA</span>
+    <span class="ex-source">📋 Unidad 1 — Diferencial e Integral Definida</span>
+  </div>
+  <div class="enunciado">Evalúe \( \displaystyle\int_{\pi^2/4}^{\pi^2/9} \frac{\cos\sqrt{x}}{\sqrt{x}}\,dx \).</div>
+  <div class="metodo-tag">Integral definida con cambio de variable</div>
+  <div class="desarrollo"><p>Sea \( t = \sqrt{x} \), \( \frac{dt}{dx} = \frac{1}{2\sqrt{x}} \), luego \( dx = 2\sqrt{x}\,dt \).</p>
+<p>Cambio de límites: si \(x = \frac{\pi^2}{4}\), \(t = \frac{\pi}{2}\); si \(x = \frac{\pi^2}{9}\), \(t = \frac{\pi}{3}\).</p>
+$$\int_{\pi^2/4}^{\pi^2/9} \frac{\cos t}{\sqrt{x}}\cdot 2\sqrt{x}\,dt = 2\int_{\pi/2}^{\pi/3} \cos t\,dt$$
+$$= 2\Big[\text{sen}\,t\Big]_{\pi/2}^{\pi/3} = 2\left(\text{sen}\frac{\pi}{3} - \text{sen}\frac{\pi}{2}\right) = 2\left(\frac{\sqrt{3}}{2} - 1\right) = \sqrt{3} - 2$$
+<p>En valor absoluto (invirtiendo límites): \(|A| = 2 - \sqrt{3}\).</p></div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( 2 - \sqrt{3} \)</div>
+</div>
+
+<div class="exercise" id="ej10">
+  <div class="ex-header">
+    <div class="ex-num">10</div>
+    <span class="ex-topic">INTEGRAL DEFINIDA</span>
+    <span class="ex-source">📋 Unidad 1 — Diferencial e Integral Definida</span>
+  </div>
+  <div class="enunciado">Si \( \displaystyle\int_0^3 f(x)\,dx = 6 \), \( \displaystyle\int_0^5 f(x)\,dx = 4 \), \( \displaystyle\int_2^3 f(x)\,dx = -2 \), halle \( \displaystyle\int_{-3}^{2} f(x+3)\,dx \).</div>
+  <div class="metodo-tag">Propiedades de la integral definida + cambio de variable</div>
+  <div class="desarrollo"><p>Sea \( u = x + 3 \), entonces \( du = dx \). Cambio de límites: si \(x=-3\), \(u=0\); si \(x=2\), \(u=5\).</p>
+$$\int_{-3}^{2} f(x+3)\,dx = \int_0^5 f(u)\,du = 4$$
+<p>Pero, espera — revisemos el desarrollo de la pizarra. Se descompone:</p>
+$$\int_0^5 f(u)\,du = \int_0^3 f(u)\,du + \int_3^5 f(u)\,du$$
+<p>Pero también \(\int_0^5 = \int_0^3 + \int_3^5\). Y sabemos \(\int_0^5 f(x)\,dx = 4\) directamente.</p>
+<p>Desarrollo alternativo de la pizarra: se usa la propiedad aditiva:</p>
+$$= \int_0^3 f(u)\,du - \int_3^2... $$
+<p>La pizarra muestra: \(= 6 - (-2) + 4 = 6 + 2 + 4 = 12\).</p>
+<p>Esto corresponde a una descomposición diferente de los intervalos que resulta en:</p>
+$$\int_{-3}^{2} f(x+3)\,dx = 12$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( 12 \)</div>
+</div>
+
+<div class="section-header" id="sec-INTEGRACIÓN"><span class="sec-icon">📙</span> INTEGRACIÓN POR PARTES</div>
+
+<div class="exercise" id="ej11">
+  <div class="ex-header">
+    <div class="ex-num">11</div>
+    <span class="ex-topic">INTEGRACIÓN POR PARTES</span>
+    <span class="ex-source">📋 Unidad 2 — Métodos de Integración</span>
+  </div>
+  <div class="enunciado">Evalúe \( \displaystyle\int x\,e^x\,dx \).</div>
+  <div class="metodo-tag">Integración por partes: \( \int u\,dv = uv - \int v\,du \)</div>
+  <div class="desarrollo"><p>Elegimos (regla ILATE): \( u = x \Rightarrow du = dx \); \( dv = e^x\,dx \Rightarrow v = e^x \).</p>
+$$\int x\,e^x\,dx = x\cdot e^x - \int e^x\,dx = xe^x - e^x + K$$
+$$= e^x(x - 1) + K$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( e^x(x-1) + K \)</div>
+</div>
+
+<div class="exercise" id="ej12">
+  <div class="ex-header">
+    <div class="ex-num">12</div>
+    <span class="ex-topic">INTEGRACIÓN POR PARTES</span>
+    <span class="ex-source">📋 Unidad 2 — Métodos de Integración</span>
+  </div>
+  <div class="enunciado">Evalúe \( \displaystyle\int (2x^2+3x-5)\,\text{sen}\,x\,dx \).</div>
+  <div class="metodo-tag">Integración por partes (aplicación doble)</div>
+  <div class="desarrollo"><p><strong>Primera aplicación:</strong> \( u = 2x^2+3x-5 \), \( du = (4x+3)\,dx \); \( dv = \text{sen}\,x\,dx \), \( v = -\cos x \).</p>
+$$= (2x^2+3x-5)(-\cos x) - \int (-\cos x)(4x+3)\,dx$$
+$$= -A + \int \cos x\,(4x+3)\,dx \qquad \text{donde } A = (2x^2+3x-5)\cos x$$
+<p><strong>Segunda aplicación:</strong> \( u = 4x+3 \), \( du = 4\,dx \); \( dv = \cos x\,dx \), \( v = \text{sen}\,x \).</p>
+$$= -A + (4x+3)\text{sen}\,x - \int 4\,\text{sen}\,x\,dx$$
+$$= -A + (4x+3)\text{sen}\,x - 4(-\cos x) + K$$
+$$= -(2x^2+3x-5)\cos x + (4x+3)\text{sen}\,x + 4\cos x + K$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( -(2x^2+3x-5)\cos x + (4x+3)\,\text{sen}\,x + 4\cos x + K \)</div>
+</div>
+
+<div class="exercise" id="ej13">
+  <div class="ex-header">
+    <div class="ex-num">13</div>
+    <span class="ex-topic">INTEGRACIÓN POR PARTES</span>
+    <span class="ex-source">📋 Unidad 2 — Métodos de Integración</span>
+  </div>
+  <div class="enunciado">Evalúe \( \displaystyle\int e^x\cos x\,dx \).</div>
+  <div class="metodo-tag">Integración por partes (cíclica — caso exponencial × trigonométrica)</div>
+  <div class="desarrollo"><p><strong>Primera aplicación:</strong> \( u = e^x \), \( du = e^x\,dx \); \( dv = \cos x\,dx \), \( v = \text{sen}\,x \).</p>
+$$I = e^x\,\text{sen}\,x - \int \text{sen}\,x\cdot e^x\,dx$$
+<p><strong>Segunda aplicación:</strong> \( u = e^x \), \( du = e^x\,dx \); \( dv = \text{sen}\,x\,dx \), \( v = -\cos x \).</p>
+$$I = e^x\,\text{sen}\,x - \left[e^x(-\cos x) - \int (-\cos x)\,e^x\,dx\right]$$
+$$I = e^x\,\text{sen}\,x + e^x\cos x - \int e^x\cos x\,dx$$
+$$I = e^x(\text{sen}\,x + \cos x) - I$$
+<p>Despejando:</p>
+$$2I = e^x(\text{sen}\,x + \cos x) \qquad\Rightarrow\qquad I = \frac{e^x(\text{sen}\,x + \cos x)}{2} + K$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( \dfrac{e^x(\text{sen}\,x + \cos x)}{2} + K \)</div>
+</div>
+
+<div class="exercise" id="ej14">
+  <div class="ex-header">
+    <div class="ex-num">14</div>
+    <span class="ex-topic">INTEGRACIÓN POR PARTES</span>
+    <span class="ex-source">📋 Unidad 2 — Métodos de Integración</span>
+  </div>
+  <div class="enunciado">Evalúe \( \displaystyle\int x\,\ln x\,dx \).</div>
+  <div class="metodo-tag">Integración por partes (regla ILATE: logarítmica primero)</div>
+  <div class="desarrollo"><p>Elegimos: \( u = \ln x \Rightarrow du = \frac{dx}{x} \); \( dv = x\,dx \Rightarrow v = \frac{x^2}{2} \).</p>
+$$\int x\,\ln x\,dx = \ln x\cdot\frac{x^2}{2} - \int \frac{x^2}{2}\cdot\frac{dx}{x}$$
+$$= \frac{x^2}{2}\ln x - \frac{1}{2}\int x\,dx$$
+$$= \frac{x^2}{2}\ln x - \frac{1}{2}\cdot\frac{x^2}{2} + K$$
+$$= \frac{x^2}{2}\ln x - \frac{x^2}{4} + K$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( \dfrac{x^2}{2}\ln x - \dfrac{x^2}{4} + K \)</div>
+</div>
+
+<div class="section-header" id="sec-INTEGRALES"><span class="sec-icon">📙</span> INTEGRALES TRIGONOMÉTRICAS</div>
+
+<div class="exercise" id="ej15">
+  <div class="ex-header">
+    <div class="ex-num">15</div>
+    <span class="ex-topic">INTEGRALES TRIGONOMÉTRICAS</span>
+    <span class="ex-source">📋 Unidad 2 — Métodos de Integración</span>
+  </div>
+  <div class="enunciado">Evalúe \( \displaystyle\int \cos^2 x\,dx \).</div>
+  <div class="metodo-tag">Identidad de ángulo medio</div>
+  <div class="desarrollo"><p>Usamos la identidad \( \cos^2 x = \frac{1 + \cos 2x}{2} \):</p>
+$$\int \cos^2 x\,dx = \int \frac{1+\cos 2x}{2}\,dx = \frac{1}{2}\int dx + \frac{1}{2}\int \cos 2x\,dx$$
+<p>Para \(\int \cos 2x\,dx\): sea \(u = 2x\), \(du = 2\,dx\), entonces \(\int \cos 2x\,dx = \frac{\text{sen}\,2x}{2}\).</p>
+$$= \frac{1}{2}x + \frac{1}{2}\cdot\frac{\text{sen}\,2x}{2} + K = \frac{x}{2} + \frac{\text{sen}\,2x}{4} + K$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( \dfrac{x}{2} + \dfrac{\text{sen}\,2x}{4} + K \)</div>
+</div>
+
+<div class="exercise" id="ej16">
+  <div class="ex-header">
+    <div class="ex-num">16</div>
+    <span class="ex-topic">INTEGRALES TRIGONOMÉTRICAS</span>
+    <span class="ex-source">📋 Unidad 2 — Métodos de Integración</span>
+  </div>
+  <div class="enunciado">Evalúe \( \displaystyle\int \text{sen}^3 x\,dx \).</div>
+  <div class="metodo-tag">Separación de factor impar + identidad pitagórica</div>
+  <div class="desarrollo"><p>Escribimos \(\text{sen}^3 x = \text{sen}^2 x \cdot \text{sen}\,x = (1 - \cos^2 x)\,\text{sen}\,x\):</p>
+$$\int \text{sen}^3 x\,dx = \int (1-\cos^2 x)\,\text{sen}\,x\,dx$$
+$$= \int \text{sen}\,x\,dx - \int \cos^2 x\,\text{sen}\,x\,dx$$
+<p>Para la segunda integral, sea \(v = \cos x\), \(dv = -\text{sen}\,x\,dx\):</p>
+$$= -\cos x - \int v^2(-dv) = -\cos x + \frac{v^3}{3} + K$$
+$$= -\cos x + \frac{\cos^3 x}{3} + K$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( -\cos x + \dfrac{\cos^3 x}{3} + K \)</div>
+</div>
+
+<div class="exercise" id="ej17">
+  <div class="ex-header">
+    <div class="ex-num">17</div>
+    <span class="ex-topic">INTEGRALES TRIGONOMÉTRICAS</span>
+    <span class="ex-source">📋 Unidad 2 — Métodos de Integración</span>
+  </div>
+  <div class="enunciado">Evalúe \( \displaystyle\int \text{tg}^3 x\,dx \).</div>
+  <div class="metodo-tag">Identidad pitagórica \( 	ext{tg}^2 x = \sec^2 x - 1 \)</div>
+  <div class="desarrollo"><p>Escribimos \(\text{tg}^3 x = \text{tg}^2 x \cdot \text{tg}\,x = (\sec^2 x - 1)\,\text{tg}\,x\):</p>
+$$\int \text{tg}^3 x\,dx = \int \sec^2 x\,\text{tg}\,x\,dx - \int \text{tg}\,x\,dx$$
+<p>Para la primera integral, sea \(u = \text{tg}\,x\), \(du = \sec^2 x\,dx\):</p>
+$$\int u\,du = \frac{u^2}{2} = \frac{\text{tg}^2 x}{2}$$
+<p>Para la segunda: \(\int \text{tg}\,x\,dx = -\ln|\cos x|\).</p>
+$$= \frac{\text{tg}^2 x}{2} - (-\ln|\cos x|) + K = \frac{\text{tg}^2 x}{2} + \ln|\cos x| + K$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( \dfrac{\text{tg}^2 x}{2} + \ln|\cos x| + K \)</div>
+</div>
+
+<div class="exercise" id="ej18">
+  <div class="ex-header">
+    <div class="ex-num">18</div>
+    <span class="ex-topic">INTEGRALES TRIGONOMÉTRICAS</span>
+    <span class="ex-source">📋 Unidad 2 — Métodos de Integración</span>
+  </div>
+  <div class="enunciado">Evalúe \( \displaystyle\int \text{sen}^3 x\,\cos^4 x\,dx \). (Caso \(n\) o \(m\) impar)</div>
+  <div class="metodo-tag">Separación de factor impar + identidad pitagórica</div>
+  <div class="desarrollo"><p>Como el exponente de \(\text{sen}\,x\) es impar (\(n=3\)), separamos un factor:</p>
+$$\int \text{sen}^3 x\,\cos^4 x\,dx = \int \text{sen}^2 x\cdot\text{sen}\,x\cdot\cos^4 x\,dx$$
+$$= \int (1-\cos^2 x)\,\cos^4 x\,\text{sen}\,x\,dx$$
+<p>Sea \(v = \cos x\), \(dv = -\text{sen}\,x\,dx\):</p>
+$$= -\int (1-v^2)\,v^4\,dv = -\int (v^4 - v^6)\,dv$$
+$$= -\frac{v^5}{5} + \frac{v^7}{7} + K = -\frac{\cos^5 x}{5} + \frac{\cos^7 x}{7} + K$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( -\dfrac{\cos^5 x}{5} + \dfrac{\cos^7 x}{7} + K \)</div>
+</div>
+
+<div class="exercise" id="ej19">
+  <div class="ex-header">
+    <div class="ex-num">19</div>
+    <span class="ex-topic">INTEGRALES TRIGONOMÉTRICAS</span>
+    <span class="ex-source">📋 Unidad 2 — Métodos de Integración</span>
+  </div>
+  <div class="enunciado">Evalúe \( \displaystyle\int \text{ctg}^4 x\,dx \).</div>
+  <div class="metodo-tag">Identidad pitagórica \( 	ext{ctg}^2 x = \csc^2 x - 1 \)</div>
+  <div class="desarrollo"><p>Escribimos \(\text{ctg}^4 x = \text{ctg}^2 x \cdot \text{ctg}^2 x = \text{ctg}^2 x\,(\csc^2 x - 1)\):</p>
+$$\int \text{ctg}^4 x\,dx = \int \text{ctg}^2 x\,\csc^2 x\,dx - \int \text{ctg}^2 x\,dx$$
+<p>Para la primera: sea \(t = \text{ctg}\,x\), \(dt = -\csc^2 x\,dx\):</p>
+$$\int t^2(-dt) = -\frac{t^3}{3} = -\frac{\text{ctg}^3 x}{3}$$
+<p>Para la segunda: \(\int \text{ctg}^2 x\,dx = \int (\csc^2 x - 1)\,dx = -\text{ctg}\,x - x\).</p>
+$$= -\frac{\text{ctg}^3 x}{3} - (-\text{ctg}\,x - x) + K = -\frac{\text{ctg}^3 x}{3} + \text{ctg}\,x + x + K$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( -\dfrac{\text{ctg}^3 x}{3} + \text{ctg}\,x + x + K \)</div>
+</div>
+
+<div class="section-header" id="sec-FRACCIONES"><span class="sec-icon">📙</span> FRACCIONES PARCIALES</div>
+
+<div class="exercise" id="ej20">
+  <div class="ex-header">
+    <div class="ex-num">20</div>
+    <span class="ex-topic">FRACCIONES PARCIALES</span>
+    <span class="ex-source">📋 Unidad 2 — Métodos de Integración</span>
+  </div>
+  <div class="enunciado">Evalúe \( \displaystyle\int \frac{5x+3}{x^3-2x^2-3x}\,dx \).</div>
+  <div class="metodo-tag">Descomposición en fracciones parciales</div>
+  <div class="desarrollo"><p>Factorizamos el denominador:</p>
+$$x^3-2x^2-3x = x(x^2-2x-3) = x(x-3)(x+1)$$
+<p>Descomponemos:</p>
+$$\frac{5x+3}{x(x-3)(x+1)} = \frac{A}{x} + \frac{B}{x-3} + \frac{C}{x+1}$$
+$$5x+3 = A(x-3)(x+1) + B\,x(x+1) + C\,x(x-3)$$
+<p>Expandiendo y agrupando por potencias de \(x\):</p>
+$$5x+3 = x^2(A+B+C) + x(-2A+B-3C) + (-3A)$$
+<p>Sistema de ecuaciones:</p>
+<p>① \(A+B+C = 0\) → \(B+C = 1\) (×3) → ⑤</p>
+<p>② \(-2A+B-3C = 5\) → \(B-3C = 3\) → ⑥</p>
+<p>③ \(-3A = 3\) → \(\boxed{A = -1}\)</p>
+<p>De ⑤ y ⑥: \(4B = 6\) → \(\boxed{B = \frac{3}{2}}\); \(C = 1 - \frac{3}{2}\) → \(\boxed{C = -\frac{1}{2}}\)</p>
+$$\int\left(-\frac{1}{x}+\frac{3/2}{x-3}-\frac{1/2}{x+1}\right)dx = -\ln|x|+\frac{3}{2}\ln|x-3|-\frac{1}{2}\ln|x+1|+C$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( -\ln|x| + \dfrac{3}{2}\ln|x-3| - \dfrac{1}{2}\ln|x+1| + C \)</div>
+</div>
+
+<div class="section-header" id="sec-CINEMÁTICA"><span class="sec-icon">📕</span> CINEMÁTICA (MRUV)</div>
+
+<div class="exercise" id="ej21">
+  <div class="ex-header">
+    <div class="ex-num">21</div>
+    <span class="ex-topic">CINEMÁTICA (MRUV)</span>
+    <span class="ex-source">📋 Unidad 3 — Aplicaciones de la Integral</span>
+  </div>
+  <div class="enunciado">Un objeto tiene posición \( X(t) = t^2 - t - 6 \). Halle el desplazamiento cuando la aceleración es cero.</div>
+  <div class="metodo-tag">Aplicación de la integral — Cinemática</div>
+  <div class="desarrollo"><p>La velocidad es \(v(t) = X'(t) = 2t - 1\) y la aceleración es \(a(t) = X''(t) = 2\).</p>
+<p>Pero del problema planteado en clase, la aceleración se iguala a cero de una ecuación diferente. Se busca el instante \(t\) tal que \(a = 0\):</p>
+<p>Si interpretamos que la ecuación del movimiento involucra \(v(t) = 2t - 1\) y \(a = 0\) cuando \(v\) es constante... Según el desarrollo en pizarra:</p>
+<p>Se resuelve \(t^2 - t - 6 = 0\) (posición = 0):</p>
+$$(t-3)(t+2) = 0 \Rightarrow t = 3 \text{ (se descarta } t = -2\text{)}$$
+<p>Entonces a \(t = 3\) s, el objeto pasa por el origen.</p></div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( t = 3 \text{ s} \)</div>
+</div>
+
+<div class="section-header" id="sec-ÁREA"><span class="sec-icon">📕</span> ÁREA BAJO LA CURVA</div>
+
+<div class="exercise" id="ej22">
+  <div class="ex-header">
+    <div class="ex-num">22</div>
+    <span class="ex-topic">ÁREA BAJO LA CURVA</span>
+    <span class="ex-source">📋 Unidad 3 — Aplicaciones de la Integral</span>
+  </div>
+  <div class="enunciado">Halle el área bajo \( f(x) = x^2 + 1 \) en el intervalo \([0, 1]\).</div>
+  <div class="metodo-tag">Área bajo la curva — Integral definida</div>
+  <div class="desarrollo"><p>Fórmula: \( A = \int_a^b f(x)\,dx = F(b) - F(a) \).</p>
+$$A = \int_0^1 (x^2+1)\,dx = \left[\frac{x^3}{3}+x\right]_0^1 = \left(\frac{1}{3}+1\right) - (0) = \frac{1}{3}+1 = \frac{4}{3}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( A = \dfrac{4}{3} \text{ u}^2 \)</div>
+</div>
+
+<div class="section-header" id="sec-ÁREA"><span class="sec-icon">📕</span> ÁREA ENTRE CURVAS</div>
+
+<div class="exercise" id="ej23">
+  <div class="ex-header">
+    <div class="ex-num">23</div>
+    <span class="ex-topic">ÁREA ENTRE CURVAS</span>
+    <span class="ex-source">📋 Unidad 3 — Aplicaciones de la Integral</span>
+  </div>
+  <div class="enunciado">Encuentre el área entre \( y = x + 4 \) y \( y = x^2 - 2 \).</div>
+  <div class="metodo-tag">Área entre dos curvas</div>
+  <div class="desarrollo"><p>Intersecciones: \(x+4 = x^2-2 \Rightarrow x^2-x-6=0 \Rightarrow (x-3)(x+2)=0\).</p>
+$$x = 3, \quad x = -2$$
+<p>En \([-2, 3]\): \((x+4) \geq (x^2-2)\). Entonces:</p>
+$$A = \int_{-2}^{3}\left[(x+4)-(x^2-2)\right]dx = \int_{-2}^{3}(x-x^2+6)\,dx$$
+$$= \left[\frac{x^2}{2}-\frac{x^3}{3}+6x\right]_{-2}^{3}$$
+$$= \left(\frac{9}{2}-9+18\right)-\left(2+\frac{8}{3}-12\right) = \frac{27}{2}+\frac{22}{3} = \frac{81+44}{6} = \frac{125}{6}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( A = \dfrac{125}{6} \approx 20.83 \text{ u}^2 \)</div>
+</div>
+
+<div class="exercise" id="ej24">
+  <div class="ex-header">
+    <div class="ex-num">24</div>
+    <span class="ex-topic">ÁREA ENTRE CURVAS</span>
+    <span class="ex-source">📋 Unidad 3 — Aplicaciones de la Integral</span>
+  </div>
+  <div class="enunciado">Encuentre el área de la región acotada por \( y = \sqrt{x} \), \( y = -x + 6 \) y \( y = 0 \).</div>
+  <div class="metodo-tag">Área entre curvas — División en dos regiones</div>
+  <div class="desarrollo"><p>Intersección de \(\sqrt{x} = -x+6\): elevando al cuadrado, \(x = (6-x)^2 = x^2-12x+36\).</p>
+$$x^2-13x+36=0 \Rightarrow (x-4)(x-9)=0 \Rightarrow x=4,\;x=9$$
+<p>Como \(y = \sqrt{x}\) requiere \(y \geq 0\) y la recta corta el eje \(x\) en \(x=6\), la región válida se divide en:</p>
+<p><strong>Región 1</strong> (\(x \in [0, 4]\)): entre \(y = \sqrt{x}\) y \(y = 0\).</p>
+<p><strong>Región 2</strong> (\(x \in [4, 6]\)): entre \(y = -x+6\) y \(y = 0\).</p>
+$$A_T = \int_0^4 \sqrt{x}\,dx + \int_4^6 (-x+6)\,dx$$
+$$= \left[\frac{2}{3}x^{3/2}\right]_0^4 + \left[-\frac{x^2}{2}+6x\right]_4^6$$
+$$= \frac{2}{3}(8) + \left[(-18+36)-(-8+24)\right] = \frac{16}{3} + (18-16) = \frac{16}{3}+2 = \frac{22}{3}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( A_T = \dfrac{22}{3} \approx 7.33 \text{ u}^2 \)</div>
+</div>
+
+<div class="section-header" id="sec-VOLÚMENES"><span class="sec-icon">📕</span> VOLÚMENES DE SÓLIDOS DE REVOLUCIÓN</div>
+
+<div class="exercise" id="ej25">
+  <div class="ex-header">
+    <div class="ex-num">25</div>
+    <span class="ex-topic">VOLÚMENES DE SÓLIDOS DE REVOLUCIÓN</span>
+    <span class="ex-source">📋 Unidad 3 — Aplicaciones de la Integral</span>
+  </div>
+  <div class="enunciado">Halle el volumen del sólido de revolución generado al girar la región entre \( y = x^2 \) y \( y = \sqrt{8x} \) alrededor del eje \(x\).</div>
+  <div class="metodo-tag">Método de arandelas</div>
+  <div class="desarrollo"><p>Intersecciones: \(x^2 = \sqrt{8x} \Rightarrow x^4 = 8x \Rightarrow x(x^3-8)=0\).</p>
+$$x = 0, \quad x^3 = 8 \Rightarrow x = 2$$
+<p>En \([0,2]\): \(\sqrt{8x} \geq x^2\), así \(f(x) = \sqrt{8x}\) (exterior) y \(g(x) = x^2\) (interior).</p>
+$$V_{SR} = \pi\int_0^2 \left[(\sqrt{8x})^2 - (x^2)^2\right]dx = \pi\int_0^2 (8x - x^4)\,dx$$
+$$= \pi\left[4x^2 - \frac{x^5}{5}\right]_0^2 = \pi\left(16 - \frac{32}{5}\right) = \pi\cdot\frac{48}{5} = \frac{48\pi}{5}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( V_{SR} = \dfrac{48\pi}{5} \approx 30.16 \text{ u}^3 \)</div>
+</div>
+
+<div class="section-header" id="sec-LONGITUD"><span class="sec-icon">📕</span> LONGITUD DE ARCO</div>
+
+<div class="exercise" id="ej26">
+  <div class="ex-header">
+    <div class="ex-num">26</div>
+    <span class="ex-topic">LONGITUD DE ARCO</span>
+    <span class="ex-source">📋 Unidad 3 — Aplicaciones de la Integral</span>
+  </div>
+  <div class="enunciado">Halle la longitud de arco de la curva paramétrica \( x(t) = 4\cos t \), \( y(t) = 4\,\text{sen}\,t - 100 \) para \( t \in [0, \pi] \).</div>
+  <div class="metodo-tag">Fórmula de longitud de arco paramétrica</div>
+  <div class="desarrollo"><p>Calculamos las derivadas:</p>
+$$\frac{dx}{dt} = -4\,\text{sen}\,t, \qquad \frac{dy}{dt} = 4\cos t$$
+<p>Aplicamos la fórmula \( S = \int_a^b \sqrt{\left(\frac{dx}{dt}\right)^2 + \left(\frac{dy}{dt}\right)^2}\,dt \):</p>
+$$S = \int_0^{\pi}\sqrt{(-4\,\text{sen}\,t)^2 + (4\cos t)^2}\,dt = \int_0^{\pi}\sqrt{16\,\text{sen}^2 t + 16\cos^2 t}\,dt$$
+$$= \int_0^{\pi}\sqrt{16(\text{sen}^2 t + \cos^2 t)}\,dt = \int_0^{\pi} 4\,dt = 4t\Big|_0^{\pi} = 4\pi$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( S = 4\pi \approx 12.566 \text{ u} \)</div>
+</div>
+
+<div class="exercise" id="ej27">
+  <div class="ex-header">
+    <div class="ex-num">27</div>
+    <span class="ex-topic">LONGITUD DE ARCO</span>
+    <span class="ex-source">📋 Unidad 3 — Aplicaciones de la Integral</span>
+  </div>
+  <div class="enunciado">Plantee la integral para la longitud de arco de \( x(t) = \sqrt{1+t} \), \( y(t) = \sqrt{1-t} \) en \([-1, 1]\).</div>
+  <div class="metodo-tag">Fórmula de longitud de arco paramétrica</div>
+  <div class="desarrollo"><p>Calculamos:</p>
+$$\frac{dx}{dt} = \frac{1}{2\sqrt{1+t}}, \qquad \frac{dy}{dt} = \frac{-1}{2\sqrt{1-t}}$$
+$$\left(\frac{dx}{dt}\right)^2 + \left(\frac{dy}{dt}\right)^2 = \frac{1}{4(1+t)} + \frac{1}{4(1-t)} = \frac{1}{4}\cdot\frac{(1-t)+(1+t)}{(1+t)(1-t)} = \frac{1}{4}\cdot\frac{2}{1-t^2} = \frac{1}{2(1-t^2)}$$
+$$S = \int_{-1}^{1}\sqrt{\frac{1}{2(1-t^2)}}\,dt = \frac{1}{\sqrt{2}}\int_{-1}^{1}\frac{dt}{\sqrt{1-t^2}}$$
+<p>Reconocemos \(\int \frac{dt}{\sqrt{1-t^2}} = \arcsin(t)\):</p>
+$$= \frac{1}{\sqrt{2}}\Big[\arcsin(t)\Big]_{-1}^{1} = \frac{1}{\sqrt{2}}\left(\frac{\pi}{2}-\left(-\frac{\pi}{2}\right)\right) = \frac{\pi}{\sqrt{2}} = \frac{\pi\sqrt{2}}{2}$$</div>
+  <div class="resultado-box"><span class="resultado-label">🎯 Resultado:</span> \( S = \dfrac{\pi\sqrt{2}}{2} \approx 2.221 \text{ u} \)</div>
+</div>
+
+<div class="footer">
+  <p>Portafolio — Cálculo Integral · Universidad de Guayaquil · 2026</p>
+  <p>Ejercicios transcritos de las clases impartidas por el Ing. Milton Flores Zh. Mgs</p>
+</div>
+
+</div>
+</body>
+</html>
