@@ -6,28 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reinaldo Dianda | Desarrollador Web Junior – Guayaquil, Ecuador</title>
     <meta name="description" content="Portafolio de Reinaldo Dianda, Desarrollador Web Junior y Tecnólogo en Sistemas. Especializado en HTML5, CSS3, JavaScript, Bootstrap y WordPress. Disponible para proyectos en Ecuador.">
-    <!-- Open Graph -->
+    <meta name="theme-color" content="#262626">
     <meta property="og:title" content="Reinaldo Dianda | Desarrollador Web Junior">
     <meta property="og:description" content="Portafolio de Reinaldo Dianda — desarrollo web, soporte técnico y plataformas educativas. Guayaquil, Ecuador.">
     <meta property="og:image" content="https://res.cloudinary.com/doo95ngwf/image/upload/v1668123458/ft_h5m64p.webp">
     <meta property="og:url" content="https://reinaldodianda.com">
     <meta property="og:type" content="website">
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Reinaldo Dianda | Desarrollador Web Junior">
-    <meta name="twitter:description" content="Portafolio de Reinaldo Dianda — desarrollo web, soporte técnico y plataformas educativas.">
-    <meta name="twitter:image" content="https://res.cloudinary.com/doo95ngwf/image/upload/v1668123458/ft_h5m64p.webp">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <script src="https://kit.fontawesome.com/a2360167c8.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
-    <nav class="navbar">
-         <button class="switch switch-translater nav-link" id="switch-translater" aria-label="Cambiar idioma">
-                <div class="flags" id="flags"> 
+        <nav class="navbar">
+            <button class="switch switch-translater nav-link" id="switch-translater" aria-label="Cambiar idioma">
+                <div class="flags" id="flags">
                     <div class="flags_item" data-language="es">
-                            <img class="flag-icon" src="https://res.cloudinary.com/doo95ngwf/image/upload/v1662840998/espana_qx4hvi.png" alt="Bandera España">
+                        <img class="flag-icon" src="https://res.cloudinary.com/doo95ngwf/image/upload/v1662840998/espana_qx4hvi.png" alt="Bandera España">
                     </div>
                     <div class="flags_item" data-language="en">
                         <img class="flag-icon" src="https://res.cloudinary.com/doo95ngwf/image/upload/v1662840998/reino-unido_uh7wyq.png" alt="Bandera Reino Unido">
@@ -36,12 +32,11 @@
             </button>
 
             <ul class="nav-menu">
-                <li class="nav-item">
-                    <a class="nav-link" target="_blank" rel="noopener noreferrer" href="./Cv Reinaldo Dianda.pdf">Curriculum Vitae</a>
-                </li>
-                <li>
-                    <a href="mailto:reinaldodianda@gmail.com" target="_blank" rel="noopener noreferrer" class="nav-link">Contáctame</a>
-                </li>
+                <li class="nav-item"><a class="nav-link" href="#sobre-mi" data-section="nav" data-value="about">Sobre mí</a></li>
+                <li class="nav-item"><a class="nav-link" href="#experiencia" data-section="nav" data-value="experience">Experiencia</a></li>
+                <li class="nav-item"><a class="nav-link" href="#proyectos" data-section="nav" data-value="projects">Proyectos</a></li>
+                <li class="nav-item"><a class="nav-link" target="_blank" rel="noopener noreferrer" href="./Cv Reinaldo Dianda.pdf" data-section="nav" data-value="cv">Curriculum Vitae</a></li>
+                <li><a href="mailto:reinaldodianda@gmail.com" target="_blank" rel="noopener noreferrer" class="nav-link" data-section="nav" data-value="contact">Contáctame</a></li>
                 <li>
                     <button class="switch nav-link" id="switch" aria-label="Cambiar tema oscuro/claro">
                         <span><i class="fa-solid fa-sun"></i></span>
@@ -55,9 +50,12 @@
                 <span class="bar"></span>
             </div>
         </nav>
-</header>
-<main>
-        <div class="main-div-container">
+    </header>
+
+    <main>
+
+        <!-- HERO -->
+        <div class="main-div-container fade-in" id="sobre-mi">
             <img src="https://res.cloudinary.com/doo95ngwf/image/upload/v1668123458/ft_h5m64p.webp" alt="Foto de perfil de Reinaldo Dianda" class="main-img">
             <h1>Reinaldo Dianda</h1>
             <h2 id="Web-Developer-title" data-section="profile" data-value="rol">Desarrollador Web Junior · Soporte Técnico</h2>
@@ -68,82 +66,143 @@
                     <a href="mailto:reinaldodianda@gmail.com" target="_blank" rel="noopener noreferrer" aria-label="Email"><i class="fa-solid fa-envelope fa-lg"></i></a>
                 </div>
                 <p id="about-me" data-section="profile" data-value="description">
-                    Tecnólogo en Informática, actualmente cursando Ingeniería en Sistemas (UG). Experiencia práctica en desarrollo frontend, auditoría de sitios web y soporte técnico de redes. Me adapto rápido a nuevas tecnologías y entornos de trabajo.
+                    Desarrollador Junior y estudiante de Ingeniería en Sistemas con formación como Tecnólogo en Informática y experiencia en desarrollo web y soporte IT. Con conocimientos en desarrollo frontend, Linux, redes y soporte técnico, enfocado en crear soluciones eficientes y optimizar procesos mediante experiencia práctica y aprendizaje continuo.
                 </p>
             </div>
         </div>
-        
-        <div class="curriculum"><a class="curriculum" href="./Cv Reinaldo Dianda.pdf" target="_blank" rel="noopener noreferrer">Curriculum Vitae</a></div>
-    
-    <section class="main-container-sections">
+
+        <div class="curriculum">
+            <a class="curriculum" href="./Cv Reinaldo Dianda.pdf" target="_blank" rel="noopener noreferrer" data-section="profile" data-value="cv_btn">Descargar CV</a>
+        </div>
+
+        <!-- HABILIDADES -->
+        <section class="main-container-sections fade-in">
             <h2 class="h2-subtitle" data-section="profile" data-value="skills">Habilidades</h2>
-                <div class="main-items">
-                    <div class="main-skills-container-levels">    
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" alt="Logo HTML5" loading="lazy">
-                        <div class="level-skill" id="level-skill-html"></div>
-                    </div>
-
-                    <div class="main-skills-container-levels">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" alt="Logo CSS3" loading="lazy">
-                        <div class="level-skill" id="level-skill-css"></div>
-                    </div>
-                    
-                    <div class="main-skills-container-levels">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="Logo JavaScript" loading="lazy">
-                        <div class="level-skill" id="level-skill-js"></div>
-                    </div>
-                    
-                    <div class="main-skills-container-levels">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="Logo Git/GitHub" loading="lazy">
-                        <div class="level-skill" id="level-skill-github"></div>
-                    </div>
-                    
-                    <div class="main-skills-container-levels">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/wordpress/wordpress-plain.svg" alt="Logo WordPress" loading="lazy">
-                        <div class="level-skill" id="level-skill-wordpress"></div>
-                    </div>
-                    
-                    <div class="main-skills-container-levels">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bootstrap/bootstrap-original.svg" alt="Logo Bootstrap" loading="lazy">
-                        <div class="level-skill" id="level-skill-B"></div>
-                    </div>
-
-                    <div class="main-skills-container-levels">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/chartjs/chartjs-original.svg" alt="Logo Chart.js" loading="lazy">
-                        <div class="level-skill" id="level-skill-chartjs"></div>
+            <div class="skills-categories">
+                <div class="skill-category">
+                    <h3 class="skill-cat-title" data-section="profile" data-value="skills_frontend">Frontend</h3>
+                    <div class="skill-badges">
+                        <span class="skill-badge">HTML5</span>
+                        <span class="skill-badge">CSS3</span>
+                        <span class="skill-badge">JavaScript</span>
+                        <span class="skill-badge">Bootstrap</span>
                     </div>
                 </div>
+                <div class="skill-category">
+                    <h3 class="skill-cat-title" data-section="profile" data-value="skills_tools">Herramientas</h3>
+                    <div class="skill-badges">
+                        <span class="skill-badge">WordPress</span>
+                        <span class="skill-badge">Git / GitHub</span>
+                        <span class="skill-badge">Chart.js</span>
+                        <span class="skill-badge">Linux</span>
+                        <span class="skill-badge">SEO</span>
+                    </div>
+                </div>
+            </div>
         </section>
 
-         <section class="main-container-sections">
+        <!-- EXPERIENCIA -->
+        <section class="main-container-sections fade-in" id="experiencia">
+            <h2 class="h2-subtitle" data-section="experience" data-value="title">Experiencia</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3 data-section="experience" data-value="job1_title">Desarrollador Web Freelance</h3>
+                            <span class="timeline-date" data-section="experience" data-value="job1_date">Feb 2025 – Presente</span>
+                        </div>
+                        <p class="timeline-company" data-section="experience" data-value="job1_company">Autónomo — Guayaquil, Ecuador</p>
+                        <ul class="timeline-bullets">
+                            <li data-section="experience" data-value="job1_b1">Desarrollé y audité sitios web para clientes en Ecuador, corrigiendo errores críticos de SEO, funcionalidad y UX.</li>
+                            <li data-section="experience" data-value="job1_b2">Construí una plataforma educativa interactiva de Cálculo Integral para la Universidad de Guayaquil con Chart.js y MathJax.</li>
+                            <li data-section="experience" data-value="job1_b3">Brindé soporte técnico en configuración de redes y mantenimiento de equipos.</li>
+                        </ul>
+                        <div class="timeline-stack">
+                            <span>HTML5</span>
+                            <span>CSS3</span>
+                            <span>JavaScript</span>
+                            <span>WordPress</span>
+                            <span>Bootstrap</span>
+                            <span>SEO</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GITHUB STATS
+        <section class="main-container-sections fade-in github-section">
+            <h2 class="h2-subtitle" data-section="profile" data-value="github_title">Actividad en GitHub</h2>
+            <div class="github-stats">
+                <img src="https://github-readme-stats.vercel.app/api?username=reinaldodianda&show_icons=true&theme=dark&hide_border=true&bg_color=00000000&title_color=0098c5&icon_color=0098c5&text_color=f1f1f1" alt="GitHub Stats de Reinaldo Dianda" loading="lazy" class="github-card">
+                <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=reinaldodianda&layout=compact&theme=dark&hide_border=true&bg_color=00000000&title_color=0098c5&text_color=f1f1f1" alt="Lenguajes más usados por Reinaldo Dianda" loading="lazy" class="github-card">
+            </div>
+        </section> -->
+
+        <!-- PROYECTOS -->
+        <section class="main-container-sections fade-in" id="proyectos">
             <h2 class="h2-subtitle" data-section="projects" data-value="title">Proyectos</h2>
             <article class="main-post">
-                <a href="https://mrbrillante.com/" target="_blank" rel="noopener noreferrer">
-                    <post>
-                        <h3>Mr Brillante</h3>
+
+                <div class="project-card">
+                    <a href="https://mrbrillante.com/" target="_blank" rel="noopener noreferrer">
                         <img id="post-mrbrillante" class="post-img" src="https://res.cloudinary.com/doo95ngwf/image/upload/v1668123870/mr_brillante1_jsdc6n_lwlwl8.webp" alt="Vista previa de mr-brillante.com" loading="lazy">
+                    </a>
+                    <div class="project-info">
+                        <h3>Mr Brillante</h3>
                         <p data-section="projects" data-value="mrbrillante_desc">Sitio web para la empresa de Limpieza Mr Brillante usando HTML5 y CSS3.</p>
-                    </post>
-                </a>
-                <a href="https://reinaldodianda.com/calculo-integral/" target="_blank" rel="noopener noreferrer">
-                    <post>
-                        <h3 data-section="projects" data-value="calculo_title">Cálculo Integral</h3>
+                        <div class="project-stack">
+                            <span>HTML5</span>
+                            <span>CSS3</span>
+                            <span>JavaScript</span>
+                            <span>WordPress</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://mrbrillante.com/" target="_blank" rel="noopener noreferrer" class="project-btn">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <a href="https://reinaldodianda.com/proyectos/calculo/" target="_blank" rel="noopener noreferrer">
                         <img id="post-calculo" class="post-img" src="https://res.cloudinary.com/doo95ngwf/image/upload/f_auto,q_auto/calculo_integral_preview" alt="Vista previa de la plataforma Cálculo Integral" loading="lazy">
-                        <p data-section="projects" data-value="calculo_desc">Plataforma educativa interactiva para la Universidad de Guayaquil.</p>
-                    </post>
-                </a>
+                    </a>
+                    <div class="project-info">
+                        <h3 data-section="projects" data-value="calculo_title">Cálculo Integral</h3>
+                        <p data-section="projects" data-value="calculo_desc">Plataforma educativa interactiva para la Universidad de Guayaquil con visualizaciones dinámicas usando Chart.js y MathJax.</p>
+                        <div class="project-stack">
+                            <span>HTML5</span>
+                            <span>Bootstrap</span>
+                            <span>Chart.js</span>
+                            <span>MathJax</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://reinaldodianda.com/proyectos/calculo/" target="_blank" rel="noopener noreferrer" class="project-btn">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
             </article>
         </section>
+
     </main>
+
     <footer>
-        <div class="footer-container-sections" >
+        <div class="footer-container-sections">
             <h3 class="h2-subtitle" data-section="contact" data-value="title">Contáctame</h3>
-                <div class="container-div-icons">
-                    <a href="https://www.linkedin.com/in/reinaldo-dianda/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin fa-lg"></i></a>
-                    <a href="mailto:reinaldodianda@gmail.com" target="_blank" rel="noopener noreferrer" aria-label="Email"><i class="fa-solid fa-envelope fa-lg"></i></a>  
-                </div>  
+            <div class="container-div-icons">
+                <a href="https://www.linkedin.com/in/reinaldo-dianda/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin fa-lg"></i></a>
+                <a href="https://github.com/reinaldodianda" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github fa-lg"></i></a>
+                <a href="mailto:reinaldodianda@gmail.com" target="_blank" rel="noopener noreferrer" aria-label="Email"><i class="fa-solid fa-envelope fa-lg"></i></a>
+            </div>
         </div>
     </footer>
+
     <script src="./script.js"></script>
 </body>
 </html>

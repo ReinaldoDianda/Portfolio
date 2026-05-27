@@ -2,13 +2,34 @@
     "profile": {
         "rol": "Desarrollador Web Junior · Soporte Técnico",
         "description": "Tecnólogo en Informática, actualmente cursando Ingeniería en Sistemas (UG). Experiencia práctica en desarrollo frontend, auditoría de sitios web y soporte técnico de redes. Me adapto rápido a nuevas tecnologías y entornos de trabajo.",
-        "skills": "Habilidades"
+        "skills": "Habilidades",
+        "skills_frontend": "Frontend",
+        "skills_tools": "Herramientas",
+        "github_title": "Actividad en GitHub",
+        "cv_btn": "Descargar CV"
+    },
+    "nav": {
+        "about": "Sobre mí",
+        "experience": "Experiencia",
+        "projects": "Proyectos",
+        "cv": "Curriculum Vitae",
+        "contact": "Contáctame"
+    },
+    "experience": {
+        "title": "Experiencia",
+        "job1_title": "Desarrollador Web Freelance",
+        "job1_date": "Feb 2025 – Presente",
+        "job1_company": "Autónomo — Guayaquil, Ecuador",
+        "job1_b1": "Desarrollé y audité sitios web para clientes en Ecuador, corrigiendo errores críticos de SEO, funcionalidad y UX.",
+        "job1_b2": "Construí plataforma educativa interactiva de Cálculo Integral para la Universidad de Guayaquil con Chart.js y MathJax.",
+        "job1_b3": "Brindé soporte técnico en configuración de redes y mantenimiento de equipos."
     },
     "projects": {
         "title": "Proyectos",
         "mrbrillante_desc": "Sitio web para la empresa de Limpieza Mr Brillante usando HTML5 y CSS3.",
         "calculo_title": "Cálculo Integral",
-        "calculo_desc": "Plataforma educativa interactiva de Cálculo Integral para la Universidad de Guayaquil, con visualizaciones dinámicas usando Chart.js y MathJax."
+        "calculo_desc": "Plataforma educativa interactiva de Cálculo Integral para la Universidad de Guayaquil, con visualizaciones dinámicas usando Chart.js y MathJax.",
+        "btn_demo": "<i class='fa-solid fa-arrow-up-right-from-square'></i> Demo"
     },
     "contact": {
         "title": "Contáctame"

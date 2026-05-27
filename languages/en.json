@@ -2,13 +2,34 @@
     "profile": {
         "rol": "Junior Web Developer · Technical Support",
         "description": "IT Technologist, currently studying Systems Engineering (UG). Practical experience in frontend development, website auditing and network technical support. I adapt quickly to new technologies and work environments.",
-        "skills": "Skills"
+        "skills": "Skills",
+        "skills_frontend": "Frontend",
+        "skills_tools": "Tools",
+        "github_title": "GitHub Activity",
+        "cv_btn": "Download CV"
+    },
+    "nav": {
+        "about": "About me",
+        "experience": "Experience",
+        "projects": "Projects",
+        "cv": "Curriculum Vitae",
+        "contact": "Contact me"
+    },
+    "experience": {
+        "title": "Experience",
+        "job1_title": "Freelance Web Developer",
+        "job1_date": "Feb 2025 – Present",
+        "job1_company": "Self-employed — Guayaquil, Ecuador",
+        "job1_b1": "Developed and audited websites for clients in Ecuador, fixing critical SEO, functionality and UX errors.",
+        "job1_b2": "Built an interactive Integral Calculus educational platform for the University of Guayaquil using Chart.js and MathJax.",
+        "job1_b3": "Provided technical support in network configuration and equipment maintenance."
     },
     "projects": {
         "title": "Projects",
         "mrbrillante_desc": "Website for the cleaning company Mr Brillante using HTML5 and CSS3.",
         "calculo_title": "Integral Calculus",
-        "calculo_desc": "Interactive educational platform for the University of Guayaquil, with dynamic visualizations built with Chart.js and MathJax."
+        "calculo_desc": "Interactive educational platform for the University of Guayaquil, with dynamic visualizations built with Chart.js and MathJax.",
+        "btn_demo": "<i class='fa-solid fa-arrow-up-right-from-square'></i> Demo"
     },
     "contact": {
         "title": "Contact Me"
