@@ -439,7 +439,7 @@ body.dark .timeline-stack span {
 /* =========================================
    9. GITHUB STATS
    ========================================= */
-.github-section { text-align: center; }
+/* .github-section { text-align: center; }
 
 .github-stats {
     display: flex;
@@ -457,7 +457,7 @@ body.dark .timeline-stack span {
     transition: transform 0.25s;
 }
 
-.github-card:hover { transform: translateY(-4px); }
+.github-card:hover { transform: translateY(-4px); } */
 
 /* =========================================
    10. PROYECTOS
