@@ -1,12 +1,14 @@
 {
     "profile": {
-        "rol": "Desarrollador de Software",
-        "description": "Soy un desarrollador Junior y estudiante de Ingeniería en Sistemas apasionado por la tecnología, tengo 1 año de experiencia y me adapto a cualquier lenguaje y reto que me propongan, ya que veo el aprendizaje como algo que no debe detenerse.",
+        "rol": "Desarrollador Web Junior · Soporte Técnico",
+        "description": "Tecnólogo en Informática, actualmente cursando Ingeniería en Sistemas (UG). Experiencia práctica en desarrollo frontend, auditoría de sitios web y soporte técnico de redes. Me adapto rápido a nuevas tecnologías y entornos de trabajo.",
         "skills": "Habilidades"
     },
     "projects": {
         "title": "Proyectos",
-        "mrbrillante_desc": "Sitio web para la empresa de Limpieza Mr Brillante usando HTML5 y CSS3."
+        "mrbrillante_desc": "Sitio web para la empresa de Limpieza Mr Brillante usando HTML5 y CSS3.",
+        "calculo_title": "Cálculo Integral",
+        "calculo_desc": "Plataforma educativa interactiva de Cálculo Integral para la Universidad de Guayaquil, con visualizaciones dinámicas usando Chart.js y MathJax."
     },
     "contact": {
         "title": "Contáctame"

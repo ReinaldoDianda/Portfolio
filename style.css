@@ -1,0 +1,420 @@
+/* =========================================
+   1. VARIABLES & RESET (Configuración Global)
+   ========================================= */
+:root {
+    /* Colores Modo Claro (Por defecto) */
+    --bg-color: #f1f1f1;
+    --text-color: #333338;
+    --text-color-light: #555;
+    --header-bg: #262626;
+    --header-text: #f1f1f1;
+    --accent-color: dodgerblue;
+    --danger-color: #E45F5F;
+    --highlight-color: #0098c5;
+    
+    /* Sombras y efectos */
+    --shadow-light: 0px 30px 130px -30px rgba(0, 151, 197, 0.58);
+}
+
+/* Variables para Modo Oscuro - ¡Magia! */
+body.dark {
+    --bg-color: #111218;
+    --text-color: #f1f1f1;
+    --text-color-light: #ccc;
+    --header-bg: rgba(38, 38, 38, 0.9); /* Un poco transparente para efecto blur */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+    /* Quitamos font-size de aquí para permitir herencia correcta */
+}
+
+html {
+    font-size: 62.5%; /* 1rem = 10px */
+    scroll-behavior: smooth; /* Desplazamiento suave al navegar */
+}
+
+body {
+    background: var(--bg-color);
+    color: var(--text-color);
+    font-size: 1.6rem; /* 16px base */
+    /* Optimizamos la transición: solo animamos colores */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* =========================================
+   2. HEADER & NAVEGACIÓN
+   ========================================= */
+header {
+    background-color: var(--header-bg);
+    position: sticky; /* Mejor que fixed para evitar saltos */
+    top: 0;
+    z-index: 1000; /* Asegura que el menú esté siempre arriba */
+    width: 100%;
+}
+
+.navbar {
+    min-height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+}
+
+.nav-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-menu li {
+    list-style: none;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: var(--header-text);
+    font-size: 1.6rem;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--accent-color);
+}
+
+/* Menú Hamburguesa */
+.hamburger {
+    display: none;
+    cursor: pointer;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    transition: all 0.3s ease-in-out;
+    background-color: var(--header-text);
+}
+
+/* =========================================
+   3. SWITCHES (Tema & Idioma)
+   ========================================= */
+.switch {
+    background: #343d5b;
+    border-radius: 1000px;
+    border: none;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    outline: none;
+    margin: 0; /* Ajustado para alinear mejor en el menú */
+}
+
+.switch::after {
+    content: "";
+    display: block;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    background: #f1f1f1;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    transition: .3s ease all;
+    box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, .2);
+}
+
+.switch.active {
+    background: #eb993b;
+    color: #000;
+}
+
+.switch.active::after {
+    left: calc(100% - 30px); /* Cálculo más preciso */
+}
+
+.switch span {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    display: block;
+    background: none;
+    color: #f1f1f1;
+    text-align: center; /* Centrar iconos */
+}
+
+/* Traductor */
+.flags {
+    display: flex;
+    text-align: center;
+    cursor: pointer;
+}
+
+.flag-icon {
+    width: 30px; /* Ajustado tamaño para consistencia */
+    height: auto;
+    padding: 5px;
+    vertical-align: middle;
+}
+
+.switch-translater {
+    height: 30px;
+    min-width: 60px; /* Asegura espacio para las banderas */
+}
+
+.switch-translater::after {
+    width: 30px; /* Igualar al otro switch */
+}
+
+/* =========================================
+   4. SECCIÓN HERO (Perfil)
+   ========================================= */
+.main-div-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: 30px;
+}
+
+.main-div-container img {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    object-fit: cover; /* Evita que la foto se deforme */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.main-div-container h1 {
+    margin-top: 18px;
+    font-size: 2.5rem;
+    color: var(--text-color);
+}
+
+#Web-Developer-title {
+    font-size: 2rem;
+    margin-top: 5px;
+    color: var(--highlight-color);
+}
+
+.container-div-icons {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Espacio entre iconos */
+}
+
+.container-div-icons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    color: var(--text-color);
+    font-size: 2.4rem;
+    transition: transform 0.2s, color 0.2s;
+}
+
+.container-div-icons a:hover {
+    transform: translateY(-3px);
+    color: var(--accent-color);
+}
+
+#about-me {
+    margin: 40px auto;
+    line-height: 1.6;
+    text-align: center;
+    max-width: 800px; /* Evita líneas infinitas en pantallas grandes */
+    padding: 0 20px;
+    color: var(--text-color);
+}
+
+.curriculum {
+    margin-top: 50px;
+    font-weight: bold;
+    font-size: 2.5rem;
+    color: var(--danger-color);
+    text-align: center;
+    display: block;
+    transition: transform 0.2s;
+}
+
+.curriculum:hover {
+    transform: scale(1.05);
+}
+
+/* =========================================
+   5. SECCIONES GENERALES (Skills & Projects)
+   ========================================= */
+main {
+    margin: 0 20px;
+    padding-bottom: 50px;
+}
+
+.h2-subtitle {
+    font-size: 3rem;
+    color: var(--text-color);
+    margin: 80px 0 50px 0;
+    text-align: center;
+}
+
+/* SKILLS */
+.main-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Grid responsivo automático */
+    gap: 30px;
+    justify-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.main-skills-container-levels {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-skills-container-levels img {
+    width: 60px;
+    margin-bottom: 10px;
+    transition: transform 0.3s;
+}
+
+.main-skills-container-levels:hover img {
+    transform: scale(1.1);
+}
+
+.level-skill {
+    height: 10px;
+    width: 60px;
+    border: 1px solid var(--text-color);
+    border-radius: 40px;
+    /* El background gradient se define por ID abajo */
+}
+
+/* Gradientes Skills - Simplificados */
+#level-skill-html { background: linear-gradient(to right, #41e415 75%, transparent 25%); }
+#level-skill-css { background: linear-gradient(to right, #41e415 60%, transparent 40%); }
+#level-skill-js { background: linear-gradient(to right, #41e415 40%, transparent 60%); }
+#level-skill-github, #level-skill-wordpress { background: linear-gradient(to right, #41e415 80%, transparent 20%); }
+#level-skill-B { background: linear-gradient(to right, #41e415 40%, transparent 60%); }
+#level-skill-chartjs { background: linear-gradient(to right, #41e415 55%, transparent 45%); }
+
+/* PROYECTOS */
+.main-container-sections {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.main-post {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Grid Responsivo */
+    gap: 40px;
+    justify-items: center;
+}
+
+.main-post a {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    transition: transform 0.3s;
+}
+
+.main-post a:hover {
+    transform: translateY(-5px);
+}
+
+.post-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.main-post h3 {
+    font-size: 2.5rem;
+    color: var(--danger-color);
+    margin: 15px 0;
+    text-align: center;
+}
+
+.main-post p {
+    color: var(--text-color);
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Sombras específicas de proyectos (Manteniendo tus IDs) */
+#post-mrbrillante, #post-vipinfinity { box-shadow: var(--shadow-light); }
+#post-usbio { box-shadow: 0px 50px 130px -20px #fdff00; }
+#punta-centinela { box-shadow: 0px 30px 130px -30px #ff41c0; }
+
+/* =========================================
+   6. FOOTER
+   ========================================= */
+.footer-container-sections {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 50px;
+    padding-top: 50px;
+}
+
+/* =========================================
+   7. MEDIA QUERIES (Responsividad)
+   ========================================= */
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+    
+    .hamburger.active .bar:nth-child(2) { opacity: 0; }
+    .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+    
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        gap: 0;
+        flex-direction: column;
+        background-color: rgba(38, 38, 38, 0.95);
+        backdrop-filter: blur(10px); /* Efecto cristal */
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        padding-bottom: 20px;
+        box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+    }
+    
+    .nav-item {
+        margin: 16px 0;
+    }
+    
+    .nav-menu.active {
+        left: 0;
+    }
+}
+
+@media (min-width: 768px) {
+    header {
+        background-color: rgba(38, 38, 38, 0.9);
+        backdrop-filter: blur(5px);
+    }
+    
+    .main-div-container h1 { font-size: 3rem; }
+    #Web-Developer-title { font-size: 2.5rem; }
+    .curriculum { font-size: 3rem; }
+    
+    .h2-subtitle {
+        font-size: 4rem;
+        margin-top: 150px;
+    }
+}

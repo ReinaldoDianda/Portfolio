@@ -1,12 +1,14 @@
 {
     "profile": {
-        "rol": "Software Developer",
-        "description": "I am a Junior Developer and Systems Engineering student with a passion for technology. With 1 year of experience, I thrive on adapting to any programming language or challenge, as I view learning as a never-ending process.",
+        "rol": "Junior Web Developer · Technical Support",
+        "description": "IT Technologist, currently studying Systems Engineering (UG). Practical experience in frontend development, website auditing and network technical support. I adapt quickly to new technologies and work environments.",
         "skills": "Skills"
     },
     "projects": {
         "title": "Projects",
-        "mrbrillante_desc": "Website for the cleaning company Mr Brillante using HTML5 and CSS3."
+        "mrbrillante_desc": "Website for the cleaning company Mr Brillante using HTML5 and CSS3.",
+        "calculo_title": "Integral Calculus",
+        "calculo_desc": "Interactive educational platform for the University of Guayaquil, with dynamic visualizations built with Chart.js and MathJax."
     },
     "contact": {
         "title": "Contact Me"
