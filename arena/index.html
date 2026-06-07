@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Colección de Arenas y Materiales Geológicos</title>
+<meta name="description" content="Colección personal documentada de arenas, sedimentos, suelos, cenizas volcánicas y sales naturales, con procedencia verificable y estándares cercanos a los de un museo pequeño.">
+<!-- Open Graph (edita la URL y la imagen cuando publiques) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Colección de Arenas y Materiales Geológicos">
+<meta property="og:description" content="Cada muestra con coordenadas, fecha, fotografías y contexto geológico. Recolección colaborativa con amigos y familia.">
+<meta property="og:url" content="https://tudominio.com/">
+<!-- <meta property="og:image" content="https://tudominio.com/assets/og.jpg"> -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Spectral:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- Leaflet (mapa) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+
+<style>
+  :root{
+    --paper:#f3ecdf;--paper-2:#ece2d0;--ink:#221b12;--ink-soft:#4a3f30;--ink-faint:#7a6c56;
+    --line:#cdbfa4;--ochre:#b07d2f;--ochre-deep:#8a5e1c;--rust:#9c4426;--rust-deep:#7a3219;
+    --teal:#1f5f59;--teal-deep:#164541;
+    --display:"Fraunces",Georgia,serif;--body:"Spectral",Georgia,serif;--mono:"IBM Plex Mono",ui-monospace,monospace;
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background-color:var(--paper);
+    background-image:radial-gradient(900px 500px at 12% -8%,rgba(176,125,47,.10),transparent 60%),radial-gradient(800px 600px at 105% 8%,rgba(31,95,89,.08),transparent 55%);
+    color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+  .z{position:relative;z-index:1;}
+  a{color:var(--ochre-deep);text-underline-offset:3px;}
+  a:hover{color:var(--rust);}
+  .mono{font-family:var(--mono);}
+  .strata{display:flex;height:8px;border-radius:2px;overflow:hidden;margin:26px 0;}
+  .strata i{flex:1;}.strata i:nth-child(1){background:var(--ochre);}.strata i:nth-child(2){background:var(--rust);flex:1.6;}
+  .strata i:nth-child(3){background:var(--teal);flex:.7;}.strata i:nth-child(4){background:var(--ochre-deep);flex:1.3;}
+  .strata i:nth-child(5){background:var(--ink-soft);flex:.5;}.strata i:nth-child(6){background:var(--teal-deep);flex:1.1;}
+
+  /* NAV */
+  header.bar{position:sticky;top:0;z-index:30;background:rgba(243,236,223,.93);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .bar-in{max-width:var(--maxw);margin:0 auto;padding:12px 22px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;}
+  .brand{font-family:var(--display);font-weight:600;font-size:1.15rem;color:var(--ink);text-decoration:none;letter-spacing:-.01em;display:flex;align-items:center;gap:9px;}
+  .brand .dot{width:13px;height:13px;border-radius:50%;background:var(--rust);box-shadow:0 0 0 3px rgba(156,68,38,.18);}
+  nav.links{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap;}
+  nav.links a{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;padding:6px 11px;border-radius:999px;border:1px solid transparent;}
+  nav.links a:hover{border-color:var(--line);color:var(--ink);}
+
+  /* HERO */
+  .hero{max-width:var(--maxw);margin:0 auto;padding:54px 22px 8px;}
+  .eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--rust);margin:0 0 16px;}
+  h1{font-family:var(--display);font-weight:600;font-size:clamp(2.1rem,5.5vw,3.5rem);line-height:1.04;margin:0 0 16px;letter-spacing:-.01em;font-variation-settings:"opsz" 144;}
+  .lede{font-size:1.12rem;max-width:60ch;color:var(--ink-soft);margin:0;}
+  .stat-row{display:flex;gap:28px;flex-wrap:wrap;margin-top:22px;}
+  .stat{font-family:var(--mono);font-size:.78rem;color:var(--ink-faint);}
+  .stat b{display:block;font-family:var(--display);font-size:1.6rem;color:var(--ink);line-height:1;margin-bottom:3px;}
+
+  main{max-width:var(--maxw);margin:0 auto;padding:0 22px 80px;}
+  section{padding:42px 0 6px;scroll-margin-top:70px;}
+  .sec-title{display:flex;align-items:baseline;gap:14px;margin-bottom:6px;}
+  .sec-title h2{font-family:var(--display);font-weight:600;font-size:clamp(1.5rem,3.2vw,2.1rem);margin:0;letter-spacing:-.01em;}
+  .sec-title .tag{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--rust);}
+  .sec-sub{color:var(--ink-soft);margin:2px 0 18px;max-width:62ch;}
+
+  /* SEARCH */
+  .filter{display:flex;gap:10px;align-items:center;margin:0 0 18px;flex-wrap:wrap;}
+  .filter input{font-family:var(--body);font-size:1rem;padding:9px 14px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.5);min-width:240px;color:var(--ink);}
+  .filter input:focus{outline:2px solid var(--ochre);outline-offset:1px;}
+  .count-pill{font-family:var(--mono);font-size:.72rem;color:var(--ink-faint);}
+
+  /* GRID */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;}
+  .card{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:rgba(255,255,255,.32);text-decoration:none;color:inherit;display:flex;flex-direction:column;transition:transform .15s ease,box-shadow .15s ease;}
+  .card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(34,27,18,.12);}
+  .swatch{height:120px;position:relative;background-size:cover;background-position:center;}
+  .swatch::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.16));}
+  .swatch .who{position:absolute;top:9px;right:9px;z-index:2;font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:999px;color:#fff;}
+  .who.propia{background:rgba(156,68,38,.92);}
+  .who.amigo{background:rgba(31,95,89,.92);}
+  .card-body{padding:13px 15px 15px;display:flex;flex-direction:column;gap:5px;flex:1;}
+  .card-body .id{font-family:var(--mono);font-size:.68rem;color:var(--rust-deep);}
+  .card-body h3{font-family:var(--display);font-weight:600;font-size:1.08rem;margin:0;line-height:1.15;}
+  .card-body .loc{font-size:.9rem;color:var(--ink-soft);}
+  .card-body .type{margin-top:auto;font-family:var(--mono);font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);border-top:1px dashed var(--line);padding-top:8px;}
+
+  /* MAP */
+  #map{height:420px;border-radius:14px;border:1px solid var(--line);z-index:1;}
+  .map-fallback{height:420px;border-radius:14px;border:1px dashed var(--line);display:flex;align-items:center;justify-content:center;text-align:center;color:var(--ink-faint);padding:24px;background:rgba(255,255,255,.25);}
+  .leaflet-popup-content{font-family:var(--body);}
+  .leaflet-popup-content a{font-family:var(--mono);font-size:.78rem;}
+
+  /* DETAIL */
+  #view-detail{padding-top:30px;}
+  .back{font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;display:inline-flex;align-items:center;gap:7px;margin-bottom:18px;}
+  .back:hover{color:var(--rust);}
+  .detail-head{margin-bottom:6px;}
+  .detail-head .id{font-family:var(--mono);font-size:.78rem;color:var(--rust-deep);background:var(--paper-2);border:1px solid var(--line);padding:2px 9px;border-radius:6px;display:inline-block;margin-bottom:10px;}
+  .detail-head h2{font-family:var(--display);font-weight:600;font-size:clamp(1.7rem,4vw,2.6rem);margin:0;line-height:1.05;}
+  .detail-head .who2{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;margin-top:8px;display:inline-block;padding:3px 10px;border-radius:999px;}
+  .detail-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:26px;margin-top:22px;align-items:start;}
+  @media (max-width:760px){.detail-grid{grid-template-columns:1fr;}}
+  .media-main{height:300px;border-radius:14px;border:1px solid var(--line);background-size:cover;background-position:center;position:relative;}
+  .media-note{position:absolute;left:0;right:0;bottom:0;text-align:center;font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.92);background:rgba(0,0,0,.28);padding:7px;border-radius:0 0 13px 13px;}
+  .gallery{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;}
+  .gallery .thumb{width:64px;height:64px;border-radius:8px;border:1px solid var(--line);background-size:cover;background-position:center;font-family:var(--mono);font-size:.55rem;display:flex;align-items:flex-end;justify-content:center;color:var(--ink-faint);padding-bottom:4px;text-transform:uppercase;}
+  #detail-map{height:160px;border-radius:12px;border:1px solid var(--line);margin-top:12px;z-index:1;}
+  .data-table{width:100%;border-collapse:collapse;font-size:.93rem;}
+  .data-table th{text-align:left;font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);width:42%;vertical-align:top;padding:8px 10px 8px 0;border-bottom:1px solid var(--line);font-weight:500;}
+  .data-table td{padding:8px 0;border-bottom:1px solid var(--line);vertical-align:top;}
+  .cite{background:var(--ink);color:#e8ddc8;border-radius:12px;padding:16px 18px;margin-top:18px;font-size:.9rem;}
+  .cite .lbl{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:#8fc7c0;display:block;margin-bottom:8px;}
+  .cite code{font-family:var(--mono);font-size:.82rem;color:#f0c98a;word-break:break-word;}
+
+  /* GUIDE */
+  .guide{border-radius:16px;border:1px solid var(--line);overflow:hidden;margin:18px 0;}
+  .guide-A{border-color:rgba(156,68,38,.4);background:linear-gradient(180deg,rgba(156,68,38,.07),rgba(156,68,38,.015));}
+  .guide-B{border-color:rgba(31,95,89,.4);background:linear-gradient(180deg,rgba(31,95,89,.07),rgba(31,95,89,.015));}
+  .guide-banner{padding:16px 22px;display:flex;align-items:center;gap:13px;border-bottom:1px solid var(--line);}
+  .guide-tag{font-family:var(--mono);font-weight:600;font-size:.74rem;letter-spacing:.1em;color:#fff;padding:5px 12px;border-radius:6px;}
+  .guide-A .guide-tag{background:var(--rust);}.guide-B .guide-tag{background:var(--teal);}
+  .guide-banner h3{margin:0;font-family:var(--display);font-size:1.25rem;}
+  .guide-body{padding:6px 22px 18px;}
+  .guide-body h4{font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--rust);margin:18px 0 7px;}
+  .guide-B .guide-body h4{color:var(--teal-deep);}
+  ul.tight{margin:0 0 12px;padding-left:1.2em;}ul.tight li{margin-bottom:5px;}
+  ol.bigsteps{counter-reset:s;list-style:none;padding:0;margin:14px 0;}
+  ol.bigsteps li{counter-increment:s;position:relative;padding:13px 15px 13px 56px;background:rgba(255,255,255,.45);border:1px solid var(--line);border-radius:10px;margin-bottom:9px;}
+  ol.bigsteps li::before{content:counter(s);position:absolute;left:13px;top:12px;width:30px;height:30px;background:var(--teal);color:#fff;font-family:var(--mono);font-weight:600;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+  ol.bigsteps li b{display:block;margin-bottom:2px;}
+  .warn{border-left:4px solid var(--rust);background:rgba(156,68,38,.08);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0;font-size:.95rem;}
+  .warn .lbl{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--rust);display:block;margin-bottom:4px;}
+  .copybox{position:relative;background:#241d14;color:#ede2cd;border-radius:12px;padding:18px 16px 16px;margin:14px 0;white-space:pre-wrap;font-size:.95rem;}
+  .copybox .wa-label{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:#8fc7c0;display:block;margin-bottom:10px;}
+  .copy-btn{position:absolute;top:10px;right:10px;font-family:var(--mono);font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;background:rgba(255,255,255,.1);color:#f0c98a;border:1px solid rgba(255,255,255,.2);border-radius:6px;padding:5px 10px;cursor:pointer;}
+  .copy-btn:hover{background:rgba(255,255,255,.2);}
+
+  .hidden{display:none !important;}
+  footer{border-top:1px solid var(--line);}
+  .foot-in{max-width:var(--maxw);margin:0 auto;padding:30px 22px 60px;color:var(--ink-faint);font-size:.88rem;}
+</style>
+</head>
+<body>
+
+<header class="bar z">
+  <div class="bar-in">
+    <a class="brand" href="#/"><span class="dot"></span>Colección de Arenas</a>
+    <nav class="links">
+      <a href="#coleccion">Colección</a>
+      <a href="#mapa">Mapa</a>
+      <a href="#guia">Guía de recolección</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== LIST VIEW ===== -->
+<div id="view-list" class="z">
+  <div class="hero">
+    <p class="eyebrow">Archivo geológico personal</p>
+    <h1>Arenas, sedimentos y materiales de cada viaje</h1>
+    <p class="lede">Una colección documentada con procedencia verificable: cada muestra lleva coordenadas, fecha, fotografías y contexto geológico. Recolectada en persona o por amigos y familia alrededor del mundo.</p>
+    <div class="stat-row">
+      <div class="stat"><b id="stat-total">—</b>Muestras</div>
+      <div class="stat"><b id="stat-paises">—</b>Países</div>
+      <div class="stat"><b id="stat-amigos">—</b>Por colaboradores</div>
+    </div>
+    <div class="strata"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  </div>
+
+  <main>
+    <!-- COLECCION -->
+    <section id="coleccion">
+      <div class="sec-title"><span class="tag">01</span><h2>La colección</h2></div>
+      <p class="sec-sub">Cada ficha enlaza a la página individual de la muestra con todos sus metadatos, su galería y su mapa.</p>
+      <div class="filter">
+        <input id="search" type="search" placeholder="Buscar por lugar, tipo o código…" aria-label="Buscar muestras">
+        <span class="count-pill" id="count-pill"></span>
+      </div>
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <div class="strata"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+    <!-- MAPA -->
+    <section id="mapa">
+      <div class="sec-title"><span class="tag">02</span><h2>Mapa de la colección</h2></div>
+      <p class="sec-sub">Cada punto es una muestra georreferenciada. Haz clic en un punto para abrir su ficha.</p>
+      <div id="map"></div>
+    </section>
+
+    <div class="strata"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+    <!-- GUIA -->
+    <section id="guia">
+      <div class="sec-title"><span class="tag">03</span><h2>Guía de recolección</h2></div>
+      <p class="sec-sub">Cómo recoger las muestras correctamente. Hay dos modos: cuando recolectas tú (protocolo completo) y cuando lo hace un amigo o familiar (versión simple). Lo irremplazable es <strong>el lugar, la fecha y el material</strong>; el resto se procesa en casa.</p>
+
+      <!-- GUIA A -->
+      <div class="guide guide-A">
+        <div class="guide-banner"><span class="guide-tag">PROTOCOLO COMPLETO</span><h3>Cuando recolectas tú</h3></div>
+        <div class="guide-body">
+          <h4>Kit de campo</h4>
+          <ul class="tight">
+            <li>Cucharilla/espátula de acero inoxidable y brocha de cerdas sintéticas.</li>
+            <li>Guantes de nitrilo (nunca toques la muestra con la mano).</li>
+            <li>Bolsas zip o tubos Falcon de 50 ml; agua destilada y paños sin pelusa para limpiar herramientas.</li>
+            <li>Teléfono con GPS, libreta impermeable, marcador, regla/escala. Mascarilla N95 si hay ceniza.</li>
+          </ul>
+          <h4>Técnica esencial</h4>
+          <ul class="tight">
+            <li><strong>Playa/duna:</strong> evita la superficie suelta; define el micro-ambiente (frente, berma o duna); pequeña cala de 5–10 cm o capa de 0–2 cm. 20–50 g.</li>
+            <li><strong>Río:</strong> barra de meandro; anota margen y distancia al cauce; evita basura y agua estancada.</li>
+            <li><strong>Suelo:</strong> define horizonte (A/B/C), retira la capa vegetal, registra profundidad; no mezcles capas.</li>
+            <li><strong>Ceniza:</strong> superficie impermeable limpia, lo antes posible; registra volcán y distancia al cráter.</li>
+            <li><strong>Sales:</strong> en seco, nunca lavar; hermético + desecante.</li>
+          </ul>
+          <div class="warn"><span class="lbl">No laves la muestra</span>La sal, los foraminíferos, las arcillas y los orgánicos son la firma ambiental. Lavarla la destruye.</div>
+          <h4>Video de procedencia (toma única)</h4>
+          <p style="margin:0 0 6px">Entorno → descenso al punto → extracción → cierre enfocando el teléfono con coordenadas y hora. Es la prueba de origen más sólida.</p>
+        </div>
+      </div>
+
+      <!-- GUIA B -->
+      <div class="guide guide-B">
+        <div class="guide-banner"><span class="guide-tag">VERSIÓN SIMPLE</span><h3>Cuando recolecta un amigo o familiar</h3></div>
+        <div class="guide-body">
+          <p style="margin:10px 0 0">Su único trabajo es capturar lo irremplazable. Todo lo demás lo hace el coleccionista al recibir la muestra.</p>
+          <ol class="bigsteps">
+            <li><b>Toma arena de un punto normal</b>No el rincón más bonito ni el más raro. 2–3 cucharadas en la bolsita. No la laves ni le quites nada.</li>
+            <li><b>Cierra la bolsa y escribe</b>El lugar (playa o ciudad) y la fecha.</li>
+            <li><b>Toma 2 fotos</b>Una del paisaje y otra del punto exacto. Activa la ubicación de la cámara si puedes.</li>
+            <li><b>Manda la ubicación por WhatsApp</b>El pin de Google Maps del sitio, o envía las fotos.</li>
+          </ol>
+          <div class="copybox">
+            <span class="wa-label">Mensaje listo para enviar por WhatsApp</span>
+            <button class="copy-btn" data-copy="wa">Copiar</button><div id="wa">¡Hola! Colecciono arenas de distintos lugares del mundo 🌍 Si vas a una playa o a un río, ¿me traes un recuerdo? Es facilísimo:
+
+1) Agarra 2 o 3 cucharadas de arena de un punto NORMAL (no el rincón más bonito).
+2) Métela en una bolsita y escribe encima el lugar y la fecha.
+3) Tómale una foto al sitio.
+4) Mándame por aquí la ubicación (el pin 📍 de Google Maps).
+
+Importante: no la laves ni le quites nada, así me llega tal como es. ¡Gracias, me ayudas muchísimo! 🙏</div>
+          </div>
+          <div class="warn"><span class="lbl">Errores a evitar</span>Elegir solo la arena bonita, lavarla, mezclar varios sitios en una bolsa, u olvidar anotar el lugar.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- ===== DETAIL VIEW ===== -->
+<div id="view-detail" class="z hidden">
+  <main>
+    <a class="back" href="#/">← Volver a la colección</a>
+    <div id="detail-content"></div>
+  </main>
+</div>
+
+<footer class="z">
+  <div class="foot-in">
+    <div class="strata"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <p>Colección de arenas, sedimentos, suelos, cenizas volcánicas y sales naturales · procedencia verificable y documentación estandarizada.</p>
+    <p class="mono" style="font-size:.72rem">Modelo conceptual basado en IGSN · catálogo estático sobre GitHub Pages · datos en <span style="color:var(--rust-deep)">data/muestras.csv</span></p>
+  </div>
+</footer>
+
+<!-- Leaflet -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<!-- PapaParse (lectura de CSV) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<script>
+/* ============================================================
+   DATOS SEMILLA (respaldo). La fuente real es data/muestras.csv.
+   Si el CSV se puede cargar, reemplaza a estos datos.
+   ============================================================ */
+const SEED = [
+ {id:"EC-2026-0001",nombre:"Arena litoral de Salinas",tipo:"Arena de playa",recoleccion:"propia",recolector:"Reinaldo",pais:"Ecuador",provincia:"Santa Elena",localidad:"Playa de Salinas",lat:"-2.2003",lon:"-80.9709",datum:"WGS84",incertidumbre_m:"5",altitud_m:"2",ambiente:"Frente de playa (zona de lavado)",litologia:"Sedimento litoral con aporte de cuarzo y bioclastos",fecha:"2026-02-15",hora:"09:40",masa_g:"42",color_munsell:"10YR 6/3",color_hex:"#c9b48f",granulometria:"Arena media",redondez:"Subredondeada",seleccion:"Bien seleccionada",composicion:"Cuarzo dominante; fragmentos de concha; trazas de minerales pesados",tratamiento:"Secado al aire; sin lavar",profundidad:"0-2 cm",almacenamiento:"Caja A · Frasco 01",licencia:"CC BY 4.0",foto:"",pano:"",macro:"",micro:"",video:"",notas:"Muestra de referencia del frente activo. Marea baja, mar calmo."},
+ {id:"EC-2026-0002",nombre:"Arena de barra del Río Daule",tipo:"Arena de río",recoleccion:"propia",recolector:"Reinaldo",pais:"Ecuador",provincia:"Guayas",localidad:"Río Daule (barra de meandro)",lat:"-2.0700",lon:"-79.9300",datum:"WGS84",incertidumbre_m:"8",altitud_m:"6",ambiente:"Barra de meandro (depositación activa); margen derecha",litologia:"Sedimento fluvial de cuenca andina-costera",fecha:"2026-03-02",hora:"16:10",masa_g:"38",color_munsell:"10YR 5/2",color_hex:"#a8957a",granulometria:"Arena fina a media",redondez:"Subangulosa",seleccion:"Moderadamente seleccionada",composicion:"Cuarzo; líticos; micas; trazas de materia orgánica",tratamiento:"Secado al aire; sin lavar",profundidad:"Superficial",almacenamiento:"Caja A · Frasco 02",licencia:"CC BY 4.0",foto:"",pano:"",macro:"",micro:"",video:"",notas:"Tomada a ~3 m del cauce principal, evitando zonas con intervención humana."},
+ {id:"EC-2026-0003",nombre:"Arena de Montañita",tipo:"Arena de playa",recoleccion:"propia",recolector:"Reinaldo",pais:"Ecuador",provincia:"Santa Elena",localidad:"Montañita",lat:"-1.8290",lon:"-80.7530",datum:"WGS84",incertidumbre_m:"5",altitud_m:"3",ambiente:"Berma de playa",litologia:"Sedimento litoral",fecha:"2026-04-12",hora:"11:05",masa_g:"45",color_munsell:"10YR 7/4",color_hex:"#d8c39a",granulometria:"Arena media",redondez:"Redondeada",seleccion:"Bien seleccionada",composicion:"Cuarzo dominante; feldespato; bioclastos",tratamiento:"Secado al aire; sin lavar",profundidad:"0-3 cm",almacenamiento:"Caja A · Frasco 03",licencia:"CC BY 4.0",foto:"",pano:"",macro:"",micro:"",video:"",notas:"Marea media. Recolección de la berma, no del frente."},
+ {id:"PE-2026-0001",nombre:"Arena de Costa Verde (Lima)",tipo:"Arena de playa",recoleccion:"amigo",recolector:"Prima María",pais:"Perú",provincia:"Lima",localidad:"Costa Verde (Miraflores)",lat:"-12.1300",lon:"-77.0300",datum:"WGS84",incertidumbre_m:"150",altitud_m:"4",ambiente:"Frente de playa (aprox.)",litologia:"Sedimento litoral (por confirmar)",fecha:"2026-05-20",hora:"",masa_g:"30",color_munsell:"",color_hex:"#8c8377",granulometria:"Arena media a gruesa con gravilla",redondez:"",seleccion:"",composicion:"Por determinar bajo lupa",tratamiento:"Sin lavar",profundidad:"Superficial",almacenamiento:"Caja A · Frasco 04",licencia:"CC BY 4.0",foto:"",pano:"",macro:"",micro:"",video:"",notas:"Recolectada por familiar. Coordenadas aproximadas derivadas de pin de WhatsApp. Pendiente análisis al microscopio."}
+];
+
+let SAMPLES = SEED.slice();
+let listMap = null, detailMap = null;
+
+/* ---------- carga de datos ---------- */
+function loadData(cb){
+  if(!window.fetch || !window.Papa){ cb(SEED); return; }
+  fetch('data/muestras.csv',{cache:'no-store'})
+    .then(function(r){ if(!r.ok) throw 0; return r.text(); })
+    .then(function(t){
+      var p = Papa.parse(t.trim(), {header:true, skipEmptyLines:true});
+      cb(p.data && p.data.length ? p.data : SEED);
+    })
+    .catch(function(){ cb(SEED); });
+}
+
+/* ---------- utilidades ---------- */
+function esc(s){ return (s==null?'':String(s)).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+function has(v){ return v!=null && String(v).trim()!==''; }
+function byId(id){ return SAMPLES.filter(function(s){return s.id===id;})[0]; }
+
+/* ---------- estadísticas ---------- */
+function renderStats(){
+  var total = SAMPLES.length;
+  var paises = {}; var amigos = 0;
+  SAMPLES.forEach(function(s){ if(has(s.pais)) paises[s.pais]=1; if((s.recoleccion||'').toLowerCase()==='amigo') amigos++; });
+  document.getElementById('stat-total').textContent = total;
+  document.getElementById('stat-paises').textContent = Object.keys(paises).length;
+  document.getElementById('stat-amigos').textContent = amigos;
+}
+
+/* ---------- cuadrícula ---------- */
+function cardHTML(s){
+  var bg = has(s.foto) ? "background-image:url('"+esc(s.foto)+"')" : "background-color:"+(has(s.color_hex)?esc(s.color_hex):'#c9b48f');
+  var who = (s.recoleccion||'').toLowerCase()==='amigo' ? 'amigo' : 'propia';
+  var whoLabel = who==='amigo' ? 'Colaborador' : 'Propia';
+  return '<a class="card" href="#/m/'+esc(s.id)+'">'+
+    '<div class="swatch" style="'+bg+'"><span class="who '+who+'">'+whoLabel+'</span></div>'+
+    '<div class="card-body">'+
+      '<span class="id">'+esc(s.id)+'</span>'+
+      '<h3>'+esc(s.nombre||s.localidad||s.id)+'</h3>'+
+      '<span class="loc">'+esc(s.localidad)+(has(s.pais)?', '+esc(s.pais):'')+'</span>'+
+      '<span class="type">'+esc(s.tipo||'Muestra')+'</span>'+
+    '</div></a>';
+}
+function renderGrid(filter){
+  var q = (filter||'').toLowerCase().trim();
+  var list = SAMPLES.filter(function(s){
+    if(!q) return true;
+    return [s.id,s.nombre,s.localidad,s.pais,s.tipo,s.provincia].some(function(f){return (f||'').toLowerCase().indexOf(q)>=0;});
+  });
+  document.getElementById('grid').innerHTML = list.map(cardHTML).join('') || '<p style="color:var(--ink-faint)">Sin resultados.</p>';
+  document.getElementById('count-pill').textContent = list.length + (list.length===1?' muestra':' muestras');
+}
+
+/* ---------- mapa de lista ---------- */
+function renderListMap(){
+  var el = document.getElementById('map');
+  if(!window.L){ el.outerHTML = '<div class="map-fallback">El mapa se mostrará al publicar el sitio (requiere conexión a Leaflet y OpenStreetMap).</div>'; return; }
+  if(listMap){ listMap.invalidateSize(); return; }
+  var pts = SAMPLES.filter(function(s){return has(s.lat)&&has(s.lon);});
+  listMap = L.map('map',{scrollWheelZoom:false});
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(listMap);
+  var group = [];
+  pts.forEach(function(s){
+    var m = L.circleMarker([parseFloat(s.lat),parseFloat(s.lon)],{radius:8,color:'#7a3219',weight:2,fillColor:'#9c4426',fillOpacity:.85}).addTo(listMap);
+    m.bindPopup('<strong>'+esc(s.nombre||s.id)+'</strong><br>'+esc(s.localidad)+'<br><a href="#/m/'+esc(s.id)+'">Ver ficha →</a>');
+    group.push([parseFloat(s.lat),parseFloat(s.lon)]);
+  });
+  if(group.length){ listMap.fitBounds(group,{padding:[40,40],maxZoom:6}); } else { listMap.setView([0,-78],2); }
+}
+
+/* ---------- ficha de detalle (PLANTILLA DE MUESTRA) ---------- */
+function row(label,val){ return has(val) ? '<tr><th>'+label+'</th><td>'+esc(val)+'</td></tr>' : ''; }
+function detailHTML(s){
+  var who = (s.recoleccion||'').toLowerCase()==='amigo';
+  var whoStyle = who ? 'background:rgba(31,95,89,.14);color:var(--teal-deep)' : 'background:rgba(156,68,38,.14);color:var(--rust-deep)';
+  var whoText = who ? 'Recolectada por '+esc(s.recolector||'colaborador') : 'Recolección propia'+(has(s.recolector)?' · '+esc(s.recolector):'');
+  var mainBg = has(s.foto) ? "background-image:url('"+esc(s.foto)+"')" : "background-color:"+(has(s.color_hex)?esc(s.color_hex):'#c9b48f');
+  var mainNote = has(s.foto) ? '' : '<div class="media-note">Muestra física · color aproximado</div>';
+
+  // galería: sólo medios presentes
+  var media = [['pano','Panorámica'],['macro','Macro'],['micro','Micro'],['video','Video']];
+  var thumbs = media.filter(function(m){return has(s[m[0]]);}).map(function(m){
+    var isImg = /\.(jpg|jpeg|png|webp|gif)$/i.test(s[m[0]]);
+    var st = isImg ? "background-image:url('"+esc(s[m[0]])+"')" : "";
+    return '<a class="thumb" style="'+st+'" href="'+esc(s[m[0]])+'" target="_blank" rel="noopener">'+(isImg?'':m[1])+'</a>';
+  }).join('');
+  if(!thumbs) thumbs = '<span style="font-family:var(--mono);font-size:.72rem;color:var(--ink-faint)">Galería pendiente — añade medios en assets/'+esc(s.id)+'/</span>';
+
+  var coords = (has(s.lat)&&has(s.lon)) ? esc(s.lat)+', '+esc(s.lon)+(has(s.datum)?' ('+esc(s.datum)+')':'')+(has(s.incertidumbre_m)?' ±'+esc(s.incertidumbre_m)+' m':'') : '';
+  var base = location.origin + location.pathname;
+  var year = has(s.fecha) ? String(s.fecha).slice(0,4) : '';
+  var cite = 'Colección de Arenas y Materiales Geológicos. '+esc(s.nombre||s.id)+' ['+esc(s.id)+']'+(year?'. '+year:'')+'. '+esc(s.localidad)+(has(s.pais)?', '+esc(s.pais):'')+'. '+base+'#/m/'+esc(s.id);
+
+  return ''+
+  '<div class="detail-head">'+
+    '<span class="id">'+esc(s.id)+'</span>'+
+    '<h2>'+esc(s.nombre||s.localidad||s.id)+'</h2>'+
+    '<span class="who2" style="'+whoStyle+'">'+whoText+'</span>'+
+  '</div>'+
+  '<div class="detail-grid">'+
+    '<div>'+
+      '<div class="media-main" style="'+mainBg+'">'+mainNote+'</div>'+
+      '<div class="gallery">'+thumbs+'</div>'+
+      ((has(s.lat)&&has(s.lon))?'<div id="detail-map"></div>':'')+
+    '</div>'+
+    '<div>'+
+      '<table class="data-table">'+
+        row('Tipo de material', s.tipo)+
+        row('Localidad', (has(s.localidad)?esc(s.localidad):'')+(has(s.provincia)?', '+esc(s.provincia):'')+(has(s.pais)?', '+esc(s.pais):''))+
+        row('Coordenadas', coords)+
+        row('Altitud', has(s.altitud_m)?esc(s.altitud_m)+' m':'')+
+        row('Ambiente deposicional', s.ambiente)+
+        row('Litología', s.litologia)+
+        row('Fecha', (has(s.fecha)?esc(s.fecha):'')+(has(s.hora)?' · '+esc(s.hora):''))+
+        row('Recolector', s.recolector)+
+        row('Masa', has(s.masa_g)?esc(s.masa_g)+' g':'')+
+        row('Granulometría', s.granulometria)+
+        row('Redondez', s.redondez)+
+        row('Selección', s.seleccion)+
+        row('Color (Munsell)', s.color_munsell)+
+        row('Composición', s.composicion)+
+        row('Tratamiento', s.tratamiento)+
+        row('Profundidad', s.profundidad)+
+        row('Almacenamiento', s.almacenamiento)+
+        row('Licencia', s.licencia)+
+        row('Notas', s.notas)+
+      '</table>'+
+      '<div class="cite"><span class="lbl">Cómo citar esta muestra</span><code>'+esc(cite)+'</code></div>'+
+    '</div>'+
+  '</div>';
+}
+
+function showDetail(id){
+  var s = byId(id);
+  document.getElementById('view-list').classList.add('hidden');
+  var dv = document.getElementById('view-detail');
+  dv.classList.remove('hidden');
+  if(!s){ document.getElementById('detail-content').innerHTML = '<p>Muestra no encontrada: '+esc(id)+'</p>'; return; }
+  document.getElementById('detail-content').innerHTML = detailHTML(s);
+  window.scrollTo(0,0);
+  // mini-mapa
+  if(detailMap){ detailMap.remove(); detailMap=null; }
+  if(window.L && has(s.lat) && has(s.lon) && document.getElementById('detail-map')){
+    detailMap = L.map('detail-map',{scrollWheelZoom:false,zoomControl:false});
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OSM'}).addTo(detailMap);
+    detailMap.setView([parseFloat(s.lat),parseFloat(s.lon)], (parseFloat(s.incertidumbre_m)>50?9:12));
+    L.circleMarker([parseFloat(s.lat),parseFloat(s.lon)],{radius:9,color:'#7a3219',weight:2,fillColor:'#9c4426',fillOpacity:.85}).addTo(detailMap);
+  }
+}
+
+function showList(){
+  document.getElementById('view-detail').classList.add('hidden');
+  document.getElementById('view-list').classList.remove('hidden');
+  if(detailMap){ detailMap.remove(); detailMap=null; }
+  setTimeout(function(){ if(listMap) listMap.invalidateSize(); },60);
+}
+
+/* ---------- router ---------- */
+function route(){
+  var h = location.hash || '';
+  if(h.indexOf('#/m/')===0){ showDetail(decodeURIComponent(h.slice(4))); }
+  else { showList(); }
+}
+
+/* ---------- init ---------- */
+function init(data){
+  SAMPLES = data;
+  renderStats();
+  renderGrid('');
+  renderListMap();
+  route();
+
+  document.getElementById('search').addEventListener('input', function(e){ renderGrid(e.target.value); });
+  window.addEventListener('hashchange', route);
+
+  // copiar
+  document.querySelectorAll('.copy-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var el = document.getElementById(btn.getAttribute('data-copy')); if(!el) return;
+      var txt = el.innerText, done=function(){var o=btn.textContent;btn.textContent='¡Copiado!';setTimeout(function(){btn.textContent=o;},1500);};
+      if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done).catch(function(){fb(txt,done);}); }
+      else fb(txt,done);
+    });
+  });
+  function fb(t,cb){var ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(ta);cb&&cb();}
+}
+
+loadData(init);
+</script>
+</body>
+</html>
