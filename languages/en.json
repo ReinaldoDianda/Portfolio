@@ -1,7 +1,7 @@
 {
     "profile": {
         "rol": "Junior Web Developer · Technical Support",
-        "description": "IT Technologist, currently studying Systems Engineering (UG). Practical experience in frontend development, website auditing and network technical support. I adapt quickly to new technologies and work environments.",
+        "description": "Junior Developer and Systems Engineering student, trained as an IT Technologist, with experience in web development and IT support. Skilled in frontend development, Linux, networking and technical support, focused on building efficient solutions and optimizing processes through hands-on experience and continuous learning.",
         "skills": "Skills",
         "skills_frontend": "Frontend",
         "skills_tools": "Tools",
@@ -18,7 +18,7 @@
     "experience": {
         "title": "Experience",
         "job1_title": "Freelance Web Developer",
-        "job1_date": "Feb 2025 – Present",
+        "job1_date": "December 2025 – Present",
         "job1_company": "Self-employed — Guayaquil, Ecuador",
         "job1_b1": "Developed and audited websites for clients in Ecuador, fixing critical SEO, functionality and UX errors.",
         "job1_b2": "Built an interactive Integral Calculus educational platform for the University of Guayaquil using Chart.js and MathJax.",

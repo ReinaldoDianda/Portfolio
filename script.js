@@ -1,23 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- 1. MENÚ HAMBURGUESA ---
-    const hamburger = document.querySelector(".hamburger");
-    const navMenu = document.querySelector(".nav-menu");
-    const navLinks = document.querySelectorAll(".nav-link");
-
-    if (hamburger && navMenu) {
-        hamburger.addEventListener("click", () => {
-            hamburger.classList.toggle("active");
-            navMenu.classList.toggle("active");
-        });
-
-        navLinks.forEach(n => n.addEventListener("click", () => {
-            hamburger.classList.remove("active");
-            navMenu.classList.remove("active");
-        }));
-    }
-
-    // --- 2. TRADUCTOR ---
+    // --- 1. TRADUCTOR ---
     const flagsElement = document.getElementById("flags");
     const textsToChange = document.querySelectorAll("[data-section]");
     const btnSwitchTranslater = document.querySelector('#switch-translater');
@@ -38,29 +21,33 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             localStorage.setItem('selected-language', language);
+            document.documentElement.lang = language;
         } catch (error) {
             console.error("Error cambiando idioma:", error);
         }
     };
 
-    // Aplicar idioma guardado al cargar
-    const savedLanguage = localStorage.getItem('selected-language');
-    if (savedLanguage && savedLanguage !== 'es') {
-        changeLanguage(savedLanguage);
-        if (btnSwitchTranslater) btnSwitchTranslater.classList.add('active');
+    // Idioma inicial: preferencia guardada > idioma del navegador > español
+    const browserLang = (navigator.language || 'es').toLowerCase().startsWith('en') ? 'en' : 'es';
+    const initialLanguage = localStorage.getItem('selected-language') || browserLang;
+    document.documentElement.lang = initialLanguage;
+    if (initialLanguage !== 'es') {
+        changeLanguage(initialLanguage);
     }
+    if (btnSwitchTranslater) btnSwitchTranslater.classList.toggle('active', initialLanguage === 'en');
 
     if (flagsElement) {
         flagsElement.addEventListener('click', (e) => {
             const flagItem = e.target.closest('.flags_item');
             if (flagItem) {
-                changeLanguage(flagItem.dataset.language);
-                if (btnSwitchTranslater) btnSwitchTranslater.classList.toggle('active');
+                const lang = flagItem.dataset.language;
+                changeLanguage(lang);
+                if (btnSwitchTranslater) btnSwitchTranslater.classList.toggle('active', lang === 'en');
             }
         });
     }
 
-// --- 3. TEMA OSCURO ---
+// --- 2. TEMA OSCURO ---
 const btnSwitch = document.querySelector('#switch');
 
 const savedMode = localStorage.getItem('dark-mode');
@@ -80,7 +67,15 @@ if (btnSwitch) {
     });
 }
 
-    // --- 4. SCROLL ANIMATIONS ---
+// Seguir en vivo el tema del sistema mientras el usuario no haya elegido manualmente
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    if (localStorage.getItem('dark-mode') === null) {
+        document.body.classList.toggle('dark', e.matches);
+        if (btnSwitch) btnSwitch.classList.toggle('active', e.matches);
+    }
+});
+
+    // --- 3. SCROLL ANIMATIONS ---
     const fadeElements = document.querySelectorAll('.fade-in');
 
     const observer = new IntersectionObserver((entries) => {

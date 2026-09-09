@@ -15,48 +15,14 @@
     <meta name="twitter:card" content="summary_large_image">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-    <script src="https://kit.fontawesome.com/a2360167c8.js" crossorigin="anonymous"></script>
+    <script defer src="https://kit.fontawesome.com/a2360167c8.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <button class="switch switch-translater nav-link" id="switch-translater" aria-label="Cambiar idioma">
-                <div class="flags" id="flags">
-                    <div class="flags_item" data-language="es">
-                        <img class="flag-icon" src="https://res.cloudinary.com/doo95ngwf/image/upload/v1662840998/espana_qx4hvi.png" alt="Bandera España">
-                    </div>
-                    <div class="flags_item" data-language="en">
-                        <img class="flag-icon" src="https://res.cloudinary.com/doo95ngwf/image/upload/v1662840998/reino-unido_uh7wyq.png" alt="Bandera Reino Unido">
-                    </div>
-                </div>
-            </button>
-
-            <ul class="nav-menu">
-                <li class="nav-item"><a class="nav-link" href="#sobre-mi" data-section="nav" data-value="about">Sobre mí</a></li>
-                <li class="nav-item"><a class="nav-link" href="#experiencia" data-section="nav" data-value="experience">Experiencia</a></li>
-                <li class="nav-item"><a class="nav-link" href="#proyectos" data-section="nav" data-value="projects">Proyectos</a></li>
-                <li class="nav-item"><a class="nav-link" target="_blank" rel="noopener noreferrer" href="./Cv Reinaldo Dianda.pdf" data-section="nav" data-value="cv">Curriculum Vitae</a></li>
-                <li><a href="mailto:reinaldodianda@gmail.com" target="_blank" rel="noopener noreferrer" class="nav-link" data-section="nav" data-value="contact">Contáctame</a></li>
-                <li>
-                    <button class="switch nav-link" id="switch" aria-label="Cambiar tema oscuro/claro">
-                        <span><i class="fa-solid fa-sun"></i></span>
-                        <span><i class="fa-solid fa-moon"></i></span>
-                    </button>
-                </li>
-            </ul>
-            <div class="hamburger" role="button" aria-label="Abrir menú">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </nav>
-    </header>
-
     <main>
 
         <!-- HERO -->
         <div class="main-div-container fade-in" id="sobre-mi">
-            <img src="https://res.cloudinary.com/doo95ngwf/image/upload/v1668123458/ft_h5m64p.webp" alt="Foto de perfil de Reinaldo Dianda" class="main-img">
+            <img src="https://res.cloudinary.com/doo95ngwf/image/upload/f_auto,q_auto,w_500,dpr_2/v1668123458/ft_h5m64p.webp" alt="Foto de perfil de Reinaldo Dianda" class="main-img" width="250" height="250" fetchpriority="high">
             <h1>Reinaldo Dianda</h1>
             <h2 id="Web-Developer-title" data-section="profile" data-value="rol">Desarrollador Web Junior · Soporte Técnico</h2>
             <div>
@@ -199,6 +165,39 @@
                 <a href="https://www.linkedin.com/in/reinaldo-dianda/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin fa-lg"></i></a>
                 <a href="https://github.com/reinaldodianda" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github fa-lg"></i></a>
                 <a href="mailto:reinaldodianda@gmail.com" target="_blank" rel="noopener noreferrer" aria-label="Email"><i class="fa-solid fa-envelope fa-lg"></i></a>
+            </div>
+
+            <div class="footer-controls">
+                <button class="lang-toggle" id="switch-translater" aria-label="Cambiar idioma">
+                    <span class="flags" id="flags">
+                        <span class="flags_item" data-language="es" title="Español" aria-label="Español">
+                            <span class="flag-circle">
+                                <svg viewBox="0 0 3 2" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                                    <rect width="3" height="2" fill="#c60b1e"/>
+                                    <rect width="3" height="1" y="0.5" fill="#ffc400"/>
+                                </svg>
+                            </span>
+                        </span>
+                        <span class="flags_item" data-language="en" title="English" aria-label="English">
+                            <span class="flag-circle">
+                                <svg viewBox="0 0 60 30" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                                    <clipPath id="ukclip"><rect width="60" height="30"/></clipPath>
+                                    <g clip-path="url(#ukclip)">
+                                        <rect width="60" height="30" fill="#012169"/>
+                                        <path d="M0,0 60,30 M60,0 0,30" stroke="#fff" stroke-width="6"/>
+                                        <path d="M0,0 60,30 M60,0 0,30" stroke="#c8102e" stroke-width="4"/>
+                                        <path d="M30,0 V30 M0,15 H60" stroke="#fff" stroke-width="10"/>
+                                        <path d="M30,0 V30 M0,15 H60" stroke="#c8102e" stroke-width="6"/>
+                                    </g>
+                                </svg>
+                            </span>
+                        </span>
+                    </span>
+                </button>
+                <button class="theme-toggle" id="switch" aria-label="Cambiar tema claro/oscuro" title="Cambiar tema">
+                    <i class="fa-solid fa-moon icon-moon"></i>
+                    <i class="fa-solid fa-sun icon-sun"></i>
+                </button>
             </div>
         </div>
     </footer>

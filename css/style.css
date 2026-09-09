@@ -63,97 +63,106 @@ body {
 }
 
 /* =========================================
-   3. HEADER & NAVBAR
+   3. CONTROLES DEL FOOTER (idioma + tema)
    ========================================= */
-header {
-    background-color: var(--header-bg);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    width: 100%;
-}
-
-.navbar {
-    min-height: 70px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 24px;
-}
-
-.nav-menu {
+.footer-controls {
     display: flex;
     align-items: center;
-    gap: 28px;
-    list-style: none;
+    gap: 18px;
+    margin-top: 28px;
 }
 
-.nav-menu li { list-style: none; }
-
-.nav-menu a {
-    color: #f1f1f1;
-    font-size: 1.4rem;
-    transition: color 0.2s;
-}
-
-.nav-link:hover { color: var(--accent-color); }
-
-.hamburger { display: none; cursor: pointer; }
-
-.bar {
-    display: block;
-    width: 25px;
-    height: 3px;
-    margin: 5px auto;
-    background-color: #f1f1f1;
-    transition: all 0.3s ease-in-out;
-}
-
-/* =========================================
-   4. SWITCHES (tema e idioma)
-   ========================================= */
-.switch {
-    background: #343d5b;
-    border-radius: 1000px;
+/* Toggle de idioma: dos banderas circulares, la activa resaltada */
+.lang-toggle {
+    background: transparent;
     border: none;
-    position: relative;
-    cursor: pointer;
-    display: flex;
     outline: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
 }
 
-.switch::after {
-    content: "";
-    display: block;
-    width: 30px;
-    height: 30px;
-    position: absolute;
-    background: #f1f1f1;
-    top: 0;
-    left: 0;
+.flags {
+    display: flex;
+    gap: 4px;
+    cursor: pointer;
+}
+
+/* Área táctil cómoda (44px) alrededor de la bandera, para móvil */
+.flags_item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
-    transition: 0.3s ease all;
-    box-shadow: 0 0 2px 2px rgba(0,0,0,0.2);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.switch.active { background: #eb993b; }
-.switch.active::after { left: calc(100% - 30px); }
-
-.switch span {
+/* Bandera visible (30px); el click lo captura .flags_item */
+.flag-circle {
+    display: flex;
     width: 30px;
     height: 30px;
-    line-height: 30px;
-    display: block;
-    color: #f1f1f1;
-    text-align: center;
+    border-radius: 50%;
+    overflow: hidden;
+    opacity: 0.45;
+    transform: scale(0.9);
+    box-shadow: 0 0 0 1px var(--card-border);
+    transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+    pointer-events: none;
 }
 
-.flags { display: flex; cursor: pointer; }
+.flag-circle svg { width: 100%; height: 100%; display: block; }
 
-.flag-icon { width: 30px; height: auto; padding: 5px; vertical-align: middle; }
+/* La bandera del idioma activo: color pleno + anillo de acento */
+#switch-translater:not(.active) .flags_item[data-language="es"] .flag-circle,
+#switch-translater.active .flags_item[data-language="en"] .flag-circle {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 0 2px var(--highlight-color);
+}
 
-.switch-translater { height: 30px; min-width: 60px; }
-.switch-translater::after { width: 30px; }
+.lang-toggle:hover .flag-circle { opacity: 0.8; }
+.lang-toggle:focus-visible {
+    outline: 2px solid var(--highlight-color);
+    outline-offset: 4px;
+    border-radius: 999px;
+}
+
+/* Toggle de tema: botón de icono minimalista */
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--card-border);
+    background: var(--card-bg);
+    color: var(--text-color);
+    font-size: 1.6rem;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: color 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.theme-toggle:hover {
+    color: var(--highlight-color);
+    border-color: var(--highlight-color);
+    transform: translateY(-2px);
+}
+
+.theme-toggle:focus-visible {
+    outline: 2px solid var(--highlight-color);
+    outline-offset: 3px;
+}
+
+/* Muestra la luna en tema claro (para pasar a oscuro) y el sol en oscuro */
+.theme-toggle .icon-sun { display: none; }
+body.dark .theme-toggle .icon-sun { display: inline-block; }
+body.dark .theme-toggle .icon-moon { display: none; }
 
 /* =========================================
    5. HERO
@@ -569,38 +578,10 @@ body.dark .project-stack span {
    12. MEDIA QUERIES
    ========================================= */
 @media (max-width: 768px) {
-    .hamburger { display: block; }
-
-    .hamburger.active .bar:nth-child(2) { opacity: 0; }
-    .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-    .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-
-    .nav-menu {
-        position: fixed;
-        left: -100%;
-        top: 70px;
-        flex-direction: column;
-        gap: 0;
-        background-color: rgba(30,30,30,0.97);
-        backdrop-filter: blur(10px);
-        width: 100%;
-        text-align: center;
-        transition: 0.3s;
-        padding-bottom: 20px;
-        box-shadow: 0 10px 10px rgba(0,0,0,0.15);
-    }
-
-    .nav-item { margin: 16px 0; }
-    .nav-menu.active { left: 0; }
     .timeline-header { flex-direction: column; }
 }
 
 @media (min-width: 768px) {
-    header {
-        background-color: rgba(38, 38, 38, 0.92);
-        backdrop-filter: blur(6px);
-    }
-
     .main-div-container h1 { font-size: 3.2rem; }
     #Web-Developer-title { font-size: 2.2rem; }
     .curriculum { font-size: 2.8rem; }
