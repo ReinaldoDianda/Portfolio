@@ -191,8 +191,13 @@ body.dark .theme-toggle .icon-moon { display: none; }
 #Web-Developer-title {
     font-size: 1.8rem;
     margin-top: 6px;
-    color: #0098c5;
+    color: #006f8a; /* pasa contraste AA sobre el fondo claro #f1f1f1 (5.1:1) */
 }
+body.dark #Web-Developer-title { color: #0098c5; } /* cian de marca sobre fondo oscuro (5.6:1) */
+
+/* Iconos SVG inline (reemplazan a FontAwesome) */
+.icon { width: 1em; height: 1em; fill: currentColor; vertical-align: -0.125em; flex-shrink: 0; }
+.container-div-icons .icon { width: 1.15em; height: 1.15em; }
 
 .container-div-icons {
     margin: 20px auto;
