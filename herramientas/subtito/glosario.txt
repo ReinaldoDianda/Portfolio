@@ -1,0 +1,35 @@
+# ============================================================================
+#  GLOSARIO DE SUBTITO
+#  Se entrega al modelo como contexto antes de transcribir, para que acierte
+#  nombres propios, siglas y jerga de tus audios.
+#
+#  Reglas:
+#   - Las lineas que empiezan con # se ignoran.
+#   - La PRIMERA linea util es la frase de contexto (una o dos oraciones).
+#   - Cada linea siguiente es un termino o nombre, uno por linea.
+#   - EL ORDEN IMPORTA: el modelo solo admite unos 220 tokens de contexto
+#     (unas 120 palabras). El motor toma la frase de contexto y luego los
+#     terminos en orden hasta llenar el cupo; lo que sobra no entra.
+#     Poner arriba lo mas importante.
+#   - Glosario por carpeta: si junto al audio hay un archivo glosario.txt,
+#     ese reemplaza a este. Sirve para audios con vocabulario propio.
+#   - Este es un EJEMPLO: cambialo por los nombres y terminos que usas tu.
+# ============================================================================
+
+# ---- Frase de contexto (primera linea util) ----
+Reunión de trabajo en español: proyectos, clientes, presupuesto, reportes y tareas de la semana.
+
+# ---- Terminos (uno por linea, lo mas importante arriba) ----
+presupuesto
+cronograma
+entregable
+factura
+proveedor
+reporte semanal
+base de datos
+Excel
+Power BI
+Teams
+Zoom
+correo
+PDF
